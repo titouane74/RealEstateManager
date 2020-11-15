@@ -38,7 +38,9 @@ public class Utils {
      * @return
      */
     public static String getTodayDate(){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        //Change format display
+        //DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(new Date());
     }
 
