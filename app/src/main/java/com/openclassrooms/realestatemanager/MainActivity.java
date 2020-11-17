@@ -2,9 +2,12 @@ package com.openclassrooms.realestatemanager;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String TAG = "TAG_MAIN";
 
     private TextView textViewMain;
     private TextView textViewQuantity;
@@ -21,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
         this.configureTextViewMain();
         this.configureTextViewQuantity();
+
+        boolean lIsInternetAvailable = Utils.isInternetAvailable(this);
+        Log.d(TAG, "onCreate: " + lIsInternetAvailable);
     }
 
     private void configureTextViewMain(){
