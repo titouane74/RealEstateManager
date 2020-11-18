@@ -1,7 +1,9 @@
 package com.openclassrooms.realestatemanager;
 
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+
+import com.openclassrooms.realestatemanager.utils.Utils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +18,6 @@ public class UtilsTest {
 
     @Test
     public void isInternetAvailable() {
-        assertEquals(true, Utils.isInternetAvailable(InstrumentationRegistry.getContext()));
+        assertEquals(true, Utils.isInternetAvailable(InstrumentationRegistry.getInstrumentation().getTargetContext()));
     }
 }

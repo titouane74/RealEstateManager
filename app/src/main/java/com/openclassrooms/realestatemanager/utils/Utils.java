@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager;
+package com.openclassrooms.realestatemanager.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -71,8 +71,9 @@ public class Utils {
             if (lNetwork == null) return false;
 
             NetworkCapabilities lCapabilities = lConnectivityManager.getNetworkCapabilities(lNetwork);
-            lIsWifi = lCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
-                    || lCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET);
+            if (lCapabilities != null)
+                lIsWifi = lCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                        || lCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET);
 
         } else {
             WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);

@@ -1,7 +1,5 @@
 package com.openclassrooms.realestatemanager.utils;
 
-import com.openclassrooms.realestatemanager.Utils;
-
 import org.junit.Test;
 
 import java.text.DateFormat;

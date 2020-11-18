@@ -1,13 +1,16 @@
-package com.openclassrooms.realestatemanager;
+package com.openclassrooms.realestatemanager.oldactivity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.openclassrooms.realestatemanager.R;
 
 public class SecondActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.z_activity_second);
     }
 }

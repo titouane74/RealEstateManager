@@ -1,13 +1,17 @@
-package com.openclassrooms.realestatemanager;
+package com.openclassrooms.realestatemanager.oldactivity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+//Change due to migration to androidx and permit the compilation
+//import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = "TAG_MAIN";
+import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.utils.Utils;
+
+public class OldMainActivity extends AppCompatActivity {
 
     private TextView textViewMain;
     private TextView textViewQuantity;
@@ -26,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         this.configureTextViewQuantity();
 
         boolean lIsInternetAvailable = Utils.isInternetAvailable(this);
-        Log.d(TAG, "onCreate: " + lIsInternetAvailable);
     }
 
     private void configureTextViewMain(){
