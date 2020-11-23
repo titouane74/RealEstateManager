@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="app_zero_dp">0dp</dimen>
+
+    <!-- DEFAULT MARGIN -->
+    <dimen name="default_margin">4dp</dimen>
+    <dimen name="default_margin_horirontal">4dp</dimen>
+    <dimen name="default_margin_vertical">4dp</dimen>
+    <dimen name="default_margin_top">4dp</dimen>
+    <dimen name="default_margin_bottom">4dp</dimen>
+    <dimen name="default_margin_start">4dp</dimen>
+    <dimen name="default_margin_end">4dp</dimen>
+
+    <!-- DEFAULT PADDING -->
+    <dimen name="default_padding">2dp</dimen>
+    <dimen name="default_padding_horirontal">2dp</dimen>
+    <dimen name="default_padding_vertical">2dp</dimen>
+    <dimen name="default_padding_top">2dp</dimen>
+    <dimen name="default_padding_bottom">2dp</dimen>
+    <dimen name="default_padding_start">2dp</dimen>
+    <dimen name="default_padding_end">2dp</dimen>
+    
+    <!-- DEFAULT CARDVIEW -->
+    <dimen name="default_card_corner_radius">5dp</dimen>
+
+</resources>

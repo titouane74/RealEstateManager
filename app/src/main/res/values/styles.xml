@@ -1,11 +1,31 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="RealEstataeTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorError">@color/colorError</item>
     </style>
+
+
+    <style name="REAddTheme" parent="RealEstataeTheme">
+        <item name="android:layout_margin">@dimen/default_margin</item>
+    </style>
+
+    <style name="REAddTheme.TxtView" parent="REAddTheme">
+        <item name="android:layout_margin">@dimen/default_margin</item>
+    </style>
+
+    <style name="REAddTheme.CardView" parent="REAddTheme">
+        <item name="android:background">@color/backgroundPrimary</item>
+        <item name="cardCornerRadius">@dimen/default_card_corner_radius</item>
+    </style>
+
+    <style name="REAddTheme.TxtComment" parent="REAddTheme">
+        <item name="android:textColor">@color/txt_unavailable</item>
+    </style>
+
 
 </resources>
