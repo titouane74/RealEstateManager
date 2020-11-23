@@ -26,7 +26,7 @@ public class REAddFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View lView = inflater.inflate(R.layout.fragment_add_re, container, false);
+        View lView = inflater.inflate(R.layout.fragment_re_add, container, false);
         return lView;
     }
 
