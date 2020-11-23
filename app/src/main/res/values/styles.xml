@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="RealEstateTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="REAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,13 +9,41 @@
         <item name="colorError">@color/colorError</item>
     </style>
 
+    <!-- TOOLBAR THEME -->
+    <style name="REToolBarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/colorOnPrimary</item>
+    </style>
 
-    <style name="REAddTheme" parent="RealEstateTheme">
+    <!-- RAPIDE FLOATING BUTTON -->
+    <style name="REAppTheme.RapidFloatButtonAdd" parent="@style/REAppTheme">
+        xmlns:rfab="http://schemas.android.com/apk/res-auto"
+        <item name="android:padding">@dimen/default_padding</item>
+        <item name="rfab_size">normal</item>
+        <item name="rfab_drawable">@drawable/ic_add</item>
+        <item name="rfab_color_normal">@color/colorAccent</item>
+        <item name="rfab_color_pressed">@color/colorAccentDark</item>
+        <item name="rfab_shadow_radius">@dimen/rfab_shadows_radius</item>
+        <item name="rfab_shadow_color">@color/colorPrimary</item>
+        <item name="rfab_shadow_dx">@dimen/app_zero_dp</item>
+        <item name="rfab_shadow_dy">@dimen/rfab_shadow_dy</item>
+        <item name="android:layout_marginEnd">@dimen/rfab_margin</item>
+        <item name="android:layout_marginBottom">@dimen/rfab_margin</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
+    </style>
+
+
+    <!-- ADD REAL ESTATE THEME -->
+    <style name="REAddTheme" parent="REAppTheme">
         <item name="android:layout_margin">@dimen/default_margin</item>
     </style>
 
     <style name="REAddTheme.TxtView" parent="REAddTheme">
         <item name="android:layout_margin">@dimen/default_margin</item>
+    </style>
+
+    <style name="REAddTheme.EditTxt" parent="REAddTheme">
+        <item name="android:textColorHint">@color/txt_unavailable</item>
     </style>
 
     <style name="REAddTheme.CardView" parent="REAddTheme">

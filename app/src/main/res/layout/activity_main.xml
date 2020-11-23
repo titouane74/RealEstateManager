@@ -1,51 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.openclassrooms.realestatemanager.view.activities.MainActivity"
     android:gravity="center"
-    android:id="@+id/act_main">
+    android:id="@+id/act_main"
+    android:tag="@string/app_support_phone">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/act_main_toolbar"
+        android:minHeight="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:titleTextColor="@color/colorOnPrimary"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/REToolBarTheme"
+        app:title="@string/app_name"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center"
-        android:id="@+id/act_main_lay_quantity">
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <TextView
-            android:id="@+id/activity_main_activity_text_view_main"
+    <FrameLayout
+        android:id="@+id/act_main_frame_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"/>
+
+    <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout
+        xmlns:rfal="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/act_main_rfal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        rfal:rfal_frame_color="@color/colorOnPrimary"
+        rfal:rfal_frame_alpha="0.6"
+        >
+        <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton
+            android:id="@+id/act_main_rfab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Voici la valeur d'un bien : "/>
-
-        <TextView
-            android:id="@+id/act_main_act_txt_view_quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/act_main_btn_open_add_frag"
-        android:text="Open Add Layout"
-        android:textAllCaps="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/act_main_lay_quantity"
-        />
-
+            style="@style/REAppTheme.RapidFloatButtonAdd"/>
+    </com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

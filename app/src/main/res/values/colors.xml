@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#BB86FC</color>
+    <color name="colorAccent">#DDC4FB</color>
+    <color name="colorAccentDark">#BB86FC</color>
     <color name="colorOnPrimary">#FFFFFF</color>
 
     <color name="backgroundPrimary">#FFFFFF</color>
@@ -18,4 +19,9 @@
 
     <color name="txt_unavailable">#636363</color>
 
+    <!-- COLOR FOR RAPID FLOATING BUTTON -->
+    <color name="rfab_color_bckgrd_normal_add_re">#A1D0F6</color>
+    <color name="rfab_color_bckgrd_pressed_add_re">#62B5F6</color>
+    <color name="rfab_color_bckgrd_normal_add_agent">#7CC57F</color>
+    <color name="rfab_color_bckgrd_pressed_add_agent">#4A914D</color>
 </resources>

@@ -13,15 +13,20 @@
     <dimen name="default_margin_end">4dp</dimen>
 
     <!-- DEFAULT PADDING -->
-    <dimen name="default_padding">2dp</dimen>
-    <dimen name="default_padding_horirontal">2dp</dimen>
-    <dimen name="default_padding_vertical">2dp</dimen>
-    <dimen name="default_padding_top">2dp</dimen>
-    <dimen name="default_padding_bottom">2dp</dimen>
-    <dimen name="default_padding_start">2dp</dimen>
-    <dimen name="default_padding_end">2dp</dimen>
+    <dimen name="default_padding">4dp</dimen>
+    <dimen name="default_padding_horirontal">4dp</dimen>
+    <dimen name="default_padding_vertical">4dp</dimen>
+    <dimen name="default_padding_top">4dp</dimen>
+    <dimen name="default_padding_bottom">4dp</dimen>
+    <dimen name="default_padding_start">4dp</dimen>
+    <dimen name="default_padding_end">4dp</dimen>
     
     <!-- DEFAULT CARDVIEW -->
     <dimen name="default_card_corner_radius">5dp</dimen>
+
+    <!-- RAPID FLOATING ACTION BUTTON -->
+    <dimen name="rfab_shadows_radius">10dp</dimen>
+    <dimen name="rfab_shadow_dy">4dp</dimen>
+    <dimen name="rfab_margin">10dp</dimen>
 
 </resources>

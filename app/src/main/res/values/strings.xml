@@ -23,4 +23,8 @@
     <string name="txt_area">Area</string>
     <string name="txt_sale_date">Date of sale</string>
 
+    <!-- RAPID FLOATING BUTTON -->
+    <string name="rfab_txt_item_add_re">Add new real estate</string>
+    <string name="rfab_txt_item_add_agent">Add new agent</string>
+
 </resources>

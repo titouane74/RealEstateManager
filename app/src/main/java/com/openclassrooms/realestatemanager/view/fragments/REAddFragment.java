@@ -13,26 +13,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.viewmodel.AddViewModel;
+import com.openclassrooms.realestatemanager.viewmodel.REAddViewModel;
 
-public class AddFragment extends Fragment {
+public class REAddFragment extends Fragment {
 
-    private AddViewModel mViewModel;
+    private REAddViewModel mViewModel;
 
-    public static AddFragment newInstance() {
-        return new AddFragment();
+    public static REAddFragment newInstance() {
+        return new REAddFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.add_fragment, container, false);
+        View lView = inflater.inflate(R.layout.fragment_add_re, container, false);
+        return lView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(AddViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(REAddViewModel.class);
         // TODO: Use the ViewModel
     }
 
