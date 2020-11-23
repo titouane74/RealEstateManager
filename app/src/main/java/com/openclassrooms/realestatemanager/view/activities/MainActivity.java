@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.textViewMain = findViewById(R.id.activity_main_activity_text_view_main);
-        this.textViewQuantity = findViewById(R.id.activity_main_activity_text_view_quantity);
+        this.textViewQuantity = findViewById(R.id.act_main_act_txt_view_quantity);
 
         this.configureTextViewMain();
         this.configureTextViewQuantity();

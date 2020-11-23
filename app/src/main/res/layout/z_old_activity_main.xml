@@ -23,7 +23,7 @@
             android:text="Voici la valeur d'un bien : "/>
 
         <TextView
-            android:id="@+id/activity_main_activity_text_view_quantity"
+            android:id="@+id/act_main_act_txt_view_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
