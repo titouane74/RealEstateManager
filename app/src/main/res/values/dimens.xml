@@ -2,10 +2,12 @@
 <resources>
 
     <dimen name="app_zero_dp">0dp</dimen>
+    <dimen name="app_divider_height">1dp</dimen>
+
 
     <!-- DEFAULT MARGIN -->
     <dimen name="default_margin">4dp</dimen>
-    <dimen name="default_margin_horirontal">4dp</dimen>
+    <dimen name="default_margin_horizontal">4dp</dimen>
     <dimen name="default_margin_vertical">4dp</dimen>
     <dimen name="default_margin_top">4dp</dimen>
     <dimen name="default_margin_bottom">4dp</dimen>
@@ -14,7 +16,7 @@
 
     <!-- DEFAULT PADDING -->
     <dimen name="default_padding">4dp</dimen>
-    <dimen name="default_padding_horirontal">4dp</dimen>
+    <dimen name="default_padding_horizontal">4dp</dimen>
     <dimen name="default_padding_vertical">4dp</dimen>
     <dimen name="default_padding_top">4dp</dimen>
     <dimen name="default_padding_bottom">4dp</dimen>
@@ -24,9 +26,19 @@
     <!-- DEFAULT CARDVIEW -->
     <dimen name="default_card_corner_radius">5dp</dimen>
 
+    <!-- DEFAULT BUTTON -->
+    <dimen name="default_btn_corner_radius">10dp</dimen>
+
     <!-- RAPID FLOATING ACTION BUTTON -->
     <dimen name="rfab_shadows_radius">10dp</dimen>
     <dimen name="rfab_shadow_dy">4dp</dimen>
     <dimen name="rfab_margin">10dp</dimen>
+
+    <!-- REAL ESTATE ADD -->
+    <dimen name="re_add_icon_edit_txt_height">24dp</dimen>
+    <dimen name="re_add_padding_btn">8dp</dimen>
+    <dimen name="re_add_padding_lay">16dp</dimen>
+
+
 
 </resources>

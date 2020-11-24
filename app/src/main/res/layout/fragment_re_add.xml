@@ -24,7 +24,7 @@
             <ImageView
                 android:id="@+id/frag_add_img_location"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/default_img_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -45,35 +45,39 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/frag_add_cardv_status"
+        android:id="@+id/frag_add_cardv_date_on_market"
         style="@style/REAddTheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/frag_add_cardv_location">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:id="@+id/frag_re_add_ll_date_on_market"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:id="@+id/frag_add_img_market_date"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:contentDescription="@string/default_img_description"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_calendar" />
 
-            <TextView
+            <EditText
                 android:id="@+id/frag_add_tv_market_date"
-                style="@style/REAddTheme.TxtView"
-                android:layout_width="wrap_content"
+                style="@style/REAddTheme.EditTxt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txt_on_market_date"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_market_date"
-                app:layout_constraintStart_toEndOf="@+id/frag_add_img_market_date"
-                app:layout_constraintTop_toTopOf="@+id/frag_add_img_market_date" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:importantForAutofill="no"
+                android:inputType="date"
+                />
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -82,146 +86,209 @@
         style="@style/REAddTheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/frag_add_cardv_status">
+        app:layout_constraintTop_toBottomOf="@+id/frag_add_cardv_date_on_market">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/frag_add_img_price"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/frag_re_add_ll_type"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/default_img_description"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_price" />
+                tools:ignore="UseCompoundDrawables">
 
-            <EditText
-                android:id="@+id/frag_add_tv_price"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/frag_add_img_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/default_img_description"
+                    app:srcCompat="@drawable/ic_type" />
+
+                <TextView
+                    android:id="@+id/frag_add_tv_type"
+                    style="@style/REAddTheme.TxtView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_type" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/frag_re_add_ll_area"
+                android:layout_width="@dimen/app_zero_dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/txt_price"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_price"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_price"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_price"
-                android:inputType="number"
-                android:importantForAutofill="no"
-                style="@style/REAddTheme.EditTxt"/>
-
-            <ImageView
-                android:id="@+id/frag_add_img_type"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/default_img_description"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_add_img_price"
-                app:srcCompat="@drawable/ic_type" />
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_type"
+                app:layout_constraintWidth_percent="0.5"
+                >
 
-            <TextView
-                android:id="@+id/frag_add_tv_type"
-                style="@style/REAddTheme.TxtView"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/frag_add_img_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/default_img_description"
+                    app:srcCompat="@drawable/ic_area" />
+
+                <EditText
+                    android:id="@+id/frag_add_tv_area"
+                    style="@style/REAddTheme.EditTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/txt_area"
+                    android:importantForAutofill="no"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/frag_re_add_ll_price"
+                android:layout_width="@dimen/app_zero_dp"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_type"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_type"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_type"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_type" />
+                android:orientation="horizontal"
+                app:layout_constraintStart_toEndOf="@id/frag_re_add_ll_area"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_type"
+                app:layout_constraintWidth_percent="0.5"
+                >
 
-            <ImageView
-                android:id="@+id/frag_add_img_area"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/default_img_description"
+                <ImageView
+                    android:id="@+id/frag_add_img_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/default_img_description"
+                    app:srcCompat="@drawable/ic_price" />
+
+                <EditText
+                    android:id="@+id/frag_add_tv_price"
+                    style="@style/REAddTheme.EditTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/txt_price"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/frag_re_add_ll_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_type"
-                app:srcCompat="@drawable/ic_area" />
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_price"
+                >
 
-            <TextView
-                android:id="@+id/frag_add_tv_area"
-                style="@style/REAddTheme.TxtView"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/frag_add_img_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/default_img_description"
+                    app:srcCompat="@drawable/ic_room" />
+
+                <EditText
+                    android:id="@+id/frag_add_tv_nb_rooms"
+                    style="@style/REAddTheme.EditTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/txt_nb_rooms"
+                    android:importantForAutofill="no"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/frag_re_add_ll_bedroom"
+                android:layout_width="@dimen/app_zero_dp"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_area"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_area"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_area"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_area" />
-
-            <ImageView
-                android:id="@+id/frag_add_img_room"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/default_img_description"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_area"
-                app:srcCompat="@drawable/ic_room" />
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_room"
+                app:layout_constraintWidth_percent="0.5"
 
-            <TextView
-                android:id="@+id/frag_add_tv_nb_rooms"
-                style="@style/REAddTheme.TxtView"
-                android:layout_width="wrap_content"
+                >
+
+                <ImageView
+                    android:id="@+id/frag_add_img_bedroom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/default_img_description"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_bedroom" />
+
+                <EditText
+                    android:id="@+id/frag_add_tv_nb_bedrooms"
+                    style="@style/REAddTheme.EditTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="4dp"
+                    android:hint="@string/txt_nb_bedrooms"
+                    android:importantForAutofill="no"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/frag_re_add_ll_bathroom"
+                android:layout_width="@dimen/app_zero_dp"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_nb_rooms"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_room"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_room"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_room" />
+                android:orientation="horizontal"
+                app:layout_constraintStart_toEndOf="@+id/frag_re_add_ll_bedroom"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_room"
+                app:layout_constraintWidth_percent="0.5"
+                >
 
-            <ImageView
-                android:id="@+id/frag_add_img_bedroom"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/default_img_description"
+                <ImageView
+                    android:id="@+id/frag_add_img_bathroom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/default_img_description"
+                    app:srcCompat="@drawable/ic_bathroom" />
+
+                <EditText
+                    android:id="@+id/frag_add_tv_nb_bathrooms"
+                    style="@style/REAddTheme.EditTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/txt_nb_bathrooms"
+                    android:importantForAutofill="no"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/frag_re_add_ll_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_nb_rooms"
-                app:srcCompat="@drawable/ic_bedroom" />
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_bathroom"
+                >
 
-            <TextView
-                android:id="@+id/frag_add_tv_nb_bedrooms"
-                style="@style/REAddTheme.TxtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_nb_bedrooms"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_bedroom"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_bedroom"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_bedroom" />
+                <ImageView
+                    android:id="@+id/frag_add_img_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/default_img_description"
+                    app:srcCompat="@drawable/ic_description" />
 
-            <ImageView
-                android:id="@+id/frag_add_img_bathroom"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/default_img_description"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_nb_bedrooms"
-                app:srcCompat="@drawable/ic_bathroom" />
-
-            <TextView
-                android:id="@+id/frag_add_tv_nb_bathrooms"
-                style="@style/REAddTheme.TxtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_nb_bathrooms"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_bathroom"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_bathroom"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_bathroom" />
-
-            <ImageView
-                android:id="@+id/frag_add_img_description"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/default_img_description"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_nb_bathrooms"
-                app:srcCompat="@drawable/ic_description" />
-
-            <TextView
-                android:id="@+id/frag_add_tv_description"
-                style="@style/REAddTheme.TxtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_description"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_description"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_description"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_description" />
+                <EditText
+                    android:id="@+id/frag_add_tv_description"
+                    style="@style/REAddTheme.EditTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|end"
+                    android:hint="@string/txt_description"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine" />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
@@ -240,7 +307,7 @@
             <ImageView
                 android:id="@+id/frag_add_img_poi"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/default_img_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

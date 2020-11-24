@@ -5,6 +5,8 @@
     <string name="app_support_phone">phone</string>
 
     <string name="default_img_description">@null</string>
+    <string name="default_btn_cancel">Cancel</string>
+    <string name="default_btn_save">Save</string>
 
     <!-- REAL ESTATE VOCABULARY -->
     <string name="txt_location">Location</string>
@@ -13,9 +15,9 @@
     <string name="txt_on_market_date">Date of placing on the market</string>
     <string name="txt_status">Status</string>
     <string name="txt_type">Type</string>
-    <string name="txt_nb_rooms">Number of rooms</string>
-    <string name="txt_nb_bedrooms">Number of bedrooms</string>
-    <string name="txt_nb_bathrooms">Number of bathrooms</string>
+    <string name="txt_nb_rooms">Rooms</string>
+    <string name="txt_nb_bedrooms">Bedrooms</string>
+    <string name="txt_nb_bathrooms">Bathrooms</string>
     <string name="txt_description">Description</string>
     <string name="txt_price">Price</string>
     <string name="txt_poi">Points of interest</string>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/re_add_padding_btn">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="@dimen/app_zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/re_add_padding_lay"
+            android:text="@string/default_btn_cancel"
+            style="@style/REAddTheme.Button"
+            />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="@dimen/app_zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/re_add_padding_lay"
+            style="@style/REAddTheme.Button"
+            android:text="@string/default_btn_save" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_divider_height"
+        android:background="@color/colorPrimary" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/fragment_re_add" />
+
+    </ScrollView>
+</LinearLayout>

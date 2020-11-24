@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
         mRFAContent
                 .setItems(lItems)
                 .setIconShadowRadius(RFABTextUtil.px2dip(mContext,3F))
-                .setIconShadowColor(ContextCompat.getColor(mContext,R.color.colorAccent))
+                .setIconShadowColor(ContextCompat.getColor(mContext,R.color.rfab_color_bckgrd))
                 .setIconShadowDy(RFABTextUtil.px2dip(mContext,3F))
         ;
         mRFAHelper = new RapidFloatingActionHelper(

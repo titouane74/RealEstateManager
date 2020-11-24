@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#505FB6</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#DDC4FB</color>
-    <color name="colorAccentDark">#BB86FC</color>
     <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorAccent">#B90000</color>
+    <color name="colorDarkRed">#B90000</color>
 
     <color name="backgroundPrimary">#FFFFFF</color>
     <color name="backgroundSecondary">#E5E6E7</color>
@@ -24,4 +24,8 @@
     <color name="rfab_color_bckgrd_pressed_add_re">#62B5F6</color>
     <color name="rfab_color_bckgrd_normal_add_agent">#7CC57F</color>
     <color name="rfab_color_bckgrd_pressed_add_agent">#4A914D</color>
+    <color name="rfab_color_bckgrd">#DDC4FB</color>
+    <color name="rfab_color_bckgrd_dark">#BB86FC</color>
+
+
 </resources>

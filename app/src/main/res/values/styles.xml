@@ -20,8 +20,8 @@
         <item name="android:padding">@dimen/default_padding</item>
         <item name="rfab_size">normal</item>
         <item name="rfab_drawable">@drawable/ic_add</item>
-        <item name="rfab_color_normal">@color/colorAccent</item>
-        <item name="rfab_color_pressed">@color/colorAccentDark</item>
+        <item name="rfab_color_normal">@color/rfab_color_bckgrd</item>
+        <item name="rfab_color_pressed">@color/rfab_color_bckgrd_dark</item>
         <item name="rfab_shadow_radius">@dimen/rfab_shadows_radius</item>
         <item name="rfab_shadow_color">@color/colorPrimary</item>
         <item name="rfab_shadow_dx">@dimen/app_zero_dp</item>
@@ -43,16 +43,32 @@
     </style>
 
     <style name="REAddTheme.EditTxt" parent="REAddTheme">
-        <item name="android:textColorHint">@color/txt_unavailable</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
     </style>
 
+    <style name="REAddTheme.TxtInputLayDate" parent="REAddTheme">
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="hintEnabled">true</item>
+        <item name="errorEnabled">false</item>
+    </style>
+    <style name="REAddTheme.TxtInputLay" parent="REAddTheme">
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="hintEnabled">true</item>
+        <item name="errorEnabled">true</item>
+    </style>
+    <style name="REAddTheme.TxtInputLayEt" parent="REAddTheme">
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="android:focusable">true</item>
+        <item name="android:cursorVisible">true</item>
+    </style>
+    <style name="REAddTheme.Button" parent="REAddTheme">
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/btn_round_corner</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+    </style>
     <style name="REAddTheme.CardView" parent="REAddTheme">
         <item name="android:background">@color/backgroundPrimary</item>
         <item name="cardCornerRadius">@dimen/default_card_corner_radius</item>
-    </style>
-
-    <style name="REAddTheme.TxtComment" parent="REAddTheme">
-        <item name="android:textColor">@color/txt_unavailable</item>
     </style>
 
 
