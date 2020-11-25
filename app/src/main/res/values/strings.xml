@@ -8,6 +8,7 @@
     <string name="default_img_description">@null</string>
     <string name="default_btn_cancel">Cancel</string>
     <string name="default_btn_save">Save</string>
+    <string name="default_btn_ok">OK</string>
 
     <!-- REAL ESTATE VOCABULARY -->
     <string name="txt_location">Location</string>
@@ -16,9 +17,9 @@
     <string name="txt_on_market_date">Date of placing on the market</string>
     <string name="txt_status">Status</string>
     <string name="txt_type">Type</string>
-    <string name="txt_nb_rooms">Rooms</string>
-    <string name="txt_nb_bedrooms">Bedrooms</string>
-    <string name="txt_nb_bathrooms">Bathrooms</string>
+    <string name="txt_rooms">Rooms</string>
+    <string name="txt_bedrooms">Bedrooms</string>
+    <string name="txt_bathrooms">Bathrooms</string>
     <string name="txt_description">Description</string>
     <string name="txt_price">Price</string>
     <string name="txt_poi">Points of interest</string>
@@ -30,5 +31,25 @@
     <string name="rfab_txt_item_view_det_re">View real estate detail</string>
     <string name="rfab_txt_item_add_re">Add new real estate</string>
     <string name="rfab_txt_item_add_agent">Add new agent</string>
+
+
+    <!-- SPINNERS -->
+    <string name="spinners_select">--Select--</string>
+
+    <!-- POI -->
+    <string name="poi_title_list">POI List</string>
+    <string name="poi_restaurant">restaurant</string>
+    <string name="poi_school">school</string>
+    <string name="poi_store">store</string>
+    <string name="poi_subway">subway</string>
+    <string name="poi_park">park</string>
+    <string name="poi_museum">museum</string>
+    <string name="poi_doctor">doctor</string>
+    <string name="poi_bank">bank</string>
+    <string name="poi_airport">airport</string>
+    <string name="poi_bar">bar</string>
+    <string name="poi_hospital">hospital</string>
+    <string name="poi_gym">gym</string>
+    <string name="poi_train">train</string>
 
 </resources>

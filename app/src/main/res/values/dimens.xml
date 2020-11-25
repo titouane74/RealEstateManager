@@ -41,6 +41,11 @@
     <dimen name="re_add_padding_btn">8dp</dimen>
     <dimen name="re_add_padding_lay">16dp</dimen>
 
-
+    <!-- SPINNER -->
+    <dimen name="default_spinner_height">24dp</dimen>
+    <dimen name="default_spinner_alone_height">24dp</dimen>
+    <dimen name="default_spinner_width_large">200dp</dimen>
+    <dimen name="default_spinner_width_small">80dp</dimen>
+    <dimen name="default_spinner_txt_size">14sp</dimen>
 
 </resources>

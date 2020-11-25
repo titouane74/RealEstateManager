@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="type_spinner">
+        <item>@string/spinners_select</item>
+        <item>Apartment</item>
+        <item>House</item>
+        <item>Loft</item>
+        <item>Private Mansion</item>
+        <item>Castle</item>
+    </string-array>
+
+    <string-array name="rooms_spinner">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5 +</item>
+    </string-array>
+
+    <string-array name="poi_spinner">
+        <item>@string/poi_restaurant</item>
+        <item>@string/poi_subway</item>
+        <item>@string/poi_school</item>
+        <item>@string/poi_park</item>
+        <item>@string/poi_store</item>
+        <item>@string/poi_museum</item>
+        <item>@string/poi_doctor</item>
+        <item>@string/poi_bank</item>
+        <item>@string/poi_airport</item>
+        <item>@string/poi_bar</item>
+        <item>@string/poi_hospital</item>
+        <item>@string/poi_gym</item>
+        <item>@string/poi_train</item>
+    </string-array>
+</resources>

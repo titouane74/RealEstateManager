@@ -159,7 +159,7 @@
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_nb_rooms"
+                android:text="@string/txt_rooms"
                 app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_room"
                 app:layout_constraintStart_toEndOf="@id/frag_re_det_img_room"
                 app:layout_constraintTop_toTopOf="@id/frag_re_det_img_room" />
@@ -178,7 +178,7 @@
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_nb_bedrooms"
+                android:text="@string/txt_bedrooms"
                 app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_bedroom"
                 app:layout_constraintStart_toEndOf="@id/frag_re_det_img_bedroom"
                 app:layout_constraintTop_toTopOf="@id/frag_re_det_img_bedroom" />
@@ -197,7 +197,7 @@
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_nb_bathrooms"
+                android:text="@string/txt_bathrooms"
                 app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_bathroom"
                 app:layout_constraintStart_toEndOf="@id/frag_re_det_img_bathroom"
                 app:layout_constraintTop_toTopOf="@id/frag_re_det_img_bathroom" />

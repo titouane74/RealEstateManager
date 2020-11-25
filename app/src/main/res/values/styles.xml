@@ -70,6 +70,16 @@
         <item name="android:background">@color/backgroundPrimary</item>
         <item name="cardCornerRadius">@dimen/default_card_corner_radius</item>
     </style>
-
-
+    <style name="REAddTheme.SpinnerRoom" parent="REAddTheme">
+        <item name="android:layout_width">@dimen/default_spinner_width_small</item>
+        <item name="android:layout_height">@dimen/default_spinner_height</item>
+        <item name="android:textSize">@dimen/default_txt_size</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+    </style>
+    <style name="REAddTheme.Spinner" parent="REAddTheme">
+        <item name="android:layout_width">@dimen/default_spinner_width_large</item>
+        <item name="android:layout_height">@dimen/default_spinner_height</item>
+        <item name="android:textSize">@dimen/default_txt_size</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+    </style>
 </resources>

@@ -47,5 +47,9 @@
             app:argType="com.openclassrooms.realestatemanager.model.RealEstate"
             app:nullable="true" />
     </fragment>
+    <dialog
+        android:id="@+id/nav_poi_dialog"
+        android:name="com.openclassrooms.realestatemanager.view.fragments.POIDialogFragment"
+        android:label="POIDialogFragment" />
 
 </navigation>

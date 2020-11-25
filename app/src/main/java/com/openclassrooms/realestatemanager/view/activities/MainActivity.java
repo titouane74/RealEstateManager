@@ -5,24 +5,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.google.android.material.navigation.NavigationView;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.model.RealEstate;
-import com.openclassrooms.realestatemanager.view.fragments.AgentAddFragment;
+import com.openclassrooms.realestatemanager.view.fragments.POIDialogFragment;
 import com.openclassrooms.realestatemanager.view.fragments.REAddFragment;
-import com.openclassrooms.realestatemanager.view.fragments.REListFragment;
 import com.openclassrooms.realestatemanager.view.fragments.REListFragmentDirections;
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton;
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionHelper;
@@ -33,8 +27,10 @@ import com.wangjie.rapidfloatingactionbutton.util.RFABTextUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements RapidFloatingActionContentLabelList.OnRapidFloatingActionContentLabelListListener {
+public class MainActivity extends AppCompatActivity implements RapidFloatingActionContentLabelList.OnRapidFloatingActionContentLabelListListener ,
+        POIDialogFragment.OnDialogPOIListener {
 
     public static final String TAG = "TAG_MAIN";
 
@@ -48,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
 
     //LIFECYCLE
     private Context mContext;
+    private REAddFragment mREAddFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,9 +144,6 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
                 mRFAButton.setVisibility(View.INVISIBLE);
                 break;
             case 1 :
-//                REListFragmentDirections.ActionNavReListToNavReDetail lAction = REListFragmentDirections.actionNavReListToNavReDetail();
-//                lAction.setReid(1);
-//                mNavController.navigate(lAction);
                 RealEstate lRE = new RealEstate(1,"apartment", 250000,100,5,2,1,"With garden and a box",false);
                 REListFragmentDirections.ActionNavReListToNavReDetail lAction = REListFragmentDirections.actionNavReListToNavReDetail(lRE);
                 lAction.setReid(1);
@@ -170,4 +164,26 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
         mRFAButton.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void onPOIOkClicked(List<String> pList) {
+        Fragment lFragment = getSupportFragmentManager().getPrimaryNavigationFragment();
+        if (lFragment != null) {
+            Log.d(TAG, "onPOIOkClicked: " + lFragment.getId() + lFragment.getTag() );
+/*            if (lFragment instanceof REAddFragment) {
+                REAddFragment mREAddFragment = (REAddFragment) lFragment;
+                mREAddFragment.onPOIOkClicked(pList);
+            }*/
+        }
+
+/*
+        mREAddFragment = (REAddFragment) getSupportFragmentManager().findFragmentById(R.id.lay_frag_add);
+        if (mREAddFragment == null) {
+            mREAddFragment = new REAddFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.lay_frag_add, mREAddFragment)
+                    .commit();
+            mREAddFragment.onPOIOkClicked(pList);
+        }
+*/
+    }
 }

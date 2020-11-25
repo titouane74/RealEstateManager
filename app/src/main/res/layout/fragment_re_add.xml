@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundSecondary"
     android:theme="@style/REAddTheme"
-    tools:context=".view.fragments.REAddFragment">
+    tools:context=".view.fragments.REAddFragment"
+    android:tag="READD">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/frag_add_cardv_location"
@@ -75,8 +76,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/txt_on_market_date"
                 android:importantForAutofill="no"
-                android:inputType="date"
-                />
+                android:inputType="date" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -109,12 +109,12 @@
                     android:contentDescription="@string/default_img_description"
                     app:srcCompat="@drawable/ic_type" />
 
-                <TextView
-                    android:id="@+id/frag_add_tv_type"
-                    style="@style/REAddTheme.TxtView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txt_type" />
+                <Spinner
+                    android:id="@+id/frag_re_add_spin_type"
+                    style="@style/REAddTheme.Spinner"
+                    android:layout_marginEnd="@dimen/default_margin_end"
+                    android:prompt="@string/txt_type" />
+
             </LinearLayout>
 
 
@@ -125,8 +125,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_type"
-                app:layout_constraintWidth_percent="0.5"
-                >
+                app:layout_constraintWidth_percent="0.5">
 
                 <ImageView
                     android:id="@+id/frag_add_img_area"
@@ -153,8 +152,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintStart_toEndOf="@id/frag_re_add_ll_area"
                 app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_type"
-                app:layout_constraintWidth_percent="0.5"
-                >
+                app:layout_constraintWidth_percent="0.5">
 
                 <ImageView
                     android:id="@+id/frag_add_img_price"
@@ -178,12 +176,11 @@
 
             <LinearLayout
                 android:id="@+id/frag_re_add_ll_room"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_price"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_price">
 
                 <ImageView
                     android:id="@+id/frag_add_img_room"
@@ -193,23 +190,21 @@
                     android:contentDescription="@string/default_img_description"
                     app:srcCompat="@drawable/ic_room" />
 
-                <EditText
-                    android:id="@+id/frag_add_tv_nb_rooms"
-                    style="@style/REAddTheme.EditTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/txt_nb_rooms"
-                    android:importantForAutofill="no"
-                    android:inputType="number" />
+                <Spinner
+                    android:id="@+id/frag_re_add_spin_rooms"
+                    style="@style/REAddTheme.SpinnerRoom"
+                    android:layout_marginEnd="@dimen/default_margin_end"
+                    android:prompt="@string/txt_rooms" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/frag_re_add_ll_bedroom"
-                android:layout_width="@dimen/app_zero_dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_room"
+                app:layout_constraintStart_toEndOf="@+id/frag_re_add_ll_room"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_price"
                 app:layout_constraintWidth_percent="0.5"
 
                 >
@@ -218,31 +213,25 @@
                     android:id="@+id/frag_add_img_bedroom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/default_img_description"
                     android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/default_img_description"
                     app:srcCompat="@drawable/ic_bedroom" />
 
-                <EditText
-                    android:id="@+id/frag_add_tv_nb_bedrooms"
-                    style="@style/REAddTheme.EditTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginStart="4dp"
-                    android:hint="@string/txt_nb_bedrooms"
-                    android:importantForAutofill="no"
-                    android:inputType="number" />
+                <Spinner
+                    android:id="@+id/frag_re_add_spin_bedrooms"
+                    style="@style/REAddTheme.SpinnerRoom"
+                    android:layout_marginEnd="@dimen/default_margin_end"
+                    android:prompt="@string/txt_bedrooms" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/frag_re_add_ll_bathroom"
-                android:layout_width="@dimen/app_zero_dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toEndOf="@+id/frag_re_add_ll_bedroom"
-                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_room"
-                app:layout_constraintWidth_percent="0.5"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_price"
+                app:layout_constraintWidth_percent="0.5">
 
                 <ImageView
                     android:id="@+id/frag_add_img_bathroom"
@@ -252,14 +241,11 @@
                     android:contentDescription="@string/default_img_description"
                     app:srcCompat="@drawable/ic_bathroom" />
 
-                <EditText
-                    android:id="@+id/frag_add_tv_nb_bathrooms"
-                    style="@style/REAddTheme.EditTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/txt_nb_bathrooms"
-                    android:importantForAutofill="no"
-                    android:inputType="number" />
+                <Spinner
+                    android:id="@+id/frag_re_add_spin_bathrooms"
+                    style="@style/REAddTheme.SpinnerRoom"
+                    android:layout_marginEnd="@dimen/default_margin_end"
+                    android:prompt="@string/txt_bathrooms" />
             </LinearLayout>
 
             <LinearLayout
@@ -268,8 +254,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_bathroom"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_bathroom">
 
                 <ImageView
                     android:id="@+id/frag_add_img_description"
@@ -321,7 +306,27 @@
                 android:text="@string/txt_poi"
                 app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_poi"
                 app:layout_constraintStart_toEndOf="@id/frag_add_img_poi"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_poi" />
+                app:layout_constraintTop_toTopOf="@id/frag_add_img_poi"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/id_frag_re_add_chipgrp_poi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.ChipGroup"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frag_add_img_poi"/>
+
+            <!--
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/frag_add_img_poi"
+                            />
+            -->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
