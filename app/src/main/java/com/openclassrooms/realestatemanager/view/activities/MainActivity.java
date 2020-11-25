@@ -13,10 +13,17 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.material.navigation.NavigationView;
 import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.view.fragments.AgentAddFragment;
 import com.openclassrooms.realestatemanager.view.fragments.REAddFragment;
 import com.openclassrooms.realestatemanager.view.fragments.REListFragment;
+import com.openclassrooms.realestatemanager.view.fragments.REListFragmentDirections;
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton;
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionHelper;
 import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout;
@@ -35,12 +42,9 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
     private Toolbar mToolbar;
     private RapidFloatingActionLayout mRFALayout;
     private RapidFloatingActionButton mRFAButton;
-    private RapidFloatingActionContentLabelList mRFAContent;
     private RapidFloatingActionHelper mRFAHelper;
-    private REListFragment mREListFragment;
-    private REAddFragment mREAddFragment;
     private View mMainLayout;
-
+    private NavController mNavController;
 
     //LIFECYCLE
     private Context mContext;
@@ -53,39 +57,18 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
 
         bindView();
         configureToolBar();
+        configureNavController();
         configureRapidFloatButton();
-        configureAndShowListFragment();
+
     }
 
-    /**
-     * Initialize and display the fragment with the real estate list
-     */
-    private void configureAndShowListFragment() {
-        mREListFragment = (REListFragment) getSupportFragmentManager().findFragmentById(R.id.act_main_frame_list);
-        if (mREListFragment == null) {
-            mREListFragment = new REListFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.act_main_frame_list, mREListFragment)
-                    .commit();
+    private void configureNavController() {
+        NavHostFragment lNavHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        if (lNavHostFragment != null) {
+            mNavController = lNavHostFragment.getNavController();
         }
     }
 
-    /**
-     * Replace the displayed fragment
-     * Take in account if it's a tablet or not
-     * @param pFragment : fragment : fragment to display
-     */
-    private void replaceFragment(final Fragment pFragment) {
-        final FragmentManager lFragmentManager = getSupportFragmentManager();
-        final FragmentTransaction lFragmentTransaction = lFragmentManager.beginTransaction();
-//        lFragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
-//        if (mMainLayout.getTag() == getString(R.string.app_support_tablet)) {
-//            lFragmentTransaction.replace(R.id.frame_right, pFragment);
-//        } else {
-            lFragmentTransaction.replace(R.id.act_main_frame_list, pFragment);
-//        }
-        lFragmentTransaction.commit();
-    }
 
     /**
      * Configure the toolbar
@@ -99,8 +82,8 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
      */
     @SuppressLint("ResourceType")
     private void configureRapidFloatButton() {
-        mRFAContent = new RapidFloatingActionContentLabelList(mContext);
-        mRFAContent.setOnRapidFloatingActionContentLabelListListener(this);
+        RapidFloatingActionContentLabelList lRFAContent = new RapidFloatingActionContentLabelList(mContext);
+        lRFAContent.setOnRapidFloatingActionContentLabelListListener(this);
         List<RFACLabelItem> lItems = new ArrayList<>();
         lItems.add(new RFACLabelItem<Integer>()
                 .setLabel(getString(R.string.rfab_txt_item_add_re))
@@ -110,13 +93,20 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
                 .setWrapper(0)
         );
         lItems.add(new RFACLabelItem<Integer>()
+                .setLabel(getString(R.string.rfab_txt_item_view_det_re))
+                .setResId(R.drawable.ic_type)
+                .setIconNormalColor(ContextCompat.getColor(mContext,R.color.rfab_color_bckgrd_normal_add_re))
+                .setIconPressedColor(ContextCompat.getColor(mContext,R.color.rfab_color_bckgrd_pressed_add_re))
+                .setWrapper(1)
+        );
+        lItems.add(new RFACLabelItem<Integer>()
                 .setLabel(getString(R.string.rfab_txt_item_add_agent))
                 .setResId(R.drawable.ic_agent)
                 .setIconNormalColor(ContextCompat.getColor(mContext,R.color.rfab_color_bckgrd_normal_add_agent))
                 .setIconPressedColor(ContextCompat.getColor(mContext,R.color.rfab_color_bckgrd_pressed_add_agent))
-                .setWrapper(1)
+                .setWrapper(2)
         );
-        mRFAContent
+        lRFAContent
                 .setItems(lItems)
                 .setIconShadowRadius(RFABTextUtil.px2dip(mContext,3F))
                 .setIconShadowColor(ContextCompat.getColor(mContext,R.color.rfab_color_bckgrd))
@@ -126,15 +116,15 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
                 mContext,
                 mRFALayout,
                 mRFAButton,
-                mRFAContent
+                lRFAContent
         ).build();
     }
 
     private void bindView() {
+        mMainLayout = findViewById(R.id.act_main);
         mToolbar = findViewById(R.id.act_main_toolbar);
         mRFALayout = findViewById(R.id.act_main_rfal);
         mRFAButton = findViewById(R.id.act_main_rfab);
-        mMainLayout = findViewById(R.id.act_main);
     }
 
     @Override
@@ -151,20 +141,33 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
     }
 
     private void manageRFABClick(int pPosition) {
-
         switch (pPosition) {
             case 0 :
-                mREAddFragment = new REAddFragment();
-                replaceFragment(mREAddFragment);
+                mNavController.navigate(R.id.nav_re_add);
                 mRFAButton.setVisibility(View.INVISIBLE);
-        }
+                break;
+            case 1 :
+//                REListFragmentDirections.ActionNavReListToNavReDetail lAction = REListFragmentDirections.actionNavReListToNavReDetail();
+//                lAction.setReid(1);
+//                mNavController.navigate(lAction);
+                RealEstate lRE = new RealEstate(1,"apartment", 250000,100,5,2,1,"With garden and a box",false);
+                REListFragmentDirections.ActionNavReListToNavReDetail lAction = REListFragmentDirections.actionNavReListToNavReDetail(lRE);
+                lAction.setReid(1);
+                mNavController.navigate(lAction);
+                mRFAButton.setVisibility(View.INVISIBLE);
+                break;
+            case 2 :
+                mNavController.navigate(R.id.nav_agent_add);
+                mRFAButton.setVisibility(View.INVISIBLE);
+                break;        }
     }
 
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
         //TODO to reactivate with the toolbar managment on the REAddFragment
-        replaceFragment(mREListFragment);
+        mNavController.navigate(R.id.nav_re_list);
         mRFAButton.setVisibility(View.VISIBLE);
     }
+
 }

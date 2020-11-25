@@ -1,4 +1,5 @@
 <resources>
+    <string name="to_do">TO DO</string>
     <string name="app_name">Real Estate Manager</string>
 
     <string name="app_support_tablet">tablet</string>
@@ -26,6 +27,7 @@
     <string name="txt_sale_date">Date of sale</string>
 
     <!-- RAPID FLOATING BUTTON -->
+    <string name="rfab_txt_item_view_det_re">View real estate detail</string>
     <string name="rfab_txt_item_add_re">Add new real estate</string>
     <string name="rfab_txt_item_add_agent">Add new agent</string>
 

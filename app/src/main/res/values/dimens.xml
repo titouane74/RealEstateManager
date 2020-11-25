@@ -4,6 +4,8 @@
     <dimen name="app_zero_dp">0dp</dimen>
     <dimen name="app_divider_height">1dp</dimen>
 
+    <!-- DEFAULT TEXT -->
+    <dimen name="default_txt_size">14sp</dimen>
 
     <!-- DEFAULT MARGIN -->
     <dimen name="default_margin">4dp</dimen>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_re_list">
+
+    <fragment
+        android:id="@+id/nav_re_add"
+        android:name="com.openclassrooms.realestatemanager.view.fragments.REAddFragment"
+        android:label="fragment_re_add"
+        tools:layout="@layout/fragment_re_add" />
+    <fragment
+        android:id="@+id/nav_re_list"
+        android:name="com.openclassrooms.realestatemanager.view.fragments.REListFragment"
+        android:label="fragment_re_list"
+        tools:layout="@layout/fragment_re_list">
+
+        <action
+            android:id="@+id/action_nav_re_list_to_nav_re_add"
+            app:destination="@id/nav_re_add" />
+        <action
+            android:id="@+id/action_nav_re_list_to_nav_agent_add"
+            app:destination="@id/nav_agent_add">
+        </action>
+        <action
+            android:id="@+id/action_nav_re_list_to_nav_re_detail"
+            app:destination="@id/nav_re_detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_agent_add"
+        android:name="com.openclassrooms.realestatemanager.view.fragments.AgentAddFragment"
+        android:label="fragment_agent_add"
+        tools:layout="@layout/fragment_agent_add">
+    </fragment>
+    <fragment
+        android:id="@+id/nav_re_detail"
+        android:name="com.openclassrooms.realestatemanager.view.fragments.REDetailFragment"
+        android:label="fragment_re_detail"
+        tools:layout="@layout/fragment_re_detail" >
+        <argument
+            android:name="reid"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="realestate"
+            app:argType="com.openclassrooms.realestatemanager.model.RealEstate"
+            app:nullable="true" />
+    </fragment>
+
+</navigation>

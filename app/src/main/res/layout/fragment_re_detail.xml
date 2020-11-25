@@ -2,15 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lay_frag_add"
+    android:id="@+id/lay_frag_re_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundSecondary"
     android:theme="@style/REAddTheme"
-    tools:context=".view.fragments.REAddFragment">
+    tools:context=".view.fragments.REDetailFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/frag_add_cardv_location"
+        android:id="@+id/frag_re_det_cardv_location"
         style="@style/REAddTheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/frag_add_img_location"
+                android:id="@+id/frag_re_det_img_location"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_img_description"
@@ -31,32 +31,32 @@
                 app:srcCompat="@drawable/ic_location" />
 
             <TextView
-                android:id="@+id/frag_add_tv_location"
+                android:id="@+id/frag_re_det_tv_location"
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/txt_location"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_location"
-                app:layout_constraintStart_toEndOf="@+id/frag_add_img_location"
-                app:layout_constraintTop_toTopOf="@+id/frag_add_img_location" />
+                app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_location"
+                app:layout_constraintStart_toEndOf="@+id/frag_re_det_img_location"
+                app:layout_constraintTop_toTopOf="@+id/frag_re_det_img_location" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/frag_add_cardv_date_on_market"
+        android:id="@+id/frag_re_det_cardv_date_on_market"
         style="@style/REAddTheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/frag_add_cardv_location">
+        app:layout_constraintTop_toBottomOf="@+id/frag_re_det_cardv_location">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/frag_add_img_market_date"
+                android:id="@+id/frag_re_det_img_market_date"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_img_description"
@@ -65,31 +65,31 @@
                 app:srcCompat="@drawable/ic_calendar" />
 
             <TextView
-                android:id="@+id/frag_add_tv_market_date"
+                android:id="@+id/frag_re_det_tv_market_date"
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/txt_on_market_date"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_market_date"
-                app:layout_constraintStart_toEndOf="@+id/frag_add_img_market_date"
-                app:layout_constraintTop_toTopOf="@+id/frag_add_img_market_date" />
+                app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_market_date"
+                app:layout_constraintStart_toEndOf="@+id/frag_re_det_img_market_date"
+                app:layout_constraintTop_toTopOf="@+id/frag_re_det_img_market_date" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/frag_add_cardv_description"
+        android:id="@+id/frag_re_det_cardv_description"
         style="@style/REAddTheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/frag_add_cardv_date_on_market">
+        app:layout_constraintTop_toBottomOf="@+id/frag_re_det_cardv_date_on_market">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/frag_add_img_price"
+                android:id="@+id/frag_re_det_img_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/default_img_description"
@@ -98,145 +98,145 @@
                 app:srcCompat="@drawable/ic_price" />
 
             <TextView
-                android:id="@+id/frag_add_tv_price"
+                android:id="@+id/frag_re_det_tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_price"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_price"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_price"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_price"
+                app:layout_constraintStart_toEndOf="@id/frag_re_det_img_price"
+                app:layout_constraintTop_toTopOf="@id/frag_re_det_img_price"
+                app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_price"
                 style="@style/REAddTheme.TxtView"/>
 
             <ImageView
-                android:id="@+id/frag_add_img_type"
+                android:id="@+id/frag_re_det_img_type"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_img_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_add_img_price"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_det_img_price"
                 app:srcCompat="@drawable/ic_type" />
 
             <TextView
-                android:id="@+id/frag_add_tv_type"
+                android:id="@+id/frag_re_det_tv_type"
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_type"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_type"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_type"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_type" />
+                app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_type"
+                app:layout_constraintStart_toEndOf="@id/frag_re_det_img_type"
+                app:layout_constraintTop_toTopOf="@id/frag_re_det_img_type" />
 
             <ImageView
-                android:id="@+id/frag_add_img_area"
+                android:id="@+id/frag_re_det_img_area"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_img_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_type"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_type"
                 app:srcCompat="@drawable/ic_area" />
 
             <TextView
-                android:id="@+id/frag_add_tv_area"
+                android:id="@+id/frag_re_det_tv_area"
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_area"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_area"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_area"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_area" />
+                app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_area"
+                app:layout_constraintStart_toEndOf="@id/frag_re_det_img_area"
+                app:layout_constraintTop_toTopOf="@id/frag_re_det_img_area" />
 
             <ImageView
-                android:id="@+id/frag_add_img_room"
+                android:id="@+id/frag_re_det_img_room"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_img_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_area"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_area"
                 app:srcCompat="@drawable/ic_room" />
 
             <TextView
-                android:id="@+id/frag_add_tv_nb_rooms"
+                android:id="@+id/frag_re_det_tv_nb_rooms"
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_nb_rooms"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_room"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_room"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_room" />
+                app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_room"
+                app:layout_constraintStart_toEndOf="@id/frag_re_det_img_room"
+                app:layout_constraintTop_toTopOf="@id/frag_re_det_img_room" />
 
             <ImageView
-                android:id="@+id/frag_add_img_bedroom"
+                android:id="@+id/frag_re_det_img_bedroom"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_img_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_nb_rooms"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_nb_rooms"
                 app:srcCompat="@drawable/ic_bedroom" />
 
             <TextView
-                android:id="@+id/frag_add_tv_nb_bedrooms"
+                android:id="@+id/frag_re_det_tv_nb_bedrooms"
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_nb_bedrooms"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_bedroom"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_bedroom"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_bedroom" />
+                app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_bedroom"
+                app:layout_constraintStart_toEndOf="@id/frag_re_det_img_bedroom"
+                app:layout_constraintTop_toTopOf="@id/frag_re_det_img_bedroom" />
 
             <ImageView
-                android:id="@+id/frag_add_img_bathroom"
+                android:id="@+id/frag_re_det_img_bathroom"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_img_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_nb_bedrooms"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_nb_bedrooms"
                 app:srcCompat="@drawable/ic_bathroom" />
 
             <TextView
-                android:id="@+id/frag_add_tv_nb_bathrooms"
+                android:id="@+id/frag_re_det_tv_nb_bathrooms"
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_nb_bathrooms"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_bathroom"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_bathroom"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_bathroom" />
+                app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_bathroom"
+                app:layout_constraintStart_toEndOf="@id/frag_re_det_img_bathroom"
+                app:layout_constraintTop_toTopOf="@id/frag_re_det_img_bathroom" />
 
             <ImageView
-                android:id="@+id/frag_add_img_description"
+                android:id="@+id/frag_re_det_img_description"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_img_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_nb_bathrooms"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_nb_bathrooms"
                 app:srcCompat="@drawable/ic_description" />
 
             <TextView
-                android:id="@+id/frag_add_tv_description"
+                android:id="@+id/frag_re_det_tv_description"
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_description"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_description"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_description"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_description" />
+                app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_description"
+                app:layout_constraintStart_toEndOf="@id/frag_re_det_img_description"
+                app:layout_constraintTop_toTopOf="@id/frag_re_det_img_description" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/frag_add_cardv_poi"
+        android:id="@+id/frag_re_det_cardv_poi"
         style="@style/REAddTheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/frag_add_cardv_description">
+        app:layout_constraintTop_toBottomOf="@+id/frag_re_det_cardv_description">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/frag_add_img_poi"
+                android:id="@+id/frag_re_det_img_poi"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/default_img_description"
@@ -245,14 +245,14 @@
                 app:srcCompat="@drawable/ic_poi" />
 
             <TextView
-                android:id="@+id/frag_add_tv_poi"
+                android:id="@+id/frag_re_det_tv_poi"
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_poi"
-                app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_poi"
-                app:layout_constraintStart_toEndOf="@id/frag_add_img_poi"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_poi" />
+                app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_poi"
+                app:layout_constraintStart_toEndOf="@id/frag_re_det_img_poi"
+                app:layout_constraintTop_toTopOf="@id/frag_re_det_img_poi" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
