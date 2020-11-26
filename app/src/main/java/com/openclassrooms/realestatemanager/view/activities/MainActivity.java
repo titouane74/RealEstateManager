@@ -1,45 +1,41 @@
 package com.openclassrooms.realestatemanager.view.activities;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.view.fragments.POIDialogFragment;
 import com.openclassrooms.realestatemanager.view.fragments.REAddFragment;
-import com.openclassrooms.realestatemanager.view.fragments.REListFragmentDirections;
-import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton;
-import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionHelper;
-import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout;
-import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RFACLabelItem;
-import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RapidFloatingActionContentLabelList;
-import com.wangjie.rapidfloatingactionbutton.util.RFABTextUtil;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements RapidFloatingActionContentLabelList.OnRapidFloatingActionContentLabelListListener ,
-        POIDialogFragment.OnDialogPOIListener {
+//public class MainActivity extends AppCompatActivity implements RapidFloatingActionContentLabelList.OnRapidFloatingActionContentLabelListListener ,
+//        POIDialogFragment.OnDialogPOIListener {
+public class MainActivity extends AppCompatActivity implements POIDialogFragment.OnDialogPOIListener {
 
     public static final String TAG = "TAG_MAIN";
 
     //DESIGN
     private Toolbar mToolbar;
-    private RapidFloatingActionLayout mRFALayout;
-    private RapidFloatingActionButton mRFAButton;
-    private RapidFloatingActionHelper mRFAHelper;
+    //    private RapidFloatingActionLayout mRFALayout;
+//    private RapidFloatingActionButton mRFAButton;
+//    private RapidFloatingActionHelper mRFAHelper;
     private View mMainLayout;
     private NavController mNavController;
     private long mBackPressedTime;
@@ -56,10 +52,18 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
         mContext = getApplicationContext();
 
         bindView();
-        configureToolBar();
-        configureNavController();
-        configureRapidFloatButton();
 
+        configureNavController();
+        configureToolBar();
+
+
+        //        configureRapidFloatButton();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+        return super.onCreateView(name, context, attrs);
     }
 
     private void configureNavController() {
@@ -75,11 +79,22 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
      */
     private void configureToolBar() {
         setSupportActionBar(mToolbar);
+        NavigationUI.setupActionBarWithNavController(this, mNavController);
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//        return NavigationUI.navigateUp(mNavController, mAppBarConfiguration)
+//                || super.onSupportNavigateUp();
+        return mNavController.navigateUp() || super.onSupportNavigateUp();
+    }
+
 
     /**
      * Configure the rapide floating action button
      */
+/*
     @SuppressLint("ResourceType")
     private void configureRapidFloatButton() {
         RapidFloatingActionContentLabelList lRFAContent = new RapidFloatingActionContentLabelList(mContext);
@@ -119,14 +134,56 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
                 lRFAContent
         ).build();
     }
-
+*/
     private void bindView() {
         mMainLayout = findViewById(R.id.act_main);
         mToolbar = findViewById(R.id.act_main_toolbar);
-        mRFALayout = findViewById(R.id.act_main_rfal);
-        mRFAButton = findViewById(R.id.act_main_rfab);
+//        mRFALayout = findViewById(R.id.act_main_rfal);
+//        mRFAButton = findViewById(R.id.act_main_rfab);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_re, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem pItem) {
+        Log.d(TAG, "onOptionsItemSelected: " + pItem.getItemId());
+        switch (pItem.getItemId()) {
+            case R.id.nav_agent_add:
+            case R.id.nav_re_add:
+                NavigationUI.onNavDestinationSelected(pItem,mNavController);
+                return true;
+            case R.id.menu_action_edit_agent:
+                return true;
+            case R.id.menu_action_save_agent:
+                return true;
+            case R.id.menu_action_edit_re:
+                return true;
+            case R.id.menu_action_save_re:
+                return true;
+            case R.id.menu_search_action:
+                return true;
+            default:
+                return super.onOptionsItemSelected(pItem);
+        }
+
+
+
+/*        if (pItem.getItemId() == android.R.id.home) {
+            mNavController.navigate(R.id.nav_re_list);
+//            mRFAButton.setVisibility(View.VISIBLE);
+        } else if (pItem.getItemId() == R.menu.menu_re) {
+            Toast.makeText(mContext, "COUCOU", Toast.LENGTH_SHORT).show();
+        }*/
+
+//        return NavigationUI.onNavDestinationSelected(pItem,mNavController) || super.onOptionsItemSelected(pItem);
+//        return super.onOptionsItemSelected(pItem);
+    }
+
+/*
     @Override
     public void onRFACItemLabelClick(int position, RFACLabelItem item) {
         mRFAHelper.toggleContent();
@@ -139,8 +196,9 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
         mRFAHelper.toggleContent();
         manageRFABClick(position);
     }
+*/
 
-    private void manageRFABClick(int pPosition) {
+/*    private void manageRFABClick(int pPosition) {
         switch (pPosition) {
             case 0 :
                 Log.d(TAG, "onNavToAdd: JE PASSE : " + mRFAButton.getVisibility());
@@ -148,6 +206,10 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
                 mRFAButton.setVisibility(View.INVISIBLE);
                 break;
             case 1 :
+                if(getSupportActionBar()!=null) {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    getSupportActionBar().setDisplayShowHomeEnabled(true);
+                }
                 RealEstate lRE = new RealEstate(1,"apartment", 250000,100,5,2,1,"With garden and a box",false);
                 REListFragmentDirections.ActionNavReListToNavReDetail lAction = REListFragmentDirections.actionNavReListToNavReDetail(lRE);
                 lAction.setReid(1);
@@ -158,7 +220,8 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
                 mNavController.navigate(R.id.nav_agent_add);
                 mRFAButton.setVisibility(View.INVISIBLE);
                 break;        }
-    }
+    }*/
+
 
 
     @Override
@@ -167,31 +230,18 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
             mBackToast.cancel();
             super.onBackPressed();
             return;
-        } else {
-            mBackToast = Toast.makeText(mContext, R.string.exit_app_back_pressed, Toast.LENGTH_SHORT);
-            mBackToast.show();
         }
         mBackPressedTime = System.currentTimeMillis();
         //TODO to reactivate with the toolbar managment on the REAddFragment
         mNavController.navigate(R.id.nav_re_list);
-        mRFAButton.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setRfabVisible();
-    }
-
-    private void setRfabVisible() {
-        mRFAButton.setVisibility(View.VISIBLE);
+//        mRFAButton.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onPOIOkClicked(List<String> pList) {
         Fragment lFragment = getSupportFragmentManager().getPrimaryNavigationFragment();
         if (lFragment != null) {
-            Log.d(TAG, "onPOIOkClicked: " + lFragment.getId() + lFragment.getTag() );
+            Log.d(TAG, "onPOIOkClicked: " + lFragment.getId() + lFragment.getTag());
 /*            if (lFragment instanceof REAddFragment) {
                 REAddFragment mREAddFragment = (REAddFragment) lFragment;
                 mREAddFragment.onPOIOkClicked(pList);

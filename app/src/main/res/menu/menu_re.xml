@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_search_action"
+        android:title="@string/default_txt_search"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/menu_re_action"
+        android:title="@string/txt_real_estate"
+        android:icon="@drawable/ic_type_white"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/nav_re_add"
+                android:icon="@drawable/ic_add_blue"
+                android:title="@string/default_txt_add" />
+            <item
+                android:id="@+id/menu_action_edit_re"
+                android:icon="@drawable/ic_edit_blue"
+                android:title="@string/default_txt_edit" />
+            <item
+                android:id="@+id/menu_action_save_re"
+                android:icon="@drawable/ic_save_blue"
+                android:title="@string/default_txt_save" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/menu_agent_action"
+        android:title="@string/txt_agent"
+        android:icon="@drawable/ic_agent_white"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/nav_agent_add"
+                android:icon="@drawable/ic_add_blue"
+                android:title="@string/default_txt_add" />
+            <item
+                android:id="@+id/menu_action_edit_agent"
+                android:icon="@drawable/ic_edit_blue"
+                android:title="@string/default_txt_edit" />
+            <item
+                android:id="@+id/menu_action_save_agent"
+                android:icon="@drawable/ic_save_blue"
+                android:title="@string/default_txt_save" />
+        </menu>
+    </item>
+
+</menu>

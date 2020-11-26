@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -57,7 +59,7 @@ public class REAddFragment extends Fragment implements POIDialogFragment.OnDialo
     private Button mCancel;
     private Button mSave;
     private View mFragView;
-
+    private Toolbar mToolbar;
 
     //LIFECYCLE
     private REAddViewModel mViewModel;

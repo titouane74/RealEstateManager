@@ -8,10 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorError">@color/colorError</item>
     </style>
+    <style name="REAppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
     <!-- TOOLBAR THEME -->
     <style name="REToolBarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColorPrimary">@color/colorOnPrimary</item>
+    </style>
+    <style name="REToolBarPopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/colorOnSecondary</item>
     </style>
 
     <!-- RAPIDE FLOATING BUTTON -->

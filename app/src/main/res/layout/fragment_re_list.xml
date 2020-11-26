@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_list_rv"
+    android:id="@+id/frag_re_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:tag=""
-    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    tools:listitem="@layout/fragment_re_list_item">
+    tools:context=".view.fragments.REListFragment"
+    android:orientation="vertical">
 
-</androidx.recyclerview.widget.RecyclerView>
+    <Button
+        android:id="@+id/btn_add_re"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rfab_txt_item_add_re"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activity_list_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/fragment_re_list_item" />
+
+</LinearLayout>

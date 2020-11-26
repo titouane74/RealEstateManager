@@ -10,6 +10,10 @@
     <string name="default_btn_cancel">Cancel</string>
     <string name="default_btn_save">Save</string>
     <string name="default_btn_ok">OK</string>
+    <string name="default_txt_search">Search</string>
+    <string name="default_txt_add">Add</string>
+    <string name="default_txt_edit">Edit</string>
+    <string name="default_txt_save">Save</string>
 
     <!-- REAL ESTATE VOCABULARY -->
     <string name="txt_location">Location</string>
@@ -27,6 +31,9 @@
     <string name="txt_photos">Photos</string>
     <string name="txt_area">Area</string>
     <string name="txt_sale_date">Date of sale</string>
+    <string name="txt_real_estate">Real estate</string>
+    <string name="txt_agent">Agent</string>
+    <string name="txt_add_agent">Add + @string/txt_agent</string>
 
     <!-- RAPID FLOATING BUTTON -->
     <string name="rfab_txt_item_view_det_re">View real estate detail</string>

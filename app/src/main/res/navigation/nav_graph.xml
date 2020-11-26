@@ -8,11 +8,13 @@
     <fragment
         android:id="@+id/nav_re_add"
         android:name="com.openclassrooms.realestatemanager.view.fragments.REAddFragment"
-        android:label="fragment_re_add"
-        tools:layout="@layout/fragment_re_add" >
+        android:label="@string/rfab_txt_item_add_re"
+        tools:layout="@layout/fragment_re_add">
         <action
             android:id="@+id/action_nav_re_add_to_nav_re_list"
-            app:destination="@id/nav_re_list" />
+            app:destination="@id/nav_re_list"
+            app:popUpTo="@id/nav_re_list"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_nav_re_add_to_nav_main"
             app:destination="@id/nav_main" />
@@ -20,16 +22,18 @@
     <fragment
         android:id="@+id/nav_re_list"
         android:name="com.openclassrooms.realestatemanager.view.fragments.REListFragment"
-        android:label="fragment_re_list"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_re_list">
 
         <action
             android:id="@+id/action_nav_re_list_to_nav_re_add"
-            app:destination="@id/nav_re_add" />
+            app:destination="@id/nav_re_add"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" />
         <action
             android:id="@+id/action_nav_re_list_to_nav_agent_add"
-            app:destination="@id/nav_agent_add">
-        </action>
+            app:destination="@id/nav_agent_add"></action>
         <action
             android:id="@+id/action_nav_re_list_to_nav_re_detail"
             app:destination="@id/nav_re_detail" />
@@ -37,18 +41,17 @@
     <fragment
         android:id="@+id/nav_agent_add"
         android:name="com.openclassrooms.realestatemanager.view.fragments.AgentAddFragment"
-        android:label="fragment_agent_add"
-        tools:layout="@layout/fragment_agent_add">
-    </fragment>
+        android:label="@string/rfab_txt_item_add_agent"
+        tools:layout="@layout/fragment_agent_add"></fragment>
     <fragment
         android:id="@+id/nav_re_detail"
         android:name="com.openclassrooms.realestatemanager.view.fragments.REDetailFragment"
-        android:label="fragment_re_detail"
-        tools:layout="@layout/fragment_re_detail" >
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_re_detail">
         <argument
             android:name="reid"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
         <argument
             android:name="realestate"
             app:argType="com.openclassrooms.realestatemanager.model.RealEstate"
@@ -61,7 +64,7 @@
     <activity
         android:id="@+id/nav_main"
         android:name="com.openclassrooms.realestatemanager.view.activities.MainActivity"
-        android:label="activity_main"
+        android:label="@string/app_name"
         tools:layout="@layout/activity_main" />
 
 </navigation>

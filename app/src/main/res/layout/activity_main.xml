@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/act_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.openclassrooms.realestatemanager.view.activities.MainActivity"
     android:gravity="center"
-    android:id="@+id/act_main"
-    android:tag="@string/app_support_phone">
+    android:tag="@string/app_support_phone"
+    tools:context="com.openclassrooms.realestatemanager.view.activities.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/act_main_toolbar"
-        android:minHeight="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleTextColor="@color/colorOnPrimary"
         android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
         android:theme="@style/REToolBarTheme"
-        app:title="@string/app_name"
+        app:popupTheme="@style/REToolBarPopupTheme"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:title="@string/app_name"
+        app:titleTextColor="@color/colorOnPrimary" />
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -29,24 +29,24 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_zero_dp"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph"
-        app:layout_constraintTop_toBottomOf="@+id/act_main_toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/act_main_toolbar"
+        app:navGraph="@navigation/nav_graph" />
 
-    <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout
-        xmlns:rfal="http://schemas.android.com/apk/res-auto"
+    <!--
+    <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout xmlns:rfal="http://schemas.android.com/apk/res-auto"
         android:id="@+id/act_main_rfal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        rfal:rfal_frame_color="@color/colorOnPrimary"
         rfal:rfal_frame_alpha="0.6"
-        >
+        rfal:rfal_frame_color="@color/colorOnPrimary">
+
         <com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton
             android:id="@+id/act_main_rfab"
+            style="@style/REAppTheme.RapidFloatButtonAdd"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/REAppTheme.RapidFloatButtonAdd"/>
+            android:layout_height="wrap_content" />
     </com.wangjie.rapidfloatingactionbutton.RapidFloatingActionLayout>
-
+-->
 </androidx.constraintlayout.widget.ConstraintLayout>
