@@ -25,13 +25,6 @@
         <item>@string/poi_school</item>
         <item>@string/poi_park</item>
         <item>@string/poi_store</item>
-        <item>@string/poi_museum</item>
-        <item>@string/poi_doctor</item>
         <item>@string/poi_bank</item>
-        <item>@string/poi_airport</item>
-        <item>@string/poi_bar</item>
-        <item>@string/poi_hospital</item>
-        <item>@string/poi_gym</item>
-        <item>@string/poi_train</item>
     </string-array>
 </resources>

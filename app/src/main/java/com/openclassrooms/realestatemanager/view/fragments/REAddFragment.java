@@ -5,18 +5,20 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,10 +31,8 @@ import com.openclassrooms.realestatemanager.viewmodel.REAddViewModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 public class REAddFragment extends Fragment implements POIDialogFragment.OnDialogPOIListener {
 
@@ -46,6 +46,18 @@ public class REAddFragment extends Fragment implements POIDialogFragment.OnDialo
     private Spinner mSpinBathrooms;
     private TextView mPoiTV;
     private ChipGroup mPoiChipGroup;
+    private CheckBox mCbBank;
+    private CheckBox mCbFood;
+    private CheckBox mCbHealth;
+    private CheckBox mCbRestaurant;
+    private CheckBox mCbSchool;
+    private CheckBox mCbStore;
+    private CheckBox mCbSubway;
+    private CheckBox mCbPark;
+    private Button mCancel;
+    private Button mSave;
+    private View mFragView;
+
 
     //LIFECYCLE
     private REAddViewModel mViewModel;
@@ -60,23 +72,30 @@ public class REAddFragment extends Fragment implements POIDialogFragment.OnDialo
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View lView = inflater.inflate(R.layout.fragment_scroll_re_add, container, false);
-        mContext = lView.getContext();
+        mFragView = inflater.inflate(R.layout.fragment_scroll_re_add, container, false);
+        mContext = mFragView.getContext();
 
-        bindView(lView);
+        bindView(mFragView);
 
         configureSpinners();
 
         mDateOnMarket.setOnClickListener(v -> displayCalendarDialog ());
-        mPoiTV.setOnClickListener(v -> displayPOIDialog());
+//        mPoiTV.setOnClickListener(v -> displayPOIDialog());
+//        mCancel.setOnClickListener(v-> closeFragment());
 
-        return lView;
+        return mFragView;
     }
 
+    private void closeFragment() {
+        Navigation.findNavController(mFragView).navigate(R.id.action_nav_re_add_to_nav_re_list);
+    }
+
+/*
     private void displayPOIDialog() {
         DialogFragment lDialogPoi = new POIDialogFragment();
         lDialogPoi.show(getChildFragmentManager(),"POIDialogFragment");
     }
+*/
 
     private void configureSpinners() {
         mSpinType.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.type_spinner));
@@ -92,7 +111,17 @@ public class REAddFragment extends Fragment implements POIDialogFragment.OnDialo
         mSpinBedrooms = pView.findViewById(R.id.frag_re_add_spin_bedrooms);
         mSpinBathrooms = pView.findViewById(R.id.frag_re_add_spin_bathrooms);
         mPoiTV = pView.findViewById(R.id.frag_add_tv_poi);
-        mPoiChipGroup = pView.findViewById(R.id.id_frag_re_add_chipgrp_poi);
+//        mPoiChipGroup = pView.findViewById(R.id.id_frag_re_add_chipgrp_poi);
+        mCbBank = pView.findViewById(R.id.frag_re_add_poi_bank);
+        mCbFood = pView.findViewById(R.id.frag_re_add_poi_food);
+        mCbHealth = pView.findViewById(R.id.frag_re_add_poi_health);
+        mCbRestaurant = pView.findViewById(R.id.frag_re_add_poi_restaurant);
+        mCbSchool = pView.findViewById(R.id.frag_re_add_poi_school);
+        mCbStore = pView.findViewById(R.id.frag_re_add_poi_store);
+        mCbSubway = pView.findViewById(R.id.frag_re_add_poi_subway);
+        mCbPark = pView.findViewById(R.id.frag_re_add_poi_park);
+        mCancel = pView.findViewById(R.id.btn_cancel);
+        mSave = pView.findViewById(R.id.btn_save);
     }
 
     @Override

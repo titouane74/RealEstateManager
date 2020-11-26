@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundSecondary"
+    android:tag="READD"
     android:theme="@style/REAddTheme"
-    tools:context=".view.fragments.REAddFragment"
-    android:tag="READD">
+    tools:context=".view.fragments.REAddFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/frag_add_cardv_location"
@@ -303,13 +303,88 @@
                 style="@style/REAddTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="@string/txt_poi"
                 app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_poi"
                 app:layout_constraintStart_toEndOf="@id/frag_add_img_poi"
-                app:layout_constraintTop_toTopOf="@id/frag_add_img_poi"
-                android:clickable="true"
-                android:focusable="true"/>
+                app:layout_constraintTop_toTopOf="@id/frag_add_img_poi" />
 
+
+            <CheckBox
+                android:id="@+id/frag_re_add_poi_bank"
+                android:layout_width="@dimen/app_zero_dp"
+                android:layout_height="wrap_content"
+                android:text="@string/poi_bank"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_poi"
+                style="@style/REAddTheme.CheckBox"/>
+            <CheckBox
+                android:id="@+id/frag_re_add_poi_food"
+                android:layout_width="@dimen/app_zero_dp"
+                android:layout_height="wrap_content"
+                android:text="@string/poi_food"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/frag_re_add_poi_bank"
+                app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_poi"
+                style="@style/REAddTheme.CheckBox"/>
+
+            <CheckBox
+                android:id="@+id/frag_re_add_poi_health"
+                style="@style/REAddTheme.CheckBox"
+                android:layout_width="@dimen/app_zero_dp"
+                android:layout_height="match_parent"
+                android:text="@string/poi_health"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_poi_bank" />
+
+            <CheckBox
+                android:id="@+id/frag_re_add_poi_restaurant"
+                style="@style/REAddTheme.CheckBox"
+                android:layout_width="@dimen/app_zero_dp"
+                android:layout_height="match_parent"
+                android:text="@string/poi_restaurant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/frag_re_add_poi_bank"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_poi_food" />
+            <CheckBox
+                android:id="@+id/frag_re_add_poi_school"
+                style="@style/REAddTheme.CheckBox"
+                android:layout_width="@dimen/app_zero_dp"
+                android:layout_height="match_parent"
+                android:text="@string/poi_school"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_poi_health" />
+
+            <CheckBox
+                android:id="@+id/frag_re_add_poi_store"
+                style="@style/REAddTheme.CheckBox"
+                android:layout_width="@dimen/app_zero_dp"
+                android:layout_height="match_parent"
+                android:text="@string/poi_store"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/frag_re_add_poi_bank"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_poi_health" />
+            <CheckBox
+                android:id="@+id/frag_re_add_poi_subway"
+                style="@style/REAddTheme.CheckBox"
+                android:layout_width="@dimen/app_zero_dp"
+                android:layout_height="match_parent"
+                android:text="@string/poi_subway"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_poi_school" />
+
+            <CheckBox
+                android:id="@+id/frag_re_add_poi_park"
+                style="@style/REAddTheme.CheckBox"
+                android:layout_width="@dimen/app_zero_dp"
+                android:layout_height="match_parent"
+                android:text="@string/poi_park"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/frag_re_add_poi_bank"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_add_poi_school" />
+
+            <!--
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/id_frag_re_add_chipgrp_poi"
                 android:layout_width="match_parent"
@@ -317,16 +392,8 @@
                 style="@style/Widget.MaterialComponents.ChipGroup"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/frag_add_img_poi"/>
+-->
 
-            <!--
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/frag_add_img_poi"
-                            />
-            -->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

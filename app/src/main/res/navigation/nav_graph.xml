@@ -9,7 +9,14 @@
         android:id="@+id/nav_re_add"
         android:name="com.openclassrooms.realestatemanager.view.fragments.REAddFragment"
         android:label="fragment_re_add"
-        tools:layout="@layout/fragment_re_add" />
+        tools:layout="@layout/fragment_re_add" >
+        <action
+            android:id="@+id/action_nav_re_add_to_nav_re_list"
+            app:destination="@id/nav_re_list" />
+        <action
+            android:id="@+id/action_nav_re_add_to_nav_main"
+            app:destination="@id/nav_main" />
+    </fragment>
     <fragment
         android:id="@+id/nav_re_list"
         android:name="com.openclassrooms.realestatemanager.view.fragments.REListFragment"
@@ -51,5 +58,10 @@
         android:id="@+id/nav_poi_dialog"
         android:name="com.openclassrooms.realestatemanager.view.fragments.POIDialogFragment"
         android:label="POIDialogFragment" />
+    <activity
+        android:id="@+id/nav_main"
+        android:name="com.openclassrooms.realestatemanager.view.activities.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 
 </navigation>

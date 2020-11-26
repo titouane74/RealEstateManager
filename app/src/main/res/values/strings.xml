@@ -4,6 +4,7 @@
 
     <string name="app_support_tablet">tablet</string>
     <string name="app_support_phone">phone</string>
+    <string name="exit_app_back_pressed">Press one more time to exit</string>
 
     <string name="default_img_description">@null</string>
     <string name="default_btn_cancel">Cancel</string>
@@ -37,19 +38,14 @@
     <string name="spinners_select">--Select--</string>
 
     <!-- POI -->
+    <string name="poi_bank">Bank</string>
+    <string name="poi_food">Food</string>
+    <string name="poi_health">Health</string>
+    <string name="poi_restaurant">Restaurant</string>
+    <string name="poi_school">School</string>
+    <string name="poi_store">Store</string>
+    <string name="poi_subway">Subway</string>
+    <string name="poi_park">Park</string>
     <string name="poi_title_list">POI List</string>
-    <string name="poi_restaurant">restaurant</string>
-    <string name="poi_school">school</string>
-    <string name="poi_store">store</string>
-    <string name="poi_subway">subway</string>
-    <string name="poi_park">park</string>
-    <string name="poi_museum">museum</string>
-    <string name="poi_doctor">doctor</string>
-    <string name="poi_bank">bank</string>
-    <string name="poi_airport">airport</string>
-    <string name="poi_bar">bar</string>
-    <string name="poi_hospital">hospital</string>
-    <string name="poi_gym">gym</string>
-    <string name="poi_train">train</string>
 
 </resources>

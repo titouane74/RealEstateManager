@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
     private RapidFloatingActionHelper mRFAHelper;
     private View mMainLayout;
     private NavController mNavController;
+    private long mBackPressedTime;
+    private Toast mBackToast;
 
     //LIFECYCLE
     private Context mContext;
@@ -140,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
     private void manageRFABClick(int pPosition) {
         switch (pPosition) {
             case 0 :
+                Log.d(TAG, "onNavToAdd: JE PASSE : " + mRFAButton.getVisibility());
                 mNavController.navigate(R.id.nav_re_add);
                 mRFAButton.setVisibility(View.INVISIBLE);
                 break;
@@ -156,11 +160,30 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
                 break;        }
     }
 
+
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
+        if (mBackPressedTime + 2000 > System.currentTimeMillis()) {
+            mBackToast.cancel();
+            super.onBackPressed();
+            return;
+        } else {
+            mBackToast = Toast.makeText(mContext, R.string.exit_app_back_pressed, Toast.LENGTH_SHORT);
+            mBackToast.show();
+        }
+        mBackPressedTime = System.currentTimeMillis();
         //TODO to reactivate with the toolbar managment on the REAddFragment
         mNavController.navigate(R.id.nav_re_list);
+        mRFAButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setRfabVisible();
+    }
+
+    private void setRfabVisible() {
         mRFAButton.setVisibility(View.VISIBLE);
     }
 
