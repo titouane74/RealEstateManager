@@ -142,9 +142,10 @@ public class MainActivity extends AppCompatActivity implements POIDialogFragment
 //        mRFAButton = findViewById(R.id.act_main_rfab);
     }
 
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_re, menu);
+        getMenuInflater().inflate(R.menu.menu_general, menu);
         return true;
     }
 
@@ -164,12 +165,12 @@ public class MainActivity extends AppCompatActivity implements POIDialogFragment
                 return true;
             case R.id.menu_action_save_re:
                 return true;
-            case R.id.menu_search_action:
-                return true;
             default:
                 return super.onOptionsItemSelected(pItem);
         }
 
+    }
+*/
 
 
 /*        if (pItem.getItemId() == android.R.id.home) {
@@ -181,7 +182,6 @@ public class MainActivity extends AppCompatActivity implements POIDialogFragment
 
 //        return NavigationUI.onNavDestinationSelected(pItem,mNavController) || super.onOptionsItemSelected(pItem);
 //        return super.onOptionsItemSelected(pItem);
-    }
 
 /*
     @Override

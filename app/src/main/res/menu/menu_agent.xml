@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_re_action"
-        android:title="@string/txt_real_estate"
-        android:icon="@drawable/ic_type_white"
+        android:id="@+id/menu_agent_action"
+        android:title="@string/txt_agent"
+        android:icon="@drawable/ic_agent_white"
         app:showAsAction="always">
         <menu>
             <item
-                android:id="@+id/menu_action_edit_re"
+                android:id="@+id/menu_action_edit_agent"
                 android:icon="@drawable/ic_edit_blue"
                 android:title="@string/default_txt_edit" />
             <item
-                android:id="@+id/menu_action_save_re"
+                android:id="@+id/menu_action_save_agent"
                 android:icon="@drawable/ic_save_blue"
                 android:title="@string/default_txt_save" />
         </menu>

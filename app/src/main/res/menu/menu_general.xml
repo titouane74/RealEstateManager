@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_re_action"
+        android:title="@string/txt_real_estate"
+        android:icon="@drawable/ic_type_white"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/nav_re_add"
+                android:icon="@drawable/ic_add_blue"
+                android:title="@string/default_txt_add" />
+            <item
+                android:id="@+id/menu_search_re"
+                android:title="@string/default_txt_search"
+                android:icon="@drawable/ic_search">
+            </item>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/menu_agent_action"
+        android:title="@string/txt_agent"
+        android:icon="@drawable/ic_agent_white"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/nav_agent_add"
+                android:icon="@drawable/ic_add_blue"
+                android:title="@string/default_txt_add" />
+            <item
+                android:id="@+id/menu_search_agent"
+                android:title="@string/default_txt_search"
+                android:icon="@drawable/ic_search"/>
+        </menu>
+    </item>
+
+</menu>
