@@ -5,21 +5,20 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
+import androidx.navigation.NavController;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -32,7 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-public class REEditFragment extends Fragment implements POIDialogFragment.OnDialogPOIListener {
+public class REEditFragment extends BaseFragment implements POIDialogFragment.OnDialogPOIListener {
 
     private static final String TAG = "TAG_REEditFragment";
 
@@ -68,28 +67,21 @@ public class REEditFragment extends Fragment implements POIDialogFragment.OnDial
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        mFragView = inflater.inflate(R.layout.fragment_scroll_re_add, container, false);
-        mContext = mFragView.getContext();
+    protected int getMenuAttached() { return R.menu.menu_save; }
 
+    @Override
+    protected int getFragmentLayout() { return R.layout.fragment_re_edit; }
+
+    @Override
+    protected void configureDesign(View pView) {
+        mContext = getContext();
+        mFragView = pView;
         bindView(mFragView);
 
         configureSpinners();
 
         mDateOnMarket.setOnClickListener(v -> displayCalendarDialog ());
-//        mPoiTV.setOnClickListener(v -> displayPOIDialog());
-//        mCancel.setOnClickListener(v-> closeFragment());
-
-        return mFragView;
     }
-
-/*
-    private void displayPOIDialog() {
-        DialogFragment lDialogPoi = new POIDialogFragment();
-        lDialogPoi.show(getChildFragmentManager(),"POIDialogFragment");
-    }
-*/
 
     private void configureSpinners() {
         mSpinType.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.type_spinner));
@@ -105,7 +97,6 @@ public class REEditFragment extends Fragment implements POIDialogFragment.OnDial
         mSpinBedrooms = pView.findViewById(R.id.frag_re_add_spin_bedrooms);
         mSpinBathrooms = pView.findViewById(R.id.frag_re_add_spin_bathrooms);
         mPoiTV = pView.findViewById(R.id.frag_add_tv_poi);
-//        mPoiChipGroup = pView.findViewById(R.id.id_frag_re_add_chipgrp_poi);
         mCbBank = pView.findViewById(R.id.frag_re_add_poi_bank);
         mCbFood = pView.findViewById(R.id.frag_re_add_poi_food);
         mCbHealth = pView.findViewById(R.id.frag_re_add_poi_health);
@@ -114,8 +105,6 @@ public class REEditFragment extends Fragment implements POIDialogFragment.OnDial
         mCbStore = pView.findViewById(R.id.frag_re_add_poi_store);
         mCbSubway = pView.findViewById(R.id.frag_re_add_poi_subway);
         mCbPark = pView.findViewById(R.id.frag_re_add_poi_park);
-        mCancel = pView.findViewById(R.id.btn_cancel);
-        mSave = pView.findViewById(R.id.btn_save);
     }
 
     @Override
@@ -125,6 +114,14 @@ public class REEditFragment extends Fragment implements POIDialogFragment.OnDial
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem pItem) {
+        if (pItem.getItemId() == R.id.menu_action_save) {
+            Toast.makeText(getContext(), "SAVE", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(pItem);
+    }
     /**
      * OnClick du champs meeting_date_et : affiche la boîte de dialogue calendrier
      */

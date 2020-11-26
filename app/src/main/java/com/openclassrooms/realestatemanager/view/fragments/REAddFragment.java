@@ -11,11 +11,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,6 +25,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.android.material.chip.Chip;
@@ -36,7 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-public class REAddFragment extends Fragment implements POIDialogFragment.OnDialogPOIListener {
+public class REAddFragment extends BaseFragment implements POIDialogFragment.OnDialogPOIListener {
 
     private static final String TAG = "TAG_REAddFragment";
 
@@ -72,24 +75,31 @@ public class REAddFragment extends Fragment implements POIDialogFragment.OnDialo
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        mFragView = inflater.inflate(R.layout.fragment_scroll_re_add, container, false);
-        mContext = mFragView.getContext();
+    protected int getMenuAttached() {
+        return R.menu.menu_save;
+    }
 
+    @Override
+    protected int getFragmentLayout() { return R.layout.fragment_re_add; }
+
+    @Override
+    protected void configureDesign(View pView) {
+        mContext = getContext();
+        mFragView = pView;
         bindView(mFragView);
 
         configureSpinners();
 
         mDateOnMarket.setOnClickListener(v -> displayCalendarDialog ());
-//        mPoiTV.setOnClickListener(v -> displayPOIDialog());
-//        mCancel.setOnClickListener(v-> closeFragment());
-
-        return mFragView;
     }
 
-    private void closeFragment() {
-        Navigation.findNavController(mFragView).navigate(R.id.action_nav_re_add_to_nav_re_list);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem pItem) {
+        if (pItem.getItemId() == R.id.menu_action_save) {
+            Toast.makeText(getContext(), "SAVE", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(pItem);
     }
 
 /*
@@ -122,8 +132,6 @@ public class REAddFragment extends Fragment implements POIDialogFragment.OnDialo
         mCbStore = pView.findViewById(R.id.frag_re_add_poi_store);
         mCbSubway = pView.findViewById(R.id.frag_re_add_poi_subway);
         mCbPark = pView.findViewById(R.id.frag_re_add_poi_park);
-        mCancel = pView.findViewById(R.id.btn_cancel);
-        mSave = pView.findViewById(R.id.btn_save);
     }
 
     @Override

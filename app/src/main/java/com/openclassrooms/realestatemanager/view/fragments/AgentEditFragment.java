@@ -8,20 +8,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.viewmodel.AgentAddViewModel;
 
-public class AgentEditFragment extends Fragment {
+public class AgentEditFragment extends BaseFragment {
 
     private static final String TAG = "AgentAddFragment";
     private TextView mText;
-
+    private View mFragView;
     private AgentAddViewModel mViewModel;
 
     public static AgentEditFragment newInstance() {
@@ -29,15 +33,26 @@ public class AgentEditFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        View lView = inflater.inflate(R.layout.fragment_agent_add, container, false);
+    protected int getMenuAttached() { return R.menu.menu_save; }
 
-        bindView(lView);
-        setHasOptionsMenu(true);
+    @Override
+    protected int getFragmentLayout() { return R.layout.fragment_agent_add; }
 
-        return lView;
+    @Override
+    protected void configureDesign(View pView) {
+        mFragView = pView;
+        bindView(mFragView);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem pItem) {
+        if (pItem.getItemId() == R.id.menu_action_save) {
+            Toast.makeText(getContext(), "SAVE", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(pItem);
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

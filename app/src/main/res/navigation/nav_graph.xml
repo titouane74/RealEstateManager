@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_re_add"
         android:name="com.openclassrooms.realestatemanager.view.fragments.REAddFragment"
-        android:label="@string/rfab_txt_item_add_re"
+        android:label="@string/txt_add_re"
         tools:layout="@layout/fragment_re_add">
         <action
             android:id="@+id/action_nav_re_add_to_nav_re_list"
@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/nav_agent_add"
         android:name="com.openclassrooms.realestatemanager.view.fragments.AgentAddFragment"
-        android:label="@string/rfab_txt_item_add_agent"
+        android:label="@string/txt_add_agent"
         tools:layout="@layout/fragment_agent_add"></fragment>
     <fragment
         android:id="@+id/nav_re_detail"
@@ -68,12 +68,12 @@
     <fragment
         android:id="@+id/nav_agent_edit"
         android:name="com.openclassrooms.realestatemanager.view.fragments.AgentEditFragment"
-        android:label="fragment_agent_edit"
+        android:label="@string/txt_edit_agent"
         tools:layout="@layout/fragment_agent_edit" />
     <fragment
         android:id="@+id/nav_re_edit"
         android:name="com.openclassrooms.realestatemanager.view.fragments.REEditFragment"
-        android:label="fragment_re_edit"
+        android:label="@string/txt_edit_re"
         tools:layout="@layout/fragment_re_edit" />
 
 </navigation>

@@ -8,16 +8,10 @@
     tools:context=".view.fragments.REListFragment"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_add_re"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rfab_txt_item_add_re"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_list_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/fragment_re_list_item" />
 
