@@ -30,23 +30,9 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_nav_re_list_to_nav_agent_add"
-            app:destination="@id/nav_agent_add"></action>
-        <action
             android:id="@+id/action_nav_re_list_to_nav_re_detail"
             app:destination="@id/nav_re_detail" />
-        <action
-            android:id="@+id/action_nav_re_list_to_nav_re_edit"
-            app:destination="@id/nav_re_edit" />
-        <action
-            android:id="@+id/action_nav_re_list_to_nav_agent_edit"
-            app:destination="@id/nav_agent_edit" />
     </fragment>
-    <fragment
-        android:id="@+id/nav_agent_add"
-        android:name="com.openclassrooms.realestatemanager.view.fragments.AgentAddFragment"
-        android:label="@string/txt_add_agent"
-        tools:layout="@layout/fragment_agent_add"></fragment>
     <fragment
         android:id="@+id/nav_re_detail"
         android:name="com.openclassrooms.realestatemanager.view.fragments.REDetailFragment"
@@ -61,19 +47,5 @@
             app:argType="com.openclassrooms.realestatemanager.model.RealEstate"
             app:nullable="true" />
     </fragment>
-    <dialog
-        android:id="@+id/nav_poi_dialog"
-        android:name="com.openclassrooms.realestatemanager.view.fragments.POIDialogFragment"
-        android:label="POIDialogFragment" />
-    <fragment
-        android:id="@+id/nav_agent_edit"
-        android:name="com.openclassrooms.realestatemanager.view.fragments.AgentEditFragment"
-        android:label="@string/txt_edit_agent"
-        tools:layout="@layout/fragment_agent_edit" />
-    <fragment
-        android:id="@+id/nav_re_edit"
-        android:name="com.openclassrooms.realestatemanager.view.fragments.REEditFragment"
-        android:label="@string/txt_edit_re"
-        tools:layout="@layout/fragment_re_edit" />
 
 </navigation>

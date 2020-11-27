@@ -58,16 +58,6 @@ public class REListFragment extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
         NavController lNavController = Navigation.findNavController(mFragView);
-        switch (pItem.getItemId()) {
-            case R.id.nav_re_add:
-                NavigationUI.onNavDestinationSelected(pItem,lNavController);
-                return true;
-            case R.id.nav_re_edit:
-                Toast.makeText(getContext(), "SEARCH RE", Toast.LENGTH_SHORT).show();
-                NavigationUI.onNavDestinationSelected(pItem,lNavController);
-                return true;
-            default:
-                return super.onOptionsItemSelected(pItem);
-        }
+        return NavigationUI.onNavDestinationSelected(pItem,lNavController) || super.onOptionsItemSelected(pItem);
     }
 }

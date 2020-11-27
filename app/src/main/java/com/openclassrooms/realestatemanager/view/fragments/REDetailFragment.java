@@ -40,13 +40,13 @@ public class REDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (getArguments() != null) {
+/*        if (getArguments() != null) {
             REDetailFragmentArgs lArgs = REDetailFragmentArgs.fromBundle(getArguments());
 
             RealEstate lRE = lArgs.getRealestate();
             Log.i(TAG, "onViewCreated: " + lRE.toString());
             displayRealEstate(lRE);
-        }
+        }*/
     }
 
     @SuppressLint("SetTextI18n")
