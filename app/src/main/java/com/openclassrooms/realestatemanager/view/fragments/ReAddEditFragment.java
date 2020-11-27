@@ -15,26 +15,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.databinding.FragmentReAddBinding;
+import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
-import com.openclassrooms.realestatemanager.viewmodel.REAddViewModel;
+import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class REAddFragment extends BaseFragment{
+public class ReAddEditFragment extends BaseFragment{
 
     private static final String TAG = "TAG_REAddFragment";
 
     private View mFragView;
 
-    private FragmentReAddBinding mBinding;
+    private FragmentReAddEditBinding mBinding;
 
-    private REAddViewModel mViewModel;
+    private ReAddEditViewModel mViewModel;
     private Context mContext;
 
     private Calendar mDateCal;
@@ -46,7 +45,7 @@ public class REAddFragment extends BaseFragment{
 
     @Override
     protected int getFragmentLayout() { return
-            R.layout.fragment_re_add;
+            R.layout.fragment_re_add_edit;
     }
 
     @Override
@@ -67,13 +66,13 @@ public class REAddFragment extends BaseFragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        mBinding = FragmentReAddBinding.inflate(inflater, container, false);
+        mBinding = FragmentReAddEditBinding.inflate(inflater, container, false);
         mFragView = mBinding.getRoot();
         mContext = getContext();
 
         configureSpinners();
 
-        mBinding.fragAddCardvDateOnMarket.setOnClickListener(v -> displayCalendarDialog ());
+        mBinding.fragAddEditCardvDateOnMarket.setOnClickListener(v -> displayCalendarDialog ());
         return mFragView;
     }
 
@@ -96,12 +95,12 @@ public class REAddFragment extends BaseFragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(REAddViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ReAddEditViewModel.class);
         // TODO: Use the ViewModel
     }
 
     /**
-     * OnClick du champs meeting_date_et : affiche la boîte de dialogue calendrier
+     * Display calendar dialog box
      */
     private void displayCalendarDialog () {
         Calendar lCalendar = Calendar.getInstance();
@@ -114,7 +113,7 @@ public class REAddFragment extends BaseFragment{
 
                     mDateCal.set(year,month,dayOfMonth);
                     String lDate = lDateFormat.format(mDateCal.getTime());
-                    mBinding.fragAddTvMarketDate.setText(lDate);
+                    mBinding.fragAddEditEtMarketDate.setText(lDate);
                 },
                 lCalendar.get(Calendar.YEAR),
                 lCalendar.get(Calendar.MONTH),

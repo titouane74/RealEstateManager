@@ -2,7 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lay_frag_add"
+    android:id="@+id/lay_frag_add_edit_edit"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,14 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundSecondary"
-        android:tag="READD"
-        android:theme="@style/RETheme"
-        tools:context=".view.fragments.REAddFragment">
+        android:theme="@style/ReTheme"
+        tools:context=".view.fragments.ReAddEditFragment">
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/frag_add_cardv_location"
-            style="@style/RETheme.CardView"
+            android:id="@+id/frag_add_edit_cardv_location"
+            style="@style/ReTheme.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +27,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/frag_add_img_location"
+                    android:id="@+id/frag_add_edit_img_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/default_img_description"
@@ -38,69 +37,69 @@
 
 
                 <TextView
-                    android:id="@+id/frag_add_tv_location"
-                    style="@style/RETheme.TxtView"
+                    android:id="@+id/frag_add_edit_tv_location"
+                    style="@style/ReTheme.TxtView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/txt_location"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_location"
-                    app:layout_constraintStart_toEndOf="@+id/frag_add_img_location"
-                    app:layout_constraintTop_toTopOf="@+id/frag_add_img_location" />
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_add_edit_img_location"
+                    app:layout_constraintStart_toEndOf="@+id/frag_add_edit_img_location"
+                    app:layout_constraintTop_toTopOf="@+id/frag_add_edit_img_location" />
                 <TextView
-                    android:id="@+id/frag_add_tv_street"
-                    style="@style/RETheme.TxtView"
+                    android:id="@+id/frag_add_edit_tv_street"
+                    style="@style/ReTheme.TxtView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/txt_street"
-                    app:layout_constraintStart_toEndOf="@+id/frag_add_img_location"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_location" />
+                    app:layout_constraintStart_toEndOf="@+id/frag_add_edit_img_location"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_add_edit_tv_location" />
                 <EditText
-                    android:id="@+id/frag_add_et_street"
-                    style="@style/RETheme.EditTxt"
+                    android:id="@+id/frag_add_edit_et_street"
+                    style="@style/ReTheme.EditTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/txt_street"
                     android:importantForAutofill="no"
                     android:inputType="textPostalAddress"
-                    app:layout_constraintStart_toEndOf="@+id/frag_add_tv_street"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_location"
-                    app:layout_constraintBottom_toBottomOf="@id/frag_add_tv_street"/>
+                    app:layout_constraintStart_toEndOf="@+id/frag_add_edit_tv_street"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_add_edit_tv_location"
+                    app:layout_constraintBottom_toBottomOf="@id/frag_add_edit_tv_street"/>
 
 
                 <TextView
-                    android:id="@+id/frag_add_tv_additional_address"
-                    style="@style/RETheme.TxtView"
+                    android:id="@+id/frag_add_edit_tv_additional_address"
+                    style="@style/ReTheme.TxtView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/txt_additional_address"
-                    app:layout_constraintStart_toEndOf="@+id/frag_add_img_location"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_street" />
+                    app:layout_constraintStart_toEndOf="@+id/frag_add_edit_img_location"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_add_edit_tv_street" />
                 <TextView
-                    android:id="@+id/frag_add_tv_zip_code"
-                    style="@style/RETheme.TxtView"
+                    android:id="@+id/frag_add_edit_tv_zip_code"
+                    style="@style/ReTheme.TxtView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/txt_zip_code"
-                    app:layout_constraintStart_toEndOf="@+id/frag_add_img_location"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_additional_address" />
+                    app:layout_constraintStart_toEndOf="@+id/frag_add_edit_img_location"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_add_edit_tv_additional_address" />
 
                 <Spinner
                     android:id="@+id/frag_re_add_spin_country"
-                    style="@style/RETheme.Spinner"
+                    style="@style/ReTheme.Spinner"
                     android:layout_marginEnd="@dimen/default_margin_end"
                     android:prompt="@string/txt_country"
-                    app:layout_constraintStart_toEndOf="@+id/frag_add_img_location"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_zip_code"/>
+                    app:layout_constraintStart_toEndOf="@+id/frag_add_edit_img_location"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_add_edit_tv_zip_code"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/frag_add_cardv_date_on_market"
-            style="@style/RETheme.CardView"
+            android:id="@+id/frag_add_edit_cardv_date_on_market"
+            style="@style/ReTheme.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/frag_add_cardv_location">
+            app:layout_constraintTop_toBottomOf="@+id/frag_add_edit_cardv_location">
 
             <LinearLayout
                 android:id="@+id/frag_re_add_ll_date_on_market"
@@ -112,7 +111,7 @@
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:id="@+id/frag_add_img_market_date"
+                    android:id="@+id/frag_add_edit_img_market_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -120,8 +119,8 @@
                     app:srcCompat="@drawable/ic_calendar" />
 
                 <EditText
-                    android:id="@+id/frag_add_tv_market_date"
-                    style="@style/RETheme.EditTxt"
+                    android:id="@+id/frag_add_edit_et_market_date"
+                    style="@style/ReTheme.EditTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/txt_on_market_date"
@@ -132,11 +131,11 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/frag_add_cardv_description"
-            style="@style/RETheme.CardView"
+            android:id="@+id/frag_add_edit_cardv_description"
+            style="@style/ReTheme.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/frag_add_cardv_date_on_market">
+            app:layout_constraintTop_toBottomOf="@+id/frag_add_edit_cardv_date_on_market">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -152,7 +151,7 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:id="@+id/frag_add_img_type"
+                        android:id="@+id/frag_add_edit_img_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -161,7 +160,7 @@
 
                     <Spinner
                         android:id="@+id/frag_re_add_spin_type"
-                        style="@style/RETheme.Spinner"
+                        style="@style/ReTheme.Spinner"
                         android:layout_marginEnd="@dimen/default_margin_end"
                         android:prompt="@string/txt_type" />
 
@@ -178,7 +177,7 @@
                     app:layout_constraintWidth_percent="0.5">
 
                     <ImageView
-                        android:id="@+id/frag_add_img_area"
+                        android:id="@+id/frag_add_edit_img_area"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -186,8 +185,8 @@
                         app:srcCompat="@drawable/ic_area" />
 
                     <EditText
-                        android:id="@+id/frag_add_tv_area"
-                        style="@style/RETheme.EditTxt"
+                        android:id="@+id/frag_add_edit_et_area"
+                        style="@style/ReTheme.EditTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/txt_area"
@@ -205,7 +204,7 @@
                     app:layout_constraintWidth_percent="0.5">
 
                     <ImageView
-                        android:id="@+id/frag_add_img_price"
+                        android:id="@+id/frag_add_edit_img_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -213,8 +212,8 @@
                         app:srcCompat="@drawable/ic_price" />
 
                     <EditText
-                        android:id="@+id/frag_add_tv_price"
-                        style="@style/RETheme.EditTxt"
+                        android:id="@+id/frag_add_edit_et_price"
+                        style="@style/ReTheme.EditTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/txt_price"
@@ -233,7 +232,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_price">
 
                     <ImageView
-                        android:id="@+id/frag_add_img_room"
+                        android:id="@+id/frag_add_edit_img_room"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -242,7 +241,7 @@
 
                     <Spinner
                         android:id="@+id/frag_re_add_spin_rooms"
-                        style="@style/RETheme.SpinnerRoom"
+                        style="@style/ReTheme.SpinnerRoom"
                         android:layout_marginEnd="@dimen/default_margin_end"
                         android:prompt="@string/txt_rooms" />
 
@@ -260,7 +259,7 @@
                     >
 
                     <ImageView
-                        android:id="@+id/frag_add_img_bedroom"
+                        android:id="@+id/frag_add_edit_img_bedroom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -269,7 +268,7 @@
 
                     <Spinner
                         android:id="@+id/frag_re_add_spin_bedrooms"
-                        style="@style/RETheme.SpinnerRoom"
+                        style="@style/ReTheme.SpinnerRoom"
                         android:layout_marginEnd="@dimen/default_margin_end"
                         android:prompt="@string/txt_bedrooms" />
                 </LinearLayout>
@@ -284,7 +283,7 @@
                     app:layout_constraintWidth_percent="0.5">
 
                     <ImageView
-                        android:id="@+id/frag_add_img_bathroom"
+                        android:id="@+id/frag_add_edit_img_bathroom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -293,7 +292,7 @@
 
                     <Spinner
                         android:id="@+id/frag_re_add_spin_bathrooms"
-                        style="@style/RETheme.SpinnerRoom"
+                        style="@style/ReTheme.SpinnerRoom"
                         android:layout_marginEnd="@dimen/default_margin_end"
                         android:prompt="@string/txt_bathrooms" />
                 </LinearLayout>
@@ -307,7 +306,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/frag_re_add_ll_bathroom">
 
                     <ImageView
-                        android:id="@+id/frag_add_img_description"
+                        android:id="@+id/frag_add_edit_img_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -315,8 +314,8 @@
                         app:srcCompat="@drawable/ic_description" />
 
                     <EditText
-                        android:id="@+id/frag_add_tv_description"
-                        style="@style/RETheme.EditTxt"
+                        android:id="@+id/frag_add_edit_et_description"
+                        style="@style/ReTheme.EditTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start|end"
@@ -329,18 +328,18 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/frag_add_cardv_poi"
-            style="@style/RETheme.CardView"
+            android:id="@+id/frag_add_edit_cardv_poi"
+            style="@style/ReTheme.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/frag_add_cardv_description">
+            app:layout_constraintTop_toBottomOf="@+id/frag_add_edit_cardv_description">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/frag_add_img_poi"
+                    android:id="@+id/frag_add_edit_img_poi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/default_img_description"
@@ -349,40 +348,40 @@
                     app:srcCompat="@drawable/ic_poi" />
 
                 <TextView
-                    android:id="@+id/frag_add_tv_poi"
-                    style="@style/RETheme.TxtView"
+                    android:id="@+id/frag_add_edit_et_poi"
+                    style="@style/ReTheme.TxtView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
                     android:text="@string/txt_poi"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_add_img_poi"
-                    app:layout_constraintStart_toEndOf="@id/frag_add_img_poi"
-                    app:layout_constraintTop_toTopOf="@id/frag_add_img_poi" />
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_add_edit_img_poi"
+                    app:layout_constraintStart_toEndOf="@id/frag_add_edit_img_poi"
+                    app:layout_constraintTop_toTopOf="@id/frag_add_edit_img_poi" />
 
 
                 <CheckBox
                     android:id="@+id/frag_re_add_poi_bank"
-                    style="@style/RETheme.CheckBox"
+                    style="@style/ReTheme.CheckBox"
                     android:layout_width="@dimen/app_zero_dp"
                     android:layout_height="wrap_content"
                     android:text="@string/poi_bank"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_poi" />
+                    app:layout_constraintTop_toBottomOf="@+id/frag_add_edit_et_poi" />
 
                 <CheckBox
                     android:id="@+id/frag_re_add_poi_food"
-                    style="@style/RETheme.CheckBox"
+                    style="@style/ReTheme.CheckBox"
                     android:layout_width="@dimen/app_zero_dp"
                     android:layout_height="wrap_content"
                     android:text="@string/poi_food"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/frag_re_add_poi_bank"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_poi" />
+                    app:layout_constraintTop_toBottomOf="@+id/frag_add_edit_et_poi" />
 
                 <CheckBox
                     android:id="@+id/frag_re_add_poi_health"
-                    style="@style/RETheme.CheckBox"
+                    style="@style/ReTheme.CheckBox"
                     android:layout_width="@dimen/app_zero_dp"
                     android:layout_height="match_parent"
                     android:text="@string/poi_health"
@@ -391,7 +390,7 @@
 
                 <CheckBox
                     android:id="@+id/frag_re_add_poi_restaurant"
-                    style="@style/RETheme.CheckBox"
+                    style="@style/ReTheme.CheckBox"
                     android:layout_width="@dimen/app_zero_dp"
                     android:layout_height="match_parent"
                     android:text="@string/poi_restaurant"
@@ -401,7 +400,7 @@
 
                 <CheckBox
                     android:id="@+id/frag_re_add_poi_school"
-                    style="@style/RETheme.CheckBox"
+                    style="@style/ReTheme.CheckBox"
                     android:layout_width="@dimen/app_zero_dp"
                     android:layout_height="match_parent"
                     android:text="@string/poi_school"
@@ -410,7 +409,7 @@
 
                 <CheckBox
                     android:id="@+id/frag_re_add_poi_store"
-                    style="@style/RETheme.CheckBox"
+                    style="@style/ReTheme.CheckBox"
                     android:layout_width="@dimen/app_zero_dp"
                     android:layout_height="match_parent"
                     android:text="@string/poi_store"
@@ -420,7 +419,7 @@
 
                 <CheckBox
                     android:id="@+id/frag_re_add_poi_subway"
-                    style="@style/RETheme.CheckBox"
+                    style="@style/ReTheme.CheckBox"
                     android:layout_width="@dimen/app_zero_dp"
                     android:layout_height="match_parent"
                     android:text="@string/poi_subway"
@@ -429,7 +428,7 @@
 
                 <CheckBox
                     android:id="@+id/frag_re_add_poi_park"
-                    style="@style/RETheme.CheckBox"
+                    style="@style/ReTheme.CheckBox"
                     android:layout_width="@dimen/app_zero_dp"
                     android:layout_height="match_parent"
                     android:text="@string/poi_park"
@@ -437,15 +436,6 @@
                     app:layout_constraintStart_toEndOf="@id/frag_re_add_poi_bank"
                     app:layout_constraintTop_toBottomOf="@+id/frag_re_add_poi_school" />
 
-                <!--
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/id_frag_re_add_chipgrp_poi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.ChipGroup"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/frag_add_img_poi"/>
-    -->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

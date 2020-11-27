@@ -9,22 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.openclassrooms.realestatemanager.databinding.FragmentReDetailBinding;
 import com.openclassrooms.realestatemanager.model.RealEstate;
-import com.openclassrooms.realestatemanager.viewmodel.REDetailViewModel;
+import com.openclassrooms.realestatemanager.viewmodel.ReDetailViewModel;
 
-public class REDetailFragment extends Fragment {
+public class ReDetailFragment extends Fragment {
 
     private static final String TAG = "REDetailFragment";
     private FragmentReDetailBinding mBinding;
 
     private View mFragView;
-    private REDetailViewModel mViewModel;
+    private ReDetailViewModel mViewModel;
 
 
     @Override
@@ -62,7 +61,7 @@ public class REDetailFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(REDetailViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ReDetailViewModel.class);
         // TODO: Use the ViewModel
     }
 

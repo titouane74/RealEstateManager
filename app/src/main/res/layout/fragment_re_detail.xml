@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundSecondary"
-    android:theme="@style/RETheme"
-    tools:context=".view.fragments.REDetailFragment">
+    android:theme="@style/ReTheme"
+    tools:context=".view.fragments.ReDetailFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/frag_re_det_cardv_location"
-        style="@style/RETheme.CardView"
+        style="@style/ReTheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
 
             <TextView
                 android:id="@+id/frag_re_det_tv_location"
-                style="@style/RETheme.TxtView"
+                style="@style/ReTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/txt_location"
@@ -46,7 +46,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/frag_re_det_cardv_date_on_market"
-        style="@style/RETheme.CardView"
+        style="@style/ReTheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/frag_re_det_cardv_location">
@@ -66,7 +66,7 @@
 
             <TextView
                 android:id="@+id/frag_re_det_tv_market_date"
-                style="@style/RETheme.TxtView"
+                style="@style/ReTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/txt_on_market_date"
@@ -79,7 +79,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/frag_re_det_cardv_description"
-        style="@style/RETheme.CardView"
+        style="@style/ReTheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/frag_re_det_cardv_date_on_market">
@@ -105,7 +105,7 @@
                 app:layout_constraintStart_toEndOf="@id/frag_re_det_img_price"
                 app:layout_constraintTop_toTopOf="@id/frag_re_det_img_price"
                 app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_price"
-                style="@style/RETheme.TxtView"/>
+                style="@style/ReTheme.TxtView"/>
 
             <ImageView
                 android:id="@+id/frag_re_det_img_type"
@@ -118,7 +118,7 @@
 
             <TextView
                 android:id="@+id/frag_re_det_tv_type"
-                style="@style/RETheme.TxtView"
+                style="@style/ReTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_type"
@@ -137,7 +137,7 @@
 
             <TextView
                 android:id="@+id/frag_re_det_tv_area"
-                style="@style/RETheme.TxtView"
+                style="@style/ReTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_area"
@@ -156,7 +156,7 @@
 
             <TextView
                 android:id="@+id/frag_re_det_tv_nb_rooms"
-                style="@style/RETheme.TxtView"
+                style="@style/ReTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_rooms"
@@ -175,7 +175,7 @@
 
             <TextView
                 android:id="@+id/frag_re_det_tv_nb_bedrooms"
-                style="@style/RETheme.TxtView"
+                style="@style/ReTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_bedrooms"
@@ -194,7 +194,7 @@
 
             <TextView
                 android:id="@+id/frag_re_det_tv_nb_bathrooms"
-                style="@style/RETheme.TxtView"
+                style="@style/ReTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_bathrooms"
@@ -213,7 +213,7 @@
 
             <TextView
                 android:id="@+id/frag_re_det_tv_description"
-                style="@style/RETheme.TxtView"
+                style="@style/ReTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_description"
@@ -226,7 +226,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/frag_re_det_cardv_poi"
-        style="@style/RETheme.CardView"
+        style="@style/ReTheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/frag_re_det_cardv_description">
@@ -246,7 +246,7 @@
 
             <TextView
                 android:id="@+id/frag_re_det_tv_poi"
-                style="@style/RETheme.TxtView"
+                style="@style/ReTheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_poi"

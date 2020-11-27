@@ -1,96 +1,77 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="REAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="ReAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorError">@color/colorError</item>
     </style>
-    <style name="REAppTheme.NoActionBar">
+    <style name="ReAppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
     <!-- TOOLBAR THEME -->
-    <style name="REToolBarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="ReToolBarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColorPrimary">@color/colorOnPrimary</item>
     </style>
-    <style name="REToolBarPopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">
+    <style name="ReToolBarPopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">
         <item name="android:textColorPrimary">@color/colorOnSecondary</item>
     </style>
 
-    <!-- RAPIDE FLOATING BUTTON -->
-    <style name="REAppTheme.RapidFloatButtonAdd" parent="@style/REAppTheme">
-        xmlns:rfab="http://schemas.android.com/apk/res-auto"
-        <item name="android:padding">@dimen/default_padding</item>
-        <item name="rfab_size">normal</item>
-        <item name="rfab_drawable">@drawable/ic_add</item>
-        <item name="rfab_color_normal">@color/rfab_color_bckgrd</item>
-        <item name="rfab_color_pressed">@color/rfab_color_bckgrd_dark</item>
-        <item name="rfab_shadow_radius">@dimen/rfab_shadows_radius</item>
-        <item name="rfab_shadow_color">@color/colorPrimary</item>
-        <item name="rfab_shadow_dx">@dimen/app_zero_dp</item>
-        <item name="rfab_shadow_dy">@dimen/rfab_shadow_dy</item>
-        <item name="android:layout_marginEnd">@dimen/rfab_margin</item>
-        <item name="android:layout_marginBottom">@dimen/rfab_margin</item>
-        <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_alignParentEnd">true</item>
-    </style>
-
-
     <!-- REAL ESTATE THEME -->
-    <style name="RETheme" parent="REAppTheme">
+    <style name="ReTheme" parent="ReAppTheme">
         <item name="android:layout_margin">@dimen/default_margin</item>
     </style>
 
-    <style name="RETheme.TxtView" parent="RETheme">
+    <style name="ReTheme.TxtView" parent="ReTheme">
         <item name="android:layout_margin">@dimen/default_margin</item>
     </style>
 
-    <style name="RETheme.EditTxt" parent="RETheme">
+    <style name="ReTheme.EditTxt" parent="ReTheme">
         <item name="android:textColorHint">@color/colorPrimary</item>
     </style>
 
-    <style name="RETheme.TxtInputLayDate" parent="RETheme">
+    <style name="ReTheme.TxtInputLayDate" parent="ReTheme">
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="hintEnabled">true</item>
         <item name="errorEnabled">false</item>
     </style>
-    <style name="RETheme.TxtInputLay" parent="RETheme">
+    <style name="ReTheme.TxtInputLay" parent="ReTheme">
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="hintEnabled">true</item>
         <item name="errorEnabled">true</item>
     </style>
-    <style name="RETheme.TxtInputLayEt" parent="RETheme">
+    <style name="ReTheme.TxtInputLayEt" parent="ReTheme">
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="android:focusable">true</item>
         <item name="android:cursorVisible">true</item>
     </style>
-    <style name="RETheme.Button" parent="RETheme">
+    <style name="ReTheme.Button" parent="ReTheme">
         <item name="android:layout_weight">1</item>
         <item name="android:background">@drawable/btn_round_corner</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
     </style>
-    <style name="RETheme.CardView" parent="RETheme">
+    <style name="ReTheme.CardView" parent="ReTheme">
         <item name="android:background">@color/backgroundPrimary</item>
         <item name="cardCornerRadius">@dimen/default_card_corner_radius</item>
     </style>
-    <style name="RETheme.SpinnerRoom" parent="RETheme">
+    <style name="ReTheme.SpinnerRoom" parent="ReTheme">
         <item name="android:layout_width">@dimen/default_spinner_width_small</item>
         <item name="android:layout_height">@dimen/default_spinner_height</item>
         <item name="android:textSize">@dimen/default_txt_size</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
     </style>
-    <style name="RETheme.Spinner" parent="RETheme">
+    <style name="ReTheme.Spinner" parent="ReTheme">
         <item name="android:layout_width">@dimen/default_spinner_width_large</item>
         <item name="android:layout_height">@dimen/default_spinner_height</item>
         <item name="android:textSize">@dimen/default_txt_size</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
     </style>
 
-    <style name="RETheme.CheckBox" parent="RETheme">
+    <style name="ReTheme.CheckBox" parent="ReTheme">
         <item name="android:checked">false</item>
         <item name="android:paddingStart">@dimen/default_padding_start</item>
         <item name="android:paddingEnd">@dimen/default_padding_end</item>

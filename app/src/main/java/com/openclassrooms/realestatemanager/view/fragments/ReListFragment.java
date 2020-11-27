@@ -14,15 +14,14 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListBinding;
-import com.openclassrooms.realestatemanager.viewmodel.REListViewModel;
+import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
 
-public class REListFragment extends BaseFragment {
+public class ReListFragment extends BaseFragment {
 
-    private REListViewModel mViewModel;
+    private ReListViewModel mViewModel;
     private View mFragView;
     private FragmentReListBinding mBinding;
 
@@ -51,7 +50,7 @@ public class REListFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(REListViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ReListViewModel.class);
         // TODO: Use the ViewModel
     }
 
