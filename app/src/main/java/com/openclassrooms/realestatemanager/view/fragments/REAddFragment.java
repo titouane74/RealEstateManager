@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.view.fragments;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
@@ -10,69 +9,35 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.databinding.FragmentReAddBinding;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.viewmodel.REAddViewModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 
-public class REAddFragment extends BaseFragment implements POIDialogFragment.OnDialogPOIListener {
+public class REAddFragment extends BaseFragment{
 
     private static final String TAG = "TAG_REAddFragment";
 
-    //DESIGN
-    private EditText mDateOnMarket;
-    private Spinner mSpinType;
-    private Spinner mSpinRooms;
-    private Spinner mSpinBedrooms;
-    private Spinner mSpinBathrooms;
-    private TextView mPoiTV;
-    private ChipGroup mPoiChipGroup;
-    private CheckBox mCbBank;
-    private CheckBox mCbFood;
-    private CheckBox mCbHealth;
-    private CheckBox mCbRestaurant;
-    private CheckBox mCbSchool;
-    private CheckBox mCbStore;
-    private CheckBox mCbSubway;
-    private CheckBox mCbPark;
-    private Button mCancel;
-    private Button mSave;
     private View mFragView;
-    private Toolbar mToolbar;
 
-    //LIFECYCLE
+    private FragmentReAddBinding mBinding;
+
     private REAddViewModel mViewModel;
     private Context mContext;
 
     private Calendar mDateCal;
-
-    public static REAddFragment newInstance() {
-        return new REAddFragment();
-    }
 
     @Override
     protected int getMenuAttached() {
@@ -80,17 +45,36 @@ public class REAddFragment extends BaseFragment implements POIDialogFragment.OnD
     }
 
     @Override
-    protected int getFragmentLayout() { return R.layout.fragment_re_add; }
+    protected int getFragmentLayout() { return
+            R.layout.fragment_re_add;
+    }
 
     @Override
     protected void configureDesign(View pView) {
+    }
+
+/*    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mFragView = mBinding.getRoot();
         mContext = getContext();
-        mFragView = pView;
-        bindView(mFragView);
+        configureSpinners();
+
+        mBinding.fragAddCardvDateOnMarket.setOnClickListener(v -> displayCalendarDialog ());
+    }*/
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        mBinding = FragmentReAddBinding.inflate(inflater, container, false);
+        mFragView = mBinding.getRoot();
+        mContext = getContext();
 
         configureSpinners();
 
-        mDateOnMarket.setOnClickListener(v -> displayCalendarDialog ());
+        mBinding.fragAddCardvDateOnMarket.setOnClickListener(v -> displayCalendarDialog ());
+        return mFragView;
     }
 
     @Override
@@ -102,36 +86,11 @@ public class REAddFragment extends BaseFragment implements POIDialogFragment.OnD
         return super.onOptionsItemSelected(pItem);
     }
 
-/*
-    private void displayPOIDialog() {
-        DialogFragment lDialogPoi = new POIDialogFragment();
-        lDialogPoi.show(getChildFragmentManager(),"POIDialogFragment");
-    }
-*/
-
     private void configureSpinners() {
-        mSpinType.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.type_spinner));
-        mSpinRooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
-        mSpinBedrooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
-        mSpinBathrooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
-    }
-
-    private void bindView(View pView) {
-        mDateOnMarket = pView.findViewById(R.id.frag_add_tv_market_date);
-        mSpinType = pView.findViewById(R.id.frag_re_add_spin_type);
-        mSpinRooms = pView.findViewById(R.id.frag_re_add_spin_rooms);
-        mSpinBedrooms = pView.findViewById(R.id.frag_re_add_spin_bedrooms);
-        mSpinBathrooms = pView.findViewById(R.id.frag_re_add_spin_bathrooms);
-        mPoiTV = pView.findViewById(R.id.frag_add_tv_poi);
-//        mPoiChipGroup = pView.findViewById(R.id.id_frag_re_add_chipgrp_poi);
-        mCbBank = pView.findViewById(R.id.frag_re_add_poi_bank);
-        mCbFood = pView.findViewById(R.id.frag_re_add_poi_food);
-        mCbHealth = pView.findViewById(R.id.frag_re_add_poi_health);
-        mCbRestaurant = pView.findViewById(R.id.frag_re_add_poi_restaurant);
-        mCbSchool = pView.findViewById(R.id.frag_re_add_poi_school);
-        mCbStore = pView.findViewById(R.id.frag_re_add_poi_store);
-        mCbSubway = pView.findViewById(R.id.frag_re_add_poi_subway);
-        mCbPark = pView.findViewById(R.id.frag_re_add_poi_park);
+        mBinding.fragReAddSpinType.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.type_spinner));
+        mBinding.fragReAddSpinRooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReAddSpinBedrooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReAddSpinBathrooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
     }
 
     @Override
@@ -155,37 +114,12 @@ public class REAddFragment extends BaseFragment implements POIDialogFragment.OnD
 
                     mDateCal.set(year,month,dayOfMonth);
                     String lDate = lDateFormat.format(mDateCal.getTime());
-                    mDateOnMarket.setText(lDate);
+                    mBinding.fragAddTvMarketDate.setText(lDate);
                 },
                 lCalendar.get(Calendar.YEAR),
                 lCalendar.get(Calendar.MONTH),
                 lCalendar.get(Calendar.DAY_OF_MONTH)
         );
         lDatePickerDialog.show();
-    }
-
-
-    @Override
-    public void onPOIOkClicked(List<String> pList) {
-
-        for(int lIndex=0; lIndex < pList.size();lIndex++) {
-            Log.d(TAG, "onPOIOkClicked: " + pList.get(lIndex));
-        }
-
-        final Chip lChipPoi = new Chip(requireContext());
-
-        for(int lIndex=0; lIndex < pList.size();lIndex++) {
-            lChipPoi.setText(pList.get(lIndex));
-            lChipPoi.setCloseIconVisible(true);
-            lChipPoi.setOnCloseIconClickListener(v -> mPoiChipGroup.removeView(lChipPoi));
-
-            mPoiChipGroup.addView(lChipPoi);
-            mPoiChipGroup.setVisibility(View.VISIBLE);
-        }
-
-    }
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
     }
 }

@@ -40,57 +40,57 @@
     </style>
 
 
-    <!-- ADD REAL ESTATE THEME -->
-    <style name="REAddTheme" parent="REAppTheme">
+    <!-- REAL ESTATE THEME -->
+    <style name="RETheme" parent="REAppTheme">
         <item name="android:layout_margin">@dimen/default_margin</item>
     </style>
 
-    <style name="REAddTheme.TxtView" parent="REAddTheme">
+    <style name="RETheme.TxtView" parent="RETheme">
         <item name="android:layout_margin">@dimen/default_margin</item>
     </style>
 
-    <style name="REAddTheme.EditTxt" parent="REAddTheme">
+    <style name="RETheme.EditTxt" parent="RETheme">
         <item name="android:textColorHint">@color/colorPrimary</item>
     </style>
 
-    <style name="REAddTheme.TxtInputLayDate" parent="REAddTheme">
+    <style name="RETheme.TxtInputLayDate" parent="RETheme">
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="hintEnabled">true</item>
         <item name="errorEnabled">false</item>
     </style>
-    <style name="REAddTheme.TxtInputLay" parent="REAddTheme">
+    <style name="RETheme.TxtInputLay" parent="RETheme">
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="hintEnabled">true</item>
         <item name="errorEnabled">true</item>
     </style>
-    <style name="REAddTheme.TxtInputLayEt" parent="REAddTheme">
+    <style name="RETheme.TxtInputLayEt" parent="RETheme">
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="android:focusable">true</item>
         <item name="android:cursorVisible">true</item>
     </style>
-    <style name="REAddTheme.Button" parent="REAddTheme">
+    <style name="RETheme.Button" parent="RETheme">
         <item name="android:layout_weight">1</item>
         <item name="android:background">@drawable/btn_round_corner</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
     </style>
-    <style name="REAddTheme.CardView" parent="REAddTheme">
+    <style name="RETheme.CardView" parent="RETheme">
         <item name="android:background">@color/backgroundPrimary</item>
         <item name="cardCornerRadius">@dimen/default_card_corner_radius</item>
     </style>
-    <style name="REAddTheme.SpinnerRoom" parent="REAddTheme">
+    <style name="RETheme.SpinnerRoom" parent="RETheme">
         <item name="android:layout_width">@dimen/default_spinner_width_small</item>
         <item name="android:layout_height">@dimen/default_spinner_height</item>
         <item name="android:textSize">@dimen/default_txt_size</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
     </style>
-    <style name="REAddTheme.Spinner" parent="REAddTheme">
+    <style name="RETheme.Spinner" parent="RETheme">
         <item name="android:layout_width">@dimen/default_spinner_width_large</item>
         <item name="android:layout_height">@dimen/default_spinner_height</item>
         <item name="android:textSize">@dimen/default_txt_size</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
     </style>
 
-    <style name="REAddTheme.CheckBox" parent="REAddTheme">
+    <style name="RETheme.CheckBox" parent="RETheme">
         <item name="android:checked">false</item>
         <item name="android:paddingStart">@dimen/default_padding_start</item>
         <item name="android:paddingEnd">@dimen/default_padding_end</item>

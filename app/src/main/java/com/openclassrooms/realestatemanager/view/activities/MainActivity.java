@@ -23,7 +23,7 @@ import com.openclassrooms.realestatemanager.view.fragments.REAddFragment;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements POIDialogFragment.OnDialogPOIListener {
+public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "TAG_MAIN";
 
@@ -125,26 +125,4 @@ public class MainActivity extends AppCompatActivity implements POIDialogFragment
         mNavController.navigate(R.id.nav_re_list);
     }
 
-    @Override
-    public void onPOIOkClicked(List<String> pList) {
-        Fragment lFragment = getSupportFragmentManager().getPrimaryNavigationFragment();
-        if (lFragment != null) {
-            Log.d(TAG, "onPOIOkClicked: " + lFragment.getId() + lFragment.getTag());
-/*            if (lFragment instanceof REAddFragment) {
-                REAddFragment mREAddFragment = (REAddFragment) lFragment;
-                mREAddFragment.onPOIOkClicked(pList);
-            }*/
-        }
-
-/*
-        mREAddFragment = (REAddFragment) getSupportFragmentManager().findFragmentById(R.id.lay_frag_add);
-        if (mREAddFragment == null) {
-            mREAddFragment = new REAddFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.lay_frag_add, mREAddFragment)
-                    .commit();
-            mREAddFragment.onPOIOkClicked(pList);
-        }
-*/
-    }
 }

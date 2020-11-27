@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundSecondary"
     android:tag="REEdit"
-    android:theme="@style/REAddTheme"
+    android:theme="@style/RETheme"
     tools:context=".view.fragments.REEditFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/frag_add_cardv_location"
-        style="@style/REAddTheme.CardView"
+        style="@style/RETheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
 
             <TextView
                 android:id="@+id/frag_add_tv_location"
-                style="@style/REAddTheme.TxtView"
+                style="@style/RETheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/txt_location"
@@ -47,7 +47,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/frag_add_cardv_date_on_market"
-        style="@style/REAddTheme.CardView"
+        style="@style/RETheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/frag_add_cardv_location">
@@ -71,7 +71,7 @@
 
             <EditText
                 android:id="@+id/frag_add_tv_market_date"
-                style="@style/REAddTheme.EditTxt"
+                style="@style/RETheme.EditTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txt_on_market_date"
@@ -83,7 +83,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/frag_add_cardv_description"
-        style="@style/REAddTheme.CardView"
+        style="@style/RETheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/frag_add_cardv_date_on_market">
@@ -111,7 +111,7 @@
 
                 <Spinner
                     android:id="@+id/frag_re_add_spin_type"
-                    style="@style/REAddTheme.Spinner"
+                    style="@style/RETheme.Spinner"
                     android:layout_marginEnd="@dimen/default_margin_end"
                     android:prompt="@string/txt_type" />
 
@@ -137,7 +137,7 @@
 
                 <EditText
                     android:id="@+id/frag_add_tv_area"
-                    style="@style/REAddTheme.EditTxt"
+                    style="@style/RETheme.EditTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/txt_area"
@@ -164,7 +164,7 @@
 
                 <EditText
                     android:id="@+id/frag_add_tv_price"
-                    style="@style/REAddTheme.EditTxt"
+                    style="@style/RETheme.EditTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/txt_price"
@@ -192,7 +192,7 @@
 
                 <Spinner
                     android:id="@+id/frag_re_add_spin_rooms"
-                    style="@style/REAddTheme.SpinnerRoom"
+                    style="@style/RETheme.SpinnerRoom"
                     android:layout_marginEnd="@dimen/default_margin_end"
                     android:prompt="@string/txt_rooms" />
 
@@ -219,7 +219,7 @@
 
                 <Spinner
                     android:id="@+id/frag_re_add_spin_bedrooms"
-                    style="@style/REAddTheme.SpinnerRoom"
+                    style="@style/RETheme.SpinnerRoom"
                     android:layout_marginEnd="@dimen/default_margin_end"
                     android:prompt="@string/txt_bedrooms" />
             </LinearLayout>
@@ -243,7 +243,7 @@
 
                 <Spinner
                     android:id="@+id/frag_re_add_spin_bathrooms"
-                    style="@style/REAddTheme.SpinnerRoom"
+                    style="@style/RETheme.SpinnerRoom"
                     android:layout_marginEnd="@dimen/default_margin_end"
                     android:prompt="@string/txt_bathrooms" />
             </LinearLayout>
@@ -266,7 +266,7 @@
 
                 <EditText
                     android:id="@+id/frag_add_tv_description"
-                    style="@style/REAddTheme.EditTxt"
+                    style="@style/RETheme.EditTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start|end"
@@ -280,7 +280,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/frag_add_cardv_poi"
-        style="@style/REAddTheme.CardView"
+        style="@style/RETheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/frag_add_cardv_description">
@@ -300,7 +300,7 @@
 
             <TextView
                 android:id="@+id/frag_add_tv_poi"
-                style="@style/REAddTheme.TxtView"
+                style="@style/RETheme.TxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -318,7 +318,7 @@
                 android:text="@string/poi_bank"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_poi"
-                style="@style/REAddTheme.CheckBox"/>
+                style="@style/RETheme.CheckBox"/>
             <CheckBox
                 android:id="@+id/frag_re_add_poi_food"
                 android:layout_width="@dimen/app_zero_dp"
@@ -327,11 +327,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/frag_re_add_poi_bank"
                 app:layout_constraintTop_toBottomOf="@+id/frag_add_tv_poi"
-                style="@style/REAddTheme.CheckBox"/>
+                style="@style/RETheme.CheckBox"/>
 
             <CheckBox
                 android:id="@+id/frag_re_add_poi_health"
-                style="@style/REAddTheme.CheckBox"
+                style="@style/RETheme.CheckBox"
                 android:layout_width="@dimen/app_zero_dp"
                 android:layout_height="match_parent"
                 android:text="@string/poi_health"
@@ -340,7 +340,7 @@
 
             <CheckBox
                 android:id="@+id/frag_re_add_poi_restaurant"
-                style="@style/REAddTheme.CheckBox"
+                style="@style/RETheme.CheckBox"
                 android:layout_width="@dimen/app_zero_dp"
                 android:layout_height="match_parent"
                 android:text="@string/poi_restaurant"
@@ -349,7 +349,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/frag_re_add_poi_food" />
             <CheckBox
                 android:id="@+id/frag_re_add_poi_school"
-                style="@style/REAddTheme.CheckBox"
+                style="@style/RETheme.CheckBox"
                 android:layout_width="@dimen/app_zero_dp"
                 android:layout_height="match_parent"
                 android:text="@string/poi_school"
@@ -358,7 +358,7 @@
 
             <CheckBox
                 android:id="@+id/frag_re_add_poi_store"
-                style="@style/REAddTheme.CheckBox"
+                style="@style/RETheme.CheckBox"
                 android:layout_width="@dimen/app_zero_dp"
                 android:layout_height="match_parent"
                 android:text="@string/poi_store"
@@ -367,7 +367,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/frag_re_add_poi_health" />
             <CheckBox
                 android:id="@+id/frag_re_add_poi_subway"
-                style="@style/REAddTheme.CheckBox"
+                style="@style/RETheme.CheckBox"
                 android:layout_width="@dimen/app_zero_dp"
                 android:layout_height="match_parent"
                 android:text="@string/poi_subway"
@@ -376,7 +376,7 @@
 
             <CheckBox
                 android:id="@+id/frag_re_add_poi_park"
-                style="@style/REAddTheme.CheckBox"
+                style="@style/RETheme.CheckBox"
                 android:layout_width="@dimen/app_zero_dp"
                 android:layout_height="match_parent"
                 android:text="@string/poi_park"

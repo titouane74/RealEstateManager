@@ -10,10 +10,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewbinding.ViewBinding;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 /**
  * Created by Florence LE BOURNOT on 26/11/2020
  */
-abstract class BaseFragment extends Fragment {
+abstract class BaseFragment<T extends ViewBinding> extends Fragment {
+
+    protected T mBinding;
 
     protected abstract int getMenuAttached();
     protected abstract int getFragmentLayout();
@@ -33,6 +42,16 @@ abstract class BaseFragment extends Fragment {
         mFragView = inflater.inflate(getFragmentLayout(),container,false);
         this.configureDesign(mFragView);
         return mFragView;
+/*        Type lSuperClass = getClass().getGenericSuperclass();
+        Class<?> aClass = (Class<?>) ((ParameterizedType) lSuperClass).getActualTypeArguments()[0];
+        try {
+            Method method = aClass.getDeclaredMethod("inflate", LayoutInflater.class,ViewGroup.class,boolean.class);
+            mBinding = (T) method.invoke(null, getLayoutInflater(),container,false);
+        } catch (NoSuchMethodException | IllegalAccessException| InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return mBinding.getRoot();*/
+
     }
 
     @Override

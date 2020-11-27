@@ -18,6 +18,11 @@
     <!-- REAL ESTATE VOCABULARY -->
     <string name="txt_location">Location</string>
     <string name="txt_address">Address</string>
+    <string name="txt_additional_address">Additional address</string>
+    <string name="txt_street">Street</string>
+    <string name="txt_zip_code">ZipCode</string>
+    <string name="txt_city">City</string>
+    <string name="txt_country">Country</string>
     <string name="txt_address_hint">(Street, City, ZipCode, Country)</string>
     <string name="txt_on_market_date">Date of placing on the market</string>
     <string name="txt_status">Status</string>
@@ -42,6 +47,7 @@
 
     <!-- SPINNERS -->
     <string name="spinners_select">--Select--</string>
+    <string name="spinners_select_country">--Select a country--</string>
 
     <!-- POI -->
     <string name="poi_bank">Bank</string>

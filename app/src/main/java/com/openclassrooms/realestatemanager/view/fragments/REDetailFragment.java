@@ -13,35 +13,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.databinding.FragmentReDetailBinding;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.viewmodel.REDetailViewModel;
 
 public class REDetailFragment extends Fragment {
 
     private static final String TAG = "REDetailFragment";
-    private TextView mREPrice;
-    private TextView mRENbRooms;
-    private TextView mRENbBedrooms;
-    private TextView mREnBBathrooms;
-    private TextView mREType;
-    private TextView mREDescription;
-    private TextView mREArea;
+    private FragmentReDetailBinding mBinding;
 
+    private View mFragView;
     private REDetailViewModel mViewModel;
 
-    public static REDetailFragment newInstance() {
-        return new REDetailFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View lView =  inflater.inflate(R.layout.fragment_re_detail, container, false);
-        bindView(lView);
-        return lView;
+        mBinding = FragmentReDetailBinding.inflate(inflater, container, false);
+        mFragView = mBinding.getRoot();
+        return mFragView;
     }
 
     @SuppressLint("SetTextI18n")
@@ -60,13 +51,13 @@ public class REDetailFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void displayRealEstate(RealEstate pRE) {
-        mREPrice.setText(Integer.toString(pRE.getRePrice()));
-        mRENbRooms.setText(Integer.toString(pRE.getReNbRooms()));
-        mRENbBedrooms.setText(Integer.toString(pRE.getReNbBedrooms()));
-        mREnBBathrooms.setText(Integer.toString(pRE.getReNbBathrooms()));
-        mREType.setText(pRE.getReType());
-        mREDescription.setText(pRE.getReDescription());
-        mREArea.setText(Integer.toString(pRE.getReArea()));
+        mBinding.fragReDetTvPrice.setText(Integer.toString(pRE.getRePrice()));
+        mBinding.fragReDetTvNbRooms.setText(Integer.toString(pRE.getReNbRooms()));
+        mBinding.fragReDetTvNbBedrooms.setText(Integer.toString(pRE.getReNbBedrooms()));
+        mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRE.getReNbBathrooms()));
+        mBinding.fragReDetTvType.setText(pRE.getReType());
+        mBinding.fragReDetTvDescription.setText(pRE.getReDescription());
+        mBinding.fragReDetTvArea.setText(Integer.toString(pRE.getReArea()));
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -74,13 +65,5 @@ public class REDetailFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(REDetailViewModel.class);
         // TODO: Use the ViewModel
     }
-    private void bindView(View pView) {
-        mREPrice = pView.findViewById(R.id.frag_re_det_tv_price);
-        mRENbRooms = pView.findViewById(R.id.frag_re_det_tv_nb_rooms);
-        mRENbBedrooms = pView.findViewById(R.id.frag_re_det_tv_nb_bedrooms);
-        mREnBBathrooms = pView.findViewById(R.id.frag_re_det_tv_nb_bathrooms);
-        mREType = pView.findViewById(R.id.frag_re_det_tv_type);
-        mREDescription = pView.findViewById(R.id.frag_re_det_tv_description);
-        mREArea = pView.findViewById(R.id.frag_re_det_tv_area);
-    }
+
 }
