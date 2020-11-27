@@ -31,7 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-public class REEditFragment extends BaseFragment implements POIDialogFragment.OnDialogPOIListener {
+public class REEditFragment extends BaseFragment {
 
     private static final String TAG = "TAG_REEditFragment";
 
@@ -145,26 +145,6 @@ public class REEditFragment extends BaseFragment implements POIDialogFragment.On
         lDatePickerDialog.show();
     }
 
-
-    @Override
-    public void onPOIOkClicked(List<String> pList) {
-
-        for(int lIndex=0; lIndex < pList.size();lIndex++) {
-            Log.d(TAG, "onPOIOkClicked: " + pList.get(lIndex));
-        }
-
-        final Chip lChipPoi = new Chip(requireContext());
-
-        for(int lIndex=0; lIndex < pList.size();lIndex++) {
-            lChipPoi.setText(pList.get(lIndex));
-            lChipPoi.setCloseIconVisible(true);
-            lChipPoi.setOnCloseIconClickListener(v -> mPoiChipGroup.removeView(lChipPoi));
-
-            mPoiChipGroup.addView(lChipPoi);
-            mPoiChipGroup.setVisibility(View.VISIBLE);
-        }
-
-    }
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

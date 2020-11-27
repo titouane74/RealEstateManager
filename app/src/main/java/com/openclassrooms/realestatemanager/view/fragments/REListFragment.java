@@ -59,12 +59,7 @@ public class REListFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem pItem) {
         NavController lNavController = Navigation.findNavController(mFragView);
         switch (pItem.getItemId()) {
-            case R.id.nav_agent_add:
             case R.id.nav_re_add:
-                NavigationUI.onNavDestinationSelected(pItem,lNavController);
-                return true;
-            case R.id.nav_agent_edit:
-                Toast.makeText(getContext(), "EDIT AGENT", Toast.LENGTH_SHORT).show();
                 NavigationUI.onNavDestinationSelected(pItem,lNavController);
                 return true;
             case R.id.nav_re_edit:
