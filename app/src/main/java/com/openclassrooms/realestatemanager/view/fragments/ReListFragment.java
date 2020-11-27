@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.view.fragments;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -10,16 +9,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListBinding;
 import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
 
-public class ReListFragment extends BaseFragment {
+public class ReListFragment extends BaseFragment<FragmentReListBinding> {
 
     private ReListViewModel mViewModel;
     private View mFragView;
@@ -32,19 +29,10 @@ public class ReListFragment extends BaseFragment {
     @Override
     protected int getMenuAttached() {return R.menu.menu_general;}
 
-
     @Override
-    protected void configureDesign(View pView) {
-
-    }
-
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = FragmentReListBinding.inflate(inflater, container, false);
+    protected void configureDesign(FragmentReListBinding pBinding) {
+        mBinding = pBinding;
         mFragView = mBinding.getRoot();
-        return mFragView;
     }
 
     @Override

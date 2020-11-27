@@ -76,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
             return;
         } else {
-            Toast.makeText(mContext, getString(R.string.exit_app_back_pressed), Toast.LENGTH_SHORT).show();
+            mBackToast = Toast.makeText(mContext, getString(R.string.exit_app_back_pressed), Toast.LENGTH_SHORT);
+            mBackToast.show();
         }
         mBackPressedTime = System.currentTimeMillis();
     }

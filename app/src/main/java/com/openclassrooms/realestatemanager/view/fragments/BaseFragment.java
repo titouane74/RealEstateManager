@@ -25,8 +25,10 @@ abstract class BaseFragment<T extends ViewBinding> extends Fragment {
     protected T mBinding;
 
     protected abstract int getMenuAttached();
+
     protected abstract int getFragmentLayout();
-    protected abstract void configureDesign(View pView);
+
+    protected abstract void configureDesign(T pBinding);
 
     private View mFragView;
 
@@ -39,24 +41,22 @@ abstract class BaseFragment<T extends ViewBinding> extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mFragView = inflater.inflate(getFragmentLayout(),container,false);
-        this.configureDesign(mFragView);
-        return mFragView;
-/*        Type lSuperClass = getClass().getGenericSuperclass();
+        Type lSuperClass = getClass().getGenericSuperclass();
         Class<?> aClass = (Class<?>) ((ParameterizedType) lSuperClass).getActualTypeArguments()[0];
         try {
-            Method method = aClass.getDeclaredMethod("inflate", LayoutInflater.class,ViewGroup.class,boolean.class);
-            mBinding = (T) method.invoke(null, getLayoutInflater(),container,false);
-        } catch (NoSuchMethodException | IllegalAccessException| InvocationTargetException e) {
+            Method method = aClass.getDeclaredMethod("inflate", LayoutInflater.class, ViewGroup.class, boolean.class);
+            mBinding = (T) method.invoke(null, getLayoutInflater(), container, false);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
-        return mBinding.getRoot();*/
+        this.configureDesign(mBinding);
 
+        return mBinding.getRoot();
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(getMenuAttached(),menu);
+        inflater.inflate(getMenuAttached(), menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

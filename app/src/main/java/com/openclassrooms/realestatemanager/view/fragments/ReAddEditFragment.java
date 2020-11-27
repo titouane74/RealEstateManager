@@ -7,13 +7,10 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.openclassrooms.realestatemanager.R;
@@ -25,7 +22,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class ReAddEditFragment extends BaseFragment{
+public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
 
     private static final String TAG = "TAG_REAddFragment";
 
@@ -49,31 +46,13 @@ public class ReAddEditFragment extends BaseFragment{
     }
 
     @Override
-    protected void configureDesign(View pView) {
-    }
-
-/*    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void configureDesign(FragmentReAddEditBinding pBinding) {
+        mBinding = pBinding;
         mFragView = mBinding.getRoot();
         mContext = getContext();
-        configureSpinners();
-
-        mBinding.fragAddCardvDateOnMarket.setOnClickListener(v -> displayCalendarDialog ());
-    }*/
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        mBinding = FragmentReAddEditBinding.inflate(inflater, container, false);
-        mFragView = mBinding.getRoot();
-        mContext = getContext();
-
         configureSpinners();
 
         mBinding.fragAddEditCardvDateOnMarket.setOnClickListener(v -> displayCalendarDialog ());
-        return mFragView;
     }
 
     @Override
