@@ -18,13 +18,14 @@
     <!-- REAL ESTATE VOCABULARY -->
     <string name="txt_location">Location</string>
     <string name="txt_address">Address</string>
-    <string name="txt_additional_address">Additional address</string>
     <string name="txt_street">Street</string>
+    <string name="txt_district">District</string>
     <string name="txt_zip_code">ZipCode</string>
     <string name="txt_city">City</string>
+    <string name="txt_county">County</string>
     <string name="txt_country">Country</string>
     <string name="txt_address_hint">(Street, City, ZipCode, Country)</string>
-    <string name="txt_on_market_date">Date of placing on the market</string>
+    <string name="txt_on_market_date">On market</string>
     <string name="txt_status">Status</string>
     <string name="txt_type">Type</string>
     <string name="txt_rooms">Rooms</string>
@@ -35,9 +36,12 @@
     <string name="txt_poi">Points of interest</string>
     <string name="txt_photos">Photos</string>
     <string name="txt_area">Area</string>
-    <string name="txt_sale_date">Date of sale</string>
+    <string name="txt_sold_date">Sold on</string>
     <string name="txt_real_estate">Real estate</string>
     <string name="txt_agent">Agent</string>
+    <string name="txt_agent_first">Agent first name</string>
+    <string name="txt_agent_last_name">Agent last name</string>
+    <string name="txt_agent_in_charge">Agent in charge of</string>
     <string name="txt_view_det_re">View real estate detail</string>
     <string name="txt_view_agent">View agent</string>
     <string name="txt_add_re">Add new real estate</string>

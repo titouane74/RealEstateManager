@@ -27,13 +27,25 @@
     </style>
 
     <style name="ReTheme.TxtView" parent="ReTheme">
-        <item name="android:layout_margin">@dimen/default_margin</item>
+        <item name="android:layout_margin">@dimen/re_add_edit_margin</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
 
+    <style name="ReTheme.ImgView" parent="ReTheme">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/default_margin_start</item>
+    </style>
     <style name="ReTheme.EditTxt" parent="ReTheme">
         <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="android:layout_width">@dimen/app_zero_dp</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
-
+    <style name="ReTheme.EditTxt.Location" parent="ReTheme.EditTxt">
+        <item name="layout_constraintStart_toStartOf">@+id/frag_re_add_edit_gl_location</item>
+    </style>
     <style name="ReTheme.TxtInputLayDate" parent="ReTheme">
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="hintEnabled">true</item>
@@ -59,13 +71,16 @@
         <item name="cardCornerRadius">@dimen/default_card_corner_radius</item>
     </style>
     <style name="ReTheme.SpinnerRoom" parent="ReTheme">
-        <item name="android:layout_width">@dimen/default_spinner_width_small</item>
+        <item name="android:layout_width">@dimen/app_zero_dp</item>
         <item name="android:layout_height">@dimen/default_spinner_height</item>
         <item name="android:textSize">@dimen/default_txt_size</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="layout_constraintWidth_percent">0.21</item>
+        <item name="android:layout_marginTop">@dimen/default_spinner_margin_top</item>
+
     </style>
     <style name="ReTheme.Spinner" parent="ReTheme">
-        <item name="android:layout_width">@dimen/default_spinner_width_large</item>
+        <item name="android:layout_width">@dimen/app_zero_dp</item>
         <item name="android:layout_height">@dimen/default_spinner_height</item>
         <item name="android:textSize">@dimen/default_txt_size</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
@@ -78,5 +93,7 @@
         <item name="android:layout_marginStart">@dimen/default_margin_start</item>
         <item name="android:layout_marginEnd">@dimen/default_margin_end</item>
         <item name="layout_constraintWidth_percent">0.5</item>
+        <item name="android:layout_width">@dimen/app_zero_dp</item>
+        <item name="android:layout_height">match_parent</item>
     </style>
 </resources>

@@ -52,7 +52,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
         mContext = getContext();
         configureSpinners();
 
-        mBinding.fragAddEditCardvDateOnMarket.setOnClickListener(v -> displayCalendarDialog ());
+        mBinding.fragReAddEditCardvStatus.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialog ());
     }
 
     @Override
@@ -65,10 +65,11 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
     }
 
     private void configureSpinners() {
-        mBinding.fragReAddSpinType.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.type_spinner));
-        mBinding.fragReAddSpinRooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReAddSpinBedrooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReAddSpinBathrooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReAddEditCardvDescription.fragReAddEditSpinType.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.type_spinner));
+        mBinding.fragReAddEditCardvDescription.fragReAddEditSpinRooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReAddEditCardvDescription.fragReAddSpinBedrooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReAddEditCardvDescription.fragReAddSpinBathrooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReAddEditCardvLocation.fragReAddSpinCountry.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.country_spinner));
     }
 
     @Override
@@ -92,7 +93,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
 
                     mDateCal.set(year,month,dayOfMonth);
                     String lDate = lDateFormat.format(mDateCal.getTime());
-                    mBinding.fragAddEditEtMarketDate.setText(lDate);
+                    mBinding.fragReAddEditCardvStatus.fragReAddEditEtMarketDate.setText(lDate);
                 },
                 lCalendar.get(Calendar.YEAR),
                 lCalendar.get(Calendar.MONTH),

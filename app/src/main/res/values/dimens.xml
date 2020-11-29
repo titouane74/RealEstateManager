@@ -8,13 +8,13 @@
     <dimen name="default_txt_size">14sp</dimen>
 
     <!-- DEFAULT MARGIN -->
-    <dimen name="default_margin">4dp</dimen>
-    <dimen name="default_margin_horizontal">4dp</dimen>
-    <dimen name="default_margin_vertical">4dp</dimen>
-    <dimen name="default_margin_top">4dp</dimen>
-    <dimen name="default_margin_bottom">4dp</dimen>
-    <dimen name="default_margin_start">4dp</dimen>
-    <dimen name="default_margin_end">4dp</dimen>
+    <dimen name="default_margin">8dp</dimen>
+    <dimen name="default_margin_horizontal">8dp</dimen>
+    <dimen name="default_margin_vertical">8dp</dimen>
+    <dimen name="default_margin_top">8dp</dimen>
+    <dimen name="default_margin_bottom">8dp</dimen>
+    <dimen name="default_margin_start">8dp</dimen>
+    <dimen name="default_margin_end">8dp</dimen>
 
     <!-- DEFAULT PADDING -->
     <dimen name="default_padding">4dp</dimen>
@@ -31,21 +31,18 @@
     <!-- DEFAULT BUTTON -->
     <dimen name="default_btn_corner_radius">10dp</dimen>
 
-    <!-- RAPID FLOATING ACTION BUTTON -->
-    <dimen name="rfab_shadows_radius">10dp</dimen>
-    <dimen name="rfab_shadow_dy">4dp</dimen>
-    <dimen name="rfab_margin">10dp</dimen>
 
-    <!-- REAL ESTATE ADD -->
-    <dimen name="re_add_icon_edit_txt_height">24dp</dimen>
-    <dimen name="re_add_padding_btn">8dp</dimen>
-    <dimen name="re_add_padding_lay">16dp</dimen>
+    <!-- REAL ESTATE ADD EDIT -->
+    <dimen name="re_add_edit_icon_edit_txt_height">24dp</dimen>
+    <dimen name="re_add_edit_padding_btn">8dp</dimen>
+    <dimen name="re_add_edit_padding_lay">16dp</dimen>
+    <dimen name="re_add_edit_margin">6dp</dimen>
+    <dimen name="frag_re_add_edit_location_guideline">0.18</dimen>
 
     <!-- SPINNER -->
-    <dimen name="default_spinner_height">24dp</dimen>
-    <dimen name="default_spinner_alone_height">24dp</dimen>
+    <dimen name="default_spinner_height">30dp</dimen>
     <dimen name="default_spinner_width_large">200dp</dimen>
-    <dimen name="default_spinner_width_small">80dp</dimen>
+    <dimen name="default_spinner_width_small">60dp</dimen>
     <dimen name="default_spinner_txt_size">14sp</dimen>
-
+    <dimen name="default_spinner_margin_top">150dp</dimen>
 </resources>
