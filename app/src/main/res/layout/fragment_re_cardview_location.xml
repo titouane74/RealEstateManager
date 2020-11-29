@@ -10,12 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/frag_re_add_edit_gl_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="@dimen/frag_re_add_edit_location_guideline" />
 
         <ImageView
             android:id="@+id/frag_re_add_edit_img_location"
@@ -34,30 +28,15 @@
             app:layout_constraintStart_toEndOf="@+id/frag_re_add_edit_img_location"
             app:layout_constraintTop_toTopOf="@+id/frag_re_add_edit_img_location" />
 
-        <TextView
-            android:id="@+id/frag_re_add_edit_tv_street"
-            style="@style/ReTheme.TxtView"
-            android:text="@string/txt_street"
-            app:layout_constraintBottom_toBottomOf="@+id/frag_re_add_edit_et_street"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/frag_re_add_edit_et_street" />
-
         <EditText
             android:id="@+id/frag_re_add_edit_et_street"
             style="@style/ReTheme.EditTxt.Location"
             android:hint="@string/txt_street"
             android:importantForAutofill="no"
             android:inputType="textPostalAddress"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_tv_location" />
-
-        <TextView
-            android:id="@+id/frag_re_add_edit_tv_district"
-            style="@style/ReTheme.TxtView"
-            android:text="@string/txt_district"
-            app:layout_constraintBottom_toBottomOf="@+id/frag_re_add_edit_et_district"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/frag_re_add_edit_et_district" />
 
         <EditText
             android:id="@+id/frag_re_add_edit_et_district"
@@ -65,16 +44,9 @@
             android:hint="@string/txt_district"
             android:importantForAutofill="no"
             android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_et_street" />
-
-        <TextView
-            android:id="@+id/frag_re_add_edit_tv_city"
-            style="@style/ReTheme.TxtView"
-            android:text="@string/txt_city"
-            app:layout_constraintBottom_toBottomOf="@+id/frag_re_add_edit_et_city"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/frag_re_add_edit_et_city" />
 
         <EditText
             android:id="@+id/frag_re_add_edit_et_city"
@@ -82,16 +54,9 @@
             android:hint="@string/txt_city"
             android:importantForAutofill="no"
             android:inputType="textPostalAddress"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_et_district" />
-
-        <TextView
-            android:id="@+id/frag_re_add_edit_tv_county"
-            style="@style/ReTheme.TxtView"
-            android:text="@string/txt_county"
-            app:layout_constraintBottom_toBottomOf="@+id/frag_re_add_edit_et_county"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/frag_re_add_edit_et_county" />
 
         <EditText
             android:id="@+id/frag_re_add_edit_et_county"
@@ -99,16 +64,9 @@
             android:hint="@string/txt_county"
             android:importantForAutofill="no"
             android:inputType="textPostalAddress"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_et_city" />
-
-        <TextView
-            android:id="@+id/frag_re_add_edit_tv_zip_code"
-            style="@style/ReTheme.TxtView"
-            android:text="@string/txt_zip_code"
-            app:layout_constraintBottom_toBottomOf="@+id/frag_re_add_edit_et_zip_code"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/frag_re_add_edit_et_zip_code" />
 
         <EditText
             android:id="@+id/frag_re_add_edit_et_zip_code"
@@ -116,16 +74,9 @@
             android:hint="@string/txt_zip_code"
             android:importantForAutofill="no"
             android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_et_county" />
-
-        <TextView
-            android:id="@+id/frag_re_add_edit_tv_country"
-            style="@style/ReTheme.TxtView"
-            android:text="@string/txt_country"
-            app:layout_constraintBottom_toBottomOf="@+id/frag_re_add_spin_country"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/frag_re_add_spin_country" />
 
         <Spinner
             android:id="@+id/frag_re_add_spin_country"
@@ -133,7 +84,7 @@
             android:layout_marginEnd="@dimen/default_margin_end"
             android:prompt="@string/txt_country"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/frag_re_add_edit_gl_location"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_et_zip_code" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
