@@ -8,7 +8,10 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
+import com.openclassrooms.realestatemanager.view.adapters.PhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 
 import java.text.DateFormat;
@@ -30,6 +34,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
 
     private FragmentReAddEditBinding mBinding;
 
+    private PhotoAdapter mAdapter;
     private ReAddEditViewModel mViewModel;
     private Context mContext;
 
@@ -51,7 +56,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
         mFragView = mBinding.getRoot();
         mContext = getContext();
         configureSpinners();
-
+        initRecyclerView();
         mBinding.fragReAddEditCardvStatus.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialog ());
     }
 
@@ -72,6 +77,11 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
         mBinding.fragReAddEditCardvLocation.fragReAddSpinCountry.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.country_spinner));
     }
 
+    private void initRecyclerView() {
+        mAdapter = new PhotoAdapter();
+        mBinding.fragReAddEditCardvPhoto.fragReAddEditRvPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
+        mBinding.fragReAddEditCardvPhoto.fragReAddEditRvPhoto.setAdapter(mAdapter);
+    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

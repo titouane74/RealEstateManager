@@ -35,6 +35,9 @@
     <string name="txt_price">Price</string>
     <string name="txt_poi">Points of interest</string>
     <string name="txt_photos">Photos</string>
+    <string name="txt_photo_description">Photo description</string>
+    <string name="txt_take_photo">Take photo</string>
+    <string name="txt_add_photo">Add photo</string>
     <string name="txt_area">Area</string>
     <string name="txt_sold_date">Sold on</string>
     <string name="txt_real_estate">Real estate</string>

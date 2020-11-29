@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/D:/ProgramFiles/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/add/baseline_add_24.xml" />
+                                      <entry key="url" value="jar:file:/D:/ProgramFiles/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/delete/baseline_delete_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_add" />
+                            <entry key="color" value="505fb6" />
+                            <entry key="outputName" value="ic_delete" />
                             <entry key="sourceFile" value="D:\WorkspaceAStudio\RealEstateManager" />
                           </map>
                         </option>
