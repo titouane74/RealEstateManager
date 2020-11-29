@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lay_frag_re_add_edit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundSecondary"
+        android:theme="@style/ReTheme"
+        tools:context=".view.fragments.ReAddEditFragment">
+
+        <include
+            android:id="@+id/frag_re_add_edit_cardv_status"
+            layout="@layout/fragment_re_cardview_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <include
+            android:id="@+id/frag_re_add_edit_cardv_location"
+            layout="@layout/fragment_re_cardview_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_cardv_status"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frag_re_add_edit_ll_description_poi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/frag_re_add_edit_cardv_location">
+
+            <include
+                android:id="@+id/frag_re_add_edit_cardv_description"
+                layout="@layout/fragment_re_cardview_description"
+                android:layout_width="@dimen/app_zero_dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/frag_re_add_edit_cardv_poi" />
+
+            <include
+                android:id="@+id/frag_re_add_edit_cardv_poi"
+                layout="@layout/fragment_re_cardview_poi"
+                android:layout_width="@dimen/app_zero_dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/frag_re_add_edit_cardv_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.36"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/frag_re_add_edit_cardv_photo"
+            layout="@layout/fragment_re_cardview_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/frag_re_add_edit_ll_description_poi"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
