@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.fragments.LoanFragment"
+    android:id="@+id/lay_frag_loan"
+    android:background="@color/backgroundSecondary">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/frag_loan_cardv_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/default_margin">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/frag_loan_tv_price"
+                style="@style/ReTheme.Loan.TxtView"
+                android:text="@string/txt_price"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/frag_loan_et_price"
+                app:layout_constraintBottom_toBottomOf="@id/frag_loan_et_price"/>
+
+            <EditText
+                android:id="@+id/frag_loan_et_price"
+                style="@style/ReTheme.Loan.EditTxt"
+
+                android:importantForAutofill="no"
+                android:inputType="number"
+                app:layout_constraintStart_toEndOf="@id/frag_loan_tv_price"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/frag_loan_tv_contribution"
+                style="@style/ReTheme.Loan.TxtView"
+                android:text="@string/txt_contribution"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/frag_loan_et_contribution"
+                app:layout_constraintBottom_toBottomOf="@id/frag_loan_et_contribution"/>
+
+            <EditText
+                android:id="@+id/frag_loan_et_contribution"
+                style="@style/ReTheme.Loan.EditTxt"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                app:layout_constraintStart_toEndOf="@id/frag_loan_tv_contribution"
+                app:layout_constraintTop_toBottomOf="@+id/frag_loan_et_price"/>
+            <TextView
+                android:id="@+id/frag_loan_tv_rate"
+                style="@style/ReTheme.Loan.TxtView"
+                android:text="@string/txt_rate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/frag_loan_et_rate"
+                app:layout_constraintBottom_toBottomOf="@id/frag_loan_et_rate"/>
+
+            <EditText
+                android:id="@+id/frag_loan_et_rate"
+                style="@style/ReTheme.Loan.EditTxt"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                app:layout_constraintStart_toEndOf="@id/frag_loan_tv_rate"
+                app:layout_constraintTop_toBottomOf="@+id/frag_loan_et_contribution"/>
+
+            <TextView
+                android:id="@+id/frag_loan_tv_duration"
+                style="@style/ReTheme.Loan.TxtView"
+                android:text="@string/txt_duration"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/frag_loan_et_duration"
+                app:layout_constraintBottom_toBottomOf="@id/frag_loan_et_duration"/>
+
+            <EditText
+                android:id="@+id/frag_loan_et_duration"
+                style="@style/ReTheme.Loan.EditTxt"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                app:layout_constraintStart_toEndOf="@id/frag_loan_tv_duration"
+                app:layout_constraintTop_toBottomOf="@+id/frag_loan_et_rate"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frag_loan_cardv_input"
+        android:layout_margin="@dimen/default_margin">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_bottom">
+
+            <Button
+                android:id="@+id/frag_loan_btn_calculate"
+                style="@style/ReTheme.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_calculate"
+                android:layout_marginStart="@dimen/loan_btn_margin_start"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/frag_loan_tv_monthly_payment_result"
+                style="@style/ReTheme.Loan.TxtView"
+                android:hint="@string/txt_monthly_payment"
+                android:textSize="@dimen/default_txt_size_extra_large"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/frag_loan_btn_calculate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/frag_loan_btn_calculate"
+                app:layout_constraintWidth_percent="@dimen/loan_et_width_percent_result" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,18 +8,30 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="nav_re_add">
+                  <entry key="loanFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-760" />
-                            <option name="y" value="-349" />
+                            <option name="x" value="-67" />
+                            <option name="y" value="230" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="reAddFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-102" />
+                            <option name="y" value="-396" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_nav_re_add_to_nav_re_list">
+                            <entry key="action_reAddFragment_to_reListFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -29,52 +41,40 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="nav_re_detail">
+                  <entry key="reDetailFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-517" />
-                            <option name="y" value="-72" />
+                            <option name="x" value="105" />
+                            <option name="y" value="-78" />
                           </Point>
                         </option>
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="nav_re_edit">
+                  <entry key="reListFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-778" />
-                            <option name="y" value="204" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="nav_re_list">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-1039" />
-                            <option name="y" value="-30" />
+                            <option name="x" value="-414" />
+                            <option name="y" value="-16" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_nav_re_list_to_nav_re_add">
+                            <entry key="action_reListFragment_to_loanFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_nav_re_list_to_nav_re_detail">
+                            <entry key="action_reListFragment_to_reAddFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_nav_re_list_to_nav_re_edit">
+                            <entry key="action_reListFragment_to_reDetailFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

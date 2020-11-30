@@ -15,7 +15,6 @@ import android.view.View;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListBinding;
-import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
 import com.openclassrooms.realestatemanager.view.adapters.ReListAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
 

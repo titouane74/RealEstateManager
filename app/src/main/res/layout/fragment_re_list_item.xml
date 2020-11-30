@@ -23,16 +23,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/frag_re_list_item_img_photo"
         app:layout_constraintBottom_toBottomOf="@id/frag_re_list_item_img_photo"
-        android:background="@color/backgroundPrimary">
+        android:background="@color/backgroundPrimary"
+        >
+
         <TextView
             android:id="@+id/item_type"
             style="@style/ReTheme.List.TxtView"
             android:text="House"
             android:textSize="@dimen/default_txt_size_large"
             android:textStyle="bold"
+            android:paddingTop="@dimen/default_padding_top"
+            app:layout_constraintBottom_toTopOf="@id/item_city"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/item_city"
@@ -41,7 +45,7 @@
             android:textSize="@dimen/default_txt_size_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_type" />
+            app:layout_constraintBottom_toTopOf="@id/item_price" />
 
         <TextView
             android:id="@+id/item_price"
@@ -51,9 +55,8 @@
             android:textSize="@dimen/default_txt_size_extra_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_city"
             app:layout_constraintBottom_toBottomOf="parent"/>
-
+<!--
         <TextView
             android:id="@+id/item_sold"
             style="@style/ReTheme.List.TxtView"
@@ -70,6 +73,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:elevation="4dp"/>
+    -->
+        <ImageView
+            android:layout_width="@dimen/re_photo_sold_size"
+            android:layout_height="@dimen/re_photo_sold_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:srcCompat="@drawable/ic_sold_red"
+            android:contentDescription="@string/txt_description"
+            android:layout_marginEnd="@dimen/default_margin_end"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

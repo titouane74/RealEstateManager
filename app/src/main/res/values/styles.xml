@@ -69,7 +69,6 @@
         <item name="android:cursorVisible">true</item>
     </style>
     <style name="ReTheme.Button" parent="ReTheme">
-        <item name="android:layout_weight">1</item>
         <item name="android:background">@drawable/btn_round_corner</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
     </style>
@@ -108,5 +107,18 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <style name="ReTheme.Loan" parent="ReTheme">
+        <item name="android:layout_width">@dimen/app_zero_dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="ReTheme.Loan.EditTxt" parent="ReTheme.Loan">
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="layout_constraintWidth_percent">@dimen/loan_et_width_percent</item>
+    </style>
+    <style name="ReTheme.Loan.TxtView" parent="ReTheme.Loan">
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="layout_constraintWidth_percent">@dimen/loan_tv_width_percent</item>
+        <item name="android:textAlignment">viewEnd</item>
+    </style>
 
 </resources>

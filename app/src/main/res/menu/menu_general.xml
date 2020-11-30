@@ -3,14 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/nav_re_add"
+        android:id="@+id/reAddFragment"
         android:icon="@drawable/ic_add"
         android:title="@string/default_txt_add"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/nav_re_detail"
+        android:id="@+id/reDetailFragment"
         android:icon="@drawable/ic_search"
         android:title="@string/default_txt_search"
         app:showAsAction="always"/>
-
+    <item
+        android:id="@+id/loanFragment"
+        android:icon="@drawable/ic_calculate"
+        android:title="@string/txt_calculate"
+        app:showAsAction="always"/>
 </menu>

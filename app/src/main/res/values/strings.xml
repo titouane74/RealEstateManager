@@ -53,6 +53,15 @@
     <string name="txt_edit_re">Edit real estate</string>
     <string name="txt_edit_agent">Edit agent</string>
 
+    <!-- LOAN SIMULATOR -->
+    <string name="txt_loan_simulator">Loan simulator</string>
+    <string name="txt_contribution">Contribution</string>
+    <string name="txt_rate">Rate (in %)</string>
+    <string name="txt_duration">Duration (in Years)</string>
+    <string name="txt_monthly_payment">Monthly payment</string>
+    <string name="txt_calculate">Calculate</string>
+
+
     <!-- SPINNERS -->
     <string name="spinners_select">--Select--</string>
     <string name="spinners_select_country">--Select a country--</string>
@@ -67,5 +76,7 @@
     <string name="poi_subway">Subway</string>
     <string name="poi_park">Park</string>
     <string name="poi_title_list">POI List</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

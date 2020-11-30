@@ -43,7 +43,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
     public void onBindViewHolder(@NonNull ReListHolder pHolder, int position) {
         pHolder.bindView(mReList.get(position));
         pHolder.itemView.setOnClickListener(v -> {
-            mNavController.navigate(R.id.action_nav_re_list_to_nav_re_detail);
+            mNavController.navigate(R.id.action_reListFragment_to_reDetailFragment);
         });
     }
 

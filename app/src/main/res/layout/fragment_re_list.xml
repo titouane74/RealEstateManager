@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".view.fragments.ReListFragment"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    tools:listitem="@layout/fragment_re_list_item">
+    tools:listitem="@layout/fragment_re_list_item"
+    android:layout_marginTop="@dimen/default_margin_top">
 
 </androidx.recyclerview.widget.RecyclerView>
