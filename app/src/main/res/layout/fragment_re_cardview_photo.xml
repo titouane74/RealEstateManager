@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/default_margin_bottom"
     android:id="@+id/frag_re_add_edit_cardv_photo"
     style="@style/ReTheme.CardView">
 
@@ -25,7 +26,7 @@
             style="@style/ReTheme.EditTxt"
             android:hint="@string/txt_photo_description"
             android:importantForAutofill="no"
-            android:inputType="number"
+            android:inputType="text"
             app:layout_constraintStart_toEndOf="@+id/frag_re_add_edit_img_photo"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -60,6 +61,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="horizontal"
             tools:listitem="@layout/fragment_re_cardview_photo_item"
+            android:layout_marginBottom="@dimen/default_margin_bottom"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
