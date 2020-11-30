@@ -11,7 +11,8 @@
         android:layout_height="match_parent"
         android:background="@color/backgroundSecondary"
         android:theme="@style/ReTheme"
-        tools:context=".view.fragments.ReAddEditFragment">
+        tools:context=".view.fragments.ReAddEditFragment"
+        android:paddingBottom="@dimen/default_padding_bottom">
 
         <include
             android:id="@+id/frag_re_add_edit_cardv_status"
@@ -20,14 +21,12 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"/>
 
-
         <include
             android:id="@+id/frag_re_add_edit_cardv_location"
             layout="@layout/fragment_re_cardview_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_cardv_status"/>
-
 
         <include
             android:id="@+id/frag_re_add_edit_cardv_description"
