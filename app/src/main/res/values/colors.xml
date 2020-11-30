@@ -8,10 +8,14 @@
 
     <color name="backgroundPrimary">#FFFFFF</color>
     <color name="backgroundSecondary">#E5E6E7</color>
+    <color name="backgroundUnvailable">#B5ADAD</color>
 
-    <color name="colorSecondary">#EA769E</color>
-    <color name="colorSecondaryDark">#E91E63</color>
-    <color name="colorSecondaryAccent">#710329</color>
+    <color name="colorSecondary">#E1D1F4</color>
+    <color name="colorSecondaryDark">#BB86FC</color>
+    <color name="colorSecondaryAccent">#6E33B6</color>
+    <color name="colorSecondaryOld">#EA769E</color>
+    <color name="colorSecondaryDarkOld">#E91E63</color>
+    <color name="colorSecondaryAccentOld">#710329</color>
     <color name="colorOnSecondary">#000000</color>
 
     <color name="colorError">#B00020</color>

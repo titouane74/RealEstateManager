@@ -30,7 +30,7 @@
 
         <EditText
             android:id="@+id/frag_re_add_edit_et_street"
-            style="@style/ReTheme.EditTxt.Location"
+            style="@style/ReTheme.EditTxt"
             android:hint="@string/txt_street"
             android:importantForAutofill="no"
             android:inputType="textPostalAddress"
@@ -40,7 +40,7 @@
 
         <EditText
             android:id="@+id/frag_re_add_edit_et_district"
-            style="@style/ReTheme.EditTxt.Location"
+            style="@style/ReTheme.EditTxt"
             android:hint="@string/txt_district"
             android:importantForAutofill="no"
             android:inputType="text"
@@ -50,7 +50,7 @@
 
         <EditText
             android:id="@+id/frag_re_add_edit_et_city"
-            style="@style/ReTheme.EditTxt.Location"
+            style="@style/ReTheme.EditTxt"
             android:hint="@string/txt_city"
             android:importantForAutofill="no"
             android:inputType="textPostalAddress"
@@ -60,7 +60,7 @@
 
         <EditText
             android:id="@+id/frag_re_add_edit_et_county"
-            style="@style/ReTheme.EditTxt.Location"
+            style="@style/ReTheme.EditTxt"
             android:hint="@string/txt_county"
             android:importantForAutofill="no"
             android:inputType="textPostalAddress"
@@ -70,7 +70,7 @@
 
         <EditText
             android:id="@+id/frag_re_add_edit_et_zip_code"
-            style="@style/ReTheme.EditTxt.Location"
+            style="@style/ReTheme.EditTxt"
             android:hint="@string/txt_zip_code"
             android:importantForAutofill="no"
             android:inputType="text"

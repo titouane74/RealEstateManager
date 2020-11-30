@@ -1,23 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frag_re_list_item"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/item_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_margin_start"
-        android:layout_marginTop="@dimen/default_margin_top"
-        android:layout_marginEnd="@dimen/default_margin_end"
-        android:singleLine="true"
-        android:text="@string/to_do"
-        android:textSize="@dimen/default_txt_size"
-        app:layout_constrainedWidth="true"
+    <ImageView
+        android:id="@+id/frag_re_list_item_img_photo"
+        android:layout_width="@dimen/re_photo_size"
+        android:layout_height="@dimen/re_photo_size"
+        android:contentDescription="@string/txt_photos"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_no_photo"/>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frag_re_list_item_cl_description"
+        android:layout_width="@dimen/app_zero_dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/frag_re_list_item_img_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/frag_re_list_item_img_photo"
+        app:layout_constraintBottom_toBottomOf="@id/frag_re_list_item_img_photo"
+        android:background="@color/backgroundPrimary">
+        <TextView
+            android:id="@+id/item_type"
+            style="@style/ReTheme.List.TxtView"
+            android:text="House"
+            android:textSize="@dimen/default_txt_size_large"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_city"
+            style="@style/ReTheme.List.TxtView"
+            android:text="Charenton-Le-Pont"
+            android:textSize="@dimen/default_txt_size_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_type" />
+
+        <TextView
+            android:id="@+id/item_price"
+            style="@style/ReTheme.List.TxtView"
+            android:text="$99,999,000"
+            android:textColor="@color/colorSecondaryDark"
+            android:textSize="@dimen/default_txt_size_extra_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_city"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/item_sold"
+            style="@style/ReTheme.List.TxtView"
+            android:layout_marginBottom="@dimen/default_margin_bottom"
+            android:text="@string/txt_sold"
+            android:textColor="@color/colorSecondaryOld"
+            android:textStyle="bold|italic"
+            android:textAlignment="viewEnd"
+            android:textSize="@dimen/re_sold_txt_size"
+            android:paddingEnd="@dimen/re_sold_padding_end"
+            android:paddingStart="@dimen/default_padding_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:elevation="4dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

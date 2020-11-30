@@ -32,13 +32,14 @@
 
         <CheckBox
             android:id="@+id/frag_re_add_edit_cb_sold"
-            style="@style/ReTheme.CheckBox"
-            android:layout_width="wrap_content"
+            style="@style/ReTheme.CheckBox.Sold"
+            android:layout_width="@dimen/app_zero_dp"
             android:layout_height="wrap_content"
             android:text="@string/txt_sold_date"
             app:layout_constraintTop_toTopOf="@+id/frag_re_add_edit_et_sold_date"
             app:layout_constraintBottom_toBottomOf="@+id/frag_re_add_edit_et_sold_date"
             app:layout_constraintEnd_toStartOf="@+id/frag_re_add_edit_et_sold_date"
+            app:layout_constraintStart_toEndOf="@+id/frag_re_add_edit_et_market_date"
             />
 
         <EditText
