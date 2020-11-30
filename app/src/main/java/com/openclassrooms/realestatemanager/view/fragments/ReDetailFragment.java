@@ -3,37 +3,66 @@ package com.openclassrooms.realestatemanager.view.fragments;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReDetailBinding;
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.view.adapters.DetailPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReDetailViewModel;
 
-public class ReDetailFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
 
     private static final String TAG = "REDetailFragment";
     private FragmentReDetailBinding mBinding;
-
+    private DetailPhotoAdapter mAdapter;
     private View mFragView;
     private ReDetailViewModel mViewModel;
-
+    private Context mContext;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        mBinding = FragmentReDetailBinding.inflate(inflater, container, false);
+    protected int getMenuAttached() { return R.menu.menu_search; }
+
+    @Override
+    protected int getFragmentLayout() { return R.layout.fragment_re_detail; }
+
+    @Override
+    protected void configureDesign(FragmentReDetailBinding pBinding) {
+        mBinding = pBinding;
         mFragView = mBinding.getRoot();
-        return mFragView;
+        mContext = getContext();
+        initRecyclerView();
     }
 
+    private void initRecyclerView() {
+        mAdapter = new DetailPhotoAdapter();
+        mBinding.fragReDetRvPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
+        mBinding.fragReDetRvPhoto.setAdapter(mAdapter);
+        initPhotoList();
+    }
+
+    private void initPhotoList() {
+        List<String> lPhotoList = new ArrayList<>();
+        lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14Gh7GajhYVm2T1esN8y8XZF7Iz6HzjC0ugJkk2dN7g=s96-c");
+        lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14Gj0Y3MR2L_u0rFtMCji9r5CmQzR5PDKlZkB9zc9");
+        lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14GgOP8seJeI1oZImU6EZHTL3WSJtWcUOMDzMvel07w=s96-c");
+        lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14Gj0Y3MR2L_u0rFtMCji9r5CmQzR5PDKlZkB9zc9");
+        lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14GgOP8seJeI1oZImU6EZHTL3WSJtWcUOMDzMvel07w=s96-c");
+        lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14Gj0Y3MR2L_u0rFtMCji9r5CmQzR5PDKlZkB9zc9");
+        mAdapter.setPhotoList(lPhotoList);
+    }
     @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

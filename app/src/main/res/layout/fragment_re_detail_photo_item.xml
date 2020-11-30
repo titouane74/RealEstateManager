@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/frag_re_det_img_photo"
+        android:layout_width="@dimen/re_add_edit_photo_size_large"
+        android:layout_height="@dimen/re_add_edit_photo_size_large"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/txt_photos"
+        app:srcCompat="@drawable/ic_no_photo_48"/>
+
+    <TextView
+        android:id="@+id/frag_re_det_tv_photo"
+        android:layout_width="@dimen/re_add_edit_photo_size_large"
+        android:layout_height="wrap_content"
+        android:lines="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frag_re_det_img_photo"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
