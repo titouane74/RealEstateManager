@@ -1,12 +1,16 @@
 package com.openclassrooms.realestatemanager.view.adapters;
 
+import android.app.Activity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListItemBinding;
 
 import java.util.ArrayList;
@@ -20,6 +24,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
     private static final String TAG = "TAG_ReListAdapter";
     private List<String> mReList = new ArrayList<>();
     private FragmentReListItemBinding mBinding;
+    private NavController mNavController;
 
     public void setReList(List<String> pReList) {
         mReList = pReList;
@@ -30,12 +35,16 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
     public ReListAdapter.ReListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater lLayoutInflater = LayoutInflater.from(parent.getContext());
         mBinding = FragmentReListItemBinding.inflate(lLayoutInflater, parent, false);
+        mNavController = Navigation.findNavController((Activity) parent.getContext(), R.id.nav_host_fragment);
         return new ReListAdapter.ReListHolder(mBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReListHolder holder, int position) {
-        holder.bindView(mReList.get(position));
+    public void onBindViewHolder(@NonNull ReListHolder pHolder, int position) {
+        pHolder.bindView(mReList.get(position));
+        pHolder.itemView.setOnClickListener(v -> {
+            mNavController.navigate(R.id.action_nav_re_list_to_nav_re_detail);
+        });
     }
 
     @Override
@@ -54,6 +63,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         public ReListHolder(@NonNull FragmentReListItemBinding pBindingHolder) {
             super(pBindingHolder.getRoot());
             mBindingHolder = pBindingHolder;
+
         }
 
         public void bindView(String pPhotoUrl) {
