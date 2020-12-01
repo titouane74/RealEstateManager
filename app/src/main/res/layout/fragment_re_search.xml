@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lay_frag_re_search"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".view.fragments.ReSearchFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/default_padding">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/center_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/re_search_center_gl" />
+        <!-- STATUS -->
+        <ImageView
+            android:id="@+id/frag_re_search_img_status"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_tv_txt_status"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/frag_re_search_tv_txt_status"
+            app:srcCompat="@drawable/ic_status" />
+
+        <TextView
+            android:id="@+id/frag_re_search_tv_txt_status"
+            style="@style/ReTheme.Detail.TxtView"
+            android:text="@string/txt_status"
+            app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_status"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/frag_re_search_cb_sold"
+            style="@style/ReTheme.CheckBox.Sold"
+            android:layout_width="@dimen/app_zero_dp"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_sold"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_tv_txt_status"
+            app:layout_constraintStart_toStartOf="@id/center_guideline"
+            app:layout_constraintTop_toTopOf="@+id/frag_re_search_tv_txt_status" />
+
+        <!-- ON MARKET DATE : >= -->
+        <ImageView
+            android:id="@+id/frag_re_search_img_market_date"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_et_market_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/frag_re_search_et_market_date"
+            app:srcCompat="@drawable/ic_calendar" />
+
+        <EditText
+            android:id="@+id/frag_re_search_et_market_date"
+            style="@style/ReTheme.EditTxt"
+            android:focusable="false"
+            android:hint="@string/txt_on_market_date"
+            android:importantForAutofill="no"
+            android:inputType="date"
+            app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_market_date"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_tv_txt_status"
+            app:layout_constraintWidth_percent="0.28" />
+
+        <!-- SOLD ON DATE >= -->
+        <ImageView
+            android:id="@+id/frag_re_search_img_sold_date"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_et_sold_date"
+            app:layout_constraintStart_toStartOf="@id/center_guideline"
+            app:layout_constraintTop_toTopOf="@+id/frag_re_search_et_sold_date"
+            app:srcCompat="@drawable/ic_calendar" />
+
+        <EditText
+            android:id="@+id/frag_re_search_et_sold_date"
+            style="@style/ReTheme.EditTxt"
+            android:focusable="false"
+            android:hint="@string/txt_sold_date"
+            android:importantForAutofill="no"
+            android:inputType="date"
+            app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_sold_date"
+            app:layout_constraintTop_toBottomOf="@id/frag_re_search_tv_txt_status"
+            app:layout_constraintWidth_percent="0.28" />
+        <!-- TYPE : SPINNER -->
+        <ImageView
+            android:id="@+id/frag_re_search_img_type"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/txt_type"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_spin_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/frag_re_search_spin_type"
+            app:srcCompat="@drawable/ic_type" />
+
+        <Spinner
+            android:id="@+id/frag_re_search_spin_type"
+            style="@style/ReTheme.Spinner"
+            android:layout_marginTop="@dimen/default_margin_top"
+            android:layout_marginEnd="@dimen/default_margin_end"
+            android:prompt="@string/txt_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_type"
+            app:layout_constraintTop_toBottomOf="@id/frag_re_search_et_sold_date" />
+
+        <!-- AREA : MIN - MAX-->
+        <ImageView
+            android:id="@+id/frag_re_search_img_area"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_et_area_min"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/frag_re_search_et_area_min"
+            app:srcCompat="@drawable/ic_area" />
+
+        <EditText
+            android:id="@+id/frag_re_search_et_area_min"
+            style="@style/ReTheme.EditTxt"
+            android:hint="@string/txt_area_min"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_area"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_type"
+            app:layout_constraintWidth_percent="0.37" />
+
+        <EditText
+            android:id="@+id/frag_re_search_et_area_max"
+            style="@style/ReTheme.EditTxt"
+            android:hint="@string/txt_area_max"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="@id/center_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_type"
+            app:layout_constraintWidth_percent="0.37" />
+        <!-- PRICE : MIN - MAX -->
+        <ImageView
+            android:id="@+id/frag_re_search_img_price"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_et_price_min"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/frag_re_search_et_price_min"
+            app:srcCompat="@drawable/ic_price" />
+
+        <EditText
+            android:id="@+id/frag_re_search_et_price_min"
+            style="@style/ReTheme.EditTxt"
+            android:hint="@string/txt_price_min"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_price"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_et_area_min"
+            app:layout_constraintWidth_percent="0.37" />
+
+        <EditText
+            android:id="@+id/frag_re_search_et_price_max"
+            style="@style/ReTheme.EditTxt"
+            android:hint="@string/txt_price_max"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="@id/center_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_et_area_min"
+            app:layout_constraintWidth_percent="0.37" />
+
+        <!-- NUMBERS -->
+        <TextView
+            android:id="@+id/frag_re_search_tv_txt_number_of"
+            style="@style/ReTheme.Detail.TxtView"
+            android:text="@string/txt_number_of"
+            app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_status"
+            app:layout_constraintTop_toBottomOf="@id/frag_re_search_et_price_min" />
+        <!-- NUMBER OF PHOTO >= -->
+        <ImageView
+            android:id="@+id/frag_re_search_img_photo"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintBottom_toBottomOf="@id/frag_re_search_spin_nb_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/frag_re_search_spin_nb_photo"
+            app:srcCompat="@drawable/ic_photo" />
+
+        <Spinner
+            android:id="@+id/frag_re_search_spin_nb_photo"
+            style="@style/ReTheme.SpinnerRoomPhoto"
+            android:layout_marginEnd="@dimen/default_margin_end"
+            android:prompt="@string/txt_photos"
+            app:layout_constraintStart_toEndOf="@id/frag_re_search_img_photo"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_tv_txt_number_of" />
+
+        <!-- ROOM : SPINNER -->
+        <ImageView
+            android:id="@+id/frag_re_search_img_room"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_spin_rooms"
+            app:layout_constraintStart_toStartOf="@id/center_guideline"
+            app:layout_constraintTop_toTopOf="@+id/frag_re_search_spin_rooms"
+            app:srcCompat="@drawable/ic_room" />
+
+        <Spinner
+            android:id="@+id/frag_re_search_spin_rooms"
+            style="@style/ReTheme.SpinnerRoomPhoto"
+            android:layout_marginEnd="@dimen/default_margin_end"
+            android:prompt="@string/txt_rooms"
+            app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_room"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_tv_txt_number_of" />
+        <!-- BEDROOM : SPINNER -->
+        <ImageView
+            android:id="@+id/frag_re_search_img_bedroom"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_spin_bedrooms"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/frag_re_search_spin_bedrooms"
+            app:srcCompat="@drawable/ic_bedroom" />
+
+        <Spinner
+            android:id="@+id/frag_re_search_spin_bedrooms"
+            style="@style/ReTheme.SpinnerRoomPhoto"
+            android:layout_marginEnd="@dimen/default_margin_end"
+            android:prompt="@string/txt_bedrooms"
+            app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_bedroom"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_rooms" />
+
+        <!-- BATHROOM : SPINNER  -->
+        <ImageView
+            android:id="@+id/frag_re_search_img_bathroom"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_spin_bathrooms"
+            app:layout_constraintStart_toStartOf="@id/center_guideline"
+            app:layout_constraintTop_toTopOf="@+id/frag_re_search_spin_bathrooms"
+            app:srcCompat="@drawable/ic_bathroom" />
+
+        <Spinner
+            android:id="@+id/frag_re_search_spin_bathrooms"
+            style="@style/ReTheme.SpinnerRoomPhoto"
+            android:layout_marginEnd="@dimen/default_margin_end"
+            android:prompt="@string/txt_bathrooms"
+            app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_bathroom"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_rooms" />
+
+        <!-- LOCATION - CITY -->
+        <ImageView
+            android:id="@+id/frag_re_search_img_location"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintBottom_toBottomOf="@id/frag_re_search_et_city"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/frag_re_search_et_city"
+            app:srcCompat="@drawable/ic_location" />
+
+        <EditText
+            android:id="@+id/frag_re_search_et_city"
+            style="@style/ReTheme.EditTxt"
+            android:hint="@string/txt_city"
+            android:importantForAutofill="no"
+            android:inputType="textPostalAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/frag_re_search_img_location"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_bathrooms" />
+
+        <!-- LOCATION - COUNTRY : SPINNER  -->
+        <ImageView
+            android:id="@+id/frag_re_search_img_location_country"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintBottom_toBottomOf="@id/frag_re_search_spin_country"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/frag_re_search_spin_country"
+            app:srcCompat="@drawable/ic_location" />
+
+        <Spinner
+            android:id="@+id/frag_re_search_spin_country"
+            style="@style/ReTheme.Spinner"
+            android:layout_marginEnd="@dimen/default_margin_end"
+            android:prompt="@string/txt_country"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/frag_re_search_img_location_country"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_et_city" />
+
+        <!-- POI : CHECK BOX -->
+        <ImageView
+            android:id="@+id/frag_re_search_img_poi"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_re_search_spin_country"
+            app:srcCompat="@drawable/ic_poi" />
+
+        <TextView
+            android:id="@+id/frag_re_search_tv_poi"
+            style="@style/ReTheme.Detail.TxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_poi"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_img_poi"
+            app:layout_constraintStart_toEndOf="@id/frag_re_search_img_poi"
+            app:layout_constraintTop_toTopOf="@id/frag_re_search_img_poi" />
+
+        <CheckBox
+            android:id="@+id/frag_re_search_poi_bank"
+            style="@style/ReTheme.CheckBox"
+            android:text="@string/poi_bank"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_tv_poi" />
+
+        <CheckBox
+            android:id="@+id/frag_re_search_poi_food"
+            style="@style/ReTheme.CheckBox"
+            android:text="@string/poi_food"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/frag_re_search_poi_bank"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_tv_poi" />
+
+        <CheckBox
+            android:id="@+id/frag_re_search_poi_health"
+            style="@style/ReTheme.CheckBox"
+            android:text="@string/poi_health"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_bank" />
+
+        <CheckBox
+            android:id="@+id/frag_re_search_poi_restaurant"
+            style="@style/ReTheme.CheckBox"
+            android:text="@string/poi_restaurant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/frag_re_search_poi_bank"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_food" />
+
+        <CheckBox
+            android:id="@+id/frag_re_search_poi_school"
+            style="@style/ReTheme.CheckBox"
+            android:text="@string/poi_school"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_health" />
+
+        <CheckBox
+            android:id="@+id/frag_re_search_poi_store"
+            style="@style/ReTheme.CheckBox"
+            android:text="@string/poi_store"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/frag_re_search_poi_bank"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_health" />
+
+        <CheckBox
+            android:id="@+id/frag_re_search_poi_subway"
+            style="@style/ReTheme.CheckBox"
+            android:text="@string/poi_subway"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_school" />
+
+        <CheckBox
+            android:id="@+id/frag_re_search_poi_park"
+            style="@style/ReTheme.CheckBox"
+            android:text="@string/poi_park"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/frag_re_search_poi_bank"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_school" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

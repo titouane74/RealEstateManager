@@ -15,7 +15,7 @@
     <dimen name="default_margin_vertical">10dp</dimen>
     <dimen name="default_margin_top">10dp</dimen>
     <dimen name="default_margin_bottom">10dp</dimen>
-    <dimen name="default_margin_start">10dp</dimen>
+    <dimen name="default_margin_start">6dp</dimen>
     <dimen name="default_margin_end">10dp</dimen>
     <dimen name="default_margin_start_large">30dp</dimen>
 
@@ -45,6 +45,9 @@
     <dimen name="re_det_right_gl">0.64</dimen>
     <dimen name="re_det_padding_bottom">10dp</dimen>
 
+    <!-- REAL ESTATE SEARCH -->
+    <dimen name="re_search_center_gl">0.54</dimen>
+
     <!-- REAL ESTATE ADD EDIT -->
     <dimen name="re_add_edit_icon_edit_txt_height">24dp</dimen>
     <dimen name="re_add_edit_padding_btn">8dp</dimen>
@@ -57,7 +60,7 @@
     <dimen name="re_add_edit_photo_margin_end">24dp</dimen>
 
     <!-- SPINNER -->
-    <dimen name="default_spinner_height">30dp</dimen>
+    <dimen name="default_spinner_height">28dp</dimen>
     <dimen name="default_spinner_width_large">200dp</dimen>
     <dimen name="default_spinner_width_small">60dp</dimen>
     <dimen name="default_spinner_txt_size">14sp</dimen>

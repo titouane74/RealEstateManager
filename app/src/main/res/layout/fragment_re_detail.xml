@@ -245,28 +245,29 @@
                     app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_txt_price"
                     app:layout_constraintWidth_percent="0.37" />
 
+                <TextView
+                    android:id="@+id/frag_re_det_tv_txt_nb_rooms"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_number_of"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_room"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_room" />
+
                 <ImageView
                     android:id="@+id/frag_re_det_img_room"
                     style="@style/ReTheme.ImgView"
                     android:contentDescription="@string/default_img_description"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_bedroom"
                     app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_area"
                     app:srcCompat="@drawable/ic_room" />
-
-                <TextView
-                    android:id="@+id/frag_re_det_tv_txt_nb_rooms"
-                    style="@style/ReTheme.Detail.TxtView"
-                    android:text="@string/txt_long_rooms"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_room"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_room"
-                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_room" />
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_nb_rooms"
                     style="@style/ReTheme.Detail.TxtView"
                     android:text="@string/txt_rooms"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_room"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_tv_txt_nb_rooms"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_room"
                     app:layout_constraintTop_toTopOf="@id/frag_re_det_img_room" />
 
                 <ImageView

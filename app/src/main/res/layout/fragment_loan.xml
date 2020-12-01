@@ -100,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin_bottom">
-
+<!--
             <Button
                 android:id="@+id/frag_loan_btn_calculate"
                 style="@style/ReTheme.Button"
@@ -111,16 +111,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/frag_loan_tv_monthly_payment_result"
-                style="@style/ReTheme.Loan.TxtView"
-                android:hint="@string/txt_monthly_payment"
-                android:textSize="@dimen/default_txt_size_extra_large"
-                android:textStyle="bold"
+TextView constraint
                 app:layout_constraintBottom_toBottomOf="@id/frag_loan_btn_calculate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/frag_loan_btn_calculate"
                 app:layout_constraintWidth_percent="@dimen/loan_et_width_percent_result" />
+
+
+-->
+            <TextView
+                android:id="@+id/frag_loan_tv_monthly_payment_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txt_monthly_payment"
+                android:textSize="@dimen/default_txt_size_extra_large"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textColorHint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

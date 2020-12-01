@@ -78,7 +78,7 @@
 
         <Spinner
             android:id="@+id/frag_re_add_edit_spin_rooms"
-            style="@style/ReTheme.SpinnerRoom"
+            style="@style/ReTheme.SpinnerRoomPhoto"
             android:layout_marginEnd="@dimen/default_margin_end"
             android:prompt="@string/txt_rooms"
             app:layout_constraintStart_toEndOf="@+id/frag_re_add_edit_img_room"
@@ -96,7 +96,7 @@
 
         <Spinner
             android:id="@+id/frag_re_add_spin_bedrooms"
-            style="@style/ReTheme.SpinnerRoom"
+            style="@style/ReTheme.SpinnerRoomPhoto"
             android:layout_marginEnd="@dimen/default_margin_end"
             android:prompt="@string/txt_bedrooms"
             app:layout_constraintStart_toEndOf="@+id/frag_re_add_edit_img_bedroom"
@@ -113,7 +113,7 @@
 
         <Spinner
             android:id="@+id/frag_re_add_spin_bathrooms"
-            style="@style/ReTheme.SpinnerRoom"
+            style="@style/ReTheme.SpinnerRoomPhoto"
             android:layout_marginEnd="@dimen/default_margin_end"
             android:prompt="@string/txt_bathrooms"
             app:layout_constraintStart_toEndOf="@+id/frag_re_add_edit_img_bathroom"

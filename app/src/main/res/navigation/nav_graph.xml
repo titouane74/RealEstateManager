@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_reListFragment_to_loanFragment"
             app:destination="@id/loanFragment" />
+        <action
+            android:id="@+id/action_reListFragment_to_reSearchFragment"
+            app:destination="@id/reSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/reDetailFragment"
@@ -55,5 +58,10 @@
         android:name="com.openclassrooms.realestatemanager.view.fragments.LoanFragment"
         android:label="@string/txt_loan_simulator"
         tools:layout="@layout/fragment_loan" />
+    <fragment
+        android:id="@+id/reSearchFragment"
+        android:name="com.openclassrooms.realestatemanager.view.fragments.ReSearchFragment"
+        android:label="@string/default_txt_search"
+        tools:layout="@layout/fragment_re_search" />
 
 </navigation>

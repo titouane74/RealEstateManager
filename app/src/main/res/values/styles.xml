@@ -80,12 +80,12 @@
         <item name="android:background">@color/backgroundPrimary</item>
         <item name="cardCornerRadius">@dimen/default_card_corner_radius</item>
     </style>
-    <style name="ReTheme.SpinnerRoom" parent="ReTheme">
+    <style name="ReTheme.SpinnerRoomPhoto" parent="ReTheme">
         <item name="android:layout_width">@dimen/app_zero_dp</item>
         <item name="android:layout_height">@dimen/default_spinner_height</item>
         <item name="android:textSize">@dimen/default_txt_size</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
-        <item name="layout_constraintWidth_percent">0.21</item>
+        <item name="layout_constraintWidth_percent">0.32</item>
         <item name="android:layout_marginTop">@dimen/default_spinner_margin_top</item>
 
     </style>
@@ -100,17 +100,11 @@
         <item name="android:checked">false</item>
         <item name="android:layout_marginStart">@dimen/default_margin_start</item>
         <item name="android:layout_marginEnd">@dimen/default_margin_end</item>
-        <item name="layout_constraintWidth_percent">0.5</item>
-        <item name="android:layout_width">@dimen/app_zero_dp</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
-    <style name="ReTheme.Detail.CheckBox" parent="ReTheme">
-        <item name="android:checked">false</item>
-        <item name="android:layout_marginStart">@dimen/default_margin_start</item>
-        <item name="android:layout_marginEnd">@dimen/default_margin_end</item>
-        <item name="layout_constraintWidth_percent">0.5</item>
+        <item name="layout_constraintWidth_percent">0.46</item>
         <item name="android:layout_width">@dimen/app_zero_dp</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="ReTheme.Detail.CheckBox" parent="ReTheme.CheckBox">
         <item name="android:clickable">false</item>
     </style>
     <style name="ReTheme.CheckBox.Sold" parent="ReTheme.CheckBox">

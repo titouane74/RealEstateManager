@@ -38,6 +38,7 @@ abstract class BaseFragment<T extends ViewBinding> extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @SuppressWarnings("unchecked")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

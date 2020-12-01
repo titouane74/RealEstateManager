@@ -14,6 +14,7 @@
     <string name="default_txt_add">Add</string>
     <string name="default_txt_edit">Edit</string>
     <string name="default_txt_save">Save</string>
+    <string name="default_txt_confirm">Confirm</string>
 
     <!-- REAL ESTATE VOCABULARY -->
     <string name="txt_location">Location</string>
@@ -36,12 +37,16 @@
     <string name="txt_long_bathrooms">Number of Bathrooms</string>
     <string name="txt_description">Description</string>
     <string name="txt_price">Price</string>
+    <string name="txt_price_min">Price min</string>
+    <string name="txt_price_max">Price max</string>
     <string name="txt_poi">Points of interest</string>
     <string name="txt_photos">Photos</string>
     <string name="txt_photo_description">Photo description</string>
     <string name="txt_take_photo">Take photo</string>
     <string name="txt_add_photo">Add photo</string>
     <string name="txt_area">Area</string>
+    <string name="txt_area_min">Area min</string>
+    <string name="txt_area_max">Area max</string>
     <string name="txt_sold">Sold</string>
     <string name="txt_sold_date">Sold on</string>
     <string name="txt_real_estate">Real estate</string>
@@ -55,6 +60,7 @@
     <string name="txt_add_agent">Add new agent</string>
     <string name="txt_edit_re">Edit real estate</string>
     <string name="txt_edit_agent">Edit agent</string>
+    <string name="txt_number_of">Number of</string>
 
     <!-- LOAN SIMULATOR -->
     <string name="txt_loan_simulator">Loan simulator</string>
@@ -66,7 +72,7 @@
 
 
     <!-- SPINNERS -->
-    <string name="spinners_select">--Select--</string>
+    <string name="spinners_select_type">--Select a type--</string>
     <string name="spinners_select_country">--Select a country--</string>
 
     <!-- POI -->
