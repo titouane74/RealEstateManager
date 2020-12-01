@@ -14,7 +14,7 @@
         tools:context=".view.fragments.ReDetailFragment"
         android:paddingBottom="@dimen/re_det_padding_bottom">
 
-        <!--PHOTOS-->
+        <!-- PHOTO -->
         <androidx.cardview.widget.CardView
             android:id="@+id/frag_re_det_cardv_photo"
             android:layout_width="match_parent"
@@ -42,8 +42,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
-
-        <!--DESCRIPTION-->
+        <!-- DESCRIPTION -->
         <androidx.cardview.widget.CardView
             android:id="@+id/frag_re_det_cardv_description"
             style="@style/ReTheme.CardView"
@@ -77,12 +76,172 @@
                     android:text="@string/txt_description"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_description_title" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- INFORMATION -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/frag_re_det_cardv_information"
+            style="@style/ReTheme.CardView"
+            android:layout_width="@dimen/app_zero_dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/frag_re_det_cardv_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/frag_re_det_cardv_poi"
+            app:layout_constraintWidth_percent="0.5">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/frag_re_det_img_price"
+                    style="@style/ReTheme.ImgView"
+                    android:contentDescription="@string/default_img_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_price" />
+
+                <TextView
+                    android:id="@+id/frag_re_det_tv_txt_price"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_price"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_price"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_price"
+                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_price" />
+                <TextView
+                    android:id="@+id/frag_re_det_tv_price"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_price"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_price"
+                    app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_txt_price"
+                    android:textSize="@dimen/default_txt_size_extra_large"/>
+
+                <ImageView
+                    android:id="@+id/frag_re_det_img_type"
+                    style="@style/ReTheme.ImgView"
+                    android:contentDescription="@string/default_img_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_price"
+                    app:srcCompat="@drawable/ic_type" />
+
+                <TextView
+                    android:id="@+id/frag_re_det_tv_txt_type"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_type"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_type"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_type"
+                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_type" />
+
+                <TextView
+                    android:id="@+id/frag_re_det_tv_type"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_type"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_type"
+                    app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_txt_type"
+                    android:textSize="@dimen/default_txt_size_large"/>
+
+                <ImageView
+                    android:id="@+id/frag_re_det_img_area"
+                    style="@style/ReTheme.ImgView"
+                    android:contentDescription="@string/default_img_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_type"
+                    app:srcCompat="@drawable/ic_area" />
+
+                <TextView
+                    android:id="@+id/frag_re_det_tv_txt_area"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_area"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_area"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_area"
+                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_area"
+                    app:layout_constraintWidth_percent="0.37" />
+                <TextView
+                    android:id="@+id/frag_re_det_tv_area"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_area"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_area"
+                    app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_txt_area"
+                    app:layout_constraintWidth_percent="0.37" />
+
+                <ImageView
+                    android:id="@+id/frag_re_det_img_room"
+                    style="@style/ReTheme.ImgView"
+                    android:contentDescription="@string/default_img_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_area"
+                    app:srcCompat="@drawable/ic_room" />
+
+                <TextView
+                    android:id="@+id/frag_re_det_tv_txt_nb_rooms"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_long_rooms"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_room"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_room"
+                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_room" />
+
+                <TextView
+                    android:id="@+id/frag_re_det_tv_nb_rooms"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_rooms"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_room"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_tv_txt_nb_rooms"
+                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_room" />
+
+                <ImageView
+                    android:id="@+id/frag_re_det_img_bedroom"
+                    style="@style/ReTheme.ImgView"
+                    android:contentDescription="@string/default_img_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_nb_rooms"
+                    app:srcCompat="@drawable/ic_bedroom" />
+                <TextView
+                    android:id="@+id/frag_re_det_tv_txt_nb_bedrooms"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_long_bedrooms"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_bedroom"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_bedroom"
+                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_bedroom" />
+
+                <TextView
+                    android:id="@+id/frag_re_det_tv_nb_bedrooms"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_bedrooms"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_bedroom"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_tv_txt_nb_bedrooms"
+                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_bedroom" />
+
+                <ImageView
+                    android:id="@+id/frag_re_det_img_bathroom"
+                    style="@style/ReTheme.ImgView"
+                    android:contentDescription="@string/default_img_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_nb_bedrooms"
+                    app:srcCompat="@drawable/ic_bathroom" />
+                <TextView
+                    android:id="@+id/frag_re_det_tv_txt_nb_bathrooms"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_long_bathrooms"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_bathroom"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_bathroom"
+                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_bathroom" />
+                <TextView
+                    android:id="@+id/frag_re_det_tv_nb_bathrooms"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_bathrooms"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_bathroom"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_det_tv_txt_nb_bathrooms"
+                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_bathroom" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
-        <!--STATUS-->
+        <!-- STATUS -->
+<!--
         <androidx.cardview.widget.CardView
             android:id="@+id/frag_re_det_cardv_status"
             style="@style/ReTheme.CardView"
@@ -90,6 +249,68 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/frag_re_det_cardv_description">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/frag_re_det_img_market_date"
+                    style="@style/ReTheme.ImgView"
+                    android:contentDescription="@string/default_img_description"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_tv_market_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/frag_re_det_tv_market_date"
+                    app:srcCompat="@drawable/ic_calendar" />
+
+
+                <TextView
+                    android:id="@+id/frag_re_det_tv_market_date"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:text="@string/txt_on_market_date"
+                    app:layout_constraintStart_toEndOf="@+id/frag_re_det_img_market_date"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/frag_re_det_tv_sold_date"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:importantForAutofill="no"
+                    android:text="@string/txt_sold_date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.4" />
+
+                <ImageView
+                    android:id="@+id/frag_re_det_img_agent"
+                    style="@style/ReTheme.ImgView"
+                    android:contentDescription="@string/default_img_description"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_tv_agent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/frag_re_det_tv_agent"
+                    app:srcCompat="@drawable/ic_agent" />
+
+                <TextView
+                    android:id="@+id/frag_re_det_tv_agent"
+                    style="@style/ReTheme.Detail.TxtView"
+                    android:layout_marginBottom="@dimen/default_margin_bottom"
+                    android:importantForAutofill="no"
+                    android:text="@string/txt_agent_last_name"
+                    app:layout_constraintStart_toEndOf="@+id/frag_re_det_img_agent"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_sold_date"
+                    app:layout_constraintWidth_percent="0.42" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/frag_re_det_cardv_status"
+            style="@style/ReTheme.CardView"
+            android:layout_width="@dimen/app_zero_dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/frag_re_det_cardv_information"
+            app:layout_constraintTop_toBottomOf="@id/frag_re_det_cardv_description"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -161,160 +382,16 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!--INFORMATION-->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/frag_re_det_cardv_information"
-            style="@style/ReTheme.CardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_det_cardv_status">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/frag_re_det_img_type"
-                    style="@style/ReTheme.ImgView"
-                    android:contentDescription="@string/default_img_description"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_type" />
-
-                <TextView
-                    android:id="@+id/frag_re_det_tv_txt_type"
-                    style="@style/ReTheme.Detail.TxtView"
-                    android:text="@string/txt_type"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_type"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_type"
-                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_type" />
-
-                <TextView
-                    android:id="@+id/frag_re_det_tv_type"
-                    style="@style/ReTheme.Detail.TxtView"
-                    android:text="@string/txt_type"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_type"
-                    app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_txt_type" />
-
-                <ImageView
-                    android:id="@+id/frag_re_det_img_area"
-                    style="@style/ReTheme.ImgView"
-                    android:contentDescription="@string/default_img_description"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_type"
-                    app:srcCompat="@drawable/ic_area" />
-
-                <TextView
-                    android:id="@+id/frag_re_det_tv_txt_area"
-                    style="@style/ReTheme.Detail.TxtView"
-                    android:text="@string/txt_area"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_area"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_area"
-                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_area"
-                    app:layout_constraintWidth_percent="0.37" />
-                <TextView
-                    android:id="@+id/frag_re_det_tv_area"
-                    style="@style/ReTheme.Detail.TxtView"
-                    android:text="@string/txt_area"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_area"
-                    app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_txt_area"
-                    app:layout_constraintWidth_percent="0.37" />
-
-                <ImageView
-                    android:id="@+id/frag_re_det_img_price"
-                    style="@style/ReTheme.ImgView"
-                    android:contentDescription="@string/default_img_description"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_area"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_type"
-                    app:srcCompat="@drawable/ic_price" />
-
-                <TextView
-                    android:id="@+id/frag_re_det_tv_txt_price"
-                    style="@style/ReTheme.Detail.TxtView"
-                    android:text="@string/txt_price"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_price"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_price"
-                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_price"
-                    app:layout_constraintWidth_percent="0.37" />
-                <TextView
-                    android:id="@+id/frag_re_det_tv_price"
-                    style="@style/ReTheme.Detail.TxtView"
-                    android:text="@string/txt_price"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_price"
-                    app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_txt_price"
-                    app:layout_constraintWidth_percent="0.37" />
-
-                <ImageView
-                    android:id="@+id/frag_re_det_img_room"
-                    style="@style/ReTheme.ImgView"
-                    android:contentDescription="@string/default_img_description"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_area"
-                    app:srcCompat="@drawable/ic_room" />
-
-                <TextView
-                    android:id="@+id/frag_re_det_tv_txt_nb_rooms"
-                    style="@style/ReTheme.Detail.TxtView"
-                    android:text="@string/txt_long_rooms"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_room"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_room"
-                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_room" />
-
-                <TextView
-                    android:id="@+id/frag_re_det_tv_nb_rooms"
-                    style="@style/ReTheme.Detail.TxtView"
-                    android:text="@string/txt_rooms"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_room"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_tv_txt_nb_rooms"
-                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_room" />
-
-                <ImageView
-                    android:id="@+id/frag_re_det_img_bedroom"
-                    style="@style/ReTheme.ImgView"
-                    android:contentDescription="@string/default_img_description"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_nb_rooms"
-                    app:srcCompat="@drawable/ic_bedroom" />
-
-                <TextView
-                    android:id="@+id/frag_re_det_tv_nb_bedrooms"
-                    style="@style/ReTheme.Detail.TxtView"
-                    android:text="@string/txt_bedrooms"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_bedroom"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_bedroom"
-                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_bedroom" />
-
-                <ImageView
-                    android:id="@+id/frag_re_det_img_bathroom"
-                    style="@style/ReTheme.ImgView"
-                    android:contentDescription="@string/default_img_description"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_bedroom"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_nb_rooms"
-                    app:srcCompat="@drawable/ic_bathroom" />
-
-                <TextView
-                    android:id="@+id/frag_re_det_tv_nb_bathrooms"
-                    style="@style/ReTheme.Detail.TxtView"
-                    android:text="@string/txt_bathrooms"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_bathroom"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_det_img_bathroom"
-                    app:layout_constraintTop_toTopOf="@id/frag_re_det_img_bathroom"
-                    app:layout_constraintWidth_percent="0.37" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <!--POI-->
+        <!-- POI -->
         <androidx.cardview.widget.CardView
             android:id="@+id/frag_re_det_cardv_poi"
             style="@style/ReTheme.CardView"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/app_zero_dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_det_cardv_information">
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_det_cardv_status"
+            app:layout_constraintStart_toEndOf="@id/frag_re_det_cardv_information"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -403,8 +480,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
-
-        <!--LOCATION-->
+        <!-- LOCATION -->
         <androidx.cardview.widget.CardView
             android:id="@+id/frag_re_det_cardv_location"
             style="@style/ReTheme.CardView"

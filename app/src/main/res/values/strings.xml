@@ -31,6 +31,9 @@
     <string name="txt_rooms">Rooms</string>
     <string name="txt_bedrooms">Bedrooms</string>
     <string name="txt_bathrooms">Bathrooms</string>
+    <string name="txt_long_rooms">Number of rooms</string>
+    <string name="txt_long_bedrooms">Number of Bedrooms</string>
+    <string name="txt_long_bathrooms">Number of Bathrooms</string>
     <string name="txt_description">Description</string>
     <string name="txt_price">Price</string>
     <string name="txt_poi">Points of interest</string>

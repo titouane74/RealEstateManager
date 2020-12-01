@@ -110,7 +110,7 @@
         <item name="android:layout_marginEnd">@dimen/default_margin_end</item>
         <item name="layout_constraintWidth_percent">0.5</item>
         <item name="android:layout_width">@dimen/app_zero_dp</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:clickable">false</item>
     </style>
     <style name="ReTheme.CheckBox.Sold" parent="ReTheme.CheckBox">

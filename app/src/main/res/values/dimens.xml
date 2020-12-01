@@ -40,6 +40,11 @@
     <dimen name="re_sold_txt_size">44sp</dimen>
     <dimen name="re_sold_padding_end">18dp</dimen>
 
+    <!-- REAL ESTATE DETAIL -->
+    <dimen name="re_det_left_gl">0.34</dimen>
+    <dimen name="re_det_right_gl">0.64</dimen>
+    <dimen name="re_det_padding_bottom">10dp</dimen>
+
     <!-- REAL ESTATE ADD EDIT -->
     <dimen name="re_add_edit_icon_edit_txt_height">24dp</dimen>
     <dimen name="re_add_edit_padding_btn">8dp</dimen>
