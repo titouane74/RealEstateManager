@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/frag_re_search_tv_txt_status"
-            style="@style/ReTheme.Detail.TxtView"
+            style="@style/ReTheme.TxtView"
             android:text="@string/txt_status"
             app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_status"
             app:layout_constraintTop_toTopOf="parent" />
@@ -168,9 +168,9 @@
         <!-- NUMBERS -->
         <TextView
             android:id="@+id/frag_re_search_tv_txt_number_of"
-            style="@style/ReTheme.Detail.TxtView"
+            style="@style/ReTheme.TxtView"
             android:text="@string/txt_number_of"
-            app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_status"
+            app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_price"
             app:layout_constraintTop_toBottomOf="@id/frag_re_search_et_price_min" />
         <!-- NUMBER OF PHOTO >= -->
         <ImageView
@@ -283,83 +283,91 @@
             app:layout_constraintTop_toBottomOf="@+id/frag_re_search_et_city" />
 
         <!-- POI : CHECK BOX -->
-        <ImageView
-            android:id="@+id/frag_re_search_img_poi"
-            style="@style/ReTheme.ImgView"
-            android:contentDescription="@string/default_img_description"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/frag_re_search_spin_country"
-            app:srcCompat="@drawable/ic_poi" />
+            android:layout_marginTop="@dimen/default_margin_top"
+            >
 
-        <TextView
-            android:id="@+id/frag_re_search_tv_poi"
-            style="@style/ReTheme.Detail.TxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_poi"
-            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_img_poi"
-            app:layout_constraintStart_toEndOf="@id/frag_re_search_img_poi"
-            app:layout_constraintTop_toTopOf="@id/frag_re_search_img_poi" />
+            <ImageView
+                android:id="@+id/frag_re_search_img_poi"
+                style="@style/ReTheme.ImgView"
+                android:contentDescription="@string/default_img_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_poi" />
 
-        <CheckBox
-            android:id="@+id/frag_re_search_poi_bank"
-            style="@style/ReTheme.CheckBox"
-            android:text="@string/poi_bank"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_tv_poi" />
+            <TextView
+                android:id="@+id/frag_re_search_tv_poi"
+                style="@style/ReTheme.TxtView"
+                android:text="@string/txt_poi"
+                app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_img_poi"
+                app:layout_constraintStart_toEndOf="@id/frag_re_search_img_poi"
+                app:layout_constraintTop_toTopOf="@id/frag_re_search_img_poi" />
 
-        <CheckBox
-            android:id="@+id/frag_re_search_poi_food"
-            style="@style/ReTheme.CheckBox"
-            android:text="@string/poi_food"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/frag_re_search_poi_bank"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_tv_poi" />
+            <CheckBox
+                android:id="@+id/frag_re_search_poi_bank"
+                style="@style/ReTheme.CheckBox"
+                android:text="@string/poi_bank"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_search_img_poi" />
 
-        <CheckBox
-            android:id="@+id/frag_re_search_poi_health"
-            style="@style/ReTheme.CheckBox"
-            android:text="@string/poi_health"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_bank" />
+            <CheckBox
+                android:id="@+id/frag_re_search_poi_food"
+                style="@style/ReTheme.CheckBox"
+                android:text="@string/poi_food"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/frag_re_search_poi_bank"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_search_img_poi" />
 
-        <CheckBox
-            android:id="@+id/frag_re_search_poi_restaurant"
-            style="@style/ReTheme.CheckBox"
-            android:text="@string/poi_restaurant"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/frag_re_search_poi_bank"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_food" />
+            <CheckBox
+                android:id="@+id/frag_re_search_poi_health"
+                style="@style/ReTheme.CheckBox"
+                android:text="@string/poi_health"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_bank" />
 
-        <CheckBox
-            android:id="@+id/frag_re_search_poi_school"
-            style="@style/ReTheme.CheckBox"
-            android:text="@string/poi_school"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_health" />
+            <CheckBox
+                android:id="@+id/frag_re_search_poi_restaurant"
+                style="@style/ReTheme.CheckBox"
+                android:text="@string/poi_restaurant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/frag_re_search_poi_bank"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_food" />
 
-        <CheckBox
-            android:id="@+id/frag_re_search_poi_store"
-            style="@style/ReTheme.CheckBox"
-            android:text="@string/poi_store"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/frag_re_search_poi_bank"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_health" />
+            <CheckBox
+                android:id="@+id/frag_re_search_poi_school"
+                style="@style/ReTheme.CheckBox"
+                android:text="@string/poi_school"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_health" />
 
-        <CheckBox
-            android:id="@+id/frag_re_search_poi_subway"
-            style="@style/ReTheme.CheckBox"
-            android:text="@string/poi_subway"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_school" />
+            <CheckBox
+                android:id="@+id/frag_re_search_poi_store"
+                style="@style/ReTheme.CheckBox"
+                android:text="@string/poi_store"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/frag_re_search_poi_bank"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_health" />
 
-        <CheckBox
-            android:id="@+id/frag_re_search_poi_park"
-            style="@style/ReTheme.CheckBox"
-            android:text="@string/poi_park"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/frag_re_search_poi_bank"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_school" />
+            <CheckBox
+                android:id="@+id/frag_re_search_poi_subway"
+                style="@style/ReTheme.CheckBox"
+                android:text="@string/poi_subway"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_school" />
+
+            <CheckBox
+                android:id="@+id/frag_re_search_poi_park"
+                style="@style/ReTheme.CheckBox"
+                android:text="@string/poi_park"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/frag_re_search_poi_bank"
+                app:layout_constraintTop_toBottomOf="@+id/frag_re_search_poi_school" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

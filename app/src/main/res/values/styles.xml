@@ -27,16 +27,11 @@
     </style>
 
     <style name="ReTheme.TxtView" parent="ReTheme">
-        <item name="android:layout_margin">@dimen/re_add_edit_margin</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
-    <style name="ReTheme.Detail.TxtView" parent="ReTheme">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorOnSecondary</item>
-    </style>
+
     <style name="ReTheme.List.TxtView" parent="ReTheme">
         <item name="android:layout_margin">@dimen/app_zero_dp</item>
         <item name="android:layout_width">match_parent</item>
@@ -79,6 +74,10 @@
     <style name="ReTheme.CardView" parent="ReTheme">
         <item name="android:background">@color/backgroundPrimary</item>
         <item name="cardCornerRadius">@dimen/default_card_corner_radius</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
+    </style>
+    <style name="ReTheme.ConstraintLayout" parent="ReTheme">
+        <item name="android:padding">@dimen/default_padding</item>
     </style>
     <style name="ReTheme.SpinnerRoomPhoto" parent="ReTheme">
         <item name="android:layout_width">@dimen/app_zero_dp</item>
@@ -87,7 +86,6 @@
         <item name="android:textColor">@color/colorOnPrimary</item>
         <item name="layout_constraintWidth_percent">0.32</item>
         <item name="android:layout_marginTop">@dimen/default_spinner_margin_top</item>
-
     </style>
     <style name="ReTheme.Spinner" parent="ReTheme">
         <item name="android:layout_width">@dimen/app_zero_dp</item>
@@ -97,6 +95,7 @@
     </style>
 
     <style name="ReTheme.CheckBox" parent="ReTheme">
+        <item name="android:layout_margin">@dimen/app_zero_dp</item>
         <item name="android:checked">false</item>
         <item name="android:layout_marginStart">@dimen/default_margin_start</item>
         <item name="android:layout_marginEnd">@dimen/default_margin_end</item>
@@ -106,6 +105,7 @@
     </style>
     <style name="ReTheme.Detail.CheckBox" parent="ReTheme.CheckBox">
         <item name="android:clickable">false</item>
+        <item name="android:layout_margin">@dimen/app_zero_dp</item>
     </style>
     <style name="ReTheme.CheckBox.Sold" parent="ReTheme.CheckBox">
         <item name="android:checked">false</item>

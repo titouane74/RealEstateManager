@@ -67,12 +67,20 @@
             app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_spin_type"
             app:layout_constraintWidth_percent="0.37"/>
 
+        <TextView
+            android:id="@+id/frag_re_det_tv_txt_nb_rooms"
+            style="@style/ReTheme.TxtView"
+            android:text="@string/txt_number_of"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_add_edit_img_room"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/frag_re_add_edit_img_room" />
+
         <ImageView
             android:id="@+id/frag_re_add_edit_img_room"
             style="@style/ReTheme.ImgView"
             android:contentDescription="@string/default_img_description"
             app:layout_constraintBottom_toBottomOf="@+id/frag_re_add_edit_spin_rooms"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/frag_re_add_edit_img_price"
             app:layout_constraintTop_toTopOf="@+id/frag_re_add_edit_spin_rooms"
             app:srcCompat="@drawable/ic_room" />
 
@@ -90,7 +98,7 @@
             style="@style/ReTheme.ImgView"
             android:contentDescription="@string/default_img_description"
             app:layout_constraintBottom_toBottomOf="@+id/frag_re_add_spin_bedrooms"
-            app:layout_constraintStart_toEndOf="@+id/frag_re_add_edit_spin_rooms"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/frag_re_add_spin_bedrooms"
             app:srcCompat="@drawable/ic_bedroom" />
 
@@ -100,14 +108,14 @@
             android:layout_marginEnd="@dimen/default_margin_end"
             android:prompt="@string/txt_bedrooms"
             app:layout_constraintStart_toEndOf="@+id/frag_re_add_edit_img_bedroom"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_et_area" />
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_spin_rooms" />
 
         <ImageView
             android:id="@+id/frag_re_add_edit_img_bathroom"
             style="@style/ReTheme.ImgView"
             android:contentDescription="@string/default_img_description"
             app:layout_constraintBottom_toBottomOf="@+id/frag_re_add_spin_bathrooms"
-            app:layout_constraintStart_toEndOf="@+id/frag_re_add_spin_bedrooms"
+            app:layout_constraintStart_toStartOf="@+id/frag_re_add_edit_img_price"
             app:layout_constraintTop_toTopOf="@+id/frag_re_add_spin_bathrooms"
             app:srcCompat="@drawable/ic_bathroom" />
 
@@ -117,7 +125,7 @@
             android:layout_marginEnd="@dimen/default_margin_end"
             android:prompt="@string/txt_bathrooms"
             app:layout_constraintStart_toEndOf="@+id/frag_re_add_edit_img_bathroom"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_et_area" />
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_spin_rooms" />
 
         <ImageView
             android:id="@+id/frag_re_add_edit_img_description"
@@ -136,7 +144,7 @@
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_spin_rooms"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_add_spin_bathrooms"
             app:layout_constraintStart_toEndOf="@+id/frag_re_add_edit_img_description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

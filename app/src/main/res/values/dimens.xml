@@ -10,7 +10,7 @@
     <dimen name="default_txt_size_extra_large">20sp</dimen>
 
     <!-- DEFAULT MARGIN -->
-    <dimen name="default_margin">10dp</dimen>
+    <dimen name="default_margin">6dp</dimen>
     <dimen name="default_margin_horizontal">10dp</dimen>
     <dimen name="default_margin_vertical">10dp</dimen>
     <dimen name="default_margin_top">10dp</dimen>
@@ -20,13 +20,13 @@
     <dimen name="default_margin_start_large">30dp</dimen>
 
     <!-- DEFAULT PADDING -->
-    <dimen name="default_padding">4dp</dimen>
-    <dimen name="default_padding_horizontal">4dp</dimen>
-    <dimen name="default_padding_vertical">4dp</dimen>
-    <dimen name="default_padding_top">4dp</dimen>
-    <dimen name="default_padding_bottom">4dp</dimen>
-    <dimen name="default_padding_start">4dp</dimen>
-    <dimen name="default_padding_end">4dp</dimen>
+    <dimen name="default_padding">6dp</dimen>
+    <dimen name="default_padding_horizontal">6dp</dimen>
+    <dimen name="default_padding_vertical">6dp</dimen>
+    <dimen name="default_padding_top">6dp</dimen>
+    <dimen name="default_padding_bottom">6dp</dimen>
+    <dimen name="default_padding_start">6dp</dimen>
+    <dimen name="default_padding_end">6dp</dimen>
     
     <!-- DEFAULT CARDVIEW -->
     <dimen name="default_card_corner_radius">5dp</dimen>
@@ -44,6 +44,7 @@
     <dimen name="re_det_left_gl">0.34</dimen>
     <dimen name="re_det_right_gl">0.64</dimen>
     <dimen name="re_det_padding_bottom">10dp</dimen>
+    <dimen name="re_det_map_size">140dp</dimen>
 
     <!-- REAL ESTATE SEARCH -->
     <dimen name="re_search_center_gl">0.54</dimen>

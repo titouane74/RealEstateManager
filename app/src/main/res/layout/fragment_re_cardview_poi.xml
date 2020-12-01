@@ -31,7 +31,7 @@
             style="@style/ReTheme.CheckBox"
             android:text="@string/poi_bank"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_et_poi" />
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_img_poi" />
 
         <CheckBox
             android:id="@+id/frag_re_add_edit_poi_food"
@@ -39,7 +39,7 @@
             android:text="@string/poi_food"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/frag_re_add_edit_poi_bank"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_et_poi" />
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_img_poi" />
 
         <CheckBox
             android:id="@+id/frag_re_add_edit_poi_health"

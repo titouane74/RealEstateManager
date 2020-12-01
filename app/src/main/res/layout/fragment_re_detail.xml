@@ -65,7 +65,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_description_title"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_description"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_description"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_img_description"
@@ -73,7 +73,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_description"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_description"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_description_title" />
@@ -107,14 +107,14 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_txt_market_date"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_on_market_date"
                     app:layout_constraintStart_toEndOf="@+id/frag_re_det_img_market_date"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_txt_sold_date"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:importantForAutofill="no"
                     android:text="@string/txt_sold_date"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -123,14 +123,14 @@
                     app:layout_constraintWidth_percent="0.4" />
                 <TextView
                     android:id="@+id/frag_re_det_tv_market_date"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_on_market_date"
                     app:layout_constraintStart_toEndOf="@+id/frag_re_det_img_market_date"
                     app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_txt_market_date" />
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_sold_date"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:importantForAutofill="no"
                     android:text="@string/txt_sold_date"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +149,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_agent"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:layout_marginBottom="@dimen/default_margin_bottom"
                     android:importantForAutofill="no"
                     android:text="@string/txt_agent"
@@ -183,7 +183,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_txt_type"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_type"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_type"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_img_type"
@@ -191,7 +191,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_type"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_type"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_img_type"
                     app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_txt_type" />
@@ -206,7 +206,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_txt_area"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_area"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_area"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_img_area"
@@ -214,7 +214,7 @@
                     app:layout_constraintWidth_percent="0.37" />
                 <TextView
                     android:id="@+id/frag_re_det_tv_area"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_area"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_img_area"
                     app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_txt_area"
@@ -231,7 +231,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_txt_price"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_price"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_price"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_img_price"
@@ -239,7 +239,7 @@
                     app:layout_constraintWidth_percent="0.37" />
                 <TextView
                     android:id="@+id/frag_re_det_tv_price"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_price"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_img_price"
                     app:layout_constraintTop_toBottomOf="@id/frag_re_det_tv_txt_price"
@@ -247,7 +247,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_txt_nb_rooms"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_number_of"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_room"
                     app:layout_constraintStart_toStartOf="parent"
@@ -264,7 +264,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_nb_rooms"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_rooms"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_room"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_img_room"
@@ -280,7 +280,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_nb_bedrooms"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_bedrooms"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_bedroom"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_img_bedroom"
@@ -297,7 +297,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_nb_bathrooms"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_bathrooms"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_bathroom"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_img_bathroom"
@@ -323,8 +323,8 @@
 
                 <ImageView
                     android:id="@+id/frag_re_det_img_poi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    style="@style/ReTheme.ImgView"
+                    android:layout_marginBottom="20dp"
                     android:contentDescription="@string/default_img_description"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -332,9 +332,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_poi"
-                    style="@style/ReTheme.Detail.TxtView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_poi"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_poi"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_img_poi"
@@ -345,7 +343,7 @@
                     style="@style/ReTheme.Detail.CheckBox"
                     android:text="@string/poi_bank"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_poi" />
+                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_img_poi" />
 
                 <CheckBox
                     android:id="@+id/frag_re_det_poi_food"
@@ -353,7 +351,7 @@
                     android:text="@string/poi_food"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_poi_bank"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_poi" />
+                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_img_poi" />
 
                 <CheckBox
                     android:id="@+id/frag_re_det_poi_health"
@@ -416,7 +414,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/default_margin_bottom">
 
                 <ImageView
                     android:id="@+id/frag_re_det_img_location"
@@ -428,7 +427,7 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_location"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_location"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_location"
                     app:layout_constraintStart_toEndOf="@+id/frag_re_det_img_location"
@@ -436,10 +435,20 @@
 
                 <TextView
                     android:id="@+id/frag_re_det_tv_complete_address"
-                    style="@style/ReTheme.Detail.TxtView"
+                    style="@style/ReTheme.TxtView"
                     android:text="@string/txt_address"
-                    app:layout_constraintStart_toEndOf="@+id/frag_re_det_img_location"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_location" />
+                    android:layout_width="@dimen/app_zero_dp"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_location"
+                    app:layout_constraintEnd_toStartOf="@id/frag_re_det_map_view"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/frag_re_det_map_view"
+                    android:layout_width="@dimen/re_det_map_size"
+                    android:layout_height="@dimen/re_det_map_size"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
