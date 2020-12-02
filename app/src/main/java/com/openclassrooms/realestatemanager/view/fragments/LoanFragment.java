@@ -9,17 +9,13 @@ import android.widget.Toast;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentLoanBinding;
+import com.openclassrooms.realestatemanager.model.MonthlyPayment;
 
 
 public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
 
-    private static final String TAG = "TAG_LoanFragment";
-
     private FragmentLoanBinding mBinding;
-    private View mFragView;
-    private Context mContext;
 
-    //TODO plantage si menuAttached return 0
     @Override
     protected int getMenuAttached() { return R.menu.menu_confirm; }
 
@@ -29,8 +25,6 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
     @Override
     protected void configureDesign(FragmentLoanBinding pBinding) {
         mBinding = pBinding;
-        mFragView = mBinding.getRoot();
-        mContext = getContext();
     }
 
     @Override
@@ -43,7 +37,12 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
     }
 
     private void calculateMonthlyPayment() {
-        Toast.makeText(getContext(), getString(R.string.txt_monthly_payment), Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "calculateMonthlyPayment: ");
+        MonthlyPayment lPayment = new MonthlyPayment();
+        lPayment.setMpAmountBorrowed(Integer.parseInt(mBinding.fragLoanEtPrice.getText().toString()));
+        lPayment.setMpContribution(Integer.parseInt(mBinding.fragLoanEtContribution.getText().toString()));
+        lPayment.setMpRate(Double.parseDouble(mBinding.fragLoanEtRate.getText().toString()));
+        lPayment.setMpDuration(Integer.parseInt(mBinding.fragLoanEtDuration.getText().toString()));
+
+        mBinding.fragLoanTvMonthlyPaymentResult.setText(String.valueOf(lPayment.calculateMonthlyPayment()));
     }
 }
