@@ -121,11 +121,13 @@
     <style name="ReTheme.Loan.EditTxt" parent="ReTheme.Loan">
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="layout_constraintWidth_percent">@dimen/loan_et_width_percent</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:hint">@string/loan_txt_default_number</item>
     </style>
     <style name="ReTheme.Loan.TxtView" parent="ReTheme.Loan">
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="layout_constraintWidth_percent">@dimen/loan_tv_width_percent</item>
-        <item name="android:textAlignment">viewEnd</item>
+        <item name="android:textAlignment">textEnd</item>
     </style>
 
 </resources>

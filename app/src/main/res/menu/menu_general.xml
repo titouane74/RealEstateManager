@@ -15,6 +15,6 @@
     <item
         android:id="@+id/loanFragment"
         android:icon="@drawable/ic_calculate"
-        android:title="@string/txt_calculate"
+        android:title="@string/loan_txt_calculate"
         app:showAsAction="always"/>
 </menu>

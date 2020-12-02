@@ -59,7 +59,7 @@
     <fragment
         android:id="@+id/loanFragment"
         android:name="com.openclassrooms.realestatemanager.view.fragments.LoanFragment"
-        android:label="@string/txt_loan_simulator"
+        android:label="@string/loan_txt_loan_simulator"
         tools:layout="@layout/fragment_loan" />
     <fragment
         android:id="@+id/reSearchFragment"

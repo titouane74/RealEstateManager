@@ -63,12 +63,16 @@
     <string name="txt_number_of">Number of</string>
 
     <!-- LOAN SIMULATOR -->
-    <string name="txt_loan_simulator">Loan simulator</string>
-    <string name="txt_contribution">Contribution</string>
-    <string name="txt_rate">Rate (in %)</string>
-    <string name="txt_duration">Duration (in Years)</string>
-    <string name="txt_monthly_payment">Monthly payment</string>
-    <string name="txt_calculate">Calculate</string>
+    <string name="loan_txt_loan_simulator">Loan simulator</string>
+    <string name="loan_txt_contribution">Contribution</string>
+    <string name="loan_txt_default_number">0</string>
+    <string name="loan_txt_rate">Rate (in %)</string>
+    <string name="loan_txt_duration">Duration (in Years)</string>
+    <string name="loan_txt_monthly_payment">Monthly payment</string>
+    <string name="loan_txt_calculate">Calculate</string>
+    <string name="loan_txt_err_valid_input">The fields are mandatory : </string>
+    <string name="loan_txt_err_field_rate">Rate</string>
+    <string name="loan_txt_err_field_duration">Duration</string>
 
 
     <!-- SPINNERS -->
