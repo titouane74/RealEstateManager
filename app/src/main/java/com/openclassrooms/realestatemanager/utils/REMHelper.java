@@ -1,9 +1,11 @@
 package com.openclassrooms.realestatemanager.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import java.text.NumberFormat;
+import java.util.Currency;
 import java.util.Locale;
 
 /**
@@ -16,25 +18,27 @@ public class REMHelper {
 
     /**
      * Configure the spinner adapter
-     * @param pContext : context : context where the spinner is
+     *
+     * @param pContext   : context : context where the spinner is
      * @param pResources : int : number of the resource which gonna implement the spinner
      * @return : adapter : configured adapter
      */
     public static ArrayAdapter<CharSequence> configureSpinAdapter(Context pContext, int pResources) {
-        ArrayAdapter<CharSequence> lAdapter = ArrayAdapter.createFromResource(pContext,pResources,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> lAdapter = ArrayAdapter.createFromResource(pContext, pResources, android.R.layout.simple_spinner_item);
         lAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return lAdapter;
     }
 
     /**
      * Concatenate a value to a string with a specific separator
-     * @param pString : string : string to implement
+     *
+     * @param pString    : string : string to implement
      * @param pSeparator : string : separator
-     * @param pValue : string : string value to add
+     * @param pValue     : string : string value to add
      * @return : string : concatenated string
      */
     public static String addValueAndSeparatorToString(String pString, String pSeparator, String pValue) {
-        if (pString.length()>0) {
+        if (pString.length() > 0) {
             pString = pString + " " + pSeparator + " ";
         }
         return pString + pValue;
@@ -42,32 +46,67 @@ public class REMHelper {
 
     /**
      * Format an int number into a formatted string with currency
+     *
      * @param pValue : int : value to convert
      * @return : string : value formatted with currency
      */
     public static String formatNumberWithCommaAndCurrency(int pValue) {
-        return NumberFormat.getCurrencyInstance(Locale.getDefault()).format(pValue);
+        NumberFormat lNf = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        lNf.setMaximumFractionDigits(0);
+        return lNf.format(pValue);
     }
 
     /**
-     * Convert a string number with currency into an int
+     * Convert a string number with currency
+     *
      * @param pStringValue : string : string number with currency to convert into an int
      * @return : string : value without format and currency
      */
+    /*
     public static String formatStringNumberWithCommaAndCurrency(String pStringValue) {
-        int lIntValue = Integer.parseInt(pStringValue);
-        String pValueFormatted = NumberFormat.getCurrencyInstance(Locale.getDefault()).format(lIntValue);
-        return pValueFormatted.substring(0, pValueFormatted.length()-3);
+        Log.d(TAG, "formatStringNumberWithCommaAndCurrency: " + pStringValue);
+        if (!pStringValue.contains(Currency.getInstance(Locale.getDefault()).getSymbol())) {
+            int lIntValue = Integer.parseInt(pStringValue);
+            Log.d(TAG, "formatStringNumberWithCommaAndCurrency: intValue" + lIntValue);
+            String pValueFormatted = NumberFormat.getCurrencyInstance(Locale.getDefault()).format(lIntValue);
+            Log.d(TAG, "formatStringNumberWithCommaAndCurrency: pValueFormatted " + pValueFormatted);
+            return pValueFormatted;
+//            return pValueFormatted.substring(0, pValueFormatted.length() - 3);
+        } else {
+            return pStringValue;
+        }
     }
 
+    public static String removeCurrency(String pStringValue) {
+        String lCurrency = Currency.getInstance(Locale.getDefault()).getSymbol();
+        int lPosCur = pStringValue.indexOf(lCurrency);
+        if (lPosCur <= 1) {
+            return pStringValue.substring(lPosCur, pStringValue.length() -1);
+        } else {
+            return pStringValue.substring(0, pStringValue.length() - 2);
+        }
+
+    }
+
+*/
     /**
      * Convert a string number with currency into an int
+     *
      * @param pValue : string : string number with currency to convert into an int
      * @return : int : value converted in int
      */
+    /*
     public static int formatStringNumberWithCommaAndCurrencyToInt(String pValue) {
-        pValue = pValue.replaceAll(",","");
-        pValue = pValue.substring(1, pValue.length()-3);
-        return  Integer.parseInt(pValue);
+        Log.d(TAG, "formatStringNumberWithCommaAndCurrencyToInt: pvalue " + pValue);
+
+        pValue = removeCurrency(pValue);
+        Log.d(TAG, "formatStringNumberWithCommaAndCurrencyToInt: pvalue " + pValue);
+
+        pValue = pValue.replaceAll(",", "");
+//        pValue = pValue.substring(0, pValue.length() - 3);
+        return Integer.parseInt(pValue);
+//        return Integer.parseInt(newString);
     }
+
+     */
 }

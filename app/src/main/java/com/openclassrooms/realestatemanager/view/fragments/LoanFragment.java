@@ -16,6 +16,8 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
 
     private FragmentLoanBinding mBinding;
     private Context mContext;
+    private String mPrice;
+    private String mContribution;
 
     @Override
     protected int getMenuAttached() {
@@ -36,14 +38,16 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
         mBinding.fragLoanEtPrice.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 if (!mBinding.fragLoanEtPrice.getText().toString().equals("")) {
-                    mBinding.fragLoanEtPrice.setText(REMHelper.formatStringNumberWithCommaAndCurrency(mBinding.fragLoanEtPrice.getText().toString()));
+                    mPrice = mBinding.fragLoanEtPrice.getText().toString();
+                    //mBinding.fragLoanEtPrice.setText(REMHelper.formatStringNumberWithCommaAndCurrency(mPrice));
                 }
             }
         });
         mBinding.fragLoanEtContribution.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 if (!mBinding.fragLoanEtContribution.getText().toString().equals("")) {
-                    mBinding.fragLoanEtContribution.setText(REMHelper.formatStringNumberWithCommaAndCurrency(mBinding.fragLoanEtContribution.getText().toString()));
+                    mContribution = mBinding.fragLoanEtContribution.getText().toString();
+                    //mBinding.fragLoanEtContribution.setText(REMHelper.formatStringNumberWithCommaAndCurrency(mContribution));
                 }
             }
         });
@@ -63,15 +67,14 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
         if (validInput()) {
             MonthlyPayment lPayment = new MonthlyPayment();
 
-            int lPrice = REMHelper.formatStringNumberWithCommaAndCurrencyToInt(mBinding.fragLoanEtPrice.getText().toString());
-            lPayment.setMpAmountBorrowed(lPrice);
+            lPayment.setMpAmountBorrowed(Integer.parseInt(mPrice));
 
             lPayment.setMpRate(Double.parseDouble(mBinding.fragLoanEtRate.getText().toString()));
             lPayment.setMpDuration(Integer.parseInt(mBinding.fragLoanEtDuration.getText().toString()));
 
             int lContribution =0;
             if (!mBinding.fragLoanEtContribution.getText().toString().equals("")) {
-                lContribution = REMHelper.formatStringNumberWithCommaAndCurrencyToInt(mBinding.fragLoanEtContribution.getText().toString());
+                lContribution = Integer.parseInt(mContribution);
             }
             lPayment.setMpContribution(lContribution);
             String lPay = REMHelper.formatNumberWithCommaAndCurrency(lPayment.calculateMonthlyPayment());
