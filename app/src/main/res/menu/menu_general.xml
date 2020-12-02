@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/reAddFragment"
+        android:id="@+id/reAddEditFragment"
         android:icon="@drawable/ic_add"
         android:title="@string/default_txt_add"
         app:showAsAction="always"/>

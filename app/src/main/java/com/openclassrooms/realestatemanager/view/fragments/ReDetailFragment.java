@@ -8,9 +8,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReDetailBinding;
@@ -31,7 +34,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     private Context mContext;
 
     @Override
-    protected int getMenuAttached() { return R.menu.menu_search; }
+    protected int getMenuAttached() { return R.menu.menu_edit; }
 
     @Override
     protected int getFragmentLayout() { return R.layout.fragment_re_detail; }
@@ -61,6 +64,16 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
         lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14Gj0Y3MR2L_u0rFtMCji9r5CmQzR5PDKlZkB9zc9");
         mAdapter.setPhotoList(lPhotoList);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem pItem) {
+        if (pItem.getItemId() == R.id.menu_action_edit) {
+            Navigation.findNavController(mFragView).navigate(R.id.action_reDetailFragment_to_reAddEditFragment);
+            return true;
+        }
+        return super.onOptionsItemSelected(pItem);
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
