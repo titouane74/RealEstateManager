@@ -25,8 +25,9 @@
 
         <ImageView
             android:id="@+id/frag_re_add_edit_img_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/ReTheme.ImgView"
+            android:layout_width="@dimen/re_add_edit_photo_icon_size"
+            android:layout_height="@dimen/re_add_edit_photo_icon_size"
             android:layout_marginEnd="@dimen/re_add_edit_photo_margin_end"
             app:layout_constraintStart_toEndOf="@+id/frag_re_add_edit_tv_photo"
             app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_img_photo"

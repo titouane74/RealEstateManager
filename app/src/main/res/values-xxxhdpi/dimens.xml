@@ -5,7 +5,7 @@
     <dimen name="app_divider_height">1dp</dimen>
 
     <!-- DEFAULT TEXT -->
-<dimen name="default_txt_size">13sp</dimen>
+    <dimen name="default_txt_size">12sp</dimen>
     <dimen name="default_txt_size_large">14sp</dimen>
     <dimen name="default_txt_size_extra_large">20sp</dimen>
 
@@ -27,15 +27,12 @@
     <dimen name="default_padding_bottom">6dp</dimen>
     <dimen name="default_padding_start">6dp</dimen>
     <dimen name="default_padding_end">6dp</dimen>
-
+    
     <!-- DEFAULT CARDVIEW -->
     <dimen name="default_card_corner_radius">5dp</dimen>
 
     <!-- DEFAULT BUTTON -->
     <dimen name="default_btn_corner_radius">10dp</dimen>
-
-    <!-- TOOLBAR -->
-    <dimen name="toolbar_txt_size">16sp</dimen>
 
     <!-- REAL ESTATE -->
     <dimen name="re_photo_size">78dp</dimen>
@@ -53,15 +50,15 @@
     <dimen name="re_search_center_gl">0.54</dimen>
 
     <!-- REAL ESTATE ADD EDIT -->
+    <dimen name="re_add_edit_icon_edit_txt_height">24dp</dimen>
     <dimen name="re_add_edit_padding_btn">8dp</dimen>
     <dimen name="re_add_edit_padding_lay">16dp</dimen>
     <dimen name="re_add_edit_margin">6dp</dimen>
     <dimen name="re_add_edit_location_guideline">0.18</dimen>
-    <dimen name="re_add_edit_photo_size_large">90dp</dimen>
-    <dimen name="re_add_edit_photo_size_large_with_marge">118dp</dimen>
+    <dimen name="re_add_edit_photo_size_large">130dp</dimen>
+    <dimen name="re_add_edit_photo_size">80dp</dimen>
+    <dimen name="re_add_edit_photo_size_large_with_marge">158dp</dimen>
     <dimen name="re_add_edit_photo_margin_end">24dp</dimen>
-    <dimen name="re_add_edit_icon_size">24dp</dimen>
-    <dimen name="re_add_edit_photo_icon_size">32dp</dimen>
 
     <!-- SPINNER -->
     <dimen name="default_spinner_height">28dp</dimen>
@@ -71,8 +68,8 @@
     <dimen name="default_spinner_margin_top">150dp</dimen>
 
     <!-- LOAN -->
-    <dimen name="loan_tv_width_percent">0.46</dimen>
-    <dimen name="loan_et_width_percent">0.42</dimen>
+    <dimen name="loan_tv_width_percent">0.4</dimen>
+    <dimen name="loan_et_width_percent">0.46</dimen>
     <dimen name="loan_et_width_percent_result">0.6</dimen>
     <dimen name="loan_btn_margin_start">30dp</dimen>
 
