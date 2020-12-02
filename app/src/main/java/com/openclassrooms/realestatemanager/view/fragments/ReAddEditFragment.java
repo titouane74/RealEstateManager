@@ -70,11 +70,11 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
     }
 
     private void configureSpinners() {
-        mBinding.fragReAddEditCardvDescription.fragReAddEditSpinType.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.type_spinner));
-        mBinding.fragReAddEditCardvDescription.fragReAddEditSpinRooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReAddEditCardvDescription.fragReAddSpinBedrooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReAddEditCardvDescription.fragReAddSpinBathrooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReAddEditCardvLocation.fragReAddSpinCountry.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.country_spinner));
+        mBinding.fragReAddEditCardvDescription.fragReAddEditSpinType.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.type_spinner));
+        mBinding.fragReAddEditCardvDescription.fragReAddEditSpinRooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReAddEditCardvDescription.fragReAddSpinBedrooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReAddEditCardvDescription.fragReAddSpinBathrooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReAddEditCardvLocation.fragReAddSpinCountry.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.country_spinner));
     }
 
     private void initRecyclerView() {

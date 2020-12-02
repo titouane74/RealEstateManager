@@ -3,23 +3,14 @@ package com.openclassrooms.realestatemanager.view.fragments;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
 import com.openclassrooms.realestatemanager.databinding.FragmentReSearchBinding;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
-import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
-import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -59,12 +50,12 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     }
 
     private void configureSpinners() {
-        mBinding.fragReSearchSpinType.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.type_spinner));
-        mBinding.fragReSearchSpinRooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReSearchSpinBedrooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReSearchSpinBathrooms.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReSearchSpinCountry.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.country_spinner));
-        mBinding.fragReSearchSpinNbPhoto.setAdapter(REMHelper.paramSpinAdapter(mContext,R.array.photo_spinner));
+        mBinding.fragReSearchSpinType.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.type_spinner));
+        mBinding.fragReSearchSpinRooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReSearchSpinBedrooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReSearchSpinBathrooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReSearchSpinCountry.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.country_spinner));
+        mBinding.fragReSearchSpinNbPhoto.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.photo_spinner));
     }
 
 
