@@ -33,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        boolean lIsTablet = getApplicationContext().getResources().getBoolean(R.bool.isTablet);
+        if (lIsTablet) {
+            Toast.makeText(getApplicationContext(), "OUI, JE SUIS UNE TABLETTE !", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "OUI, JE SUIS UN TELEPHONE !", Toast.LENGTH_SHORT).show();
+        }
+
         mBinding = ActivityMainBinding.inflate(getLayoutInflater());
         mActView = mBinding.getRoot();
         mContext = getApplicationContext();
