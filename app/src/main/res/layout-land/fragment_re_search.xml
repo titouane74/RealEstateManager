@@ -83,7 +83,7 @@
             android:importantForAutofill="no"
             android:inputType="date"
             app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_sold_date"
-            app:layout_constraintTop_toBottomOf="@id/frag_re_search_tv_txt_status"/>
+            app:layout_constraintTop_toBottomOf="@id/frag_re_search_tv_txt_status" />
         <!-- TYPE : SPINNER -->
         <ImageView
             android:id="@+id/frag_re_search_img_type"
@@ -121,7 +121,7 @@
             android:importantForAutofill="no"
             android:inputType="number"
             app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_area"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_type" />
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_type"/>
 
         <EditText
             android:id="@+id/frag_re_search_et_area_max"
@@ -130,7 +130,7 @@
             android:importantForAutofill="no"
             android:inputType="number"
             app:layout_constraintStart_toStartOf="@id/center_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_type" />
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_type"/>
         <!-- PRICE : MIN - MAX -->
         <ImageView
             android:id="@+id/frag_re_search_img_price"
@@ -187,7 +187,7 @@
             android:id="@+id/frag_re_search_spin_nb_photo"
             style="@style/ReTheme.SpinnerRoomPhoto"
             android:prompt="@string/txt_photos"
-            app:layout_constraintStart_toStartOf="@id/frag_re_search_spin_bathrooms"
+            app:layout_constraintStart_toEndOf="@id/frag_re_det_tv_txt_nb_bedrooms"
             app:layout_constraintTop_toBottomOf="@+id/frag_re_search_tv_txt_number_of" />
 
         <!-- ROOM : SPINNER -->
@@ -196,7 +196,7 @@
             style="@style/ReTheme.ImgView"
             android:contentDescription="@string/default_img_description"
             app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_spin_rooms"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/center_guideline"
             app:layout_constraintTop_toTopOf="@+id/frag_re_search_spin_rooms"
             app:srcCompat="@drawable/ic_room" />
         <TextView
@@ -210,8 +210,9 @@
             android:id="@+id/frag_re_search_spin_rooms"
             style="@style/ReTheme.SpinnerRoomPhoto"
             android:prompt="@string/txt_rooms"
-            app:layout_constraintStart_toStartOf="@+id/frag_re_search_spin_bathrooms"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_nb_photo"/>
+            app:layout_constraintStart_toEndOf="@+id/frag_re_det_tv_txt_nb_bathrooms"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_tv_txt_number_of"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <!-- BEDROOM : SPINNER -->
         <ImageView
@@ -234,8 +235,8 @@
             android:id="@+id/frag_re_search_spin_bedrooms"
             style="@style/ReTheme.SpinnerRoomPhoto"
             android:prompt="@string/txt_bedrooms"
-            app:layout_constraintStart_toStartOf="@+id/frag_re_search_spin_bathrooms"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_rooms" />
+            app:layout_constraintStart_toEndOf="@id/frag_re_det_tv_txt_nb_bedrooms"
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_nb_photo" />
 
         <!-- BATHROOM : SPINNER  -->
         <ImageView
@@ -243,7 +244,7 @@
             style="@style/ReTheme.ImgView"
             android:contentDescription="@string/default_img_description"
             app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_spin_bathrooms"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/center_guideline"
             app:layout_constraintTop_toTopOf="@+id/frag_re_search_spin_bathrooms"
             app:srcCompat="@drawable/ic_bathroom" />
         <TextView
@@ -259,7 +260,8 @@
             style="@style/ReTheme.SpinnerRoomPhoto"
             android:prompt="@string/txt_bathrooms"
             app:layout_constraintStart_toEndOf="@+id/frag_re_det_tv_txt_nb_bathrooms"
-            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_bedrooms" />
+            app:layout_constraintTop_toBottomOf="@+id/frag_re_search_spin_rooms"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <!-- LOCATION - CITY -->
         <ImageView

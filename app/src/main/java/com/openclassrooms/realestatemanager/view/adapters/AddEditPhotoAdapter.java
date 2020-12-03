@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.openclassrooms.realestatemanager.databinding.FragmentReCardviewPhotoItemBinding;
+import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditRvPhotoItemBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
 public class AddEditPhotoAdapter extends RecyclerView.Adapter<AddEditPhotoAdapter.AddEditPhotoHolder> {
 
     private List<String> mPhotoList = new ArrayList<>();
-    private FragmentReCardviewPhotoItemBinding mBinding;
+    private FragmentReAddEditRvPhotoItemBinding mBinding;
 
     public void setPhotoList(List<String> pPhotoList) { mPhotoList = pPhotoList; }
 
@@ -27,7 +27,7 @@ public class AddEditPhotoAdapter extends RecyclerView.Adapter<AddEditPhotoAdapte
     @Override
     public AddEditPhotoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater lLayoutInflater = LayoutInflater.from(parent.getContext());
-        mBinding = FragmentReCardviewPhotoItemBinding.inflate(lLayoutInflater,parent,false);
+        mBinding = FragmentReAddEditRvPhotoItemBinding.inflate(lLayoutInflater,parent,false);
         return new AddEditPhotoHolder(mBinding);
     }
 
@@ -47,9 +47,9 @@ public class AddEditPhotoAdapter extends RecyclerView.Adapter<AddEditPhotoAdapte
 
     static class AddEditPhotoHolder extends RecyclerView.ViewHolder {
 
-        FragmentReCardviewPhotoItemBinding mBindingHolder;
+        FragmentReAddEditRvPhotoItemBinding mBindingHolder;
 
-        public AddEditPhotoHolder(@NonNull FragmentReCardviewPhotoItemBinding pBindingHolder) {
+        public AddEditPhotoHolder(@NonNull FragmentReAddEditRvPhotoItemBinding pBindingHolder) {
             super(pBindingHolder.getRoot());
                 mBindingHolder = pBindingHolder;
         }

@@ -19,10 +19,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/default_padding_bottom"
-            android:layout_gravity="center"
-            android:paddingStart="@dimen/default_padding_start_large"
-            tools:ignore="RtlSymmetry">
+            android:paddingBottom="@dimen/default_padding_bottom">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/center_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/loan_center_gl" />
 
             <TextView
                 android:id="@+id/frag_loan_tv_price"
@@ -37,17 +41,17 @@
                 style="@style/ReTheme.Loan.EditTxt"
                 android:importantForAutofill="no"
                 android:inputType="number"
-                app:layout_constraintStart_toEndOf="@id/frag_loan_tv_duration"
+                app:layout_constraintStart_toEndOf="@id/frag_loan_tv_rate"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
+                app:layout_constraintEnd_toStartOf="@id/center_guideline"
+                />
 
             <TextView
                 android:id="@+id/frag_loan_tv_contribution"
                 style="@style/ReTheme.Loan.TxtView"
                 android:text="@string/loan_txt_contribution"
                 app:layout_constraintBottom_toBottomOf="@id/frag_loan_et_contribution"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/center_guideline"
                 app:layout_constraintTop_toTopOf="@id/frag_loan_et_contribution" />
 
             <EditText
@@ -56,7 +60,7 @@
                 android:importantForAutofill="no"
                 android:inputType="number"
                 app:layout_constraintStart_toEndOf="@id/frag_loan_tv_duration"
-                app:layout_constraintTop_toBottomOf="@id/frag_loan_et_price"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
@@ -72,16 +76,17 @@
                 style="@style/ReTheme.Loan.EditTxt"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
-                app:layout_constraintStart_toEndOf="@id/frag_loan_tv_duration"
+                app:layout_constraintStart_toEndOf="@id/frag_loan_tv_rate"
                 app:layout_constraintTop_toBottomOf="@id/frag_loan_et_contribution"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toStartOf="@id/center_guideline"
+                />
 
             <TextView
                 android:id="@+id/frag_loan_tv_duration"
                 style="@style/ReTheme.Loan.TxtView"
                 android:text="@string/loan_txt_duration"
                 app:layout_constraintBottom_toBottomOf="@id/frag_loan_et_duration"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/center_guideline"
                 app:layout_constraintTop_toTopOf="@id/frag_loan_et_duration" />
 
             <EditText
@@ -90,8 +95,8 @@
                 android:importantForAutofill="no"
                 android:inputType="number"
                 app:layout_constraintStart_toEndOf="@id/frag_loan_tv_duration"
-                app:layout_constraintTop_toBottomOf="@id/frag_loan_et_rate"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/frag_loan_et_contribution"
+                app:layout_constraintEnd_toEndOf="parent"/>/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

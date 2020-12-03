@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorError">@color/colorError</item>
+        <item name="android:spinnerDropDownItemStyle">@style/ReTheme.Spinner</item>
     </style>
     <style name="ReAppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -33,7 +34,13 @@
         <item name="android:textColor">@color/colorOnSecondary</item>
         <item name="android:textSize">@dimen/default_txt_size</item>
     </style>
-
+    <style name="ReTheme.TxtView.WitdthWrapContent" parent="ReTheme">
+        <item name="android:layout_width">@dimen/app_zero_dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorOnSecondary</item>
+        <item name="android:textSize">@dimen/default_txt_size</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+    </style>
     <style name="ReTheme.List.TxtView" parent="ReTheme">
         <item name="android:layout_margin">@dimen/app_zero_dp</item>
         <item name="android:layout_width">match_parent</item>
@@ -54,7 +61,19 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/default_txt_size</item>
     </style>
+    <style name="ReTheme.EditTxt.Search" parent="ReTheme.EditTxt">
+        <item name="layout_constraintWidth_percent">@dimen/re_search_width_percent_et</item>
+    </style>
 
+    <style name="ReTheme.EditTxt.AddEdit" parent="ReTheme.EditTxt">
+        <item name="layout_constraintWidth_percent">@dimen/re_add_edit_width_percent_et</item>
+    </style>
+    <style name="ReTheme.EditTxt.AddEdit.Date" parent="ReTheme.EditTxt">
+        <item name="layout_constraintWidth_percent">@dimen/re_add_edit_width_percent_et_date</item>
+    </style>
+    <style name="ReTheme.EditTxt.AddEdit.AreaPrice" parent="ReTheme.EditTxt">
+        <item name="layout_constraintWidth_percent">@dimen/re_add_edit_width_percent_et_area_price</item>
+    </style>
 
     <style name="ReTheme.CardView" parent="ReTheme">
         <item name="android:background">@color/backgroundPrimary</item>
@@ -62,21 +81,31 @@
         <item name="android:layout_margin">@dimen/default_margin</item>
     </style>
 
-
-    <style name="ReTheme.SpinnerRoomPhoto" parent="ReTheme">
-        <item name="android:layout_width">@dimen/app_zero_dp</item>
-        <item name="android:layout_height">@dimen/default_spinner_height</item>
-        <item name="android:textSize">@dimen/default_txt_size</item>
-        <item name="android:textColor">@color/colorOnPrimary</item>
-        <item name="layout_constraintWidth_percent">0.32</item>
-        <item name="android:layout_marginTop">@dimen/default_spinner_margin_top</item>
-    </style>
     <style name="ReTheme.Spinner" parent="ReTheme">
         <item name="android:layout_width">@dimen/app_zero_dp</item>
         <item name="android:layout_height">@dimen/default_spinner_height</item>
         <item name="android:textSize">@dimen/default_txt_size</item>
-        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
+    <style name="ReTheme.SpinnerRoomPhoto" parent="ReTheme.Spinner">
+        <item name="android:layout_margin">@dimen/app_zero_dp</item>
+        <item name="android:layout_width">@dimen/app_zero_dp</item>
+        <item name="android:layout_height">@dimen/default_spinner_height</item>
+        <item name="android:textSize">@dimen/default_txt_size</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="layout_constraintWidth_percent">0.30</item>
+        <item name="android:layout_marginTop">@dimen/default_spinner_margin_top</item>
+        <item name="android:textAlignment">textEnd</item>
+    </style>
+    <style name="ReTheme.SpinnerRoomPhoto.Land" parent="ReTheme.Spinner">
+        <item name="android:layout_width">@dimen/app_zero_dp</item>
+        <item name="android:layout_height">@dimen/default_spinner_height</item>
+        <item name="android:textSize">@dimen/default_txt_size</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="android:layout_marginTop">@dimen/default_spinner_margin_top</item>
+        <item name="android:textAlignment">textEnd</item>
+    </style>
+
 
     <style name="ReTheme.CheckBox" parent="ReTheme">
         <item name="android:layout_margin">@dimen/app_zero_dp</item>
@@ -88,17 +117,24 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/default_txt_size</item>
     </style>
+    <style name="ReTheme.CheckBox.Land" parent="ReTheme">
+        <item name="android:layout_margin">@dimen/app_zero_dp</item>
+        <item name="android:checked">false</item>
+        <item name="android:layout_width">@dimen/app_zero_dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="android:textSize">@dimen/default_txt_size</item>
+    </style>
     <style name="ReTheme.Detail.CheckBox" parent="ReTheme.CheckBox">
         <item name="android:clickable">false</item>
         <item name="android:layout_margin">@dimen/app_zero_dp</item>
     </style>
     <style name="ReTheme.CheckBox.Sold" parent="ReTheme.CheckBox">
+        <item name="android:layout_margin">@dimen/app_zero_dp</item>
         <item name="android:checked">false</item>
-        <item name="layout_constraintWidth_percent">0.28</item>
-        <item name="android:layout_width">@dimen/app_zero_dp</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
-
     <style name="ReTheme.Loan" parent="ReTheme">
         <item name="android:layout_width">@dimen/app_zero_dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -106,13 +142,11 @@
     </style>
     <style name="ReTheme.Loan.EditTxt" parent="ReTheme.Loan">
         <item name="android:textColorHint">@color/colorPrimary</item>
-        <item name="layout_constraintWidth_percent">@dimen/loan_et_width_percent</item>
         <item name="android:textAlignment">textEnd</item>
         <item name="android:hint">@string/loan_txt_default_number</item>
     </style>
     <style name="ReTheme.Loan.TxtView" parent="ReTheme.Loan">
         <item name="android:textColorHint">@color/colorPrimary</item>
-        <item name="layout_constraintWidth_percent">@dimen/loan_tv_width_percent</item>
         <item name="android:textAlignment">textEnd</item>
     </style>
 

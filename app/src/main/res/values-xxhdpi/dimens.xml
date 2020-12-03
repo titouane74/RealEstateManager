@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <dimen name="app_zero_dp">0dp</dimen>
     <dimen name="app_divider_height">1dp</dimen>
-
     <!-- DEFAULT TEXT -->
-    <dimen name="default_txt_size">16sp</dimen>
+    <dimen name="default_txt_size">14sp</dimen>
     <dimen name="default_txt_size_large">16sp</dimen>
     <dimen name="default_txt_size_extra_large">20sp</dimen>
-
     <!-- DEFAULT MARGIN -->
     <dimen name="default_margin">6dp</dimen>
     <dimen name="default_margin_horizontal">10dp</dimen>
@@ -18,7 +15,6 @@
     <dimen name="default_margin_start">6dp</dimen>
     <dimen name="default_margin_end">10dp</dimen>
     <dimen name="default_margin_start_large">30dp</dimen>
-
     <!-- DEFAULT PADDING -->
     <dimen name="default_padding">6dp</dimen>
     <dimen name="default_padding_horizontal">6dp</dimen>
@@ -27,31 +23,28 @@
     <dimen name="default_padding_bottom">6dp</dimen>
     <dimen name="default_padding_start">6dp</dimen>
     <dimen name="default_padding_end">6dp</dimen>
-
+    <dimen name="default_padding_start_large">60dp</dimen>
     <!-- DEFAULT CARDVIEW -->
     <dimen name="default_card_corner_radius">5dp</dimen>
-
     <!-- DEFAULT BUTTON -->
     <dimen name="default_btn_corner_radius">10dp</dimen>
-
     <!-- TOOLBAR -->
-    <dimen name="toolbar_txt_size">20sp</dimen>
-
+    <dimen name="toolbar_txt_size">18sp</dimen>
     <!-- REAL ESTATE -->
     <dimen name="re_photo_size">88dp</dimen>
     <dimen name="re_photo_sold_size">74dp</dimen>
     <dimen name="re_sold_txt_size">44sp</dimen>
     <dimen name="re_sold_padding_end">18dp</dimen>
-
     <!-- REAL ESTATE DETAIL -->
     <dimen name="re_det_left_gl">0.34</dimen>
     <dimen name="re_det_right_gl">0.64</dimen>
     <dimen name="re_det_padding_bottom">10dp</dimen>
     <dimen name="re_det_map_size">140dp</dimen>
-
+    <dimen name="re_det_width_percent_information">0.48</dimen>
+    <dimen name="re_det_height_percent_information">0.33</dimen>
     <!-- REAL ESTATE SEARCH -->
     <dimen name="re_search_center_gl">0.54</dimen>
-
+    <dimen name="re_search_width_percent_et">0.36</dimen>
     <!-- REAL ESTATE ADD EDIT -->
     <dimen name="re_add_edit_padding_btn">8dp</dimen>
     <dimen name="re_add_edit_padding_lay">16dp</dimen>
@@ -62,18 +55,26 @@
     <dimen name="re_add_edit_photo_margin_end">24dp</dimen>
     <dimen name="re_add_edit_icon_size">24dp</dimen>
     <dimen name="re_add_edit_photo_icon_size">34dp</dimen>
-
+    <dimen name="re_add_edit_height_percent">0.43</dimen>
+    <dimen name="re_add_edit_width_percent_poi">0.27</dimen>
+    <dimen name="re_add_edit_width_percent_information">0.38</dimen>
+    <dimen name="re_add_edit_width_percent_location">0.31</dimen>
+    <dimen name="re_add_edit_width_percent_agent">0.22</dimen>
+    <dimen name="re_add_edit_width_percent_date">0.15</dimen>
+    <dimen name="re_add_edit_width_percent_et">0.42</dimen>
+    <dimen name="re_add_edit_width_percent_et_date">0.28</dimen>
+    <dimen name="re_add_edit_width_percent_et_area_price">0.37</dimen>
+    <dimen name="re_add_edit_center_guideline">0.5</dimen>
     <!-- SPINNER -->
     <dimen name="default_spinner_height">28dp</dimen>
     <dimen name="default_spinner_width_large">200dp</dimen>
     <dimen name="default_spinner_width_small">60dp</dimen>
     <dimen name="default_spinner_txt_size">14sp</dimen>
     <dimen name="default_spinner_margin_top">150dp</dimen>
-
     <!-- LOAN -->
     <dimen name="loan_tv_width_percent">0.46</dimen>
-    <dimen name="loan_et_width_percent">0.42</dimen>
+    <dimen name="loan_et_width_percent">0.30</dimen>
     <dimen name="loan_et_width_percent_result">0.6</dimen>
     <dimen name="loan_btn_margin_start">30dp</dimen>
-
+    <dimen name="loan_center_gl">0.48</dimen>
 </resources>

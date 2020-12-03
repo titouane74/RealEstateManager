@@ -57,7 +57,8 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
         mContext = getContext();
         configureSpinners();
         initRecyclerView();
-        mBinding.fragReAddEditCardvStatus.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialog ());
+        mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialogMarket());
+        mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialogSold());
     }
 
     @Override
@@ -70,17 +71,17 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
     }
 
     private void configureSpinners() {
-        mBinding.fragReAddEditCardvDescription.fragReAddEditSpinType.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.type_spinner));
-        mBinding.fragReAddEditCardvDescription.fragReAddEditSpinRooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReAddEditCardvDescription.fragReAddSpinBedrooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReAddEditCardvDescription.fragReAddSpinBathrooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReAddEditCardvLocation.fragReAddSpinCountry.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.country_spinner));
+        mBinding.fragReAddEditSpinType.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.type_spinner));
+        mBinding.fragReAddEditSpinRooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReAddSpinBedrooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReAddSpinBathrooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
+        mBinding.fragReAddSpinCountry.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.country_spinner));
     }
 
     private void initRecyclerView() {
         mAdapter = new AddEditPhotoAdapter();
-        mBinding.fragReAddEditCardvPhoto.fragReAddEditRvPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
-        mBinding.fragReAddEditCardvPhoto.fragReAddEditRvPhoto.setAdapter(mAdapter);
+        mBinding.fragReAddEditRvPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
+        mBinding.fragReAddEditRvPhoto.setAdapter(mAdapter);
         initPhotoList();
     }
 
@@ -104,7 +105,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
     /**
      * Display calendar dialog box
      */
-    private void displayCalendarDialog () {
+    private void displayCalendarDialogMarket() {
         Calendar lCalendar = Calendar.getInstance();
 
         DatePickerDialog lDatePickerDialog = new DatePickerDialog(
@@ -115,7 +116,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
 
                     mDateCal.set(year,month,dayOfMonth);
                     String lDate = lDateFormat.format(mDateCal.getTime());
-                    mBinding.fragReAddEditCardvStatus.fragReAddEditEtMarketDate.setText(lDate);
+                    mBinding.fragReAddEditEtMarketDate.setText(lDate);
                 },
                 lCalendar.get(Calendar.YEAR),
                 lCalendar.get(Calendar.MONTH),
@@ -123,4 +124,25 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
         );
         lDatePickerDialog.show();
     }
+
+    private void displayCalendarDialogSold() {
+        Calendar lCalendar = Calendar.getInstance();
+
+        DatePickerDialog lDatePickerDialog = new DatePickerDialog(
+                mContext,
+                (view, year, month, dayOfMonth) -> {
+                    @SuppressLint("SimpleDateFormat") DateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    mDateCal = Calendar.getInstance();
+
+                    mDateCal.set(year,month,dayOfMonth);
+                    String lDate = lDateFormat.format(mDateCal.getTime());
+                    mBinding.fragReAddEditEtSoldDate.setText(lDate);
+                },
+                lCalendar.get(Calendar.YEAR),
+                lCalendar.get(Calendar.MONTH),
+                lCalendar.get(Calendar.DAY_OF_MONTH)
+        );
+        lDatePickerDialog.show();
+    }
+
 }
