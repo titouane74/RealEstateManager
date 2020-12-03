@@ -1,8 +1,12 @@
 package com.openclassrooms.realestatemanager.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+
+import com.openclassrooms.realestatemanager.R;
 
 import java.text.NumberFormat;
 import java.util.Currency;
@@ -109,4 +113,29 @@ public class REMHelper {
     }
 
      */
+
+    /**
+     * Get the orientation of the material
+     * @param pContext : context
+     * @return : int : return the orientation
+     */
+    public static int getOrientation(Context pContext) {
+        return pContext.getResources().getConfiguration().orientation;
+    }
+
+    /**
+     * Return the id of the nav_host_fragment which must be used when it's a tablet in landscape
+     * @param pContext : context
+     * @param pIsTablet : boolean : indicator if the material is a tablet or not
+     * @return : return the right nav_host_fragment id
+     */
+    public static int getNavHostId(Context pContext,boolean pIsTablet) {
+        if ((pIsTablet) && (getOrientation(pContext) == Configuration.ORIENTATION_LANDSCAPE)) {
+//            return R.id.nav_right_fragment;
+            return R.id.nav_host_fragment;
+        } else {
+            return R.id.nav_host_fragment;
+        }
+    }
+
 }

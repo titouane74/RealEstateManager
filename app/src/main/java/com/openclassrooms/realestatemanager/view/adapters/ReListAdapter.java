@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListItemBinding;
+import com.openclassrooms.realestatemanager.utils.REMHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +42,16 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         mBinding = FragmentReListItemBinding.inflate(lLayoutInflater, parent, false);
         mContext = mBinding.getRoot().getContext();
 
+/*
          mIsTablet = mContext.getResources().getBoolean(R.bool.isTablet);
         if (mIsTablet) {
             mNavController = Navigation.findNavController((Activity) parent.getContext(), R.id.nav_right_fragment);
         } else {
             mNavController = Navigation.findNavController((Activity) parent.getContext(), R.id.nav_host_fragment);
         }
+*/
+        int lIntNavHost = REMHelper.getNavHostId(mContext,mIsTablet);
+        mNavController = Navigation.findNavController((Activity) parent.getContext(), lIntNavHost);
         return new ReListAdapter.ReListHolder(mBinding);
     }
 

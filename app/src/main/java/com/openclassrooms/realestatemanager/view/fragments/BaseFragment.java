@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.view.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewbinding.ViewBinding;
 
 import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.utils.REMHelper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -30,6 +32,7 @@ abstract class BaseFragment<T extends ViewBinding> extends Fragment {
 
     protected T mBinding;
     private int mIntNavHost;
+    private Context mContext;
 
     protected abstract int getMenuAttached();
 
@@ -62,18 +65,13 @@ abstract class BaseFragment<T extends ViewBinding> extends Fragment {
         }
         boolean lIsTablet = mBinding.getRoot().getContext().getResources().getBoolean(R.bool.isTablet);
 
-        //Select the right id
-        /*
-        if (lIsTablet) {
-            mIntNavHost = R.id.nav_right_fragment;
-        } else {
-            mIntNavHost = R.id.nav_host_fragment;
-        }
-*/
-        mIntNavHost = R.id.nav_host_fragment;
+        mContext = mBinding.getRoot().getContext();
+
+        mIntNavHost = REMHelper.getNavHostId(mContext, lIsTablet);
 
         //TODO navHostFragment vide en sortie si tablet
 /*
+//            lNavHostFragment = (NavHostFragment) getChildFragmentManager().findFragmentById(mIntNavHost);
         if (lIsTablet) {
             lNavHostFragment = (NavHostFragment) getChildFragmentManager().findFragmentById(R.id.nav_right_fragment);
         } else {

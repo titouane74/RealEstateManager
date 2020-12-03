@@ -19,6 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding;
+import com.openclassrooms.realestatemanager.utils.REMHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,14 +64,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureNavController() {
-        boolean lIsTablet = mContext.getResources().getBoolean(R.bool.isTablet);
-        if (lIsTablet) {
-            mIntNavHost = R.id.nav_right_fragment;
-        } else {
-            mIntNavHost = R.id.nav_host_fragment;
-        }
-//        mNavHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(mIntNavHost);
-        mNavHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+
+        mIntNavHost = REMHelper.getNavHostId(mContext,mIsTablet);
+        mNavHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(mIntNavHost);
         if (mNavHostFragment != null) {
             mNavController = mNavHostFragment.getNavController();
         } else {
