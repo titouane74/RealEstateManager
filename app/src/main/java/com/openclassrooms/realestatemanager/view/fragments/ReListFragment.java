@@ -2,16 +2,20 @@ package com.openclassrooms.realestatemanager.view.fragments;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
+import androidx.navigation.NavHost;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListBinding;
@@ -28,6 +32,9 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
     private FragmentReListBinding mBinding;
 
     private ReListAdapter mAdapter;
+    private Context mContext;
+    private boolean mIsTablet;
+    private NavController mNavController;
 
     @Override
     protected int getFragmentLayout() { return R.layout.fragment_re_list; }
@@ -36,9 +43,12 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
     protected int getMenuAttached() {return R.menu.menu_general;}
 
     @Override
-    protected void configureDesign(FragmentReListBinding pBinding) {
+    protected void configureDesign(FragmentReListBinding pBinding, NavController pNavController, boolean pIsTablet) {
         mBinding = pBinding;
         mFragView = mBinding.getRoot();
+        mContext = mFragView.getContext();
+        mIsTablet = pIsTablet;
+        mNavController = pNavController;
         initRecyclerView();
     }
 
@@ -51,8 +61,31 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
-        NavController lNavController = Navigation.findNavController(mFragView);
-        return NavigationUI.onNavDestinationSelected(pItem,lNavController) || super.onOptionsItemSelected(pItem);
+/*
+        if (mIsTablet) {
+                switch (pItem.getItemId()) {
+                    case R.menu.menu_edit:
+                        Toast.makeText(mContext, "menu edit", Toast.LENGTH_SHORT).show();
+                        mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment);
+                        break;
+                    case R.menu.menu_search:
+                        Toast.makeText(mContext, "menu search", Toast.LENGTH_SHORT).show();
+                        mNavController.navigate(R.id.action_reDetailFragment_to_reSearchFragment);
+                        break;
+                    case R.menu.menu_general:
+                        Toast.makeText(mContext, "menu loan", Toast.LENGTH_SHORT).show();
+                        mNavController.navigate(R.id.action_reDetailFragment_to_loanFragment);
+                        break;
+                    default:
+                        break;
+                }
+//            } else {
+//                Toast.makeText(mContext, "PAS DE NAVHOST !", Toast.LENGTH_SHORT).show();
+//            }
+            return true;
+        } else {*/
+            return NavigationUI.onNavDestinationSelected(pItem,mNavController) || super.onOptionsItemSelected(pItem);
+//        }
     }
 
     private void initRecyclerView() {

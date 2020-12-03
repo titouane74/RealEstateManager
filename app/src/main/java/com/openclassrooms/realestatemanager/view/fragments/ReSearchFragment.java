@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.navigation.NavController;
+
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReSearchBinding;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
@@ -21,7 +23,8 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     private static final String TAG = "TAG_ReSearchFragment";
     private View mFragView;
     private Context mContext;
-
+    private NavController mNavController;
+    private boolean mIsTablet;
 
     @Override
     protected int getMenuAttached() { return R.menu.menu_confirm; }
@@ -30,10 +33,12 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     protected int getFragmentLayout() { return R.layout.fragment_re_search; }
 
     @Override
-    protected void configureDesign(FragmentReSearchBinding pBinding) {
+    protected void configureDesign(FragmentReSearchBinding pBinding, NavController pNavController, boolean pIsTablet) {
         mBinding = pBinding;
         mFragView = mBinding.getRoot();
         mContext = getContext();
+        mNavController = pNavController;
+        mIsTablet = pIsTablet;
         configureSpinners();
 
         mBinding.fragReSearchEtMarketDate.setOnClickListener(v -> displayCalendarDialogMarket ());

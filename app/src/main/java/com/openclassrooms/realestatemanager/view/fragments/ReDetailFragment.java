@@ -8,9 +8,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -32,24 +34,36 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     private View mFragView;
     private ReDetailViewModel mViewModel;
     private Context mContext;
+    private NavController mNavController;
+    private boolean mIsTablet;
 
     @Override
-    protected int getMenuAttached() { return R.menu.menu_edit; }
+    protected int getMenuAttached() {
+//        if (mIsTablet) {
+//            return R.menu.menu_general_tablet;
+//        } else {
+            return R.menu.menu_edit;
+//        }
+    }
 
     @Override
-    protected int getFragmentLayout() { return R.layout.fragment_re_detail; }
+    protected int getFragmentLayout() {
+        return R.layout.fragment_re_detail;
+    }
 
     @Override
-    protected void configureDesign(FragmentReDetailBinding pBinding) {
+    protected void configureDesign(FragmentReDetailBinding pBinding, NavController pNavController, boolean pIsTablet) {
         mBinding = pBinding;
         mFragView = mBinding.getRoot();
         mContext = getContext();
+        mNavController = pNavController;
+        mIsTablet = pIsTablet;
         initRecyclerView();
     }
 
     private void initRecyclerView() {
         mAdapter = new DetailPhotoAdapter();
-        mBinding.fragReDetRvPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
+        mBinding.fragReDetRvPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mBinding.fragReDetRvPhoto.setAdapter(mAdapter);
         initPhotoList();
     }
@@ -68,7 +82,14 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
         if (pItem.getItemId() == R.id.menu_action_edit) {
-            Navigation.findNavController(mFragView).navigate(R.id.action_reDetailFragment_to_reAddEditFragment);
+//            Navigation.findNavController(mFragView).navigate(R.id.action_reDetailFragment_to_reAddEditFragment);
+            if (mIsTablet) {
+                mNavController.navigate(R.id.reAddEditFragment);
+                Log.d(TAG, "onOptionsItemSelected: detail fragment tablet detail to edit");
+            } else {
+                mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment);
+                Log.d(TAG, "onOptionsItemSelected: detail fragment phone detail to edit");
+            }
             return true;
         }
         return super.onOptionsItemSelected(pItem);
@@ -98,6 +119,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
         mBinding.fragReDetTvDescription.setText(pRE.getReDescription());
         mBinding.fragReDetTvArea.setText(Integer.toString(pRE.getReArea()));
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

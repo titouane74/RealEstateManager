@@ -26,6 +26,12 @@
         <action
             android:id="@+id/action_reDetailFragment_to_reAddEditFragment"
             app:destination="@id/reAddEditFragment" />
+        <action
+            android:id="@+id/action_reDetailFragment_to_loanFragment"
+            app:destination="@id/loanFragment" />
+        <action
+            android:id="@+id/action_reDetailFragment_to_reSearchFragment"
+            app:destination="@id/reSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/loanFragment"

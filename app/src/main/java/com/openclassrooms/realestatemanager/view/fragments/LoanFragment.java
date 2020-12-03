@@ -6,6 +6,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.navigation.NavController;
+
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentLoanBinding;
 import com.openclassrooms.realestatemanager.model.MonthlyPayment;
@@ -18,6 +20,8 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
     private Context mContext;
     private String mPrice;
     private String mContribution;
+    private NavController mNavController;
+    private boolean mIsTablet;
 
     @Override
     protected int getMenuAttached() {
@@ -30,10 +34,12 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
     }
 
     @Override
-    protected void configureDesign(FragmentLoanBinding pBinding) {
+    protected void configureDesign(FragmentLoanBinding pBinding, NavController pNavController, boolean pIsTablet) {
         mBinding = pBinding;
         View lFragView = mBinding.getRoot();
         mContext = lFragView.getContext();
+        mNavController = pNavController;
+        mIsTablet = pIsTablet;
 
         mBinding.fragLoanEtPrice.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {

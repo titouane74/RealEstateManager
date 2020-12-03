@@ -1,9 +1,11 @@
 package com.openclassrooms.realestatemanager.view.adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -25,6 +27,8 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
     private List<String> mReList = new ArrayList<>();
     private FragmentReListItemBinding mBinding;
     private NavController mNavController;
+    private Context mContext;
+    private boolean mIsTablet;
 
     public void setReList(List<String> pReList) {
         mReList = pReList;
@@ -35,7 +39,14 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
     public ReListAdapter.ReListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater lLayoutInflater = LayoutInflater.from(parent.getContext());
         mBinding = FragmentReListItemBinding.inflate(lLayoutInflater, parent, false);
-        mNavController = Navigation.findNavController((Activity) parent.getContext(), R.id.nav_host_fragment);
+        mContext = mBinding.getRoot().getContext();
+
+         mIsTablet = mContext.getResources().getBoolean(R.bool.isTablet);
+        if (mIsTablet) {
+            mNavController = Navigation.findNavController((Activity) parent.getContext(), R.id.nav_right_fragment);
+        } else {
+            mNavController = Navigation.findNavController((Activity) parent.getContext(), R.id.nav_host_fragment);
+        }
         return new ReListAdapter.ReListHolder(mBinding);
     }
 
@@ -43,7 +54,12 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
     public void onBindViewHolder(@NonNull ReListHolder pHolder, int position) {
         pHolder.bindView(mReList.get(position));
         pHolder.itemView.setOnClickListener(v -> {
-            mNavController.navigate(R.id.action_reListFragment_to_reDetailFragment);
+            if(mIsTablet) {
+                mNavController.navigate(R.id.reDetailFragment);
+                Toast.makeText(mContext, "TABLET DETAIL", Toast.LENGTH_SHORT).show();
+            } else {
+                mNavController.navigate(R.id.action_reListFragment_to_reDetailFragment);
+            }
         });
     }
 
@@ -52,7 +68,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         if (mReList == null) {
             return 0;
         } else {
-            Log.d(TAG, "getItemCount: " + mReList.size());
+//            Log.d(TAG, "getItemCount: " + mReList.size());
             return mReList.size();
         }
     }

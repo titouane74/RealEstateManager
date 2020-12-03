@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.MenuItem;
@@ -37,8 +38,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
     private AddEditPhotoAdapter mAdapter;
     private ReAddEditViewModel mViewModel;
     private Context mContext;
-
+    private NavController mNavController;
     private Calendar mDateCal;
+    private boolean mIsTablet;
 
     @Override
     protected int getMenuAttached() {
@@ -51,10 +53,12 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
     }
 
     @Override
-    protected void configureDesign(FragmentReAddEditBinding pBinding) {
+    protected void configureDesign(FragmentReAddEditBinding pBinding, NavController pNavController, boolean pIsTablet) {
         mBinding = pBinding;
         mFragView = mBinding.getRoot();
         mContext = getContext();
+        mNavController = pNavController;
+        mIsTablet = pIsTablet;
         configureSpinners();
         initRecyclerView();
         mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialogMarket());
