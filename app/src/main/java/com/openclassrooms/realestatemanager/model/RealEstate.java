@@ -3,13 +3,19 @@ package com.openclassrooms.realestatemanager.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.sql.Timestamp;
 
 /**
  * Created by Florence LE BOURNOT on 25/11/2020
  */
+@Entity(tableName="realestate")
 public class RealEstate implements Parcelable {
 
+    @PrimaryKey(autoGenerate = true)
     private int reId;
     private String reType;
     private int rePrice;
@@ -19,10 +25,11 @@ public class RealEstate implements Parcelable {
     private int reNbBathrooms;
     private String reDescription;
     private boolean reIsSold;
-    private Timestamp reSaleDate;
-    private Timestamp reOnMarketDate;
+//    private Timestamp reSaleDate;
+//    private Timestamp reOnMarketDate;
 
     public RealEstate() { }
+
 
     public RealEstate(int pReId, String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold) {
         reId = pReId;
@@ -132,6 +139,7 @@ public class RealEstate implements Parcelable {
         reIsSold = pReIsSold;
     }
 
+/*
     public Timestamp getReSaleDate() {
         return reSaleDate;
     }
@@ -147,6 +155,7 @@ public class RealEstate implements Parcelable {
     public void setReOnMarketDate(Timestamp pReOnMarketDate) {
         reOnMarketDate = pReOnMarketDate;
     }
+*/
 
     @Override
     public String toString() {
@@ -160,8 +169,8 @@ public class RealEstate implements Parcelable {
                 ", reNbBathrooms=" + reNbBathrooms +
                 ", reDescription='" + reDescription + '\'' +
                 ", reIsSold=" + reIsSold +
-                ", reSaleDate=" + reSaleDate +
-                ", reOnMarketDate=" + reOnMarketDate +
+//                ", reSaleDate=" + reSaleDate +
+//                ", reOnMarketDate=" + reOnMarketDate +
                 '}';
     }
 

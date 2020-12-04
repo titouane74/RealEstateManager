@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
+import com.openclassrooms.realestatemanager.di.Injection;
+import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
+import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
@@ -41,6 +44,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
     private NavController mNavController;
     private Calendar mDateCal;
     private boolean mIsTablet;
+    private RealEstate mRealEstate = new RealEstate();
 
     @Override
     protected int getMenuAttached() {
@@ -69,11 +73,25 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
     public boolean onOptionsItemSelected(MenuItem pItem) {
         if (pItem.getItemId() == R.id.menu_action_save) {
             Toast.makeText(getContext(), "SAVE", Toast.LENGTH_SHORT).show();
+            prepareRealEstate();
             return true;
         }
         return super.onOptionsItemSelected(pItem);
     }
 
+    private void prepareRealEstate() {
+
+
+        mRealEstate.setReType("Apartment");
+        mRealEstate.setReNbRooms(3);
+        mRealEstate.setReNbBedrooms(1);
+        mRealEstate.setReNbBathrooms(1);
+        mRealEstate.setReArea(70);
+        mRealEstate.setReIsSold(false);
+        mRealEstate.setReDescription("Under development");
+
+        mViewModel.insertRealEstate(mRealEstate);
+    }
     private void configureSpinners() {
         mBinding.fragReAddEditSpinType.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.type_spinner));
         mBinding.fragReAddEditSpinRooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
@@ -102,9 +120,15 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ReAddEditViewModel.class);
-        // TODO: Use the ViewModel
+
+        configureViewModel();
     }
+
+    private void configureViewModel() {
+        ReViewModelFactory lFactory = Injection.reViewModelFactory(mContext);
+        mViewModel = new ViewModelProvider(this,lFactory).get(ReAddEditViewModel.class);
+    }
+
 
     /**
      * Display calendar dialog box
