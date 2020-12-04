@@ -131,8 +131,8 @@ public class REMHelper {
      */
     public static int getNavHostId(Context pContext,boolean pIsTablet) {
         if ((pIsTablet) && (getOrientation(pContext) == Configuration.ORIENTATION_LANDSCAPE)) {
-//            return R.id.nav_right_fragment;
-            return R.id.nav_host_fragment;
+            return R.id.nav_right_fragment;
+//            return R.id.nav_host_fragment;
         } else {
             return R.id.nav_host_fragment;
         }

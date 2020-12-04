@@ -12,6 +12,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListItemBinding;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
@@ -42,14 +44,6 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         mBinding = FragmentReListItemBinding.inflate(lLayoutInflater, parent, false);
         mContext = mBinding.getRoot().getContext();
 
-/*
-         mIsTablet = mContext.getResources().getBoolean(R.bool.isTablet);
-        if (mIsTablet) {
-            mNavController = Navigation.findNavController((Activity) parent.getContext(), R.id.nav_right_fragment);
-        } else {
-            mNavController = Navigation.findNavController((Activity) parent.getContext(), R.id.nav_host_fragment);
-        }
-*/
         int lIntNavHost = REMHelper.getNavHostId(mContext,mIsTablet);
         mNavController = Navigation.findNavController((Activity) parent.getContext(), lIntNavHost);
         return new ReListAdapter.ReListHolder(mBinding);
@@ -88,16 +82,16 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         }
 
         public void bindView(String pPhotoUrl) {
-/*
-            mBindingHolder.itemCity.setText(pPhotoUrl);
-            mBindingHolder.itemPrice.setText(pPhotoUrl);
-            mBindingHolder.itemType.setText(pPhotoUrl);
-*/
 
-/*            Glide.with(mBindingHolder.fragReListItemImgPhoto.getContext())
+/*            mBindingHolder.itemCity.setText(pPhotoUrl);
+            mBindingHolder.itemPrice.setText(pPhotoUrl);
+            mBindingHolder.itemType.setText(pPhotoUrl);*/
+
+
+            Glide.with(mBindingHolder.fragReListItemImgPhoto.getContext())
                     .load(pPhotoUrl)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(mBindingHolder.fragReListItemImgPhoto);*/
+                    .into(mBindingHolder.fragReListItemImgPhoto);
         }
     }
 

@@ -25,13 +25,14 @@ public class RealEstate implements Parcelable {
     private int reNbBathrooms;
     private String reDescription;
     private boolean reIsSold;
+    private String reAgentFirstName;
+    private String reAgentLastName;
 //    private Timestamp reSaleDate;
 //    private Timestamp reOnMarketDate;
 
     public RealEstate() { }
 
-
-    public RealEstate(int pReId, String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold) {
+    public RealEstate(int pReId, String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName, String pReAgentLastName) {
         reId = pReId;
         reType = pReType;
         rePrice = pRePrice;
@@ -41,6 +42,8 @@ public class RealEstate implements Parcelable {
         reNbBathrooms = pReNbBathrooms;
         reDescription = pReDescription;
         reIsSold = pReIsSold;
+        reAgentFirstName = pReAgentFirstName;
+        reAgentLastName = pReAgentLastName;
     }
 
     protected RealEstate(Parcel in) {
@@ -138,6 +141,14 @@ public class RealEstate implements Parcelable {
     public void setReIsSold(boolean pReIsSold) {
         reIsSold = pReIsSold;
     }
+
+    public String getReAgentFirstName() { return reAgentFirstName; }
+
+    public void setReAgentFirstName(String pReAgentFirstName) { reAgentFirstName = pReAgentFirstName; }
+
+    public String getReAgentLastName() { return reAgentLastName; }
+
+    public void setReAgentLastName(String pReAgentLastName) { reAgentLastName = pReAgentLastName; }
 
 /*
     public Timestamp getReSaleDate() {

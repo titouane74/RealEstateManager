@@ -81,14 +81,23 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
 
     private void prepareRealEstate() {
 
+        int lArea = Integer.parseInt(mBinding.fragReAddEditEtArea.getText().toString());
+        String lIsSold = mBinding.fragReAddEditCbSold.getText().toString();
+        String lDescription = mBinding.fragReAddEditEtDescription.getText().toString();
+        String lAgentFirstName = mBinding.fragReAddEditEtAgentFirstName.getText().toString();
+        String lAgentLastName = mBinding.fragReAddEditEtAgentLastName.getText().toString();
+//        String lType = mBinding.fragReAddEditSpinType.getT.toString();
 
         mRealEstate.setReType("Apartment");
         mRealEstate.setReNbRooms(3);
         mRealEstate.setReNbBedrooms(1);
         mRealEstate.setReNbBathrooms(1);
-        mRealEstate.setReArea(70);
+        mRealEstate.setReArea(lArea);
         mRealEstate.setReIsSold(false);
-        mRealEstate.setReDescription("Under development");
+        mRealEstate.setReDescription(lDescription);
+        mRealEstate.setReAgentFirstName(lAgentFirstName);
+        mRealEstate.setReAgentLastName(lAgentLastName);
+
 
         mViewModel.insertRealEstate(mRealEstate);
     }
@@ -109,12 +118,16 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
 
     private void initPhotoList() {
         List<String> lPhotoList = new ArrayList<>();
-        lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14Gh7GajhYVm2T1esN8y8XZF7Iz6HzjC0ugJkk2dN7g=s96-c");
-        lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14Gj0Y3MR2L_u0rFtMCji9r5CmQzR5PDKlZkB9zc9");
-        lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14GgOP8seJeI1oZImU6EZHTL3WSJtWcUOMDzMvel07w=s96-c");
-        lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14Gj0Y3MR2L_u0rFtMCji9r5CmQzR5PDKlZkB9zc9");
-        lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14GgOP8seJeI1oZImU6EZHTL3WSJtWcUOMDzMvel07w=s96-c");
-        lPhotoList.add("https://lh3.googleusercontent.com/a-/AOh14Gj0Y3MR2L_u0rFtMCji9r5CmQzR5PDKlZkB9zc9");
+        lPhotoList.add("https://lemagdesanimaux.ouest-france.fr/images/dossiers/2019-06/cheval-073016.jpg");
+        lPhotoList.add("https://www.30millionsdamis.fr/uploads/pics/conseils-erreurs-chat-1171.jpg");
+        lPhotoList.add("https://cdn.futura-sciences.com/buildsv6/images/wide1920/a/0/f/a0fc73919d_50166390_chaton.jpg");
+        lPhotoList.add("https://www.i-cad.fr/uploads/5bec27af5afec.jpeg");
+        lPhotoList.add("https://www.dogteur.com/media/magpleasure/mpblog/list_thumbnail_file/e/a/cache/5/ece9a24a761836a70934a998c163f8c8/eaf7d56dbea1bb003bb0bb649c022bab.jpg");
+        lPhotoList.add("https://lemagduchat.ouest-france.fr/images/dossiers/2018-11/chat-drole-113730.jpg");
+        lPhotoList.add("https://cdn-s-www.ledauphine.com/images/5FC3042C-0F6B-4D19-87CF-01591980B2D3/NW_detail_M/title-1602592555.jpg");
+        lPhotoList.add("https://www.ultrapremiumdirect.com/img/cms/blog/loulou-ronron-therapie.jpg");
+
+
         mAdapter.setPhotoList(lPhotoList);
     }
     @Override

@@ -89,7 +89,8 @@ abstract class BaseFragment<T extends ViewBinding> extends Fragment {
             lNavController = Navigation.findNavController((Activity) container.getContext(), R.id.nav_host_fragment);
         }*/
 
-        lNavController = Navigation.findNavController((Activity) container.getContext(), mIntNavHost);
+        lNavController = Navigation.findNavController((Activity) container.getContext(), R.id.nav_host_fragment);
+//        lNavController = Navigation.findNavController((Activity) container.getContext(), mIntNavHost);
         this.configureDesign(mBinding, lNavController, lIsTablet);
 
         return mBinding.getRoot();
