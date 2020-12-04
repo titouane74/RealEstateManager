@@ -1,15 +1,12 @@
 package com.openclassrooms.realestatemanager.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import com.openclassrooms.realestatemanager.R;
 
 import java.text.NumberFormat;
-import java.util.Currency;
 import java.util.Locale;
 
 /**
@@ -28,8 +25,8 @@ public class REMHelper {
      * @return : adapter : configured adapter
      */
     public static ArrayAdapter<CharSequence> configureSpinAdapter(Context pContext, int pResources) {
-        ArrayAdapter<CharSequence> lAdapter = ArrayAdapter.createFromResource(pContext, pResources, android.R.layout.simple_spinner_item);
-        lAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> lAdapter = ArrayAdapter.createFromResource(pContext, pResources, R.layout.spinner_item);
+        lAdapter.setDropDownViewResource(R.layout.spinner_item);
         return lAdapter;
     }
 

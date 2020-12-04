@@ -57,8 +57,8 @@
 <dimen name="re_add_edit_photo_icon_size">32dp</dimen>
 <dimen name="re_add_edit_height_percent">0.43</dimen>
 <dimen name="re_add_edit_width_percent_poi">0.27</dimen>
-<dimen name="re_add_edit_width_percent_information">0.38</dimen>
-<dimen name="re_add_edit_width_percent_location">0.30</dimen>
+<dimen name="re_add_edit_width_percent_information">0.36</dimen>
+<dimen name="re_add_edit_width_percent_location">0.32</dimen>
 <dimen name="re_add_edit_width_percent_agent">0.2</dimen>
 <dimen name="re_add_edit_width_percent_date">0.15</dimen>
 <dimen name="re_add_edit_width_percent_et">0.42</dimen>

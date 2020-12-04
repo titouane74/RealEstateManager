@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="type_spinner">
-        <item>@string/spinners_select_type</item>
+        <item>@string/spinners_select</item>
         <item>Apartment</item>
         <item>Castle</item>
         <item>Duplex</item>
@@ -42,7 +42,7 @@
     </string-array>
 
     <string-array name="country_spinner">
-        <item>@string/spinners_select_country</item>
+        <item>@string/spinners_select</item>
         <item>Afghanistan</item>
         <item>Afrique du Sud</item>
         <item>Albanie</item>

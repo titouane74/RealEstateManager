@@ -57,7 +57,7 @@
     <string name="txt_view_det_re">View real estate detail</string>
     <string name="txt_view_agent">View agent</string>
     <string name="txt_add_re">Add new real estate</string>
-    <string name="txt_add_edit_re">Add / Edit real estate</string>
+    <string name="txt_add_edit_re">Add Edit real estate</string>
     <string name="txt_edit_re">Edit real estate</string>
     <string name="txt_add_agent">Add new agent</string>
     <string name="txt_edit_agent">Edit agent</string>
@@ -77,6 +77,7 @@
 
 
     <!-- SPINNERS -->
+    <string name="spinners_select">--Select--</string>
     <string name="spinners_select_type">--Select a type--</string>
     <string name="spinners_select_country">--Select a country--</string>
 
