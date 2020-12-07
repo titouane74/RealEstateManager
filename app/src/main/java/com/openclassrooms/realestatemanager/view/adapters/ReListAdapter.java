@@ -16,6 +16,7 @@ import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListItemBinding;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
+import com.openclassrooms.realestatemanager.view.fragments.ReListFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,6 @@ import java.util.List;
 public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHolder> {
 
     private static final String TAG = "TAG_ReListAdapter";
-    private List<String> mReListString = new ArrayList<>();
     private List<RealEstate> mReList = new ArrayList<>();
     private com.openclassrooms.realestatemanager.databinding.FragmentReListItemBinding mBinding;
     private NavController mNavController;
@@ -34,14 +34,9 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
     private boolean mIsTablet;
 
 
-    public void setReListString(List<String> pReList) {
-        mReListString = pReList;
-    }
-
     public void setReList(List<RealEstate> pReList) {
         mReList = pReList;
     }
-
 
     @NonNull
     @Override
@@ -49,7 +44,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         LayoutInflater lLayoutInflater = LayoutInflater.from(parent.getContext());
         mBinding = FragmentReListItemBinding.inflate(lLayoutInflater, parent, false);
         mContext = mBinding.getRoot().getContext();
-
+        mIsTablet =  mContext.getResources().getBoolean(R.bool.isTablet);
         int lIntNavHost = REMHelper.getNavHostId(mContext, mIsTablet);
         mNavController = Navigation.findNavController((Activity) parent.getContext(), lIntNavHost);
         return new ReListAdapter.ReListHolder(mBinding);
@@ -57,14 +52,16 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
 
     @Override
     public void onBindViewHolder(@NonNull ReListHolder pHolder, int position) {
-//        pHolder.bindView(mReListString.get(position));
         pHolder.bindView(mReList.get(position));
+
         pHolder.itemView.setOnClickListener(v -> {
             if (mIsTablet) {
                 mNavController.navigate(R.id.reDetailFragment);
                 Toast.makeText(mContext, "TABLET DETAIL", Toast.LENGTH_SHORT).show();
             } else {
-                mNavController.navigate(R.id.action_reListFragment_to_reDetailFragment);
+                ReListFragmentDirections.ActionReListFragmentToReDetailFragment lAction =ReListFragmentDirections.actionReListFragmentToReDetailFragment();
+                lAction.setReid(mReList.get(position).getReId());
+                mNavController.navigate(lAction);
             }
         });
 
@@ -75,15 +72,8 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         if (mReList == null) {
             return 0;
         } else {
-//            Log.d(TAG, "getItemCount: " + mReList.size());
             return mReList.size();
         }
-        /*        if (mReListString == null) {
-            return 0;
-        } else {
-//            Log.d(TAG, "getItemCount: " + mReList.size());
-            return mReListString.size();
-        }*/
     }
 
 
@@ -97,25 +87,21 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
 
         public void bindView(RealEstate pRealEstate) {
             mBindingHolder.itemCity.setText(pRealEstate.getReAgentFirstName());
-            mBindingHolder.itemPrice.setText(String.valueOf(pRealEstate.getRePrice()));
+            mBindingHolder.itemPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pRealEstate.getRePrice()));
             mBindingHolder.itemType.setText(pRealEstate.getReType());
-        }
+            if(pRealEstate.isReIsSold()) {
+                mBindingHolder.fragReListItemImgSold.setVisibility(View.VISIBLE);
+            } else {
+                mBindingHolder.fragReListItemImgSold.setVisibility(View.INVISIBLE);
+            }
 
             /*
-        public void bindView(String pPhotoUrl) {
-
-            mBindingHolder.itemCity.setText(pPhotoUrl);
-            mBindingHolder.itemPrice.setText(pPhotoUrl);
-            mBindingHolder.itemType.setText(pPhotoUrl);
-
-
             Glide.with(mBindingHolder.fragReListItemImgPhoto.getContext())
                     .load(pPhotoUrl)
                     .apply(RequestOptions.circleCropTransform())
                     .into(mBindingHolder.fragReListItemImgPhoto);
-        }
 */
+
+        }
     }
-
-
 }

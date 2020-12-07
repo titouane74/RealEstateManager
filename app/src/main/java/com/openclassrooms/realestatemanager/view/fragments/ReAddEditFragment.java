@@ -11,9 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.AdapterView;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
@@ -82,22 +83,40 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
 
     private void prepareRealEstate() {
 
-        int lArea = Integer.parseInt(mBinding.fragReAddEditEtArea.getText().toString());
-        String lIsSold = mBinding.fragReAddEditCbSold.getText().toString();
-        String lDescription = mBinding.fragReAddEditEtDescription.getText().toString();
+        boolean lIsSold = mBinding.fragReAddEditCbSold.isSelected();
         String lAgentFirstName = mBinding.fragReAddEditEtAgentFirstName.getText().toString();
         String lAgentLastName = mBinding.fragReAddEditEtAgentLastName.getText().toString();
-//        String lType = mBinding.fragReAddEditSpinType.getT.toString();
 
-        mRealEstate.setReType("Apartment");
-        mRealEstate.setReNbRooms(3);
-        mRealEstate.setReNbBedrooms(1);
-        mRealEstate.setReNbBathrooms(1);
-        mRealEstate.setReArea(lArea);
-        mRealEstate.setReIsSold(false);
-        mRealEstate.setReDescription(lDescription);
+        String lDescription = mBinding.fragReAddEditEtDescription.getText().toString();
+
+        String lType = mBinding.fragReAddEditSpinType.getSelectedItem().toString();
+        int lArea = Integer.parseInt(mBinding.fragReAddEditEtArea.getText().toString());
+        int lPrice = Integer.parseInt(mBinding.fragReAddEditEtPrice.getText().toString());
+        String lNbRooms = mBinding.fragReAddEditSpinRooms.getSelectedItem().toString();
+        String lNbBedRooms = mBinding.fragReAddSpinBedrooms.getSelectedItem().toString();
+        String lNbBathRooms = mBinding.fragReAddSpinBathrooms.getSelectedItem().toString();
+        if (lNbRooms.indexOf("+")>0) {
+            lNbRooms = lNbRooms.substring(0,1);
+        }
+        if (lNbBedRooms.indexOf("+")>0) {
+            lNbBedRooms = lNbBedRooms.substring(0,1);
+        }
+        if (lNbBathRooms.indexOf("+")>0) {
+            lNbBathRooms = lNbBathRooms.substring(0,1);
+        }
+
+        mRealEstate.setReIsSold(lIsSold);
         mRealEstate.setReAgentFirstName(lAgentFirstName);
         mRealEstate.setReAgentLastName(lAgentLastName);
+
+        mRealEstate.setReDescription(lDescription);
+
+        mRealEstate.setReType(lType);
+        mRealEstate.setReArea(lArea);
+        mRealEstate.setRePrice(lPrice);
+        mRealEstate.setReNbRooms(Integer.parseInt(lNbRooms));
+        mRealEstate.setReNbBedrooms(Integer.parseInt(lNbBedRooms));
+        mRealEstate.setReNbBathrooms(Integer.parseInt(lNbBathRooms));
 
 
         mViewModel.insertRealEstate(mRealEstate);

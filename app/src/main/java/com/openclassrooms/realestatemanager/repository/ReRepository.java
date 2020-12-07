@@ -18,6 +18,8 @@ public class ReRepository {
 
     public LiveData<List<RealEstate>> selectAllRealEstates() { return mReDao.selectAllRealEstates(); }
 
+    public LiveData<RealEstate> selectRealEstate(int pReId) { return mReDao.selectRealEstate(pReId); }
+
     public void insertRealEstate(RealEstate pRealEstate) {mReDao.insertRealEstate(pRealEstate);}
 
 }

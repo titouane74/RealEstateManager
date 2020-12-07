@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.openclassrooms.realestatemanager.repository.ReRepository;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
+import com.openclassrooms.realestatemanager.viewmodel.ReDetailViewModel;
 import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
 
 import java.util.concurrent.Executor;
@@ -33,7 +34,9 @@ public class ReViewModelFactory implements ViewModelProvider.Factory {
         if (modelClass.isAssignableFrom(ReListViewModel.class)) {
             return (T) new ReListViewModel(mReRepo, mExecutor);
         }
-
+        if (modelClass.isAssignableFrom(ReDetailViewModel.class)) {
+            return (T) new ReDetailViewModel(mReRepo, mExecutor);
+        }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }
 }

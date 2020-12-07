@@ -48,10 +48,12 @@
             android:name="reid"
             android:defaultValue="0"
             app:argType="integer" />
+<!--
         <argument
             android:name="realestate"
             app:argType="com.openclassrooms.realestatemanager.model.RealEstate"
             app:nullable="true" />
+-->
         <action
             android:id="@+id/action_reDetailFragment_to_reAddEditFragment"
             app:destination="@id/reAddEditFragment" />

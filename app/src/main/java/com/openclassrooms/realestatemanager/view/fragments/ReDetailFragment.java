@@ -19,9 +19,12 @@ import android.widget.Toast;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReDetailBinding;
+import com.openclassrooms.realestatemanager.di.Injection;
+import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.view.adapters.DetailPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReDetailViewModel;
+import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +39,8 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     private Context mContext;
     private NavController mNavController;
     private boolean mIsTablet;
+    private RealEstate mRE;
+    private int mReId;
 
     @Override
     protected int getMenuAttached() {
@@ -100,13 +105,14 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-/*        if (getArguments() != null) {
-            REDetailFragmentArgs lArgs = REDetailFragmentArgs.fromBundle(getArguments());
+        if (getArguments() != null) {
+            ReDetailFragmentArgs lArgs = ReDetailFragmentArgs.fromBundle(getArguments());
 
-            RealEstate lRE = lArgs.getRealestate();
-            Log.i(TAG, "onViewCreated: " + lRE.toString());
-            displayRealEstate(lRE);
-        }*/
+//            RealEstate lRE = lArgs.getRealestate();
+            mReId = lArgs.getReid();
+            Log.i(TAG, "onViewCreated: " + mReId);
+            //displayRealEstate(lRE);
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -120,11 +126,18 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
         mBinding.fragReDetTvArea.setText(Integer.toString(pRE.getReArea()));
     }
 
+    private void configureViewModel() {
+        ReViewModelFactory lFactory = Injection.reViewModelFactory(mContext);
+        mViewModel = new ViewModelProvider(this,lFactory).get(ReDetailViewModel.class);
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ReDetailViewModel.class);
-        // TODO: Use the ViewModel
+        configureViewModel();
+        mViewModel.getRealEstate(mReId).observe(getViewLifecycleOwner(),pRealEstate -> {
+            displayRealEstate(pRealEstate);
+        });
     }
 
 }

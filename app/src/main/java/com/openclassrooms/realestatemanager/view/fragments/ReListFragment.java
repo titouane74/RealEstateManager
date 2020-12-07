@@ -20,9 +20,6 @@ import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.view.adapters.ReListAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ReListFragment extends BaseFragment<FragmentReListBinding> {
 
     private ReListViewModel mViewModel;
@@ -73,17 +70,6 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
         mAdapter = new ReListAdapter();
         mBinding.fragReListRv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         mBinding.fragReListRv.setAdapter(mAdapter);
-        initPhotoList();
     }
-    private void initPhotoList() {
-        List<String> lPhotoList = new ArrayList<>();
-        lPhotoList.add("https://www.30millionsdamis.fr/uploads/pics/conseils-erreurs-chat-1171.jpg");
-        lPhotoList.add("https://cdn.futura-sciences.com/buildsv6/images/wide1920/a/0/f/a0fc73919d_50166390_chaton.jpg");
-        lPhotoList.add("https://www.i-cad.fr/uploads/5bec27af5afec.jpeg");
-        lPhotoList.add("https://www.dogteur.com/media/magpleasure/mpblog/list_thumbnail_file/e/a/cache/5/ece9a24a761836a70934a998c163f8c8/eaf7d56dbea1bb003bb0bb649c022bab.jpg");
-        lPhotoList.add("https://lemagduchat.ouest-france.fr/images/dossiers/2018-11/chat-drole-113730.jpg");
-        lPhotoList.add("https://cdn-s-www.ledauphine.com/images/5FC3042C-0F6B-4D19-87CF-01591980B2D3/NW_detail_M/title-1602592555.jpg");
-        lPhotoList.add("https://www.ultrapremiumdirect.com/img/cms/blog/loulou-ronron-therapie.jpg");
-        mAdapter.setReListString(lPhotoList);
-    }
+
 }

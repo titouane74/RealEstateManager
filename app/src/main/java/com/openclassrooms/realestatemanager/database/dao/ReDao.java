@@ -24,4 +24,7 @@ public interface ReDao {
 
     @Insert
     void insertRealEstateList(RealEstate... pRealEstates);
+
+    @Query("SELECT * FROM RealEstate WHERE reId = :pReId")
+    LiveData<RealEstate> selectRealEstate(int pReId);
 }
