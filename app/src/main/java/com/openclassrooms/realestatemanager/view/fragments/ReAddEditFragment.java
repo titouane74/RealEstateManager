@@ -72,8 +72,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
         if (pItem.getItemId() == R.id.menu_action_save) {
-            Toast.makeText(getContext(), "SAVE", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "SAVE", Toast.LENGTH_SHORT).show();
             prepareRealEstate();
+            mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
             return true;
         }
         return super.onOptionsItemSelected(pItem);

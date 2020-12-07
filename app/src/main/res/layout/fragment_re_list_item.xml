@@ -74,6 +74,7 @@
             android:elevation="4dp"/>
     -->
         <ImageView
+            android:id="@+id/frag_re_list_item_img_sold"
             android:layout_width="@dimen/re_photo_sold_size"
             android:layout_height="@dimen/re_photo_sold_size"
             app:layout_constraintEnd_toEndOf="parent"

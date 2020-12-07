@@ -7,18 +7,16 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
-import androidx.navigation.NavHost;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListBinding;
+import com.openclassrooms.realestatemanager.di.Injection;
+import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.view.adapters.ReListAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
 
@@ -52,16 +50,23 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
         initRecyclerView();
     }
 
+    private void configureViewModel() {
+        ReViewModelFactory lFactory = Injection.reViewModelFactory(mContext);
+        mViewModel = new ViewModelProvider(this,lFactory).get(ReListViewModel.class);
+    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ReListViewModel.class);
-        // TODO: Use the ViewModel
+        configureViewModel();
+        mViewModel.getAllRe().observe(getViewLifecycleOwner(), pAllRe -> {
+            mAdapter.setReList(pAllRe);
+            mAdapter.notifyDataSetChanged();
+        });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
-            return NavigationUI.onNavDestinationSelected(pItem,mNavController) || super.onOptionsItemSelected(pItem);
+            return NavigationUI.onNavDestinationSelected(pItem, mNavController) || super.onOptionsItemSelected(pItem);
     }
 
     private void initRecyclerView() {
@@ -79,6 +84,6 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
         lPhotoList.add("https://lemagduchat.ouest-france.fr/images/dossiers/2018-11/chat-drole-113730.jpg");
         lPhotoList.add("https://cdn-s-www.ledauphine.com/images/5FC3042C-0F6B-4D19-87CF-01591980B2D3/NW_detail_M/title-1602592555.jpg");
         lPhotoList.add("https://www.ultrapremiumdirect.com/img/cms/blog/loulou-ronron-therapie.jpg");
-        mAdapter.setReList(lPhotoList);
+        mAdapter.setReListString(lPhotoList);
     }
 }
