@@ -13,7 +13,8 @@ import java.sql.Timestamp;
  * Created by Florence LE BOURNOT on 25/11/2020
  */
 @Entity(tableName="realestate")
-public class RealEstate implements Parcelable {
+//public class RealEstate implements Parcelable {
+public class RealEstate  {
 
     @PrimaryKey(autoGenerate = true)
     private int reId;
@@ -46,6 +47,7 @@ public class RealEstate implements Parcelable {
         reAgentLastName = pReAgentLastName;
     }
 
+    /*
     protected RealEstate(Parcel in) {
         reId = in.readInt();
         reType = in.readString();
@@ -68,7 +70,7 @@ public class RealEstate implements Parcelable {
         public RealEstate[] newArray(int size) {
             return new RealEstate[size];
         }
-    };
+    };*/
 
     public int getReId() {
         return reId;
@@ -185,6 +187,7 @@ public class RealEstate implements Parcelable {
                 '}';
     }
 
+/*
     @Override
     public int describeContents() {
         return 0;
@@ -202,4 +205,5 @@ public class RealEstate implements Parcelable {
         dest.writeString(reDescription);
         dest.writeByte((byte) (reIsSold ? 1 : 0));
     }
+*/
 }

@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.viewmodel;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.openclassrooms.realestatemanager.model.RealEstate;
@@ -19,5 +20,13 @@ public class ReAddEditViewModel extends ViewModel {
 
     public void insertRealEstate(RealEstate pRealEstate){
         mExecutor.execute(() -> mReRepo.insertRealEstate(pRealEstate));
+    }
+
+    public void updateRealEstate(RealEstate pRealEstate){
+        mExecutor.execute(() -> mReRepo.updateRealEstate(pRealEstate));
+    }
+
+    public LiveData<RealEstate> getRealEstate(int pReId) {
+        return mReRepo.selectRealEstate(pReId);
     }
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.openclassrooms.realestatemanager.model.RealEstate;
 
@@ -20,11 +21,14 @@ public interface ReDao {
     LiveData<List<RealEstate>> selectAllRealEstates();
 
     @Insert
-    long insertRealEstate(RealEstate pRealEstate);
+    void insertRealEstate(RealEstate pRealEstate);
 
     @Insert
     void insertRealEstateList(RealEstate... pRealEstates);
 
     @Query("SELECT * FROM RealEstate WHERE reId = :pReId")
     LiveData<RealEstate> selectRealEstate(int pReId);
+
+    @Update
+    void updateRealEstate(RealEstate pRealEstate);
 }

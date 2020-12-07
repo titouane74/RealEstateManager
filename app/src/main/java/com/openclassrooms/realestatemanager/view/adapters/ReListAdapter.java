@@ -2,6 +2,8 @@ package com.openclassrooms.realestatemanager.view.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,9 @@ import java.util.List;
  * Created by Florence LE BOURNOT on 30/11/2020
  */
 public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHolder> {
+
+    public static final String RE_ID_KEY = "RE_ID";
+    public static final String IS_EDIT_KEY = "IS_EDIT";
 
     private static final String TAG = "TAG_ReListAdapter";
     private List<RealEstate> mReList = new ArrayList<>();
@@ -55,8 +60,11 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         pHolder.bindView(mReList.get(position));
 
         pHolder.itemView.setOnClickListener(v -> {
+            Log.d(TAG, "onBindViewHolder List envoi : mReId : " + mReList.get(position).getReId());
             if (mIsTablet) {
-                mNavController.navigate(R.id.reDetailFragment);
+                Bundle lBundle = new Bundle();
+                lBundle.putInt(RE_ID_KEY,mReList.get(position).getReId());
+                mNavController.navigate(R.id.reDetailFragment,lBundle);
                 Toast.makeText(mContext, "TABLET DETAIL", Toast.LENGTH_SHORT).show();
             } else {
                 ReListFragmentDirections.ActionReListFragmentToReDetailFragment lAction =ReListFragmentDirections.actionReListFragmentToReDetailFragment();
@@ -78,7 +86,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
 
 
     static class ReListHolder extends RecyclerView.ViewHolder {
-        FragmentReListItemBinding mBindingHolder;
+        com.openclassrooms.realestatemanager.databinding.FragmentReListItemBinding mBindingHolder;
 
         public ReListHolder(@NonNull FragmentReListItemBinding pBindingHolder) {
             super(pBindingHolder.getRoot());

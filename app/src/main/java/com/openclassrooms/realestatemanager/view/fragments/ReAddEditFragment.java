@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.view.fragments;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
@@ -14,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
@@ -31,7 +32,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
+import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
+import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
+
+public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
     private static final String TAG = "TAG_REAddFragment";
 
@@ -46,6 +50,8 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
     private Calendar mDateCal;
     private boolean mIsTablet;
     private RealEstate mRealEstate = new RealEstate();
+    private int mReId;
+    private boolean mIsEdit;
 
     @Override
     protected int getMenuAttached() {
@@ -53,8 +59,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
     }
 
     @Override
-    protected int getFragmentLayout() { return
-            R.layout.fragment_re_add_edit;
+    protected int getFragmentLayout() {
+        return
+                R.layout.fragment_re_add_edit;
     }
 
     @Override
@@ -70,12 +77,28 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
         mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialogSold());
     }
 
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (getArguments() != null) {
+            mReId = getArguments().getInt(RE_ID_KEY);
+            mIsEdit = getArguments().getBoolean(IS_EDIT_KEY);
+            Log.d(TAG, "onViewCreated: AddEdit args in : " + mReId + " IsEdit : " + mIsEdit);
+        } else {
+            Log.d(TAG, "onViewCreated: AddEdit : args null");
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
         if (pItem.getItemId() == R.id.menu_action_save) {
 //            Toast.makeText(getContext(), "SAVE", Toast.LENGTH_SHORT).show();
             prepareRealEstate();
-            mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
+            if (!mIsTablet) {
+                mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
+            }
             return true;
         }
         return super.onOptionsItemSelected(pItem);
@@ -95,16 +118,17 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
         String lNbRooms = mBinding.fragReAddEditSpinRooms.getSelectedItem().toString();
         String lNbBedRooms = mBinding.fragReAddSpinBedrooms.getSelectedItem().toString();
         String lNbBathRooms = mBinding.fragReAddSpinBathrooms.getSelectedItem().toString();
-        if (lNbRooms.indexOf("+")>0) {
-            lNbRooms = lNbRooms.substring(0,1);
+        if (lNbRooms.indexOf("+") > 0) {
+            lNbRooms = lNbRooms.substring(0, 1);
         }
-        if (lNbBedRooms.indexOf("+")>0) {
-            lNbBedRooms = lNbBedRooms.substring(0,1);
+        if (lNbBedRooms.indexOf("+") > 0) {
+            lNbBedRooms = lNbBedRooms.substring(0, 1);
         }
-        if (lNbBathRooms.indexOf("+")>0) {
-            lNbBathRooms = lNbBathRooms.substring(0,1);
+        if (lNbBathRooms.indexOf("+") > 0) {
+            lNbBathRooms = lNbBathRooms.substring(0, 1);
         }
 
+        mRealEstate.setReId(mReId);
         mRealEstate.setReIsSold(lIsSold);
         mRealEstate.setReAgentFirstName(lAgentFirstName);
         mRealEstate.setReAgentLastName(lAgentLastName);
@@ -117,21 +141,25 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
         mRealEstate.setReNbRooms(Integer.parseInt(lNbRooms));
         mRealEstate.setReNbBedrooms(Integer.parseInt(lNbBedRooms));
         mRealEstate.setReNbBathrooms(Integer.parseInt(lNbBathRooms));
-
-
-        mViewModel.insertRealEstate(mRealEstate);
+        Log.d(TAG, "prepareRealEstate: mReId : " + mReId + " rq_get_re : reId : " + mRealEstate.getReId());
+        if (!mIsEdit) {
+            mViewModel.insertRealEstate(mRealEstate);
+        } else {
+            mViewModel.updateRealEstate(mRealEstate);
+        }
     }
+
     private void configureSpinners() {
-        mBinding.fragReAddEditSpinType.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.type_spinner));
-        mBinding.fragReAddEditSpinRooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReAddSpinBedrooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReAddSpinBathrooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReAddSpinCountry.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.country_spinner));
+        mBinding.fragReAddEditSpinType.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.type_spinner));
+        mBinding.fragReAddEditSpinRooms.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.rooms_spinner));
+        mBinding.fragReAddSpinBedrooms.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.rooms_spinner));
+        mBinding.fragReAddSpinBathrooms.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.rooms_spinner));
+        mBinding.fragReAddSpinCountry.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.country_spinner));
     }
 
     private void initRecyclerView() {
         mAdapter = new AddEditPhotoAdapter();
-        mBinding.fragReAddEditRvPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
+        mBinding.fragReAddEditRvPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mBinding.fragReAddEditRvPhoto.setAdapter(mAdapter);
         initPhotoList();
     }
@@ -150,16 +178,20 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
 
         mAdapter.setPhotoList(lPhotoList);
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         configureViewModel();
+        mViewModel.getRealEstate(mReId).observe(getViewLifecycleOwner(), pRealEstate -> {
+            displayRealEstate(pRealEstate);
+        });
     }
 
     private void configureViewModel() {
         ReViewModelFactory lFactory = Injection.reViewModelFactory(mContext);
-        mViewModel = new ViewModelProvider(this,lFactory).get(ReAddEditViewModel.class);
+        mViewModel = new ViewModelProvider(this, lFactory).get(ReAddEditViewModel.class);
     }
 
 
@@ -175,7 +207,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
                     @SuppressLint("SimpleDateFormat") DateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     mDateCal = Calendar.getInstance();
 
-                    mDateCal.set(year,month,dayOfMonth);
+                    mDateCal.set(year, month, dayOfMonth);
                     String lDate = lDateFormat.format(mDateCal.getTime());
                     mBinding.fragReAddEditEtMarketDate.setText(lDate);
                 },
@@ -195,7 +227,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
                     @SuppressLint("SimpleDateFormat") DateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     mDateCal = Calendar.getInstance();
 
-                    mDateCal.set(year,month,dayOfMonth);
+                    mDateCal.set(year, month, dayOfMonth);
                     String lDate = lDateFormat.format(mDateCal.getTime());
                     mBinding.fragReAddEditEtSoldDate.setText(lDate);
                 },
@@ -206,4 +238,19 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>{
         lDatePickerDialog.show();
     }
 
+    @SuppressLint("SetTextI18n")
+    private void displayRealEstate(RealEstate pRe) {
+        if (pRe != null) {
+            mBinding.fragReAddEditEtPrice.setText(Integer.toString(pRe.getRePrice()));
+            mBinding.fragReAddEditCbSold.setSelected(pRe.isReIsSold());
+//        mBinding.fragReDetTvNbRooms.setText(Integer.toString(pRe.getReNbRooms()));
+//        mBinding.fragReDetTvNbBedrooms.setText(Integer.toString(pRe.getReNbBedrooms()));
+//        mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getReNbBathrooms()));
+            ArrayAdapter<CharSequence> lAdapter = REMHelper.configureSpinAdapter(mContext, R.array.type_spinner);
+            int lPosInAdapter = lAdapter.getPosition(pRe.getReType());
+            mBinding.fragReAddEditSpinType.setSelection(lPosInAdapter);
+            mBinding.fragReAddEditEtDescription.setText(pRe.getReDescription());
+            mBinding.fragReAddEditEtArea.setText(Integer.toString(pRe.getReArea()));
+        }
+    }
 }

@@ -22,4 +22,6 @@ public class ReRepository {
 
     public void insertRealEstate(RealEstate pRealEstate) {mReDao.insertRealEstate(pRealEstate);}
 
+    public void updateRealEstate(RealEstate pRealEstate) {mReDao.updateRealEstate(pRealEstate);}
+
 }

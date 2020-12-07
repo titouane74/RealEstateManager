@@ -10,6 +10,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -20,8 +21,12 @@ import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.view.adapters.ReListAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
 
+import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
+import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
+
 public class ReListFragment extends BaseFragment<FragmentReListBinding> {
 
+    private static final String TAG = "TAG_ReListFragment";
     private ReListViewModel mViewModel;
     private View mFragView;
     private FragmentReListBinding mBinding;
@@ -63,7 +68,25 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
+        Log.d(TAG, "onOptionsItemSelected: LIst: " + pItem.getItemId());
+        Log.d(TAG, "onOptionsItemSelected: LIst: R.id.reAddEditFragment :" + R.id.reAddEditFragment);
+        Log.d(TAG, "onOptionsItemSelected: LIst: R.id.action_reDetailFragment_to_reAddEditFragment : " + R.id.action_reDetailFragment_to_reAddEditFragment);
+        if (pItem.getItemId() == R.id.reAddEditFragment) {
+            Bundle lBundle = new Bundle();
+            lBundle.putInt(RE_ID_KEY,0);
+            lBundle.putBoolean(IS_EDIT_KEY,false);
+            Log.d(TAG, "onOptionsItemSelected: detail envoi reId :0 et isEdit false ");
+            if (mIsTablet) {
+                mNavController.navigate(R.id.reAddEditFragment,lBundle);
+//                Log.d(TAG, "onOptionsItemSelected: detail fragment tablet detail to edit");
+            } else {
+                mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment,lBundle);
+//                Log.d(TAG, "onOptionsItemSelected: detail fragment phone detail to edit");
+            }
+            return super.onOptionsItemSelected(pItem);
+        } else {
             return NavigationUI.onNavDestinationSelected(pItem, mNavController) || super.onOptionsItemSelected(pItem);
+        }
     }
 
     private void initRecyclerView() {

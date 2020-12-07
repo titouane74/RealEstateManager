@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReDetailBinding;
@@ -24,10 +23,12 @@ import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.view.adapters.DetailPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReDetailViewModel;
-import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
+import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
 
 public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
 
@@ -47,7 +48,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
 //        if (mIsTablet) {
 //            return R.menu.menu_general_tablet;
 //        } else {
-            return R.menu.menu_edit;
+        return R.menu.menu_edit;
 //        }
     }
 
@@ -86,13 +87,20 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
-        if (pItem.getItemId() == R.id.menu_action_edit) {
-//            Navigation.findNavController(mFragView).navigate(R.id.action_reDetailFragment_to_reAddEditFragment);
+//        if (pItem.getItemId() == R.id.menu_action_edit) {
+        Log.d(TAG, "onOptionsItemSelected: detail :  " + pItem.getItemId());
+        Log.d(TAG, "onOptionsItemSelected: detail : R.id.reAddEditFragment : " + R.id.reAddEditFragment);
+        if (pItem.getItemId() == R.id.reAddEditFragment) {
+            Bundle lBundle = new Bundle();
+            lBundle.putInt(RE_ID_KEY,mReId);
+            lBundle.putBoolean(IS_EDIT_KEY,true);
+            Log.d(TAG, "onOptionsItemSelected: detail envoi reId : " + mReId);
             if (mIsTablet) {
-                mNavController.navigate(R.id.reAddEditFragment);
+                mNavController.navigate(R.id.reAddEditFragment,lBundle);
                 Log.d(TAG, "onOptionsItemSelected: detail fragment tablet detail to edit");
             } else {
-                mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment);
+
+                mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment,lBundle);
                 Log.d(TAG, "onOptionsItemSelected: detail fragment phone detail to edit");
             }
             return true;
@@ -106,36 +114,44 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
         super.onViewCreated(view, savedInstanceState);
 
         if (getArguments() != null) {
-            ReDetailFragmentArgs lArgs = ReDetailFragmentArgs.fromBundle(getArguments());
 
+            if (!mIsTablet) {
+                ReDetailFragmentArgs lArgs = ReDetailFragmentArgs.fromBundle(getArguments());
 //            RealEstate lRE = lArgs.getRealestate();
-            mReId = lArgs.getReid();
-            Log.i(TAG, "onViewCreated: " + mReId);
-            //displayRealEstate(lRE);
+                mReId = lArgs.getReid();
+                Log.i(TAG, "onViewCreated: " + mReId);
+            } else {
+                mReId = getArguments().getInt(RE_ID_KEY);
+                Log.d(TAG, "onViewCreated: detail mReId: " + mReId);
+            }
+        } else {
+            Log.d(TAG, "onViewCreated: detail : args null");
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private void displayRealEstate(RealEstate pRE) {
-        mBinding.fragReDetTvPrice.setText(Integer.toString(pRE.getRePrice()));
-        mBinding.fragReDetTvNbRooms.setText(Integer.toString(pRE.getReNbRooms()));
-        mBinding.fragReDetTvNbBedrooms.setText(Integer.toString(pRE.getReNbBedrooms()));
-        mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRE.getReNbBathrooms()));
-        mBinding.fragReDetTvType.setText(pRE.getReType());
-        mBinding.fragReDetTvDescription.setText(pRE.getReDescription());
-        mBinding.fragReDetTvArea.setText(Integer.toString(pRE.getReArea()));
+    private void displayRealEstate(RealEstate pRe) {
+        if (pRe != null) {
+            mBinding.fragReDetTvPrice.setText(Integer.toString(pRe.getRePrice()));
+            mBinding.fragReDetTvNbRooms.setText(Integer.toString(pRe.getReNbRooms()));
+            mBinding.fragReDetTvNbBedrooms.setText(Integer.toString(pRe.getReNbBedrooms()));
+            mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getReNbBathrooms()));
+            mBinding.fragReDetTvType.setText(pRe.getReType());
+            mBinding.fragReDetTvDescription.setText(pRe.getReDescription());
+            mBinding.fragReDetTvArea.setText(Integer.toString(pRe.getReArea()));
+        }
     }
 
     private void configureViewModel() {
         ReViewModelFactory lFactory = Injection.reViewModelFactory(mContext);
-        mViewModel = new ViewModelProvider(this,lFactory).get(ReDetailViewModel.class);
+        mViewModel = new ViewModelProvider(this, lFactory).get(ReDetailViewModel.class);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         configureViewModel();
-        mViewModel.getRealEstate(mReId).observe(getViewLifecycleOwner(),pRealEstate -> {
+        mViewModel.getRealEstate(mReId).observe(getViewLifecycleOwner(), pRealEstate -> {
             displayRealEstate(pRealEstate);
         });
     }
