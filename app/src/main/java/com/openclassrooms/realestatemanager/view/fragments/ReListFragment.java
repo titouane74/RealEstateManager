@@ -80,7 +80,7 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
                 mNavController.navigate(R.id.reAddEditFragment,lBundle);
 //                Log.d(TAG, "onOptionsItemSelected: detail fragment tablet detail to edit");
             } else {
-                mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment,lBundle);
+                mNavController.navigate(R.id.action_reListFragment_to_reAddFragment,lBundle);
 //                Log.d(TAG, "onOptionsItemSelected: detail fragment phone detail to edit");
             }
             return super.onOptionsItemSelected(pItem);
