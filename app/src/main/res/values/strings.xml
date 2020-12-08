@@ -44,7 +44,7 @@
     <string name="txt_photo_description">Photo description</string>
     <string name="txt_take_photo">Take photo</string>
     <string name="txt_add_photo">Add photo</string>
-    <string name="txt_area">Area</string>
+    <string name="txt_area">Area (in m²)</string>
     <string name="txt_area_min">Area min</string>
     <string name="txt_area_max">Area max</string>
     <string name="txt_sold">Sold</string>

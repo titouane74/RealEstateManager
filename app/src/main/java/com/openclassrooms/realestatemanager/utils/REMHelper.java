@@ -135,8 +135,45 @@ public class REMHelper {
         }
     }
 
+    /**
+     * Indicator of the support is a tablet in landscape mode
+     * @param pContext : context
+     * @param pIsTablet : boolean : is a tablet or not
+     * @return : boolean : true if it's a tablet in landscape otherwise false
+     */
     public static boolean isTabletLandscape(Context pContext,boolean pIsTablet) {
         return pIsTablet && (getOrientation(pContext) == Configuration.ORIENTATION_LANDSCAPE);
     }
 
+    public static int getPositionInSpinner(Context pContext, int pResource, String pValue ) {
+        return configureSpinAdapter(pContext, pResource).getPosition(pValue);
+    }
+
+    public static String convertSpinRoomToString(int pValue) {
+        if (pValue == 5) {
+            return "5 +";
+        } else {
+            return String.valueOf(pValue);
+        }
+    }
+
+    public static int getPositionInRoomSpinner(Context pContext, int pResource, int pRoom) {
+        return configureSpinAdapter(pContext, pResource).getPosition(convertSpinRoomToString(pRoom));
+    }
+
+    public static int convertSpinnerValueToInt(String pValue) {
+        if (pValue.indexOf("+") > 0) {
+            return Integer.parseInt(pValue.substring(0,1));
+        } else {
+            return Integer.parseInt(pValue);
+        }
+    }
+
+    public static String convertSpinTypeToString(int pValue) {
+        if (pValue == 10) {
+            return "10 +";
+        } else {
+            return String.valueOf(pValue);
+        }
+    }
 }

@@ -20,6 +20,7 @@ import com.openclassrooms.realestatemanager.databinding.FragmentReDetailBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.adapters.DetailPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReDetailViewModel;
 
@@ -127,14 +128,14 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     @SuppressLint("SetTextI18n")
     private void displayRealEstate(RealEstate pRe) {
         if (pRe != null) {
-            mBinding.fragReDetTvPrice.setText(Integer.toString(pRe.getRePrice()));
+            mBinding.fragReDetTvDescription.setText(pRe.getReDescription());
+            mBinding.fragReDetTvAgent.setText(pRe.getReAgentFirstName() + " " + pRe.getReAgentLastName());
+            mBinding.fragReDetTvPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pRe.getRePrice()));
+            mBinding.fragReDetTvType.setText(pRe.getReType());
+            mBinding.fragReDetTvArea.setText(Integer.toString(pRe.getReArea()));
             mBinding.fragReDetTvNbRooms.setText(Integer.toString(pRe.getReNbRooms()));
             mBinding.fragReDetTvNbBedrooms.setText(Integer.toString(pRe.getReNbBedrooms()));
             mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getReNbBathrooms()));
-            mBinding.fragReDetTvType.setText(pRe.getReType());
-            mBinding.fragReDetTvDescription.setText(pRe.getReDescription());
-            mBinding.fragReDetTvArea.setText(Integer.toString(pRe.getReArea()));
-            mBinding.fragReDetTvAgent.setText(pRe.getReAgentFirstName() + " " + pRe.getReAgentLastName());
         }
     }
 

@@ -109,36 +109,29 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         String lType = mBinding.fragReAddEditSpinType.getSelectedItem().toString();
         int lArea = Integer.parseInt(mBinding.fragReAddEditEtArea.getText().toString());
         int lPrice = Integer.parseInt(mBinding.fragReAddEditEtPrice.getText().toString());
-        String lNbRooms = mBinding.fragReAddEditSpinRooms.getSelectedItem().toString();
-        String lNbBedRooms = mBinding.fragReAddSpinBedrooms.getSelectedItem().toString();
-        String lNbBathRooms = mBinding.fragReAddSpinBathrooms.getSelectedItem().toString();
-        if (lNbRooms.indexOf("+") > 0) {
-            lNbRooms = lNbRooms.substring(0, 1);
-        }
-        if (lNbBedRooms.indexOf("+") > 0) {
-            lNbBedRooms = lNbBedRooms.substring(0, 1);
-        }
-        if (lNbBathRooms.indexOf("+") > 0) {
-            lNbBathRooms = lNbBathRooms.substring(0, 1);
-        }
+        int lNbRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinRooms.getSelectedItem().toString());
+        int lNbBedRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBedrooms.getSelectedItem().toString());
+        int lNbBathRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBathrooms.getSelectedItem().toString());
 
-        mRealEstate.setReId(mReId);
+        mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
+                lAgentFirstName, lAgentLastName);
+/*
         mRealEstate.setReIsSold(lIsSold);
         mRealEstate.setReAgentFirstName(lAgentFirstName);
         mRealEstate.setReAgentLastName(lAgentLastName);
-
         mRealEstate.setReDescription(lDescription);
-
         mRealEstate.setReType(lType);
         mRealEstate.setReArea(lArea);
         mRealEstate.setRePrice(lPrice);
-        mRealEstate.setReNbRooms(Integer.parseInt(lNbRooms));
-        mRealEstate.setReNbBedrooms(Integer.parseInt(lNbBedRooms));
-        mRealEstate.setReNbBathrooms(Integer.parseInt(lNbBathRooms));
-        Log.d(TAG, "prepareRealEstate: mReId : " + mReId + " rq_get_re : reId : " + mRealEstate.getReId());
+        mRealEstate.setReNbRooms(lNbRooms);
+        mRealEstate.setReNbBedrooms(lNbBedRooms);
+        mRealEstate.setReNbBathrooms(lNbBathRooms);
+*/
+
         if (!mIsEdit) {
             mViewModel.insertRealEstate(mRealEstate);
         } else {
+            mRealEstate.setReId(mReId);
             mViewModel.updateRealEstate(mRealEstate);
         }
     }
@@ -146,9 +139,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private void configureSpinners() {
         mBinding.fragReAddEditSpinType.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.type_spinner));
         mBinding.fragReAddEditSpinRooms.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.rooms_spinner));
-        mBinding.fragReAddSpinBedrooms.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.rooms_spinner));
-        mBinding.fragReAddSpinBathrooms.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.rooms_spinner));
-        mBinding.fragReAddSpinCountry.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.country_spinner));
+        mBinding.fragReAddEditSpinBedrooms.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.rooms_spinner));
+        mBinding.fragReAddEditSpinBathrooms.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.rooms_spinner));
+        mBinding.fragReAddEditSpinCountry.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.country_spinner));
     }
 
     private void initRecyclerView() {
@@ -234,17 +227,31 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
     @SuppressLint("SetTextI18n")
     private void displayRealEstate(RealEstate pRe) {
+        int lPosInAdapter = 0;
+        String lNbRooms = "0";
+
         if (pRe != null) {
             mBinding.fragReAddEditEtPrice.setText(Integer.toString(pRe.getRePrice()));
             mBinding.fragReAddEditCbSold.setSelected(pRe.isReIsSold());
-//        mBinding.fragReDetTvNbRooms.setText(Integer.toString(pRe.getReNbRooms()));
-//        mBinding.fragReDetTvNbBedrooms.setText(Integer.toString(pRe.getReNbBedrooms()));
-//        mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getReNbBathrooms()));
+
             ArrayAdapter<CharSequence> lAdapter = REMHelper.configureSpinAdapter(mContext, R.array.type_spinner);
-            int lPosInAdapter = lAdapter.getPosition(pRe.getReType());
+            lPosInAdapter = lAdapter.getPosition(pRe.getReType());
             mBinding.fragReAddEditSpinType.setSelection(lPosInAdapter);
+
+            lPosInAdapter = REMHelper.getPositionInRoomSpinner(mContext, R.array.rooms_spinner, pRe.getReNbRooms());
+            mBinding.fragReAddEditSpinRooms.setSelection(lPosInAdapter);
+
+            lNbRooms = REMHelper.convertSpinRoomToString(pRe.getReNbBedrooms());
+            lPosInAdapter = REMHelper.getPositionInSpinner(mContext, R.array.rooms_spinner, lNbRooms);
+            mBinding.fragReAddEditSpinBedrooms.setSelection(lPosInAdapter);
+            lNbRooms = REMHelper.convertSpinRoomToString(pRe.getReNbBathrooms());
+            lPosInAdapter = REMHelper.getPositionInSpinner(mContext, R.array.rooms_spinner, lNbRooms);
+            mBinding.fragReAddEditSpinBathrooms.setSelection(lPosInAdapter);
+
             mBinding.fragReAddEditEtDescription.setText(pRe.getReDescription());
             mBinding.fragReAddEditEtArea.setText(Integer.toString(pRe.getReArea()));
+
+
         }
     }
 }

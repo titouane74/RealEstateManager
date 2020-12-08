@@ -227,6 +227,7 @@
                     style="@style/ReTheme.TxtView.WitdthWrapContent"
                     android:text="@string/txt_type"
                     android:textSize="@dimen/default_txt_size_large"
+                    android:textAlignment="textEnd"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_type"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_tv_txt_type"
                     app:layout_constraintTop_toTopOf="@id/frag_re_det_img_type" />
@@ -251,6 +252,7 @@
                     android:id="@+id/frag_re_det_tv_area"
                     style="@style/ReTheme.TxtView.WitdthWrapContent"
                     android:text="@string/txt_area"
+                    android:textAlignment="textEnd"
                     app:layout_constraintBottom_toBottomOf="@+id/frag_re_det_img_area"
                     app:layout_constraintStart_toEndOf="@id/frag_re_det_tv_txt_area"
                     app:layout_constraintTop_toTopOf="@id/frag_re_det_img_area"/>

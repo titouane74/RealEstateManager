@@ -33,6 +33,19 @@ public class RealEstate  {
 
     public RealEstate() { }
 
+    public RealEstate(String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName, String pReAgentLastName) {
+        reType = pReType;
+        rePrice = pRePrice;
+        reArea = pReArea;
+        reNbRooms = pReNbRooms;
+        reNbBedrooms = pReNbBedrooms;
+        reNbBathrooms = pReNbBathrooms;
+        reDescription = pReDescription;
+        reIsSold = pReIsSold;
+        reAgentFirstName = pReAgentFirstName;
+        reAgentLastName = pReAgentLastName;
+    }
+
     public RealEstate(int pReId, String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName, String pReAgentLastName) {
         reId = pReId;
         reType = pReType;

@@ -191,7 +191,7 @@
                     app:layout_constraintTop_toBottomOf="@id/frag_re_add_edit_et_county" />
 
                 <Spinner
-                    android:id="@+id/frag_re_add_spin_country"
+                    android:id="@+id/frag_re_add_edit_spin_country"
                     style="@style/ReTheme.Spinner"
                     android:layout_marginEnd="@dimen/default_margin_end"
                     android:prompt="@string/txt_country"
@@ -311,9 +311,9 @@
                     android:id="@+id/frag_re_add_edit_img_bedroom"
                     style="@style/ReTheme.ImgView"
                     android:contentDescription="@string/default_img_description"
-                    app:layout_constraintBottom_toBottomOf="@id/frag_re_add_spin_bedrooms"
+                    app:layout_constraintBottom_toBottomOf="@id/frag_re_add_edit_spin_bedrooms"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/frag_re_add_spin_bedrooms"
+                    app:layout_constraintTop_toTopOf="@id/frag_re_add_edit_spin_bedrooms"
                     app:srcCompat="@drawable/ic_bedroom" />
                 <TextView
                     android:id="@+id/frag_re_add_edit_tv_txt_nb_bedrooms"
@@ -324,7 +324,7 @@
                     app:layout_constraintTop_toTopOf="@id/frag_re_add_edit_img_bedroom" />
 
                 <Spinner
-                    android:id="@+id/frag_re_add_spin_bedrooms"
+                    android:id="@+id/frag_re_add_edit_spin_bedrooms"
                     style="@style/ReTheme.SpinnerRoomPhoto.Land"
                     android:layout_marginEnd="@dimen/default_margin_end"
                     android:prompt="@string/txt_bedrooms"
@@ -336,9 +336,9 @@
                     android:id="@+id/frag_re_add_edit_img_bathroom"
                     style="@style/ReTheme.ImgView"
                     android:contentDescription="@string/default_img_description"
-                    app:layout_constraintBottom_toBottomOf="@id/frag_re_add_spin_bathrooms"
+                    app:layout_constraintBottom_toBottomOf="@id/frag_re_add_edit_spin_bathrooms"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/frag_re_add_spin_bathrooms"
+                    app:layout_constraintTop_toTopOf="@id/frag_re_add_edit_spin_bathrooms"
                     app:srcCompat="@drawable/ic_bathroom" />
                 <TextView
                     android:id="@+id/frag_re_add_edit_tv_txt_nb_bathrooms"
@@ -349,11 +349,11 @@
                     app:layout_constraintTop_toTopOf="@id/frag_re_add_edit_img_bathroom" />
 
                 <Spinner
-                    android:id="@+id/frag_re_add_spin_bathrooms"
+                    android:id="@+id/frag_re_add_edit_spin_bathrooms"
                     style="@style/ReTheme.SpinnerRoomPhoto.Land"
                     android:prompt="@string/txt_bathrooms"
                     app:layout_constraintStart_toEndOf="@id/frag_re_add_edit_tv_txt_nb_bathrooms"
-                    app:layout_constraintTop_toBottomOf="@id/frag_re_add_spin_bedrooms"
+                    app:layout_constraintTop_toBottomOf="@id/frag_re_add_edit_spin_bedrooms"
                     app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
