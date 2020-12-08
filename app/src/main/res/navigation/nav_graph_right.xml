@@ -15,10 +15,10 @@
         android:name="com.openclassrooms.realestatemanager.view.fragments.ReDetailFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_re_detail">
-        <argument
+<!--        <argument
             android:name="reid"
             android:defaultValue="0"
-            app:argType="integer" />
+            app:argType="integer" />-->
         <action
             android:id="@+id/action_reDetailFragment_to_reAddEditFragment"
             app:destination="@id/reAddEditFragment" />

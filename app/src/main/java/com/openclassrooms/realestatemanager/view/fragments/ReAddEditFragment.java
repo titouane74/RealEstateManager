@@ -48,7 +48,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private Context mContext;
     private NavController mNavController;
     private Calendar mDateCal;
-    private boolean mIsTablet;
+    private boolean mIsTabletLandscape;
     private RealEstate mRealEstate = new RealEstate();
     private int mReId;
     private boolean mIsEdit;
@@ -59,22 +59,17 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     }
 
     @Override
-    protected int getFragmentLayout() {
-        return
-                R.layout.fragment_re_add_edit;
-    }
-
-    @Override
-    protected void configureDesign(FragmentReAddEditBinding pBinding, NavController pNavController, boolean pIsTablet) {
+    protected void configureDesign(FragmentReAddEditBinding pBinding, NavController pNavController, boolean pIsTablet, boolean pIsTabletLandscape) {
         mBinding = pBinding;
         mFragView = mBinding.getRoot();
         mContext = getContext();
         mNavController = pNavController;
-        mIsTablet = pIsTablet;
+        mIsTabletLandscape = pIsTabletLandscape;
         configureSpinners();
         initRecyclerView();
         mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialogMarket());
         mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialogSold());
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -94,9 +89,8 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
         if (pItem.getItemId() == R.id.menu_action_save) {
-//            Toast.makeText(getContext(), "SAVE", Toast.LENGTH_SHORT).show();
             prepareRealEstate();
-            if (!mIsTablet) {
+            if (!mIsTabletLandscape) {
                 mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
             }
             return true;

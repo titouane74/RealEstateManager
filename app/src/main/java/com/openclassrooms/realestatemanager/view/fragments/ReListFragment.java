@@ -33,21 +33,18 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
 
     private ReListAdapter mAdapter;
     private Context mContext;
-    private boolean mIsTablet;
+    private boolean mIsTabletLandscape;
     private NavController mNavController;
-
-    @Override
-    protected int getFragmentLayout() { return R.layout.fragment_re_list; }
 
     @Override
     protected int getMenuAttached() {return R.menu.menu_general;}
 
     @Override
-    protected void configureDesign(FragmentReListBinding pBinding, NavController pNavController, boolean pIsTablet) {
+    protected void configureDesign(FragmentReListBinding pBinding, NavController pNavController, boolean pIsTablet, boolean pIsTabletLandscape) {
         mBinding = pBinding;
         mFragView = mBinding.getRoot();
         mContext = mFragView.getContext();
-        mIsTablet = pIsTablet;
+        mIsTabletLandscape = pIsTabletLandscape;
         mNavController = pNavController;
         initRecyclerView();
     }
@@ -68,21 +65,19 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
-        Log.d(TAG, "onOptionsItemSelected: LIst: " + pItem.getItemId());
-        Log.d(TAG, "onOptionsItemSelected: LIst: R.id.reAddEditFragment :" + R.id.reAddEditFragment);
-        Log.d(TAG, "onOptionsItemSelected: LIst: R.id.action_reDetailFragment_to_reAddEditFragment : " + R.id.action_reDetailFragment_to_reAddEditFragment);
+//        Log.d(TAG, "onOptionsItemSelected: LIst: " + pItem.getItemId());
+//        Log.d(TAG, "onOptionsItemSelected: LIst: R.id.reAddEditFragment :" + R.id.reAddEditFragment);
+//        Log.d(TAG, "onOptionsItemSelected: LIst: R.id.action_reDetailFragment_to_reAddEditFragment : " + R.id.action_reDetailFragment_to_reAddEditFragment);
         if (pItem.getItemId() == R.id.reAddEditFragment) {
             Bundle lBundle = new Bundle();
             lBundle.putInt(RE_ID_KEY,0);
             lBundle.putBoolean(IS_EDIT_KEY,false);
-            Log.d(TAG, "onOptionsItemSelected: detail envoi reId :0 et isEdit false ");
-            if (mIsTablet) {
-                mNavController.navigate(R.id.reAddEditFragment,lBundle);
+//            if (mIsTabletLandscape) {
+//                mNavController.navigate(R.id.reAddEditFragment,lBundle);
 //                Log.d(TAG, "onOptionsItemSelected: detail fragment tablet detail to edit");
-            } else {
+//            } else {
                 mNavController.navigate(R.id.action_reListFragment_to_reAddFragment,lBundle);
-//                Log.d(TAG, "onOptionsItemSelected: detail fragment phone detail to edit");
-            }
+//            }
             return super.onOptionsItemSelected(pItem);
         } else {
             return NavigationUI.onNavDestinationSelected(pItem, mNavController) || super.onOptionsItemSelected(pItem);

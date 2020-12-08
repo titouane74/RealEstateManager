@@ -21,7 +21,6 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
     private String mPrice;
     private String mContribution;
     private NavController mNavController;
-    private boolean mIsTablet;
 
     @Override
     protected int getMenuAttached() {
@@ -29,17 +28,11 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
     }
 
     @Override
-    protected int getFragmentLayout() {
-        return R.layout.fragment_loan;
-    }
-
-    @Override
-    protected void configureDesign(FragmentLoanBinding pBinding, NavController pNavController, boolean pIsTablet) {
+    protected void configureDesign(FragmentLoanBinding pBinding, NavController pNavController, boolean pIsTablet, boolean pIsTabletLandscape) {
         mBinding = pBinding;
         View lFragView = mBinding.getRoot();
         mContext = lFragView.getContext();
         mNavController = pNavController;
-        mIsTablet = pIsTablet;
 
         mBinding.fragLoanEtPrice.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {

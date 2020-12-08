@@ -24,21 +24,18 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     private View mFragView;
     private Context mContext;
     private NavController mNavController;
-    private boolean mIsTablet;
+    private boolean mIsTabletLandscape;
 
     @Override
     protected int getMenuAttached() { return R.menu.menu_confirm; }
 
     @Override
-    protected int getFragmentLayout() { return R.layout.fragment_re_search; }
-
-    @Override
-    protected void configureDesign(FragmentReSearchBinding pBinding, NavController pNavController, boolean pIsTablet) {
+    protected void configureDesign(FragmentReSearchBinding pBinding, NavController pNavController, boolean pIsTablet, boolean pIsTabletLandscape) {
         mBinding = pBinding;
         mFragView = mBinding.getRoot();
         mContext = getContext();
         mNavController = pNavController;
-        mIsTablet = pIsTablet;
+        mIsTabletLandscape = pIsTabletLandscape;
         configureSpinners();
 
         mBinding.fragReSearchEtMarketDate.setOnClickListener(v -> displayCalendarDialogMarket ());

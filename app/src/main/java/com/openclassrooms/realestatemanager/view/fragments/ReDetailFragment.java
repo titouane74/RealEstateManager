@@ -9,7 +9,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -39,13 +38,13 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     private ReDetailViewModel mViewModel;
     private Context mContext;
     private NavController mNavController;
-    private boolean mIsTablet;
+    private boolean mIsTabletLandscape;
     private RealEstate mRE;
     private int mReId;
 
     @Override
     protected int getMenuAttached() {
-//        if (mIsTablet) {
+//        if (mIsTabletLandscape) {
 //            return R.menu.menu_general_tablet;
 //        } else {
         return R.menu.menu_edit;
@@ -53,17 +52,12 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     }
 
     @Override
-    protected int getFragmentLayout() {
-        return R.layout.fragment_re_detail;
-    }
-
-    @Override
-    protected void configureDesign(FragmentReDetailBinding pBinding, NavController pNavController, boolean pIsTablet) {
+    protected void configureDesign(FragmentReDetailBinding pBinding, NavController pNavController, boolean pIsTablet, boolean pIsTabletLandscape) {
         mBinding = pBinding;
         mFragView = mBinding.getRoot();
         mContext = getContext();
         mNavController = pNavController;
-        mIsTablet = pIsTablet;
+        mIsTabletLandscape = pIsTabletLandscape;
         initRecyclerView();
     }
 
@@ -95,14 +89,13 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             lBundle.putInt(RE_ID_KEY,mReId);
             lBundle.putBoolean(IS_EDIT_KEY,true);
             Log.d(TAG, "onOptionsItemSelected: detail envoi reId : " + mReId);
-            if (mIsTablet) {
-                mNavController.navigate(R.id.reAddEditFragment,lBundle);
-                Log.d(TAG, "onOptionsItemSelected: detail fragment tablet detail to edit");
-            } else {
-
+//            if (mIsTabletLandscape) {
+//                mNavController.navigate(R.id.reAddEditFragment,lBundle);
+//                Log.d(TAG, "onOptionsItemSelected: detail fragment tablet detail to edit");
+//            } else {
                 mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment,lBundle);
-                Log.d(TAG, "onOptionsItemSelected: detail fragment phone detail to edit");
-            }
+//                Log.d(TAG, "onOptionsItemSelected: detail fragment phone detail to edit");
+//            }
             return true;
         }
         return super.onOptionsItemSelected(pItem);
@@ -114,18 +107,20 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
         super.onViewCreated(view, savedInstanceState);
 
         if (getArguments() != null) {
-
-            if (!mIsTablet) {
+//TODO
+// Deactivation of the safe args with the navigation component causing a build warning
+/*
+            if (!mIsTabletLandscape) {
                 ReDetailFragmentArgs lArgs = ReDetailFragmentArgs.fromBundle(getArguments());
-//            RealEstate lRE = lArgs.getRealestate();
                 mReId = lArgs.getReid();
                 Log.i(TAG, "onViewCreated: " + mReId);
             } else {
                 mReId = getArguments().getInt(RE_ID_KEY);
                 Log.d(TAG, "onViewCreated: detail mReId: " + mReId);
             }
-        } else {
-            Log.d(TAG, "onViewCreated: detail : args null");
+*/
+            mReId = getArguments().getInt(RE_ID_KEY);
+            Log.d(TAG, "onViewCreated: detail mReId: " + mReId);
         }
     }
 
@@ -139,6 +134,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             mBinding.fragReDetTvType.setText(pRe.getReType());
             mBinding.fragReDetTvDescription.setText(pRe.getReDescription());
             mBinding.fragReDetTvArea.setText(Integer.toString(pRe.getReArea()));
+            mBinding.fragReDetTvAgent.setText(pRe.getReAgentFirstName() + " " + pRe.getReAgentLastName());
         }
     }
 

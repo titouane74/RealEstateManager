@@ -127,12 +127,16 @@ public class REMHelper {
      * @return : return the right nav_host_fragment id
      */
     public static int getNavHostId(Context pContext,boolean pIsTablet) {
-        if ((pIsTablet) && (getOrientation(pContext) == Configuration.ORIENTATION_LANDSCAPE)) {
+        if (isTabletLandscape(pContext, pIsTablet)) {
+            //return R.id.nav_host_fragment;
             return R.id.nav_right_fragment;
-//            return R.id.nav_host_fragment;
         } else {
             return R.id.nav_host_fragment;
         }
+    }
+
+    public static boolean isTabletLandscape(Context pContext,boolean pIsTablet) {
+        return pIsTablet && (getOrientation(pContext) == Configuration.ORIENTATION_LANDSCAPE);
     }
 
 }

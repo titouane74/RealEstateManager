@@ -60,16 +60,18 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         pHolder.bindView(mReList.get(position));
 
         pHolder.itemView.setOnClickListener(v -> {
-            Log.d(TAG, "onBindViewHolder List envoi : mReId : " + mReList.get(position).getReId());
-            if (mIsTablet) {
-                Bundle lBundle = new Bundle();
-                lBundle.putInt(RE_ID_KEY,mReList.get(position).getReId());
+            Bundle lBundle = new Bundle();
+            lBundle.putInt(RE_ID_KEY,mReList.get(position).getReId());
+
+            if (REMHelper.isTabletLandscape(mContext,mIsTablet)) {
                 mNavController.navigate(R.id.reDetailFragment,lBundle);
-                Toast.makeText(mContext, "TABLET DETAIL", Toast.LENGTH_SHORT).show();
             } else {
-                ReListFragmentDirections.ActionReListFragmentToReDetailFragment lAction =ReListFragmentDirections.actionReListFragmentToReDetailFragment();
-                lAction.setReid(mReList.get(position).getReId());
-                mNavController.navigate(lAction);
+//TODO
+// Deactivation of the safe args with the navigation component causing a build warning
+//                ReListFragmentDirections.ActionReListFragmentToReDetailFragment lAction =ReListFragmentDirections.actionReListFragmentToReDetailFragment();
+//                lAction.setReid(mReList.get(position).getReId());
+//                mNavController.navigate(lAction);
+                mNavController.navigate(R.id.action_reListFragment_to_reDetailFragment,lBundle);
             }
         });
 
