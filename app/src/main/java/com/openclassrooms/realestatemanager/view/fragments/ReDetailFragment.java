@@ -151,6 +151,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
         mViewModel.getRealEstate(mReId).observe(getViewLifecycleOwner(), pRealEstate -> {
             displayRealEstate(pRealEstate);
         });
+
     }
 
 }

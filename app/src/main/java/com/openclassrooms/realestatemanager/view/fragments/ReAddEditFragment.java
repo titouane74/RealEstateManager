@@ -21,6 +21,7 @@ import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
+import com.openclassrooms.realestatemanager.model.ReLocationAdress;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
@@ -49,9 +50,11 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private NavController mNavController;
     private Calendar mDateCal;
     private boolean mIsTabletLandscape;
-    private RealEstate mRealEstate = new RealEstate();
-    private int mReId;
     private boolean mIsEdit;
+
+    private RealEstate mRealEstate = new RealEstate();
+    private long mReId;
+    private ReLocationAdress mReLocationAdress = new ReLocationAdress();
 
     @Override
     protected int getMenuAttached() {
@@ -113,6 +116,8 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         int lNbBedRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBedrooms.getSelectedItem().toString());
         int lNbBathRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBathrooms.getSelectedItem().toString());
 
+        managePoi();
+
         mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
                 lAgentFirstName, lAgentLastName);
 /*
@@ -130,10 +135,40 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
         if (!mIsEdit) {
             mViewModel.insertRealEstate(mRealEstate);
+            mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
+                manageLocation(pMaxReId);
+            });
         } else {
             mRealEstate.setReId(mReId);
             mViewModel.updateRealEstate(mRealEstate);
         }
+    }
+
+    private void manageLocation(int pMaxReId) {
+        String lStreet = mBinding.fragReAddEditEtStreet.getText().toString();
+        String lDistrict = mBinding.fragReAddEditEtDistrict.getText().toString();
+        String lCity = mBinding.fragReAddEditEtCity.getText().toString();
+        String lCounty = mBinding.fragReAddEditEtCounty.getText().toString();
+        int lZipCode = Integer.parseInt(mBinding.fragReAddEditEtZipCode.getText().toString());
+        String lCountry = mBinding.fragReAddEditSpinCountry.getSelectedItem().toString();
+
+        mReLocationAdress = new ReLocationAdress(pMaxReId, lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry);
+        if (!mIsEdit) {
+            mViewModel.insertReLocation(mReLocationAdress);
+        } else {
+            //TODO
+            //mReLocation.setLocId();
+        }
+    }
+
+    private void managePoi() {
+/*                <item>@string/poi_restaurant</item>
+        <item>@string/poi_subway</item>
+        <item>@string/poi_school</item>
+        <item>@string/poi_park</item>
+        <item>@string/poi_store</item>
+        <item>@string/poi_bank</item>*/
+
     }
 
     private void configureSpinners() {
@@ -171,9 +206,11 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         super.onActivityCreated(savedInstanceState);
 
         configureViewModel();
-        mViewModel.getRealEstate(mReId).observe(getViewLifecycleOwner(), pRealEstate -> {
-            displayRealEstate(pRealEstate);
-        });
+//        if (mIsEdit) {
+            mViewModel.getRealEstate(mReId).observe(getViewLifecycleOwner(), pRealEstate -> {
+                displayRealEstate(pRealEstate);
+            });
+//        }
     }
 
     private void configureViewModel() {

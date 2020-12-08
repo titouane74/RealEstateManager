@@ -61,7 +61,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
 
         pHolder.itemView.setOnClickListener(v -> {
             Bundle lBundle = new Bundle();
-            lBundle.putInt(RE_ID_KEY,mReList.get(position).getReId());
+            lBundle.putLong(RE_ID_KEY,mReList.get(position).getReId());
 
             if (REMHelper.isTabletLandscape(mContext,mIsTablet)) {
                 mNavController.navigate(R.id.reDetailFragment,lBundle);

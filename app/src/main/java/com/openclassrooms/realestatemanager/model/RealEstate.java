@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 public class RealEstate  {
 
     @PrimaryKey(autoGenerate = true)
-    private int reId;
+    private long reId;
     private String reType;
     private int rePrice;
     private int reArea;
@@ -46,7 +46,7 @@ public class RealEstate  {
         reAgentLastName = pReAgentLastName;
     }
 
-    public RealEstate(int pReId, String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName, String pReAgentLastName) {
+    public RealEstate(long pReId, String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName, String pReAgentLastName) {
         reId = pReId;
         reType = pReType;
         rePrice = pRePrice;
@@ -85,11 +85,11 @@ public class RealEstate  {
         }
     };*/
 
-    public int getReId() {
+    public long getReId() {
         return reId;
     }
 
-    public void setReId(int pReId) {
+    public void setReId(long pReId) {
         reId = pReId;
     }
 
@@ -97,9 +97,7 @@ public class RealEstate  {
         return reType;
     }
 
-    public void setReType(String pReType) {
-        reType = pReType;
-    }
+    public void setReType(String pReType) { reType = pReType; }
 
     public int getRePrice() {
         return rePrice;

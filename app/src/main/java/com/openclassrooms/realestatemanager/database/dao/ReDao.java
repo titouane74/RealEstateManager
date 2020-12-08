@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 
 import java.util.List;
 
@@ -17,8 +19,19 @@ import java.util.List;
 @Dao
 public interface ReDao {
 
-    @Query("SELECT * FROM RealEstate")
+    @Query("SELECT * FROM realestate")
     LiveData<List<RealEstate>> selectAllRealEstates();
+
+    @Query("SELECT * FROM realestate WHERE reid = :pReId")
+    LiveData<RealEstate> selectRealEstate(long pReId);
+
+    @Query("SELECT max(reid) FROM realestate")
+    LiveData<Integer> selectMaxReId();
+/*
+    @Transaction
+    @Query("SELECT * FROM realestate WHERE reid = :pReId")
+    public RealEstateComplete getReComplete(long pReId);
+*/
 
     @Insert
     void insertRealEstate(RealEstate pRealEstate);
@@ -26,9 +39,8 @@ public interface ReDao {
     @Insert
     void insertRealEstateList(RealEstate... pRealEstates);
 
-    @Query("SELECT * FROM RealEstate WHERE reId = :pReId")
-    LiveData<RealEstate> selectRealEstate(int pReId);
-
     @Update
     void updateRealEstate(RealEstate pRealEstate);
+
+
 }
