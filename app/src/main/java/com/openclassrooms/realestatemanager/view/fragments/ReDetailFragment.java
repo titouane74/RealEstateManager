@@ -43,7 +43,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     private NavController mNavController;
     private boolean mIsTabletLandscape;
     private RealEstate mRE;
-    private int mReId;
+    private long mReId;
 
     @Override
     protected int getMenuAttached() {
@@ -89,7 +89,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
         Log.d(TAG, "onOptionsItemSelected: detail : R.id.reAddEditFragment : " + R.id.reAddEditFragment);
         if (pItem.getItemId() == R.id.reAddEditFragment) {
             Bundle lBundle = new Bundle();
-            lBundle.putInt(RE_ID_KEY, mReId);
+            lBundle.putLong(RE_ID_KEY, mReId);
             lBundle.putBoolean(IS_EDIT_KEY, true);
             Log.d(TAG, "onOptionsItemSelected: detail envoi reId : " + mReId);
 //            if (mIsTabletLandscape) {
@@ -122,25 +122,10 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
                 Log.d(TAG, "onViewCreated: detail mReId: " + mReId);
             }
 */
-            mReId = getArguments().getInt(RE_ID_KEY);
+            mReId = getArguments().getLong(RE_ID_KEY);
             Log.d(TAG, "onViewCreated: detail mReId: " + mReId);
         }
     }
-
-    @SuppressLint("SetTextI18n")
-    private void displayRealEstate(RealEstate pRe) {
-        if (pRe != null) {
-            mBinding.fragReDetTvDescription.setText(pRe.getReDescription());
-            mBinding.fragReDetTvAgent.setText(pRe.getReAgentFirstName() + " " + pRe.getReAgentLastName());
-            mBinding.fragReDetTvPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pRe.getRePrice()));
-            mBinding.fragReDetTvType.setText(pRe.getReType());
-            mBinding.fragReDetTvArea.setText(Integer.toString(pRe.getReArea()));
-            mBinding.fragReDetTvNbRooms.setText(Integer.toString(pRe.getReNbRooms()));
-            mBinding.fragReDetTvNbBedrooms.setText(Integer.toString(pRe.getReNbBedrooms()));
-            mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getReNbBathrooms()));
-        }
-    }
-
     private void configureViewModel() {
         ReViewModelFactory lFactory = Injection.reViewModelFactory(mContext);
         mViewModel = new ViewModelProvider(this, lFactory).get(ReDetailViewModel.class);
@@ -150,14 +135,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         configureViewModel();
-/*
-        mViewModel.selectRealEstate(mReId).observe(getViewLifecycleOwner(), pRealEstate -> {
-            displayRealEstate(pRealEstate);
-        });
-*/
         mViewModel.selectReComplete(mReId).observe(getViewLifecycleOwner(), pRealEstateComplete -> {
-            Log.d(TAG, "onActivityCreated: " + pRealEstateComplete.mPoiList.size());
-            Log.d(TAG, "onActivityCreated: " + pRealEstateComplete.getPoiList().size());
             displayReComplete(pRealEstateComplete);
         });
     }
@@ -165,51 +143,75 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     @SuppressLint("SetTextI18n")
     private void displayReComplete(RealEstateComplete pRe) {
         if (pRe != null) {
-            Log.d(TAG, "displayReComplete: poi list : " + pRe.getPoiList() + " size : " + pRe.getPoiList().size());
             for (RePoi lPoi : pRe.getPoiList()) {
-                Log.d(TAG, "displayReComplete: poi : " + lPoi.getPoiName());
-                if(lPoi.getPoiName().equals(getString(R.string.poi_restaurant))) {
-                    mBinding.fragReDetPoiRestaurant.setSelected(true);
-                } else if(lPoi.getPoiName().equals(getString(R.string.poi_subway))) {
-                    mBinding.fragReDetPoiSubway.setSelected(true);
-                } else if(lPoi.getPoiName().equals(getString(R.string.poi_school))) {
-                    mBinding.fragReDetPoiSchool.setSelected(true);
-                } else if(lPoi.getPoiName().equals(getString(R.string.poi_health))) {
-                    mBinding.fragReDetPoiHealth.setSelected(true);
-                } else if(lPoi.getPoiName().equals(getString(R.string.poi_food))) {
-                    mBinding.fragReDetPoiFood.setSelected(true);
-                } else if(lPoi.getPoiName().equals(getString(R.string.poi_bank))) {
-                    mBinding.fragReDetPoiBank.setSelected(true);
-                } else if(lPoi.getPoiName().equals(getString(R.string.poi_store))) {
-                    mBinding.fragReDetPoiStore.setSelected(true);
-                } else if(lPoi.getPoiName().equals(getString(R.string.poi_park))) {
-                    mBinding.fragReDetPoiPark.setSelected(true);
+                if (lPoi.getPoiName().equals(getString(R.string.poi_restaurant))) {
+                    mBinding.fragReDetPoiRestaurant.setChecked(true);
+                } else if (lPoi.getPoiName().equals(getString(R.string.poi_subway))) {
+                    mBinding.fragReDetPoiSubway.setChecked(true);
+                } else if (lPoi.getPoiName().equals(getString(R.string.poi_school))) {
+                    mBinding.fragReDetPoiSchool.setChecked(true);
+                } else if (lPoi.getPoiName().equals(getString(R.string.poi_health))) {
+                    mBinding.fragReDetPoiHealth.setChecked(true);
+                } else if (lPoi.getPoiName().equals(getString(R.string.poi_food))) {
+                    mBinding.fragReDetPoiFood.setChecked(true);
+                } else if (lPoi.getPoiName().equals(getString(R.string.poi_bank))) {
+                    mBinding.fragReDetPoiBank.setChecked(true);
+                } else if (lPoi.getPoiName().equals(getString(R.string.poi_store))) {
+                    mBinding.fragReDetPoiStore.setChecked(true);
+                } else if (lPoi.getPoiName().equals(getString(R.string.poi_park))) {
+                    mBinding.fragReDetPoiPark.setChecked(true);
                 }
 /*
-                //TODO switch bug sur le getString
+//TODO case avec getString non reconnu
                 switch (lPoi.getPoiName()) {
-                    case getString(R.string.poi_restaurant) :
-                        mBinding.fragReDetPoiRestaurant.setSelected(true);
+                    case getString(R.string.poi_restaurant):
+                        mBinding.fragReDetPoiRestaurant.setChecked(true);
                         break;
-                    case getString(R.string.poi_subway) :
-                        mBinding.fragReDetPoiRestaurant.setSelected(true);
-                        break;                    default:
+                    case getString(R.string.poi_subway):
+                        mBinding.fragReDetPoiSubway.setChecked(true);
+                        break;
+                    case getString(R.string.poi_school):
+                        mBinding.fragReDetPoiSchool.setChecked(true);
+                        break;
+                    case getString(R.string.poi_health):
+                        mBinding.fragReDetPoiHealth.setChecked(true);
+                        break;
+                    case getString(R.string.poi_food):
+                        mBinding.fragReDetPoiFood.setChecked(true);
+                        break;
+                    case getString(R.string.poi_bank):
+                        mBinding.fragReDetPoiBank.setChecked(true);
+                        break;
+                    case getString(R.string.poi_store):
+                        mBinding.fragReDetPoiStore.setChecked(true);
+                        break;
+                    case getString(R.string.poi_park):
+                        mBinding.fragReDetPoiPark.setChecked(true);
+                        break;
+                    default:
                         throw new IllegalStateException("Unexpected value: " + lPoi.getPoiName());
                 }
 */
             }
-            Log.d(TAG, "displayReComplete: agent last name : " + pRe.getRealEstate().getReAgentLastName());
-                mBinding.fragReDetTvAgent.setText(pRe.getRealEstate().getReAgentFirstName()
-                        + " " + pRe.getRealEstate().getReAgentLastName());
 
-//            mBinding.fragReDetTvDescription.setText(pRe.getReDescription());
-//            mBinding.fragReDetTvAgent.setText(pRe.getReAgentFirstName() + " " + pRe.getReAgentLastName());
-//            mBinding.fragReDetTvPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pRe.getRePrice()));
-//            mBinding.fragReDetTvType.setText(pRe.getReType());
-//            mBinding.fragReDetTvArea.setText(Integer.toString(pRe.getReArea()));
-//            mBinding.fragReDetTvNbRooms.setText(Integer.toString(pRe.getReNbRooms()));
-//            mBinding.fragReDetTvNbBedrooms.setText(Integer.toString(pRe.getReNbBedrooms()));
-//            mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getReNbBathrooms()));
+            if (pRe.getRealEstate().isReIsSold()) {
+                mBinding.fragReDetTvTxtSoldDate.setVisibility(View.VISIBLE);
+                mBinding.fragReDetTvSoldDate.setVisibility(View.VISIBLE);
+            } else {
+                mBinding.fragReDetTvTxtSoldDate.setVisibility(View.INVISIBLE);
+                mBinding.fragReDetTvSoldDate.setVisibility(View.INVISIBLE);
+            }
+            mBinding.fragReDetTvAgent.setText(pRe.getRealEstate().getReAgentFirstName()
+                    + " " + pRe.getRealEstate().getReAgentLastName());
+
+            mBinding.fragReDetTvDescription.setText(pRe.getRealEstate().getReDescription());
+            mBinding.fragReDetTvAgent.setText(pRe.getRealEstate().getReAgentFirstName() + " " + pRe.getRealEstate().getReAgentLastName());
+            mBinding.fragReDetTvPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pRe.getRealEstate().getRePrice()));
+            mBinding.fragReDetTvType.setText(pRe.getRealEstate().getReType());
+            mBinding.fragReDetTvArea.setText(Integer.toString(pRe.getRealEstate().getReArea()));
+            mBinding.fragReDetTvNbRooms.setText(Integer.toString(pRe.getRealEstate().getReNbRooms()));
+            mBinding.fragReDetTvNbBedrooms.setText(Integer.toString(pRe.getRealEstate().getReNbBedrooms()));
+            mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getRealEstate().getReNbBathrooms()));
 
         } else {
             Log.d(TAG, "displayReComplete: pRe is null");

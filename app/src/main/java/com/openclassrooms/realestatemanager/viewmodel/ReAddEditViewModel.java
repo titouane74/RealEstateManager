@@ -47,4 +47,6 @@ public class ReAddEditViewModel extends ViewModel {
 
     public void insertRePoi(RePoi pRePoi) { mExecutor.execute(() -> mRePoiRepo.insertRePoi(pRePoi)); }
 
+    public LiveData<RealEstateComplete> selectReComplete(long pReId) { return mReRepo.selectReComplete(pReId); }
+
 }

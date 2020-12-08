@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class RealEstateComplete {
 
-    @Embedded public RealEstate mRealEstate;
+    @Embedded RealEstate mRealEstate;
     @Relation(parentColumn = "reId",entityColumn = "poireid")
     public List<RePoi> mPoiList;
 
