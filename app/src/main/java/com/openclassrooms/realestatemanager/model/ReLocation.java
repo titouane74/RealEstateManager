@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey;
         parentColumns = "reid",
         childColumns = "locreid"))
 
-public class ReLocationAdress {
+public class ReLocation {
 
     @PrimaryKey(autoGenerate = true)
     private long locId;
@@ -28,9 +28,9 @@ public class ReLocationAdress {
     private int locZipCode;
     private String locCountry;
 
-    public ReLocationAdress() {}
+    public ReLocation() {}
 
-    public ReLocationAdress(long pLocReId, String pLocStreet, String pLocDistrict, String pLocCity, String pLocCounty, int pLocZipCode, String pLocCountry) {
+    public ReLocation(long pLocReId, String pLocStreet, String pLocDistrict, String pLocCity, String pLocCounty, int pLocZipCode, String pLocCountry) {
         locReId = pLocReId;
         locStreet = pLocStreet;
         locDistrict = pLocDistrict;
@@ -40,7 +40,7 @@ public class ReLocationAdress {
         locCountry = pLocCountry;
     }
 
-    public ReLocationAdress(long pLocId, long pLocReId, String pLocStreet, String pLocDistrict, String pLocCity, String pLocCounty, int pLocZipCode, String pLocCountry) {
+    public ReLocation(long pLocId, long pLocReId, String pLocStreet, String pLocDistrict, String pLocCity, String pLocCounty, int pLocZipCode, String pLocCountry) {
         locId = pLocId;
         locReId = pLocReId;
         locStreet = pLocStreet;

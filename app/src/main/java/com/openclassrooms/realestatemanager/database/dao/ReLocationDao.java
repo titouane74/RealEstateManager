@@ -5,7 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.openclassrooms.realestatemanager.model.ReLocationAdress;
+import com.openclassrooms.realestatemanager.model.ReLocation;
 
 
 /**
@@ -15,8 +15,8 @@ import com.openclassrooms.realestatemanager.model.ReLocationAdress;
 public interface ReLocationDao {
 
     @Insert
-    void insertReLocation(ReLocationAdress pReLocationAdress);
+    void insertReLocation(ReLocation pReLocation);
 
     @Query("SELECT * FROM ReLocationAdress WHERE locreid = :pLocReId")
-    LiveData<ReLocationAdress> selectReLocation(long pLocReId);
+    LiveData<ReLocation> selectReLocation(long pLocReId);
 }

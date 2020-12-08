@@ -21,7 +21,7 @@ import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
-import com.openclassrooms.realestatemanager.model.ReLocationAdress;
+import com.openclassrooms.realestatemanager.model.ReLocation;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
@@ -54,7 +54,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
     private RealEstate mRealEstate = new RealEstate();
     private long mReId;
-    private ReLocationAdress mReLocationAdress = new ReLocationAdress();
+    private ReLocation mReLocation = new ReLocation();
 
     @Override
     protected int getMenuAttached() {
@@ -152,9 +152,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         int lZipCode = Integer.parseInt(mBinding.fragReAddEditEtZipCode.getText().toString());
         String lCountry = mBinding.fragReAddEditSpinCountry.getSelectedItem().toString();
 
-        mReLocationAdress = new ReLocationAdress(pMaxReId, lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry);
+        mReLocation = new ReLocation(pMaxReId, lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry);
         if (!mIsEdit) {
-            mViewModel.insertReLocation(mReLocationAdress);
+            mViewModel.insertReLocation(mReLocation);
         } else {
             //TODO
             //mReLocation.setLocId();

@@ -3,7 +3,7 @@ package com.openclassrooms.realestatemanager.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.openclassrooms.realestatemanager.model.ReLocationAdress;
+import com.openclassrooms.realestatemanager.model.ReLocation;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.repository.ReRepository;
 
@@ -34,10 +34,10 @@ public class ReAddEditViewModel extends ViewModel {
 
     public LiveData<Integer> selectMaxReId() { return mReRepo.selectMaxReId();}
 
-    public void insertReLocation(ReLocationAdress pReLocationAdress) {
-        mExecutor.execute(() -> mReRepo.insertReLocation(pReLocationAdress));
+    public void insertReLocation(ReLocation pReLocation) {
+        mExecutor.execute(() -> mReRepo.insertReLocation(pReLocation));
     }
 
-    public LiveData<ReLocationAdress> selectReLocation(long pLocReId) { return mReRepo.selectReLocation(pLocReId); }
+    public LiveData<ReLocation> selectReLocation(long pLocReId) { return mReRepo.selectReLocation(pLocReId); }
 
 }
