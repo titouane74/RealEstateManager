@@ -22,6 +22,7 @@ import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.model.ReLocation;
+import com.openclassrooms.realestatemanager.model.RePoi;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
@@ -52,9 +53,10 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private boolean mIsTabletLandscape;
     private boolean mIsEdit;
 
-    private RealEstate mRealEstate = new RealEstate();
     private long mReId;
+    private RealEstate mRealEstate = new RealEstate();
     private ReLocation mReLocation = new ReLocation();
+    private RePoi mRePoi = new RePoi();
 
     @Override
     protected int getMenuAttached() {
@@ -93,9 +95,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     public boolean onOptionsItemSelected(MenuItem pItem) {
         if (pItem.getItemId() == R.id.menu_action_save) {
             prepareRealEstate();
-            if (!mIsTabletLandscape) {
-                mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
-            }
             return true;
         }
         return super.onOptionsItemSelected(pItem);
@@ -116,8 +115,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         int lNbBedRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBedrooms.getSelectedItem().toString());
         int lNbBathRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBathrooms.getSelectedItem().toString());
 
-        managePoi();
-
         mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
                 lAgentFirstName, lAgentLastName);
 /*
@@ -136,7 +133,12 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         if (!mIsEdit) {
             mViewModel.insertRealEstate(mRealEstate);
             mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
-                manageLocation(pMaxReId);
+                Log.d(TAG, "prepareRealEstate: " + pMaxReId);
+                //manageLocation(pMaxReId);
+                managePoi(pMaxReId);
+                if (!mIsTabletLandscape) {
+                    mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
+                }
             });
         } else {
             mRealEstate.setReId(mReId);
@@ -144,7 +146,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         }
     }
 
-    private void manageLocation(int pMaxReId) {
+    private void manageLocation(long pMaxReId) {
         String lStreet = mBinding.fragReAddEditEtStreet.getText().toString();
         String lDistrict = mBinding.fragReAddEditEtDistrict.getText().toString();
         String lCity = mBinding.fragReAddEditEtCity.getText().toString();
@@ -161,14 +163,49 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         }
     }
 
-    private void managePoi() {
-/*                <item>@string/poi_restaurant</item>
-        <item>@string/poi_subway</item>
-        <item>@string/poi_school</item>
-        <item>@string/poi_park</item>
-        <item>@string/poi_store</item>
-        <item>@string/poi_bank</item>*/
+    private void managePoi(long pMaxReId) {
+        List<RePoi> lPoiList = new ArrayList<>();
+        RePoi lRePoi;
 
+        if (mBinding.fragReAddEditPoiRestaurant.isChecked()) {
+             lRePoi = new RePoi(pMaxReId, getString(R.string.poi_restaurant));
+            lPoiList.add(lRePoi);
+        }
+        if (mBinding.fragReAddEditPoiSubway.isChecked()) {
+            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_subway));
+            lPoiList.add(lRePoi);
+        }
+        if (mBinding.fragReAddEditPoiSchool.isChecked()) {
+            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_school));
+            lPoiList.add(lRePoi);
+        }
+        if (mBinding.fragReAddEditPoiPark.isChecked()) {
+            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_park));
+            lPoiList.add(lRePoi);
+        }
+        if (mBinding.fragReAddEditPoiStore.isChecked()) {
+            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_store));
+            lPoiList.add(lRePoi);
+        }
+        if (mBinding.fragReAddEditPoiBank.isChecked()) {
+            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_bank));
+            lPoiList.add(lRePoi);
+        }
+        if (mBinding.fragReAddEditPoiFood.isChecked()) {
+            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_food));
+            lPoiList.add(lRePoi);
+        }
+        if (mBinding.fragReAddEditPoiHealth.isChecked()) {
+            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_health));
+            lPoiList.add(lRePoi);
+        }
+        Log.d(TAG, "managePoi: size " + lPoiList.size());
+        if ((!mIsEdit) && (lPoiList.size()>0)) {
+            for(RePoi lPoi: lPoiList) {
+                Log.d(TAG, "managePoi: " + lPoi.getPoiName());
+                mViewModel.insertRePoi(lPoi);
+            }
+        }
     }
 
     private void configureSpinners() {
@@ -207,9 +244,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
         configureViewModel();
 //        if (mIsEdit) {
-            mViewModel.getRealEstate(mReId).observe(getViewLifecycleOwner(), pRealEstate -> {
-                displayRealEstate(pRealEstate);
-            });
+        mViewModel.getRealEstate(mReId).observe(getViewLifecycleOwner(), pRealEstate -> {
+            displayRealEstate(pRealEstate);
+        });
 //        }
     }
 

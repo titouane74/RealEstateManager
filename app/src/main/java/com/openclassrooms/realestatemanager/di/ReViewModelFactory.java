@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.openclassrooms.realestatemanager.repository.RePoiRepository;
 import com.openclassrooms.realestatemanager.repository.ReRepository;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 import com.openclassrooms.realestatemanager.viewmodel.ReDetailViewModel;
@@ -17,10 +18,12 @@ import java.util.concurrent.Executor;
 public class ReViewModelFactory implements ViewModelProvider.Factory {
 
     private final ReRepository mReRepo;
+    private final RePoiRepository mRePoiRepo;
     private final Executor mExecutor;
 
-    public ReViewModelFactory(ReRepository pReRepo, Executor pExecutor) {
+    public ReViewModelFactory(ReRepository pReRepo, RePoiRepository pRePoiRepo, Executor pExecutor) {
         mReRepo = pReRepo;
+        mRePoiRepo = pRePoiRepo;
         mExecutor = pExecutor;
     }
 
@@ -29,7 +32,7 @@ public class ReViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(ReAddEditViewModel.class)) {
-            return (T) new ReAddEditViewModel(mReRepo, mExecutor);
+            return (T) new ReAddEditViewModel(mReRepo, mRePoiRepo, mExecutor);
         }
         if (modelClass.isAssignableFrom(ReListViewModel.class)) {
             return (T) new ReListViewModel(mReRepo, mExecutor);

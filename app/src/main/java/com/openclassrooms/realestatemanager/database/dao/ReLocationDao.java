@@ -17,6 +17,6 @@ public interface ReLocationDao {
     @Insert
     void insertReLocation(ReLocation pReLocation);
 
-    @Query("SELECT * FROM ReLocationAdress WHERE locreid = :pLocReId")
+    @Query("SELECT * FROM location WHERE locreid = :pLocReId")
     LiveData<ReLocation> selectReLocation(long pLocReId);
 }

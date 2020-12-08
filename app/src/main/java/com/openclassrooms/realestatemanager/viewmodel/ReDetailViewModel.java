@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.repository.ReRepository;
 
 import java.util.concurrent.Executor;
@@ -17,8 +18,9 @@ public class ReDetailViewModel extends ViewModel {
         mExecutor = pExecutor;
     }
 
-    public LiveData<RealEstate> getRealEstate(long pReId) {
+    public LiveData<RealEstate> selectRealEstate(long pReId) {
         return mReRepo.selectRealEstate(pReId);
     }
 
+    public LiveData<RealEstateComplete> selectReComplete(long pReId) { return mReRepo.selectReComplete(pReId); }
 }

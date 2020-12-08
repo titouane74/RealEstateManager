@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.di;
 import android.content.Context;
 
 import com.openclassrooms.realestatemanager.database.ReDatabase;
+import com.openclassrooms.realestatemanager.repository.RePoiRepository;
 import com.openclassrooms.realestatemanager.repository.ReRepository;
 
 import java.util.concurrent.Executor;
@@ -18,13 +19,18 @@ public class Injection {
         return new ReRepository(lDb.ReDao());
     }
 
+    public static RePoiRepository provideRePoiRepository(Context pContext) {
+        ReDatabase lDb = ReDatabase.getInstance(pContext);
+        return new RePoiRepository(lDb.RePoiDao());
+    }
     public static Executor provideExecutor() {
         return Executors.newSingleThreadExecutor();
     }
 
     public static ReViewModelFactory reViewModelFactory(Context context) {
         ReRepository lReRepo = provideReRepository(context);
+        RePoiRepository lRePoiRepo = provideRePoiRepository(context);
         Executor executor = provideExecutor();
-        return new ReViewModelFactory(lReRepo, executor);
+        return new ReViewModelFactory(lReRepo, lRePoiRepo, executor);
     }
 }

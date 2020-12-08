@@ -27,20 +27,19 @@ public interface ReDao {
 
     @Query("SELECT max(reid) FROM realestate")
     LiveData<Integer> selectMaxReId();
-/*
-    @Transaction
-    @Query("SELECT * FROM realestate WHERE reid = :pReId")
-    public RealEstateComplete getReComplete(long pReId);
-*/
 
     @Insert
     void insertRealEstate(RealEstate pRealEstate);
 
-    @Insert
-    void insertRealEstateList(RealEstate... pRealEstates);
-
     @Update
     void updateRealEstate(RealEstate pRealEstate);
 
+    @Transaction
+    @Query("SELECT * FROM realestate")
+    public List<RealEstateComplete> selectReCompleteList();
+
+    @Transaction
+    @Query("SELECT * FROM realestate WHERE reid=:pReId")
+    LiveData<RealEstateComplete> selectReComplete(long pReId);
 
 }

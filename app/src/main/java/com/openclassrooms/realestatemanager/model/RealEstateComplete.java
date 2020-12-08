@@ -3,32 +3,30 @@ package com.openclassrooms.realestatemanager.model;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
+import java.util.List;
+
 /**
  * Created by Florence LE BOURNOT on 25/11/2020
  */
 public class RealEstateComplete {
 
-/*
-    @Embedded public RealEstate mReCompRe;
-    @Relation(
-            parentColumn = "reid",
-            entityColumn = "locreid"
-    )
-    public ReLocation mReCompLocation;
-*/
+    @Embedded public RealEstate mRealEstate;
+    @Relation(parentColumn = "reId",entityColumn = "poireid")
+    public List<RePoi> mPoiList;
 
-/*    public RealEstateComplete() { }
-
-    public RealEstateComplete(RealEstate pReCompRe, ReLocation pReCompLocation) {
-        mReCompRe = pReCompRe;
-        mReCompLocation = pReCompLocation;
+    public RealEstate getRealEstate() {
+        return mRealEstate;
     }
 
-    public RealEstate getReCompRe() { return mReCompRe; }
+    public List<RePoi> getPoiList() {
+        return mPoiList;
+    }
 
-    public void setReCompRe(RealEstate pReCompRe) { mReCompRe = pReCompRe; }
+    public void setRealEstate(RealEstate pRealEstate) {
+        mRealEstate = pRealEstate;
+    }
 
-    public ReLocation getReCompLocation() { return mReCompLocation; }
-
-    public void setReCompLocation(ReLocation pReCompLocation) { mReCompLocation = pReCompLocation; }*/
+    public void setPoiList(List<RePoi> pPoiList) {
+        mPoiList = pPoiList;
+    }
 }

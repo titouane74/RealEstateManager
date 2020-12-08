@@ -19,7 +19,9 @@ import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReDetailBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
+import com.openclassrooms.realestatemanager.model.RePoi;
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.adapters.DetailPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReDetailViewModel;
@@ -87,14 +89,14 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
         Log.d(TAG, "onOptionsItemSelected: detail : R.id.reAddEditFragment : " + R.id.reAddEditFragment);
         if (pItem.getItemId() == R.id.reAddEditFragment) {
             Bundle lBundle = new Bundle();
-            lBundle.putInt(RE_ID_KEY,mReId);
-            lBundle.putBoolean(IS_EDIT_KEY,true);
+            lBundle.putInt(RE_ID_KEY, mReId);
+            lBundle.putBoolean(IS_EDIT_KEY, true);
             Log.d(TAG, "onOptionsItemSelected: detail envoi reId : " + mReId);
 //            if (mIsTabletLandscape) {
 //                mNavController.navigate(R.id.reAddEditFragment,lBundle);
 //                Log.d(TAG, "onOptionsItemSelected: detail fragment tablet detail to edit");
 //            } else {
-                mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment,lBundle);
+            mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment, lBundle);
 //                Log.d(TAG, "onOptionsItemSelected: detail fragment phone detail to edit");
 //            }
             return true;
@@ -148,10 +150,69 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         configureViewModel();
-        mViewModel.getRealEstate(mReId).observe(getViewLifecycleOwner(), pRealEstate -> {
+/*
+        mViewModel.selectRealEstate(mReId).observe(getViewLifecycleOwner(), pRealEstate -> {
             displayRealEstate(pRealEstate);
         });
-
+*/
+        mViewModel.selectReComplete(mReId).observe(getViewLifecycleOwner(), pRealEstateComplete -> {
+            Log.d(TAG, "onActivityCreated: " + pRealEstateComplete.mPoiList.size());
+            Log.d(TAG, "onActivityCreated: " + pRealEstateComplete.getPoiList().size());
+            displayReComplete(pRealEstateComplete);
+        });
     }
 
+    @SuppressLint("SetTextI18n")
+    private void displayReComplete(RealEstateComplete pRe) {
+        if (pRe != null) {
+            Log.d(TAG, "displayReComplete: poi list : " + pRe.getPoiList() + " size : " + pRe.getPoiList().size());
+            for (RePoi lPoi : pRe.getPoiList()) {
+                Log.d(TAG, "displayReComplete: poi : " + lPoi.getPoiName());
+                if(lPoi.getPoiName().equals(getString(R.string.poi_restaurant))) {
+                    mBinding.fragReDetPoiRestaurant.setSelected(true);
+                } else if(lPoi.getPoiName().equals(getString(R.string.poi_subway))) {
+                    mBinding.fragReDetPoiSubway.setSelected(true);
+                } else if(lPoi.getPoiName().equals(getString(R.string.poi_school))) {
+                    mBinding.fragReDetPoiSchool.setSelected(true);
+                } else if(lPoi.getPoiName().equals(getString(R.string.poi_health))) {
+                    mBinding.fragReDetPoiHealth.setSelected(true);
+                } else if(lPoi.getPoiName().equals(getString(R.string.poi_food))) {
+                    mBinding.fragReDetPoiFood.setSelected(true);
+                } else if(lPoi.getPoiName().equals(getString(R.string.poi_bank))) {
+                    mBinding.fragReDetPoiBank.setSelected(true);
+                } else if(lPoi.getPoiName().equals(getString(R.string.poi_store))) {
+                    mBinding.fragReDetPoiStore.setSelected(true);
+                } else if(lPoi.getPoiName().equals(getString(R.string.poi_park))) {
+                    mBinding.fragReDetPoiPark.setSelected(true);
+                }
+/*
+                //TODO switch bug sur le getString
+                switch (lPoi.getPoiName()) {
+                    case getString(R.string.poi_restaurant) :
+                        mBinding.fragReDetPoiRestaurant.setSelected(true);
+                        break;
+                    case getString(R.string.poi_subway) :
+                        mBinding.fragReDetPoiRestaurant.setSelected(true);
+                        break;                    default:
+                        throw new IllegalStateException("Unexpected value: " + lPoi.getPoiName());
+                }
+*/
+            }
+            Log.d(TAG, "displayReComplete: agent last name : " + pRe.getRealEstate().getReAgentLastName());
+                mBinding.fragReDetTvAgent.setText(pRe.getRealEstate().getReAgentFirstName()
+                        + " " + pRe.getRealEstate().getReAgentLastName());
+
+//            mBinding.fragReDetTvDescription.setText(pRe.getReDescription());
+//            mBinding.fragReDetTvAgent.setText(pRe.getReAgentFirstName() + " " + pRe.getReAgentLastName());
+//            mBinding.fragReDetTvPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pRe.getRePrice()));
+//            mBinding.fragReDetTvType.setText(pRe.getReType());
+//            mBinding.fragReDetTvArea.setText(Integer.toString(pRe.getReArea()));
+//            mBinding.fragReDetTvNbRooms.setText(Integer.toString(pRe.getReNbRooms()));
+//            mBinding.fragReDetTvNbBedrooms.setText(Integer.toString(pRe.getReNbBedrooms()));
+//            mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getReNbBathrooms()));
+
+        } else {
+            Log.d(TAG, "displayReComplete: pRe is null");
+        }
+    }
 }

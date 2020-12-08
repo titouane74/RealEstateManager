@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
  */
 @Entity(tableName = "poi",
         foreignKeys = @ForeignKey(entity = RealEstate.class,
-                parentColumns = "reid",
+                parentColumns = "reId",
                 childColumns = "poireid"))
 
 public class RePoi {
@@ -23,6 +23,11 @@ public class RePoi {
     private String poiName;
 
     public RePoi() {}
+
+    public RePoi(long pPoiReId, String pPoiName) {
+        poiReId = pPoiReId;
+        poiName = pPoiName;
+    }
 
     public RePoi(long pPoiId, long pPoiReId, String pPoiName) {
         poiId = pPoiId;
