@@ -20,13 +20,24 @@ public class RePhoto {
     private long phReId;
 
     private String phDescription;
+    private String phPath;
+    private int phContentDescription;
 
     public RePhoto() {}
 
-    public RePhoto(long pPhId, long pPhReId, String pPhDescription) {
+    public RePhoto(long pPhId, String pPhDescription, String pPhPath,int pPhContentDescription) {
+        phId = pPhId;
+        phDescription = pPhDescription;
+        phPath = pPhPath;
+        phContentDescription = pPhContentDescription;
+    }
+
+    public RePhoto(long pPhId, long pPhReId, String pPhDescription, String pPhPath,int pPhContentDescription) {
         phId = pPhId;
         phReId = pPhReId;
         phDescription = pPhDescription;
+        phPath = pPhPath;
+        phContentDescription = pPhContentDescription;
     }
 
     public long getPhId() { return phId; }
@@ -41,4 +52,11 @@ public class RePhoto {
 
     public void setPhDescription(String pPhDescription) { phDescription = pPhDescription; }
 
+    public String getPhPath() { return phPath; }
+
+    public void setPhPath(String pPhPath) { phPath = pPhPath; }
+
+    public int getPhContentDescription() { return phContentDescription; }
+
+    public void setPhContentDescription(int pPhContentDescription) { phContentDescription = pPhContentDescription; }
 }

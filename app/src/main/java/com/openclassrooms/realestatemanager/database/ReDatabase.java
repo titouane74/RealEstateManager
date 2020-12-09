@@ -22,7 +22,7 @@ import com.openclassrooms.realestatemanager.utils.DateConverter;
 /**
  * Created by Florence LE BOURNOT on 04/12/2020
  */
-@Database(entities = {RealEstate.class, RePoi.class, ReLocation.class, RePhoto.class}, version = 5 , exportSchema = false)
+@Database(entities = {RealEstate.class, RePoi.class, ReLocation.class, RePhoto.class}, version = 6 , exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class ReDatabase extends RoomDatabase {
 

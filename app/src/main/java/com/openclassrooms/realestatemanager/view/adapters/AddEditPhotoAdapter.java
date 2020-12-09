@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditRvPhotoItemBinding;
+import com.openclassrooms.realestatemanager.model.RePhoto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,10 @@ import java.util.List;
  */
 public class AddEditPhotoAdapter extends RecyclerView.Adapter<AddEditPhotoAdapter.AddEditPhotoHolder> {
 
-    private List<String> mPhotoList = new ArrayList<>();
+    private List<RePhoto> mPhotoList = new ArrayList<>();
     private FragmentReAddEditRvPhotoItemBinding mBinding;
 
-    public void setPhotoList(List<String> pPhotoList) { mPhotoList = pPhotoList; }
+    public void setPhotoList(List<RePhoto> pPhotoList) { mPhotoList = pPhotoList; }
 
     @NonNull
     @Override
@@ -54,12 +55,12 @@ public class AddEditPhotoAdapter extends RecyclerView.Adapter<AddEditPhotoAdapte
                 mBindingHolder = pBindingHolder;
         }
 
-        public void bindView(String pPhotoUrl) {
-            mBindingHolder.fragReAddEditTvPhoto.setText(pPhotoUrl);
-/*            Glide.with(mBindingHolder.fragReAddEditImgPhoto.getContext())
-                    .load(pPhotoUrl)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(mBindingHolder.fragReAddEditImgPhoto);*/
+        public void bindView(RePhoto pPhoto) {
+            mBindingHolder.fragReAddEditEtPhoto.setText(pPhoto.getPhDescription());
+            Glide.with(mBindingHolder.fragReAddEditImgPhoto.getContext())
+                    .load(pPhoto.getPhPath())
+                    .into(mBindingHolder.fragReAddEditImgPhoto);
+
         }
     }
 }

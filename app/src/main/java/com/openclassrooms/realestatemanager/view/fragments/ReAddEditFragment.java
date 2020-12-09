@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -17,11 +18,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import com.esafirm.imagepicker.features.ImagePicker;
+import com.esafirm.imagepicker.model.Image;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.model.ReLocation;
+import com.openclassrooms.realestatemanager.model.RePhoto;
 import com.openclassrooms.realestatemanager.model.RePoi;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
@@ -61,6 +65,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private RealEstate mRealEstate = new RealEstate();
     private ReLocation mReLocation = new ReLocation();
     private List<RePoi> mPoiList = new ArrayList<>();
+    private List<RePhoto> mPhotoList = new ArrayList<>();
 
     @Override
     protected int getMenuAttached() {
@@ -80,6 +85,32 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialogSold());
 //        mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialog(mFragView));
 //        mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialog(mFragView));
+        mBinding.imgBtnAdd.setOnClickListener(v-> addPhoto());
+        mBinding.fragReAddEditImgSelectPhoto.setOnClickListener(v-> addPhoto());
+/*
+        mBinding.fragReAddEditImgAddPhoto.setOnClickListener(v -> addPhoto());
+        mBinding.fragReAddEditImgAddPhoto.setOnClickListener(v -> addPhoto());
+*/
+    }
+
+    private void addPhoto() {
+        ImagePicker.create(this)
+                .start();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, final int resultCode, Intent data) {
+        if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
+            // Get a list of picked images
+            List<Image> images = ImagePicker.getImages(data);
+            for(Image lImg : images) {
+                Log.d(TAG, "onActivityResult: " + lImg.getName() + " " + lImg.getPath() + " " + lImg.getId() + " " + lImg.describeContents());
+                mPhotoList.add(new RePhoto(lImg.getId(), lImg.getName(), lImg.getPath(), lImg.describeContents()));
+            }
+            mAdapter.setPhotoList(mPhotoList);
+            mAdapter.notifyDataSetChanged();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @SuppressLint("SetTextI18n")
@@ -226,7 +257,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         mAdapter = new AddEditPhotoAdapter();
         mBinding.fragReAddEditRvPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mBinding.fragReAddEditRvPhoto.setAdapter(mAdapter);
-        initPhotoList();
+        //initPhotoList();
     }
 
     private void initPhotoList() {
@@ -241,7 +272,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         lPhotoList.add("https://www.ultrapremiumdirect.com/img/cms/blog/loulou-ronron-therapie.jpg");
 
 
-        mAdapter.setPhotoList(lPhotoList);
+//        mAdapter.setPhotoList(lPhotoList);
     }
 
     @Override
