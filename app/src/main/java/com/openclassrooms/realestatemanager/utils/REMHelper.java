@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.widget.ArrayAdapter;
 
+import androidx.annotation.Nullable;
+
 import com.openclassrooms.realestatemanager.R;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -202,5 +205,14 @@ public class REMHelper {
             pE.printStackTrace();
         }
         return "";
+    }
+    public static @Nullable Date formatStringToDate(String pDate) {
+        SimpleDateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return lDateFormat.parse(pDate);
+        } catch (ParseException pE) {
+            pE.printStackTrace();
+        }
+        return null;
     }
 }

@@ -29,11 +29,11 @@ import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
@@ -51,6 +51,8 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private ReAddEditViewModel mViewModel;
     private Context mContext;
     private NavController mNavController;
+    private String mStringDateMarket;
+    private String mStringDateSold;
     private Calendar mDateCal;
     private boolean mIsTabletLandscape;
     private boolean mIsEdit;
@@ -75,24 +77,10 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         mIsTabletLandscape = pIsTabletLandscape;
         configureSpinners();
         initRecyclerView();
-        //mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialogMarket());
-        mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialogSold());
         mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialogMarket());
-
-/*        CompoundButton.OnCheckedChangeListener checkedListener = new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                switch(buttonView.getId()){
-                    case R.id.frag_re_add_edit_poi_restaurant:
-                        if (isChecked) {
-                            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_restaurant)););
-                        }
-                        break;
-                }
-            }
-        };*/
-
+        mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialogSold());
+//        mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialog(mFragView));
+//        mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialog(mFragView));
     }
 
     @SuppressLint("SetTextI18n")
@@ -119,6 +107,8 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     }
 
     private void prepareRealEstate() {
+        Date lDateMarket = null;
+        Date lDateSold = null;
 
         boolean lIsSold = mBinding.fragReAddEditCbSold.isChecked();
         String lAgentFirstName = mBinding.fragReAddEditEtAgentFirstName.getText().toString();
@@ -133,15 +123,27 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         int lNbBedRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBedrooms.getSelectedItem().toString());
         int lNbBathRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBathrooms.getSelectedItem().toString());
 
-        DateFormat lDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar mDateCal = Calendar.getInstance();
-        mDateCal.set(2020,12,9);
-        String lStringDate = lDateFormat.format(mDateCal.getTime());
+//        DateFormat lDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        Calendar mDateCal = Calendar.getInstance();
+//        mDateCal.set(2020, 12, 9);
+//        String lStringDate = lDateFormat.format(mDateCal.getTime());
+//
+//        Date date = Date.valueOf(lStringDate);
 
-        Date date = Date.valueOf(lStringDate);
+        if (mStringDateMarket != null) {
+//            lDateMarket = Date.valueOf(REMHelper.formatStringToYearMonthDayString(mStringDateMarket));
 
+            lDateMarket = REMHelper.formatStringToDate(mStringDateMarket);
+        } else {
+            Log.d(TAG, "prepareRealEstate: String date market null");
+        }
+        if (mStringDateSold != null) {
+//            lDateSold = Date.valueOf(REMHelper.formatStringToYearMonthDayString(mStringDateSold));
+            lDateSold = REMHelper.formatStringToDate(mStringDateSold);
+        }
+        Log.d(TAG, "prepareRealEstate: market " + lDateMarket);
         mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
-                lAgentFirstName, lAgentLastName, date, date);
+                lAgentFirstName, lAgentLastName, lDateMarket, lDateSold);
 
         if (!mIsEdit) {
             mViewModel.insertRealEstate(mRealEstate);
@@ -199,7 +201,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_school)));
         }
         if (mBinding.fragReAddEditPoiPark.isChecked()) {
-            mPoiList.add( new RePoi(pMaxReId, getString(R.string.poi_park)));
+            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_park)));
         }
         if (mBinding.fragReAddEditPoiStore.isChecked()) {
             mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_store)));
@@ -289,7 +291,10 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
                     mDateCal = Calendar.getInstance();
 
                     mDateCal.set(year, month, dayOfMonth);
+                    Log.d(TAG, "displayCalendarDialogMarket: dayOfMonth" + dayOfMonth);
                     String lDate = lDateFormat.format(mDateCal.getTime());
+                    Log.d(TAG, "displayCalendarDialogMarket: lDate " + lDate);
+                    mStringDateMarket = lDate;
                     mBinding.fragReAddEditEtMarketDate.setText(lDate);
                 },
                 lCalendar.get(Calendar.YEAR),
@@ -310,6 +315,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
                     mDateCal.set(year, month, dayOfMonth);
                     String lDate = lDateFormat.format(mDateCal.getTime());
+                    mStringDateSold = lDate;
                     mBinding.fragReAddEditEtSoldDate.setText(lDate);
                 },
                 lCalendar.get(Calendar.YEAR),
@@ -317,36 +323,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
                 lCalendar.get(Calendar.DAY_OF_MONTH)
         );
         lDatePickerDialog.show();
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void displayRealEstate(RealEstate pRe) {
-        int lPosInAdapter = 0;
-        String lNbRooms = "0";
-
-        if (pRe != null) {
-            mBinding.fragReAddEditEtPrice.setText(Integer.toString(pRe.getRePrice()));
-            mBinding.fragReAddEditCbSold.setSelected(pRe.isReIsSold());
-
-            ArrayAdapter<CharSequence> lAdapter = REMHelper.configureSpinAdapter(mContext, R.array.type_spinner);
-            lPosInAdapter = lAdapter.getPosition(pRe.getReType());
-            mBinding.fragReAddEditSpinType.setSelection(lPosInAdapter);
-
-            lPosInAdapter = REMHelper.getPositionInRoomSpinner(mContext, R.array.rooms_spinner, pRe.getReNbRooms());
-            mBinding.fragReAddEditSpinRooms.setSelection(lPosInAdapter);
-
-            lNbRooms = REMHelper.convertSpinRoomToString(pRe.getReNbBedrooms());
-            lPosInAdapter = REMHelper.getPositionInSpinner(mContext, R.array.rooms_spinner, lNbRooms);
-            mBinding.fragReAddEditSpinBedrooms.setSelection(lPosInAdapter);
-            lNbRooms = REMHelper.convertSpinRoomToString(pRe.getReNbBathrooms());
-            lPosInAdapter = REMHelper.getPositionInSpinner(mContext, R.array.rooms_spinner, lNbRooms);
-            mBinding.fragReAddEditSpinBathrooms.setSelection(lPosInAdapter);
-
-            mBinding.fragReAddEditEtDescription.setText(pRe.getReDescription());
-            mBinding.fragReAddEditEtArea.setText(Integer.toString(pRe.getReArea()));
-
-
-        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -399,5 +375,35 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             mBinding.fragReAddEditEtAgentFirstName.setText(pRe.getRealEstate().getReAgentFirstName());
 
         }
+    }
+
+    private void displayCalendarDialog(View pView) {
+        final int lId = pView.getId();
+        Log.d(TAG, "displayCalendarDialog: " + pView.getId());
+        Calendar lCalendar = Calendar.getInstance();
+
+        DatePickerDialog lDatePickerDialog = new DatePickerDialog(
+                mContext,
+                (view, year, month, dayOfMonth) -> {
+                    @SuppressLint("SimpleDateFormat") DateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    Calendar lDateCal;
+                    lDateCal = Calendar.getInstance();
+
+                    lDateCal.set(year, month, dayOfMonth);
+                    String lDate = lDateFormat.format(lDateCal.getTime());
+
+                    if (lId == R.id.frag_re_add_edit_et_market_date) {
+                        mStringDateMarket = lDate;
+                        mBinding.fragReAddEditEtMarketDate.setText(lDate);
+                    } else if (lId == R.id.frag_re_add_edit_et_sold_date) {
+                        mStringDateSold = lDate;
+                        mBinding.fragReAddEditEtSoldDate.setText(lDate);
+                    }
+                },
+                lCalendar.get(Calendar.YEAR),
+                lCalendar.get(Calendar.MONTH),
+                lCalendar.get(Calendar.DAY_OF_MONTH)
+        );
+        lDatePickerDialog.show();
     }
 }

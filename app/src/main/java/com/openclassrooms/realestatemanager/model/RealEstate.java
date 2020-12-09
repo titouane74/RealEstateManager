@@ -1,15 +1,11 @@
 package com.openclassrooms.realestatemanager.model;
 
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
 
-import com.openclassrooms.realestatemanager.utils.DateConverter;
+import java.util.Date;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.Calendar;
 
 /**
  * Created by Florence LE BOURNOT on 25/11/2020
@@ -29,14 +25,16 @@ public class RealEstate  {
     private boolean reIsSold;
     private String reAgentFirstName;
     private String reAgentLastName;
+    @Nullable
     private Date reSaleDate;
+    @Nullable
     private Date reOnMarketDate;
 
     public RealEstate() { }
 
     public RealEstate(String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName, String pReAgentLastName,
-                      Date pReSaleDate
-            , Date pReOnMarketDate
+                     @Nullable Date pReSaleDate
+            , @Nullable Date pReOnMarketDate
     ) {
         reType = pReType;
         rePrice = pRePrice;
@@ -54,8 +52,7 @@ public class RealEstate  {
 
     public RealEstate(long pReId, String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms,
                       int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName,
-                      String pReAgentLastName, Date pReSaleDate
-            , Date pReOnMarketDate
+                      String pReAgentLastName, @Nullable Date pReSaleDate, @Nullable Date pReOnMarketDate
     ) {
         reId = pReId;
         reType = pReType;
@@ -171,7 +168,7 @@ public class RealEstate  {
                 ", reDescription='" + reDescription + '\'' +
                 ", reIsSold=" + reIsSold +
                 ", reSaleDate=" + reSaleDate +
-//                ", reOnMarketDate=" + reOnMarketDate +
+                ", reOnMarketDate=" + reOnMarketDate +
                 '}';
     }
 

@@ -2,7 +2,7 @@ package com.openclassrooms.realestatemanager.utils;
 
 import androidx.room.TypeConverter;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by Florence LE BOURNOT on 09/12/2020

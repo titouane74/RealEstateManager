@@ -223,8 +223,13 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getRealEstate().getReNbBathrooms()));
 
             mBinding.fragReDetTvCompleteAddress.setText(pRe.getReLocation().toString());
-
-            mBinding.fragReDetTvMarketDate.setText(REMHelper.formatStringToDayMonthYearString(pRe.getRealEstate().getReOnMarketDate().toString()));
+            if(pRe.getRealEstate().getReOnMarketDate() != null) {
+                Log.d(TAG, "displayReComplete: marketDate : " + pRe.getRealEstate().getReOnMarketDate().toString());
+            } else {
+                Log.d(TAG, "displayReComplete: marketDate null ");
+            }
+//            mBinding.fragReDetTvMarketDate.setText(REMHelper.formatStringToDayMonthYearString(pRe.getRealEstate().getReOnMarketDate().toString()));
+//            mBinding.fragReDetTvSoldDate.setText(REMHelper.formatStringToDayMonthYearString(pRe.getRealEstate().getReSaleDate().toString()));
         } else {
             Log.d(TAG, "displayReComplete: pRe is null");
         }
