@@ -85,13 +85,13 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
     private boolean validInput() {
         String lField = "";
         if ((mBinding.fragLoanEtPrice.getText() == null) || (mBinding.fragLoanEtPrice.getText().toString().equals(""))) {
-            lField = REMHelper.addValueAndSeparatorToString(lField, ",", getString(R.string.txt_price));
+            lField = REMHelper.addValueAndSeparatorToString(lField, " , ", getString(R.string.txt_price));
         }
         if ((mBinding.fragLoanEtRate.getText() == null) || (mBinding.fragLoanEtRate.getText().toString().equals(""))) {
-            lField = REMHelper.addValueAndSeparatorToString(lField, ",", getString(R.string.loan_txt_err_field_rate));
+            lField = REMHelper.addValueAndSeparatorToString(lField, " , ", getString(R.string.loan_txt_err_field_rate));
         }
         if ((mBinding.fragLoanEtDuration.getText() == null) || (mBinding.fragLoanEtDuration.getText().toString().equals(""))) {
-            lField = REMHelper.addValueAndSeparatorToString(lField, ",", getString(R.string.loan_txt_err_field_duration));
+            lField = REMHelper.addValueAndSeparatorToString(lField, " , ", getString(R.string.loan_txt_err_field_duration));
         }
         if (lField.length() > 0) {
             Toast.makeText(mContext, getString(R.string.loan_txt_err_valid_input) + " " + lField, Toast.LENGTH_SHORT).show();

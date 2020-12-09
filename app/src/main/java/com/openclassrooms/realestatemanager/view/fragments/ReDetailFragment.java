@@ -213,6 +213,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             mBinding.fragReDetTvNbBedrooms.setText(Integer.toString(pRe.getRealEstate().getReNbBedrooms()));
             mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getRealEstate().getReNbBathrooms()));
 
+            mBinding.fragReDetTvCompleteAddress.setText(pRe.getReLocation().toString());
         } else {
             Log.d(TAG, "displayReComplete: pRe is null");
         }

@@ -34,6 +34,7 @@ public interface ReDao {
     @Update
     void updateRealEstate(RealEstate pRealEstate);
 
+    @Transaction
     @Query("SELECT * FROM realestate WHERE reid=:pReId")
     LiveData<RealEstateComplete> selectReComplete(long pReId);
 

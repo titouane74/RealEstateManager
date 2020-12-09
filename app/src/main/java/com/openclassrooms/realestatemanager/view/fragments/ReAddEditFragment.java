@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
@@ -34,6 +35,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
@@ -58,6 +61,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private RealEstate mRealEstate = new RealEstate();
     private ReLocation mReLocation = new ReLocation();
     private RePoi mRePoi = new RePoi();
+    private List<RePoi> mPoiList = new ArrayList<>();
 
     @Override
     protected int getMenuAttached() {
@@ -75,6 +79,20 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         initRecyclerView();
         mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialogMarket());
         mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialogSold());
+
+/*        CompoundButton.OnCheckedChangeListener checkedListener = new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                switch(buttonView.getId()){
+                    case R.id.frag_re_add_edit_poi_restaurant:
+                        if (isChecked) {
+                            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_restaurant)););
+                        }
+                        break;
+                }
+            }
+        };*/
 
     }
 
@@ -123,7 +141,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             mViewModel.insertRealEstate(mRealEstate);
             mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
                 Log.d(TAG, "prepareRealEstate: " + pMaxReId);
-                //manageLocation(pMaxReId);
+                manageLocation(pMaxReId);
                 managePoi(pMaxReId);
                 if (!mIsTabletLandscape) {
                     mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
@@ -136,64 +154,66 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     }
 
     private void manageLocation(long pMaxReId) {
+        boolean lIsValid = true;
         String lStreet = mBinding.fragReAddEditEtStreet.getText().toString();
         String lDistrict = mBinding.fragReAddEditEtDistrict.getText().toString();
         String lCity = mBinding.fragReAddEditEtCity.getText().toString();
         String lCounty = mBinding.fragReAddEditEtCounty.getText().toString();
-        int lZipCode = Integer.parseInt(mBinding.fragReAddEditEtZipCode.getText().toString());
-        String lCountry = mBinding.fragReAddEditSpinCountry.getSelectedItem().toString();
+/*        Pattern lPattern = Pattern.compile("#[0-9]#");
+        Matcher lMatcher = lPattern.matcher(lStringZipCode);
+        lIsValid = lMatcher.matches();*/
 
-        mReLocation = new ReLocation(pMaxReId, lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry);
-        if (!mIsEdit) {
-            mViewModel.insertReLocation(mReLocation);
-        } else {
-            //TODO
-            //mReLocation.setLocId();
+        String lZipCode = mBinding.fragReAddEditEtZipCode.getText().toString();
+
+        String lCountry = mBinding.fragReAddEditSpinCountry.getSelectedItem().toString();
+        if (lCountry == getString(R.string.spinners_select)) {
+            lCountry = "";
+        }
+
+        if (lIsValid) {
+            mReLocation = new ReLocation(pMaxReId, lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry);
+            if (!mIsEdit) {
+                mViewModel.insertReLocation(mReLocation);
+            } else {
+                //TODO
+                //mReLocation.setLocId();
+            }
         }
     }
 
     private void managePoi(long pMaxReId) {
-        List<RePoi> lPoiList = new ArrayList<>();
-        RePoi lRePoi;
 
         if (mBinding.fragReAddEditPoiRestaurant.isChecked()) {
-            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_restaurant));
-            lPoiList.add(lRePoi);
+            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_restaurant)));
         }
         if (mBinding.fragReAddEditPoiSubway.isChecked()) {
-            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_subway));
-            lPoiList.add(lRePoi);
+            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_subway)));
         }
         if (mBinding.fragReAddEditPoiSchool.isChecked()) {
-            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_school));
-            lPoiList.add(lRePoi);
+            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_school)));
         }
         if (mBinding.fragReAddEditPoiPark.isChecked()) {
-            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_park));
-            lPoiList.add(lRePoi);
+            mPoiList.add( new RePoi(pMaxReId, getString(R.string.poi_park)));
         }
         if (mBinding.fragReAddEditPoiStore.isChecked()) {
-            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_store));
-            lPoiList.add(lRePoi);
+            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_store)));
         }
         if (mBinding.fragReAddEditPoiBank.isChecked()) {
-            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_bank));
-            lPoiList.add(lRePoi);
+            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_bank)));
         }
         if (mBinding.fragReAddEditPoiFood.isChecked()) {
-            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_food));
-            lPoiList.add(lRePoi);
+            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_food)));
         }
         if (mBinding.fragReAddEditPoiHealth.isChecked()) {
-            lRePoi = new RePoi(pMaxReId, getString(R.string.poi_health));
-            lPoiList.add(lRePoi);
+            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_health)));
         }
-        Log.d(TAG, "managePoi: size " + lPoiList.size());
-        if ((!mIsEdit) && (lPoiList.size() > 0)) {
-            for (RePoi lPoi : lPoiList) {
+        Log.d(TAG, "managePoi: size " + mPoiList.size());
+        if ((!mIsEdit) && (mPoiList.size() > 0)) {
+            for (RePoi lPoi : mPoiList) {
                 Log.d(TAG, "managePoi: " + lPoi.getPoiName());
                 mViewModel.insertRePoi(lPoi);
             }
+//        } else if (mPoiList.size() > 0) {
         }
     }
 

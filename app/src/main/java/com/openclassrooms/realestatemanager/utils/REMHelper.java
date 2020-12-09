@@ -40,7 +40,7 @@ public class REMHelper {
      */
     public static String addValueAndSeparatorToString(String pString, String pSeparator, String pValue) {
         if (pString.length() > 0) {
-            pString = pString + " " + pSeparator + " ";
+            pString = pString + pSeparator;
         }
         return pString + pValue;
     }
@@ -113,6 +113,7 @@ public class REMHelper {
 
     /**
      * Get the orientation of the material
+     *
      * @param pContext : context
      * @return : int : return the orientation
      */
@@ -122,11 +123,12 @@ public class REMHelper {
 
     /**
      * Return the id of the nav_host_fragment which must be used when it's a tablet in landscape
-     * @param pContext : context
+     *
+     * @param pContext  : context
      * @param pIsTablet : boolean : indicator if the material is a tablet or not
      * @return : return the right nav_host_fragment id
      */
-    public static int getNavHostId(Context pContext,boolean pIsTablet) {
+    public static int getNavHostId(Context pContext, boolean pIsTablet) {
         if (isTabletLandscape(pContext, pIsTablet)) {
             //return R.id.nav_host_fragment;
             return R.id.nav_right_fragment;
@@ -137,15 +139,16 @@ public class REMHelper {
 
     /**
      * Indicator of the support is a tablet in landscape mode
-     * @param pContext : context
+     *
+     * @param pContext  : context
      * @param pIsTablet : boolean : is a tablet or not
      * @return : boolean : true if it's a tablet in landscape otherwise false
      */
-    public static boolean isTabletLandscape(Context pContext,boolean pIsTablet) {
+    public static boolean isTabletLandscape(Context pContext, boolean pIsTablet) {
         return pIsTablet && (getOrientation(pContext) == Configuration.ORIENTATION_LANDSCAPE);
     }
 
-    public static int getPositionInSpinner(Context pContext, int pResource, String pValue ) {
+    public static int getPositionInSpinner(Context pContext, int pResource, String pValue) {
         return configureSpinAdapter(pContext, pResource).getPosition(pValue);
     }
 
@@ -163,7 +166,7 @@ public class REMHelper {
 
     public static int convertSpinnerValueToInt(String pValue) {
         if (pValue.indexOf("+") > 0) {
-            return Integer.parseInt(pValue.substring(0,1));
+            return Integer.parseInt(pValue.substring(0, 1));
         } else {
             return Integer.parseInt(pValue);
         }

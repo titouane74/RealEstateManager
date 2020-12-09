@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
  */
 @Entity(tableName = "photo",
         foreignKeys = @ForeignKey(entity = RealEstate.class,
-                parentColumns = "reid",
+                parentColumns = "reId",
                 childColumns = "phreid"))
 public class RePhoto {
     @PrimaryKey(autoGenerate = true)

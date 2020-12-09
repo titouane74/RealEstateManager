@@ -13,6 +13,10 @@ public class RealEstateComplete {
     @Embedded RealEstate mRealEstate;
     @Relation(parentColumn = "reId",entityColumn = "poireid")
     public List<RePoi> mPoiList;
+    @Relation(parentColumn = "reId", entityColumn = "locreid")
+    public ReLocation mReLocation;
+    @Relation(parentColumn = "reId", entityColumn = "phreid")
+    public RePhoto mRePhoto;
 
     public RealEstate getRealEstate() {
         return mRealEstate;
@@ -29,4 +33,13 @@ public class RealEstateComplete {
     public void setPoiList(List<RePoi> pPoiList) {
         mPoiList = pPoiList;
     }
+
+    public ReLocation getReLocation() { return mReLocation; }
+
+    public void setReLocation(ReLocation pReLocation) { mReLocation = pReLocation; }
+
+    public RePhoto getRePhoto() { return mRePhoto; }
+
+    public void setRePhoto(RePhoto pRePhoto) { mRePhoto = pRePhoto; }
+
 }

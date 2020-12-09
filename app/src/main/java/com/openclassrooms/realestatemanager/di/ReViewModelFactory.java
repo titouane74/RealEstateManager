@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.openclassrooms.realestatemanager.database.dao.RePhotoDao;
+import com.openclassrooms.realestatemanager.repository.ReLocationRepository;
+import com.openclassrooms.realestatemanager.repository.RePhotoRepository;
 import com.openclassrooms.realestatemanager.repository.RePoiRepository;
 import com.openclassrooms.realestatemanager.repository.ReRepository;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
@@ -19,11 +22,17 @@ public class ReViewModelFactory implements ViewModelProvider.Factory {
 
     private final ReRepository mReRepo;
     private final RePoiRepository mRePoiRepo;
+    private final ReLocationRepository mReLocRepo;
+    private final RePhotoRepository mRePhoRepo;
     private final Executor mExecutor;
 
-    public ReViewModelFactory(ReRepository pReRepo, RePoiRepository pRePoiRepo, Executor pExecutor) {
+    public ReViewModelFactory(ReRepository pReRepo, RePoiRepository pRePoiRepo,
+                              ReLocationRepository pReLocRepo, RePhotoRepository pRePhRepo,
+                              Executor pExecutor) {
         mReRepo = pReRepo;
         mRePoiRepo = pRePoiRepo;
+        mReLocRepo = pReLocRepo;
+        mRePhoRepo = pRePhRepo;
         mExecutor = pExecutor;
     }
 
@@ -32,7 +41,7 @@ public class ReViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(ReAddEditViewModel.class)) {
-            return (T) new ReAddEditViewModel(mReRepo, mRePoiRepo, mExecutor);
+            return (T) new ReAddEditViewModel(mReRepo, mRePoiRepo, mReLocRepo, mRePhoRepo, mExecutor);
         }
         if (modelClass.isAssignableFrom(ReListViewModel.class)) {
             return (T) new ReListViewModel(mReRepo, mExecutor);
