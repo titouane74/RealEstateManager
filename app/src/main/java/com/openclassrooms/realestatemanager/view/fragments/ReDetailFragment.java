@@ -26,12 +26,8 @@ import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.adapters.DetailPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReDetailViewModel;
 
-import java.sql.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
@@ -223,13 +219,9 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getRealEstate().getReNbBathrooms()));
 
             mBinding.fragReDetTvCompleteAddress.setText(pRe.getReLocation().toString());
-            if(pRe.getRealEstate().getReOnMarketDate() != null) {
-                Log.d(TAG, "displayReComplete: marketDate : " + pRe.getRealEstate().getReOnMarketDate().toString());
-            } else {
-                Log.d(TAG, "displayReComplete: marketDate null ");
-            }
-//            mBinding.fragReDetTvMarketDate.setText(REMHelper.formatStringToDayMonthYearString(pRe.getRealEstate().getReOnMarketDate().toString()));
-//            mBinding.fragReDetTvSoldDate.setText(REMHelper.formatStringToDayMonthYearString(pRe.getRealEstate().getReSaleDate().toString()));
+
+            mBinding.fragReDetTvMarketDate.setText(REMHelper.formatDateToString(pRe.getRealEstate().getReOnMarketDate()));
+            mBinding.fragReDetTvSoldDate.setText(REMHelper.formatDateToString(pRe.getRealEstate().getReSaleDate()));
         } else {
             Log.d(TAG, "displayReComplete: pRe is null");
         }

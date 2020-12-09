@@ -60,7 +60,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private long mReId;
     private RealEstate mRealEstate = new RealEstate();
     private ReLocation mReLocation = new ReLocation();
-    private RePoi mRePoi = new RePoi();
     private List<RePoi> mPoiList = new ArrayList<>();
 
     @Override
@@ -91,9 +90,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         if (getArguments() != null) {
             mReId = getArguments().getLong(RE_ID_KEY);
             mIsEdit = getArguments().getBoolean(IS_EDIT_KEY);
-            Log.d(TAG, "onViewCreated: AddEdit args in : " + mReId + " IsEdit : " + mIsEdit);
-        } else {
-            Log.d(TAG, "onViewCreated: AddEdit : args null");
         }
     }
 
@@ -117,38 +113,32 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         String lDescription = mBinding.fragReAddEditEtDescription.getText().toString();
 
         String lType = mBinding.fragReAddEditSpinType.getSelectedItem().toString();
+        if (lType == getString(R.string.spinners_select)) {
+            lType ="";
+        }
         int lArea = Integer.parseInt(mBinding.fragReAddEditEtArea.getText().toString());
         int lPrice = Integer.parseInt(mBinding.fragReAddEditEtPrice.getText().toString());
         int lNbRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinRooms.getSelectedItem().toString());
         int lNbBedRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBedrooms.getSelectedItem().toString());
         int lNbBathRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBathrooms.getSelectedItem().toString());
 
-//        DateFormat lDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        Calendar mDateCal = Calendar.getInstance();
-//        mDateCal.set(2020, 12, 9);
-//        String lStringDate = lDateFormat.format(mDateCal.getTime());
-//
-//        Date date = Date.valueOf(lStringDate);
-
         if (mStringDateMarket != null) {
-//            lDateMarket = Date.valueOf(REMHelper.formatStringToYearMonthDayString(mStringDateMarket));
-
             lDateMarket = REMHelper.formatStringToDate(mStringDateMarket);
-        } else {
-            Log.d(TAG, "prepareRealEstate: String date market null");
         }
         if (mStringDateSold != null) {
-//            lDateSold = Date.valueOf(REMHelper.formatStringToYearMonthDayString(mStringDateSold));
             lDateSold = REMHelper.formatStringToDate(mStringDateSold);
         }
-        Log.d(TAG, "prepareRealEstate: market " + lDateMarket);
-        mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
-                lAgentFirstName, lAgentLastName, lDateMarket, lDateSold);
 
+        mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
+                lAgentFirstName, lAgentLastName, lDateSold, lDateMarket);
+
+        saveRealEstate();
+    }
+
+    private void saveRealEstate() {
         if (!mIsEdit) {
             mViewModel.insertRealEstate(mRealEstate);
             mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
-                Log.d(TAG, "prepareRealEstate: " + pMaxReId);
                 manageLocation(pMaxReId);
                 managePoi(pMaxReId);
                 if (!mIsTabletLandscape) {
@@ -160,7 +150,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             mViewModel.updateRealEstate(mRealEstate);
         }
     }
-
     private void manageLocation(long pMaxReId) {
         boolean lIsValid = true;
         String lStreet = mBinding.fragReAddEditEtStreet.getText().toString();
@@ -261,11 +250,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
         configureViewModel();
         if (mIsEdit) {
-/*
-        mViewModel.getRealEstate(mReId).observe(getViewLifecycleOwner(), pRealEstate -> {
-            displayRealEstate(pRealEstate);
-        });
-*/
             mViewModel.selectReComplete(mReId).observe(getViewLifecycleOwner(), pReComp -> {
                 displayReComplete(pReComp);
             });

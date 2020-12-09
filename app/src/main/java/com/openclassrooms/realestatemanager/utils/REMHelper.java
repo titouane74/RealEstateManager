@@ -215,4 +215,9 @@ public class REMHelper {
         }
         return null;
     }
+
+    public static @Nullable String formatDateToString(Date pDate) {
+        SimpleDateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            return lDateFormat.format(pDate);
+    }
 }
