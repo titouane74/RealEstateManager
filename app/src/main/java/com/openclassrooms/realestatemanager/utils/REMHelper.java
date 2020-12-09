@@ -7,6 +7,8 @@ import android.widget.ArrayAdapter;
 import com.openclassrooms.realestatemanager.R;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 /**
@@ -178,5 +180,27 @@ public class REMHelper {
         } else {
             return String.valueOf(pValue);
         }
+    }
+
+    public static String formatStringToDayMonthYearString(String pDate) {
+        SimpleDateFormat sFrom = new SimpleDateFormat("yyyy-MM-dd");
+        java.text.SimpleDateFormat sTo = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return sTo.format(sFrom.parse(pDate));
+        } catch (ParseException pE) {
+            pE.printStackTrace();
+        }
+        return "";
+    }
+
+    public static String formatStringToYearMonthDayString(String pDate) {
+        SimpleDateFormat sFrom = new SimpleDateFormat("dd/MM/yyyy");
+        java.text.SimpleDateFormat sTo = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return sTo.format(sFrom.parse(pDate));
+        } catch (ParseException pE) {
+            pE.printStackTrace();
+        }
+        return "";
     }
 }

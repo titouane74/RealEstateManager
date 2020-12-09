@@ -26,7 +26,12 @@ import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.adapters.DetailPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReDetailViewModel;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
@@ -136,12 +141,16 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
         super.onActivityCreated(savedInstanceState);
         configureViewModel();
         mViewModel.selectReComplete(mReId).observe(getViewLifecycleOwner(), pRealEstateComplete -> {
-            displayReComplete(pRealEstateComplete);
+            try {
+                displayReComplete(pRealEstateComplete);
+            } catch (ParseException pE) {
+                pE.printStackTrace();
+            }
         });
     }
 
     @SuppressLint("SetTextI18n")
-    private void displayReComplete(RealEstateComplete pRe) {
+    private void displayReComplete(RealEstateComplete pRe) throws ParseException {
         if (pRe != null) {
             for (RePoi lPoi : pRe.getPoiList()) {
                 if (lPoi.getPoiName().equals(getString(R.string.poi_restaurant))) {
@@ -214,6 +223,8 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getRealEstate().getReNbBathrooms()));
 
             mBinding.fragReDetTvCompleteAddress.setText(pRe.getReLocation().toString());
+
+            mBinding.fragReDetTvMarketDate.setText(REMHelper.formatStringToDayMonthYearString(pRe.getRealEstate().getReOnMarketDate().toString()));
         } else {
             Log.d(TAG, "displayReComplete: pRe is null");
         }

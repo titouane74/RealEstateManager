@@ -1,19 +1,20 @@
 package com.openclassrooms.realestatemanager.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.openclassrooms.realestatemanager.utils.DateConverter;
+
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.Calendar;
 
 /**
  * Created by Florence LE BOURNOT on 25/11/2020
  */
 @Entity(tableName="realestate")
-//public class RealEstate implements Parcelable {
 public class RealEstate  {
 
     @PrimaryKey(autoGenerate = true)
@@ -28,12 +29,15 @@ public class RealEstate  {
     private boolean reIsSold;
     private String reAgentFirstName;
     private String reAgentLastName;
-//    private Timestamp reSaleDate;
-//    private Timestamp reOnMarketDate;
+    private Date reSaleDate;
+    private Date reOnMarketDate;
 
     public RealEstate() { }
 
-    public RealEstate(String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName, String pReAgentLastName) {
+    public RealEstate(String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName, String pReAgentLastName,
+                      Date pReSaleDate
+            , Date pReOnMarketDate
+    ) {
         reType = pReType;
         rePrice = pRePrice;
         reArea = pReArea;
@@ -44,9 +48,15 @@ public class RealEstate  {
         reIsSold = pReIsSold;
         reAgentFirstName = pReAgentFirstName;
         reAgentLastName = pReAgentLastName;
+        reSaleDate = pReSaleDate;
+        reOnMarketDate = pReOnMarketDate;
     }
 
-    public RealEstate(long pReId, String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName, String pReAgentLastName) {
+    public RealEstate(long pReId, String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms,
+                      int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName,
+                      String pReAgentLastName, Date pReSaleDate
+            , Date pReOnMarketDate
+    ) {
         reId = pReId;
         reType = pReType;
         rePrice = pRePrice;
@@ -58,32 +68,9 @@ public class RealEstate  {
         reIsSold = pReIsSold;
         reAgentFirstName = pReAgentFirstName;
         reAgentLastName = pReAgentLastName;
+        reSaleDate = pReSaleDate;
+        reOnMarketDate = pReOnMarketDate;
     }
-
-    /*
-    protected RealEstate(Parcel in) {
-        reId = in.readInt();
-        reType = in.readString();
-        rePrice = in.readInt();
-        reArea = in.readInt();
-        reNbRooms = in.readInt();
-        reNbBedrooms = in.readInt();
-        reNbBathrooms = in.readInt();
-        reDescription = in.readString();
-        reIsSold = in.readByte() != 0;
-    }
-
-    public static final Creator<RealEstate> CREATOR = new Creator<RealEstate>() {
-        @Override
-        public RealEstate createFromParcel(Parcel in) {
-            return new RealEstate(in);
-        }
-
-        @Override
-        public RealEstate[] newArray(int size) {
-            return new RealEstate[size];
-        }
-    };*/
 
     public long getReId() {
         return reId;
@@ -163,23 +150,13 @@ public class RealEstate  {
 
     public void setReAgentLastName(String pReAgentLastName) { reAgentLastName = pReAgentLastName; }
 
-/*
-    public Timestamp getReSaleDate() {
-        return reSaleDate;
-    }
+    public Date getReSaleDate() { return reSaleDate; }
 
-    public void setReSaleDate(Timestamp pReSaleDate) {
-        reSaleDate = pReSaleDate;
-    }
+    public void setReSaleDate(Date pReSaleDate) { reSaleDate = pReSaleDate; }
 
-    public Timestamp getReOnMarketDate() {
-        return reOnMarketDate;
-    }
+    public Date getReOnMarketDate() { return reOnMarketDate; }
 
-    public void setReOnMarketDate(Timestamp pReOnMarketDate) {
-        reOnMarketDate = pReOnMarketDate;
-    }
-*/
+    public void setReOnMarketDate(Date pReOnMarketDate) { reOnMarketDate = pReOnMarketDate; }
 
     @Override
     public String toString() {
@@ -193,28 +170,9 @@ public class RealEstate  {
                 ", reNbBathrooms=" + reNbBathrooms +
                 ", reDescription='" + reDescription + '\'' +
                 ", reIsSold=" + reIsSold +
-//                ", reSaleDate=" + reSaleDate +
+                ", reSaleDate=" + reSaleDate +
 //                ", reOnMarketDate=" + reOnMarketDate +
                 '}';
     }
 
-/*
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(reId);
-        dest.writeString(reType);
-        dest.writeInt(rePrice);
-        dest.writeInt(reArea);
-        dest.writeInt(reNbRooms);
-        dest.writeInt(reNbBedrooms);
-        dest.writeInt(reNbBathrooms);
-        dest.writeString(reDescription);
-        dest.writeByte((byte) (reIsSold ? 1 : 0));
-    }
-*/
 }

@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
@@ -30,13 +29,12 @@ import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
@@ -77,8 +75,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         mIsTabletLandscape = pIsTabletLandscape;
         configureSpinners();
         initRecyclerView();
-        mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialogMarket());
+        //mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialogMarket());
         mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialogSold());
+        mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialogMarket());
 
 /*        CompoundButton.OnCheckedChangeListener checkedListener = new CompoundButton.OnCheckedChangeListener() {
 
@@ -134,8 +133,15 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         int lNbBedRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBedrooms.getSelectedItem().toString());
         int lNbBathRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBathrooms.getSelectedItem().toString());
 
+        DateFormat lDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar mDateCal = Calendar.getInstance();
+        mDateCal.set(2020,12,9);
+        String lStringDate = lDateFormat.format(mDateCal.getTime());
+
+        Date date = Date.valueOf(lStringDate);
+
         mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
-                lAgentFirstName, lAgentLastName);
+                lAgentFirstName, lAgentLastName, date, date);
 
         if (!mIsEdit) {
             mViewModel.insertRealEstate(mRealEstate);
