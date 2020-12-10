@@ -171,19 +171,21 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> im
         if (!mIsEdit) {
             mViewModel.insertRealEstate(mRealEstate);
             mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
+                Log.d(TAG, "saveRealEstate: maxreid : " + pMaxReId);
                 saveInformations(pMaxReId);
             });
         } else {
             mRealEstate.setReId(mReId);
             mViewModel.updateRealEstate(mRealEstate);
+            Log.d(TAG, "saveRealEstate: reid " + mReId);
             saveInformations(mReId);
         }
     }
 
-    private void saveInformations(long pMaxReId) {
-        manageLocation(pMaxReId);
-        managePoi(pMaxReId);
-        managePhoto(pMaxReId);
+    private void saveInformations(long pReId) {
+        manageLocation(pReId);
+        managePoi(pReId);
+        managePhoto(pReId);
         if (!mIsTabletLandscape) {
             mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
         }
@@ -229,45 +231,29 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> im
         }
     }
 
-    private void managePoi(long pMaxReId) {
+    private void managePoi(long pReId) {
 
-        if (mBinding.fragReAddEditPoiRestaurant.isChecked()) {
-            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_restaurant)));
-        }
-        if (mBinding.fragReAddEditPoiSubway.isChecked()) {
-            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_subway)));
-        }
-        if (mBinding.fragReAddEditPoiSchool.isChecked()) {
-            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_school)));
-        }
-        if (mBinding.fragReAddEditPoiPark.isChecked()) {
-            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_park)));
-        }
-        if (mBinding.fragReAddEditPoiStore.isChecked()) {
-            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_store)));
-        }
-        if (mBinding.fragReAddEditPoiBank.isChecked()) {
-            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_bank)));
-        }
-        if (mBinding.fragReAddEditPoiFood.isChecked()) {
-            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_food)));
-        }
-        if (mBinding.fragReAddEditPoiHealth.isChecked()) {
-            mPoiList.add(new RePoi(pMaxReId, getString(R.string.poi_health)));
-        }
-        Log.d(TAG, "managePoi: size " + mPoiList.size());
-        if ((!mIsEdit) && (mPoiList.size() > 0)) {
+        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_restaurant),
+                mBinding.fragReAddEditPoiRestaurant.isChecked(), mViewModel);
+        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_subway),
+                mBinding.fragReAddEditPoiSubway.isChecked(), mViewModel);
+        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_school),
+                mBinding.fragReAddEditPoiSchool.isChecked(), mViewModel);
+        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_park),
+                mBinding.fragReAddEditPoiPark.isChecked(), mViewModel);
+        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_store),
+                mBinding.fragReAddEditPoiStore.isChecked(), mViewModel);
+        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_bank),
+                mBinding.fragReAddEditPoiBank.isChecked(), mViewModel);
+        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_food),
+                mBinding.fragReAddEditPoiFood.isChecked(), mViewModel);
+        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_health),
+                mBinding.fragReAddEditPoiHealth.isChecked(), mViewModel);
+
+        if (mPoiList.size() > 0) {
             for (RePoi lPoi : mPoiList) {
-                Log.d(TAG, "managePoi: " + lPoi.getPoiName());
-                if (!mIsEdit) {
-                    mViewModel.insertRePoi(lPoi);
-                } else {
-                    //TODO
-//                    mReLocation.setLocId(mReComp.getReLocation().getLocId());
-//                    mViewModel.updateReLocation(mReLocation);
-                }
+                mViewModel.insertRePoi(lPoi);
             }
-//        } else if (mPoiList.size() > 0) {
         }
     }
 

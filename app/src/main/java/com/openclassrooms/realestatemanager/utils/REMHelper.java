@@ -7,11 +7,15 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.Nullable;
 
 import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.model.RePoi;
+import com.openclassrooms.realestatemanager.model.RealEstateComplete;
+import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -223,5 +227,31 @@ public class REMHelper {
         } else {
             return null;
         }
+    }
+
+    public static RePoi findInPoiList(List<RePoi> pPoiList, String pPoi) {
+        for (RePoi lPoi : pPoiList) {
+            if (lPoi.getPoiName().equals(pPoi)) {
+                return lPoi;
+            }
+        }
+        return null;
+    }
+
+    public static List<RePoi> setPoiList(RealEstateComplete pReComp, List<RePoi> pPoiList, long pReId,
+                                         boolean pIsEdit, String pPoi, boolean pIsChecked, ReAddEditViewModel pViewModel) {
+        RePoi lPoi;
+
+        if(pIsEdit) { //update
+            lPoi = REMHelper.findInPoiList(pReComp.getPoiList(),pPoi) ;
+            if ((lPoi != null) && !pIsChecked) {  // in list and  no more selected => delete
+                pViewModel.deleteRePoi(lPoi);
+            } else if ((lPoi == null) && pIsChecked){  // not in list and selected => insert
+                pPoiList.add(new RePoi(pReId,pPoi));
+            }
+        } else { //insert
+            pPoiList.add(new RePoi(pReId,pPoi));
+        }
+        return pPoiList;
     }
 }

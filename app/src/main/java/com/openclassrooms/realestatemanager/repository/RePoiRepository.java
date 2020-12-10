@@ -14,4 +14,6 @@ public class RePoiRepository {
 
     public void insertRePoi(RePoi pRePoi) { mRePoiDao.insertRePoi(pRePoi);}
 
+    public void deleteRePoi(RePoi pRePoi) { mRePoiDao.deleteRePoi(pRePoi);}
+
 }
