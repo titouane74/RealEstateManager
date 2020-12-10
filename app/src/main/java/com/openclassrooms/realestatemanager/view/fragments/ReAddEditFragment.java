@@ -43,7 +43,7 @@ import java.util.List;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
 
-public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  implements AddEditPhotoAdapter.OnRecyclerViewListener{
+public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> implements AddEditPhotoAdapter.OnRecyclerViewListener {
 
     private static final String TAG = "TAG_REAddFragment";
 
@@ -66,6 +66,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  i
     private ReLocation mReLocation = new ReLocation();
     private List<RePoi> mPoiList = new ArrayList<>();
     private List<RePhoto> mPhotoList = new ArrayList<>();
+    private RealEstateComplete mReComp;
 
     @Override
     protected int getMenuAttached() {
@@ -85,7 +86,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  i
         mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialogSold());
 //        mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialog(mFragView));
 //        mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialog(mFragView));
-        mBinding.fragReAddEditImgSelectPhoto.setOnClickListener(v-> addPhoto());
+        mBinding.fragReAddEditImgSelectPhoto.setOnClickListener(v -> addPhoto());
 
     }
 
@@ -99,9 +100,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  i
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
             // Get a list of picked images
             List<Image> images = ImagePicker.getImages(data);
-            for(Image lImg : images) {
+            for (Image lImg : images) {
                 Log.d(TAG, "onActivityResult: " + lImg.getName() + " " + lImg.getPath() + " " + lImg.getId() + " " + lImg.describeContents());
-                mPhotoList.add(new RePhoto( lImg.getName(), lImg.getPath(),lImg.getId()));
+                mPhotoList.add(new RePhoto(lImg.getName(), lImg.getPath(), lImg.getId()));
             }
             mAdapter.setPhotoList(mPhotoList);
             mAdapter.notifyDataSetChanged();
@@ -141,7 +142,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  i
 
         String lType = mBinding.fragReAddEditSpinType.getSelectedItem().toString();
         if (lType == getString(R.string.spinners_select)) {
-            lType ="";
+            lType = "";
         }
         int lArea = Integer.parseInt(mBinding.fragReAddEditEtArea.getText().toString());
         int lPrice = Integer.parseInt(mBinding.fragReAddEditEtPrice.getText().toString());
@@ -151,9 +152,13 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  i
 
         if (mStringDateMarket != null) {
             lDateMarket = REMHelper.formatStringToDate(mStringDateMarket);
+        } else if (mBinding.fragReAddEditEtMarketDate.getText() != null) {
+            lDateMarket = REMHelper.formatStringToDate(mBinding.fragReAddEditEtMarketDate.getText().toString());
         }
         if (mStringDateSold != null) {
             lDateSold = REMHelper.formatStringToDate(mStringDateSold);
+        } else if (mBinding.fragReAddEditEtSoldDate.getText() != null) {
+            lDateSold = REMHelper.formatStringToDate(mBinding.fragReAddEditEtSoldDate.getText().toString());
         }
 
         mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
@@ -166,25 +171,36 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  i
         if (!mIsEdit) {
             mViewModel.insertRealEstate(mRealEstate);
             mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
-                manageLocation(pMaxReId);
-                managePoi(pMaxReId);
-                managePhoto(pMaxReId);
-                if (!mIsTabletLandscape) {
-                    mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
-                }
+                saveInformations(pMaxReId);
             });
         } else {
             mRealEstate.setReId(mReId);
             mViewModel.updateRealEstate(mRealEstate);
+            saveInformations(mReId);
+        }
+    }
+
+    private void saveInformations(long pMaxReId) {
+        manageLocation(pMaxReId);
+        managePoi(pMaxReId);
+        managePhoto(pMaxReId);
+        if (!mIsTabletLandscape) {
+            mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
         }
     }
 
     private void managePhoto(long pMaxReId) {
         for (RePhoto lPhoto : mPhotoList) {
             lPhoto.setPhReId(pMaxReId);
-            mViewModel.insertRePhoto(lPhoto);
+            if (!mIsEdit) {
+                mViewModel.insertRePhoto(lPhoto);
+            } else {
+                //TODO manage list
+            }
         }
+
     }
+
     private void manageLocation(long pMaxReId) {
         boolean lIsValid = true;
         String lStreet = mBinding.fragReAddEditEtStreet.getText().toString();
@@ -207,8 +223,8 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  i
             if (!mIsEdit) {
                 mViewModel.insertReLocation(mReLocation);
             } else {
-                //TODO
-                //mReLocation.setLocId();
+                mReLocation.setLocId(mReComp.getReLocation().getLocId());
+                mViewModel.updateReLocation(mReLocation);
             }
         }
     }
@@ -243,7 +259,13 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  i
         if ((!mIsEdit) && (mPoiList.size() > 0)) {
             for (RePoi lPoi : mPoiList) {
                 Log.d(TAG, "managePoi: " + lPoi.getPoiName());
-                mViewModel.insertRePoi(lPoi);
+                if (!mIsEdit) {
+                    mViewModel.insertRePoi(lPoi);
+                } else {
+                    //TODO
+//                    mReLocation.setLocId(mReComp.getReLocation().getLocId());
+//                    mViewModel.updateReLocation(mReLocation);
+                }
             }
 //        } else if (mPoiList.size() > 0) {
         }
@@ -270,6 +292,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  i
         configureViewModel();
         if (mIsEdit) {
             mViewModel.selectReComplete(mReId).observe(getViewLifecycleOwner(), pReComp -> {
+                mReComp = pReComp;
                 displayReComplete(pReComp);
             });
         }
@@ -329,13 +352,13 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  i
     }
 
     @SuppressLint("SetTextI18n")
-    private void displayReComplete(RealEstateComplete pRe) {
+    private void displayReComplete(RealEstateComplete pReComp) {
         int lPosInAdapter = 0;
         String lNbRooms = "0";
 
-        if (pRe != null) {
+        if (pReComp != null) {
 
-            for (RePoi lPoi : pRe.getPoiList()) {
+            for (RePoi lPoi : pReComp.getPoiList()) {
                 if (lPoi.getPoiName().equals(getString(R.string.poi_restaurant))) {
                     mBinding.fragReAddEditPoiRestaurant.setChecked(true);
                 } else if (lPoi.getPoiName().equals(getString(R.string.poi_subway))) {
@@ -354,28 +377,43 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  i
                     mBinding.fragReAddEditPoiPark.setChecked(true);
                 }
             }
-            mBinding.fragReAddEditEtPrice.setText(Integer.toString(pRe.getRealEstate().getRePrice()));
-            mBinding.fragReAddEditCbSold.setChecked(pRe.getRealEstate().isReIsSold());
+
+            mBinding.fragReAddEditEtPrice.setText(Integer.toString(pReComp.getRealEstate().getRePrice()));
+            mBinding.fragReAddEditCbSold.setChecked(pReComp.getRealEstate().isReIsSold());
 
             ArrayAdapter<CharSequence> lAdapter = REMHelper.configureSpinAdapter(mContext, R.array.type_spinner);
-            lPosInAdapter = lAdapter.getPosition(pRe.getRealEstate().getReType());
+            lPosInAdapter = lAdapter.getPosition(pReComp.getRealEstate().getReType());
             mBinding.fragReAddEditSpinType.setSelection(lPosInAdapter);
 
-            lPosInAdapter = REMHelper.getPositionInRoomSpinner(mContext, R.array.rooms_spinner, pRe.getRealEstate().getReNbRooms());
+            lPosInAdapter = REMHelper.getPositionInRoomSpinner(mContext, R.array.rooms_spinner, pReComp.getRealEstate().getReNbRooms());
             mBinding.fragReAddEditSpinRooms.setSelection(lPosInAdapter);
 
-            lNbRooms = REMHelper.convertSpinRoomToString(pRe.getRealEstate().getReNbBedrooms());
+            lNbRooms = REMHelper.convertSpinRoomToString(pReComp.getRealEstate().getReNbBedrooms());
             lPosInAdapter = REMHelper.getPositionInSpinner(mContext, R.array.rooms_spinner, lNbRooms);
             mBinding.fragReAddEditSpinBedrooms.setSelection(lPosInAdapter);
-            lNbRooms = REMHelper.convertSpinRoomToString(pRe.getRealEstate().getReNbBathrooms());
+            lNbRooms = REMHelper.convertSpinRoomToString(pReComp.getRealEstate().getReNbBathrooms());
             lPosInAdapter = REMHelper.getPositionInSpinner(mContext, R.array.rooms_spinner, lNbRooms);
             mBinding.fragReAddEditSpinBathrooms.setSelection(lPosInAdapter);
 
-            mBinding.fragReAddEditEtDescription.setText(pRe.getRealEstate().getReDescription());
-            mBinding.fragReAddEditEtArea.setText(Integer.toString(pRe.getRealEstate().getReArea()));
+            mBinding.fragReAddEditEtDescription.setText(pReComp.getRealEstate().getReDescription());
+            mBinding.fragReAddEditEtArea.setText(Integer.toString(pReComp.getRealEstate().getReArea()));
 
-            mBinding.fragReAddEditEtAgentLastName.setText(pRe.getRealEstate().getReAgentLastName());
-            mBinding.fragReAddEditEtAgentFirstName.setText(pRe.getRealEstate().getReAgentFirstName());
+            mBinding.fragReAddEditEtAgentLastName.setText(pReComp.getRealEstate().getReAgentLastName());
+            mBinding.fragReAddEditEtAgentFirstName.setText(pReComp.getRealEstate().getReAgentFirstName());
+
+            mBinding.fragReAddEditEtMarketDate.setText(REMHelper.formatDateToString(pReComp.getRealEstate().getReOnMarketDate()));
+            mBinding.fragReAddEditEtSoldDate.setText(REMHelper.formatDateToString(pReComp.getRealEstate().getReSaleDate()));
+
+            mPhotoList = pReComp.getRePhotoList();
+            mAdapter.setPhotoList(mPhotoList);
+            mAdapter.notifyDataSetChanged();
+
+            mBinding.fragReAddEditEtStreet.setText(pReComp.getReLocation().getLocStreet());
+            mBinding.fragReAddEditEtDistrict.setText(pReComp.getReLocation().getLocDistrict());
+            mBinding.fragReAddEditEtCity.setText(pReComp.getReLocation().getLocCity());
+            mBinding.fragReAddEditEtCounty.setText(pReComp.getReLocation().getLocCounty());
+            mBinding.fragReAddEditEtZipCode.setText(pReComp.getReLocation().getLocZipCode());
+            mBinding.fragReAddEditSpinCountry.setSelection(REMHelper.getPositionInSpinner(mContext, R.array.country_spinner, pReComp.getReLocation().getLocCountry()));
 
         }
     }

@@ -207,9 +207,6 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
                 mBinding.fragReDetTvTxtSoldDate.setVisibility(View.INVISIBLE);
                 mBinding.fragReDetTvSoldDate.setVisibility(View.INVISIBLE);
             }
-            mBinding.fragReDetTvAgent.setText(pRe.getRealEstate().getReAgentFirstName()
-                    + " " + pRe.getRealEstate().getReAgentLastName());
-
             mBinding.fragReDetTvDescription.setText(pRe.getRealEstate().getReDescription());
             mBinding.fragReDetTvAgent.setText(pRe.getRealEstate().getReAgentFirstName() + " " + pRe.getRealEstate().getReAgentLastName());
             mBinding.fragReDetTvPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pRe.getRealEstate().getRePrice()));

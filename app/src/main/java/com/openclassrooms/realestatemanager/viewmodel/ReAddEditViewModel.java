@@ -49,6 +49,8 @@ public class ReAddEditViewModel extends ViewModel {
 
     public void insertReLocation(ReLocation pReLocation) { mExecutor.execute(() -> mReLocRepo.insertReLocation(pReLocation)); }
 
+    public void updateReLocation(ReLocation pReLocation) { mExecutor.execute(() -> mReLocRepo.updateReLocation(pReLocation)); }
+
     public LiveData<ReLocation> selectReLocation(long pLocReId) { return mReLocRepo.selectReLocation(pLocReId); }
 
     public void insertRePoi(RePoi pRePoi) { mExecutor.execute(() -> mRePoiRepo.insertRePoi(pRePoi)); }

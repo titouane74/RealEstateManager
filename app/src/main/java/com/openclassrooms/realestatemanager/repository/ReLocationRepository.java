@@ -16,6 +16,8 @@ public class ReLocationRepository {
 
     public void insertReLocation(ReLocation pReLocation) {mReLocationDao.insertReLocation(pReLocation);}
 
+    public void updateReLocation(ReLocation pReLocation) {mReLocationDao.updateReLocation(pReLocation);}
+
     public LiveData<ReLocation> selectReLocation(long pLocReId) {return mReLocationDao.selectReLocation(pLocReId); }
 
 }
