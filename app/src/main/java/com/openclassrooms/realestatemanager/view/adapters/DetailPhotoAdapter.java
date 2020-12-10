@@ -6,7 +6,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.openclassrooms.realestatemanager.databinding.FragmentReDetailPhotoItemBinding;
+import com.openclassrooms.realestatemanager.model.RePhoto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +19,10 @@ import java.util.List;
 public class DetailPhotoAdapter extends RecyclerView.Adapter<DetailPhotoAdapter.DetailPhotoHolder> {
 
     private static final String TAG = "TAG_DetailPhotoAdapter";
-    private List<String> mPhotoList = new ArrayList<>();
+    private List<RePhoto> mPhotoList = new ArrayList<>();
     private FragmentReDetailPhotoItemBinding mBinding;
 
-    public void setPhotoList(List<String> pPhotoList) { mPhotoList = pPhotoList; }
+    public void setPhotoList(List<RePhoto> pPhotoList) { mPhotoList = pPhotoList; }
 
     @NonNull
     @Override
@@ -53,12 +55,11 @@ public class DetailPhotoAdapter extends RecyclerView.Adapter<DetailPhotoAdapter.
                 mBindingHolder = pBindingHolder;
         }
 
-        public void bindView(String pPhotoUrl) {
-            mBindingHolder.fragReDetTvPhoto.setText(pPhotoUrl);
-/*            Glide.with(mBindingHolder.fragReAddEditImgPhoto.getContext())
-                    .load(pPhotoUrl)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(mBindingHolder.fragReAddEditImgPhoto);*/
+        public void bindView(RePhoto pPhoto) {
+            mBindingHolder.fragReDetTvPhoto.setText(pPhoto.getPhDescription());
+            Glide.with(mBindingHolder.fragReDetImgPhoto.getContext())
+                    .load(pPhoto.getPhPath())
+                    .into(mBindingHolder.fragReDetImgPhoto);
         }
     }
 }

@@ -43,7 +43,7 @@ import java.util.List;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
 
-public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
+public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding>  implements AddEditPhotoAdapter.OnRecyclerViewListener{
 
     private static final String TAG = "TAG_REAddFragment";
 
@@ -85,12 +85,8 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialogSold());
 //        mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> displayCalendarDialog(mFragView));
 //        mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> displayCalendarDialog(mFragView));
-        mBinding.imgBtnAdd.setOnClickListener(v-> addPhoto());
         mBinding.fragReAddEditImgSelectPhoto.setOnClickListener(v-> addPhoto());
-/*
-        mBinding.fragReAddEditImgAddPhoto.setOnClickListener(v -> addPhoto());
-        mBinding.fragReAddEditImgAddPhoto.setOnClickListener(v -> addPhoto());
-*/
+
     }
 
     private void addPhoto() {
@@ -105,7 +101,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             List<Image> images = ImagePicker.getImages(data);
             for(Image lImg : images) {
                 Log.d(TAG, "onActivityResult: " + lImg.getName() + " " + lImg.getPath() + " " + lImg.getId() + " " + lImg.describeContents());
-                mPhotoList.add(new RePhoto(lImg.getId(), lImg.getName(), lImg.getPath(), lImg.describeContents()));
+                mPhotoList.add(new RePhoto( lImg.getName(), lImg.getPath(),lImg.getId()));
             }
             mAdapter.setPhotoList(mPhotoList);
             mAdapter.notifyDataSetChanged();
@@ -172,6 +168,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
                 manageLocation(pMaxReId);
                 managePoi(pMaxReId);
+                managePhoto(pMaxReId);
                 if (!mIsTabletLandscape) {
                     mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
                 }
@@ -179,6 +176,13 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         } else {
             mRealEstate.setReId(mReId);
             mViewModel.updateRealEstate(mRealEstate);
+        }
+    }
+
+    private void managePhoto(long pMaxReId) {
+        for (RePhoto lPhoto : mPhotoList) {
+            lPhoto.setPhReId(pMaxReId);
+            mViewModel.insertRePhoto(lPhoto);
         }
     }
     private void manageLocation(long pMaxReId) {
@@ -257,22 +261,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         mAdapter = new AddEditPhotoAdapter();
         mBinding.fragReAddEditRvPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mBinding.fragReAddEditRvPhoto.setAdapter(mAdapter);
-        //initPhotoList();
-    }
-
-    private void initPhotoList() {
-        List<String> lPhotoList = new ArrayList<>();
-        lPhotoList.add("https://lemagdesanimaux.ouest-france.fr/images/dossiers/2019-06/cheval-073016.jpg");
-        lPhotoList.add("https://www.30millionsdamis.fr/uploads/pics/conseils-erreurs-chat-1171.jpg");
-        lPhotoList.add("https://cdn.futura-sciences.com/buildsv6/images/wide1920/a/0/f/a0fc73919d_50166390_chaton.jpg");
-        lPhotoList.add("https://www.i-cad.fr/uploads/5bec27af5afec.jpeg");
-        lPhotoList.add("https://www.dogteur.com/media/magpleasure/mpblog/list_thumbnail_file/e/a/cache/5/ece9a24a761836a70934a998c163f8c8/eaf7d56dbea1bb003bb0bb649c022bab.jpg");
-        lPhotoList.add("https://lemagduchat.ouest-france.fr/images/dossiers/2018-11/chat-drole-113730.jpg");
-        lPhotoList.add("https://cdn-s-www.ledauphine.com/images/5FC3042C-0F6B-4D19-87CF-01591980B2D3/NW_detail_M/title-1602592555.jpg");
-        lPhotoList.add("https://www.ultrapremiumdirect.com/img/cms/blog/loulou-ronron-therapie.jpg");
-
-
-//        mAdapter.setPhotoList(lPhotoList);
     }
 
     @Override
@@ -420,5 +408,10 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
                 lCalendar.get(Calendar.DAY_OF_MONTH)
         );
         lDatePickerDialog.show();
+    }
+
+    @Override
+    public void listToSave(List<RePhoto> pPhotoList) {
+        mPhotoList = pPhotoList;
     }
 }

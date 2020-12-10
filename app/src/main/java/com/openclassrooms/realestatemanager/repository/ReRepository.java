@@ -37,4 +37,6 @@ public class ReRepository {
 
     public LiveData<RealEstateComplete> selectReComplete(long pReId) { return mReDao.selectReComplete(pReId);}
 
+    public LiveData<List<RealEstateComplete>> selectAllReComplete() { return mReDao.selectAllReComplete();}
+
 }

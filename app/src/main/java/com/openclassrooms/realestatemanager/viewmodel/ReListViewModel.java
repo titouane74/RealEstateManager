@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.repository.ReRepository;
 
 import java.util.List;
@@ -19,8 +20,8 @@ public class ReListViewModel extends ViewModel {
         mExecutor = pExecutor;
     }
 
-    public LiveData<List<RealEstate>> getAllRe() {
-        return mReRepo.selectAllRealEstates();
-    }
+    public LiveData<List<RealEstate>> getAllRe() { return mReRepo.selectAllRealEstates(); }
+
+    public LiveData<List<RealEstateComplete>> selectAllReComplete() { return mReRepo.selectAllReComplete(); }
 
 }

@@ -57,7 +57,13 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         configureViewModel();
+/*
         mViewModel.getAllRe().observe(getViewLifecycleOwner(), pAllRe -> {
+            mAdapter.setReList(pAllRe);
+            mAdapter.notifyDataSetChanged();
+        });
+*/
+        mViewModel.selectAllReComplete().observe(getViewLifecycleOwner(), pAllRe -> {
             mAdapter.setReList(pAllRe);
             mAdapter.notifyDataSetChanged();
         });

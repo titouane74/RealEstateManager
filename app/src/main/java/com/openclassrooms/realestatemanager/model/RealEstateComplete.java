@@ -16,7 +16,7 @@ public class RealEstateComplete {
     @Relation(parentColumn = "reId", entityColumn = "locreid")
     public ReLocation mReLocation;
     @Relation(parentColumn = "reId", entityColumn = "phreid")
-    public RePhoto mRePhoto;
+    public List<RePhoto> mRePhotoList;
 
     public RealEstate getRealEstate() {
         return mRealEstate;
@@ -38,8 +38,8 @@ public class RealEstateComplete {
 
     public void setReLocation(ReLocation pReLocation) { mReLocation = pReLocation; }
 
-    public RePhoto getRePhoto() { return mRePhoto; }
+    public List<RePhoto> getRePhotoList() { return mRePhotoList; }
 
-    public void setRePhoto(RePhoto pRePhoto) { mRePhoto = pRePhoto; }
+    public void setRePhotoList(List<RePhoto> pRePhotoList) { mRePhotoList = pRePhotoList; }
 
 }

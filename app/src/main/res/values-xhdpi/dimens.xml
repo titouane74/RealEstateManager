@@ -35,6 +35,8 @@
     <dimen name="re_photo_sold_size">74dp</dimen>
     <dimen name="re_sold_txt_size">44sp</dimen>
     <dimen name="re_sold_padding_end">18dp</dimen>
+    <dimen name="re_photo_margin_start">8dp</dimen>
+
     <!-- REAL ESTATE DETAIL -->
     <dimen name="re_det_left_gl">0.34</dimen>
     <dimen name="re_det_right_gl">0.64</dimen>

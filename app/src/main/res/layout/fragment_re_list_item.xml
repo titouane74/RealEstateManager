@@ -10,7 +10,10 @@
         android:id="@+id/frag_re_list_item_img_photo"
         android:layout_width="@dimen/re_photo_size"
         android:layout_height="@dimen/re_photo_size"
+        android:layout_marginStart="@dimen/re_photo_margin_start"
         android:contentDescription="@string/txt_photos"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_no_photo"/>
@@ -18,7 +21,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frag_re_list_item_cl_description"
         android:layout_width="@dimen/app_zero_dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/app_zero_dp"
         app:layout_constraintStart_toEndOf="@id/frag_re_list_item_img_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/frag_re_list_item_img_photo"
@@ -32,8 +35,8 @@
             android:text="House"
             android:textSize="@dimen/default_txt_size_large"
             android:textStyle="bold"
-            android:paddingTop="@dimen/default_padding_top"
-            app:layout_constraintBottom_toTopOf="@id/item_city"
+
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -44,7 +47,8 @@
             android:textSize="@dimen/default_txt_size_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/item_price" />
+            app:layout_constraintBottom_toTopOf="@id/item_price"
+            app:layout_constraintTop_toBottomOf="@id/item_type"/>
 
         <TextView
             android:id="@+id/item_price"

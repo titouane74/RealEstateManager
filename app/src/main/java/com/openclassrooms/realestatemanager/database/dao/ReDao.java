@@ -38,4 +38,7 @@ public interface ReDao {
     @Query("SELECT * FROM realestate WHERE reid=:pReId")
     LiveData<RealEstateComplete> selectReComplete(long pReId);
 
+    @Transaction
+    @Query("SELECT * FROM realestate")
+    LiveData<List<RealEstateComplete>> selectAllReComplete();
 }

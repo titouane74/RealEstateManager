@@ -3,22 +3,20 @@ package com.openclassrooms.realestatemanager.view.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListItemBinding;
-import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
-import com.openclassrooms.realestatemanager.view.fragments.ReListFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +30,14 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
     public static final String IS_EDIT_KEY = "IS_EDIT";
 
     private static final String TAG = "TAG_ReListAdapter";
-    private List<RealEstate> mReList = new ArrayList<>();
+    private List<RealEstateComplete> mReList = new ArrayList<>();
     private com.openclassrooms.realestatemanager.databinding.FragmentReListItemBinding mBinding;
     private NavController mNavController;
     private Context mContext;
     private boolean mIsTablet;
 
 
-    public void setReList(List<RealEstate> pReList) {
+    public void setReList(List<RealEstateComplete> pReList) {
         mReList = pReList;
     }
 
@@ -61,7 +59,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
 
         pHolder.itemView.setOnClickListener(v -> {
             Bundle lBundle = new Bundle();
-            lBundle.putLong(RE_ID_KEY,mReList.get(position).getReId());
+            lBundle.putLong(RE_ID_KEY,mReList.get(position).getRealEstate().getReId());
 
             if (REMHelper.isTabletLandscape(mContext,mIsTablet)) {
                 mNavController.navigate(R.id.reDetailFragment,lBundle);
@@ -95,22 +93,23 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
             mBindingHolder = pBindingHolder;
         }
 
-        public void bindView(RealEstate pRealEstate) {
-            mBindingHolder.itemCity.setText(pRealEstate.getReAgentFirstName());
-            mBindingHolder.itemPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pRealEstate.getRePrice()));
-            mBindingHolder.itemType.setText(pRealEstate.getReType());
-            if(pRealEstate.isReIsSold()) {
+        public void bindView(RealEstateComplete pReComp) {
+            mBindingHolder.itemCity.setText(pReComp.getRealEstate().getReAgentFirstName());
+            mBindingHolder.itemPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pReComp.getRealEstate().getRePrice()));
+            mBindingHolder.itemType.setText(pReComp.getRealEstate().getReType());
+            if(pReComp.getRealEstate().isReIsSold()) {
                 mBindingHolder.fragReListItemImgSold.setVisibility(View.VISIBLE);
             } else {
                 mBindingHolder.fragReListItemImgSold.setVisibility(View.INVISIBLE);
             }
 
-            /*
-            Glide.with(mBindingHolder.fragReListItemImgPhoto.getContext())
-                    .load(pPhotoUrl)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(mBindingHolder.fragReListItemImgPhoto);
-*/
+            if (pReComp.getRePhotoList().size()>0) {
+                if (pReComp.getRePhotoList().get(0).getPhPath() != null) {
+                    Glide.with(mBindingHolder.fragReListItemImgPhoto.getContext())
+                            .load(pReComp.getRePhotoList().get(0).getPhPath())
+                            .into(mBindingHolder.fragReListItemImgPhoto);
+                }
+            }
 
         }
     }

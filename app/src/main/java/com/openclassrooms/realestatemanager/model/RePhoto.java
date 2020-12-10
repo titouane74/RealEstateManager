@@ -18,26 +18,31 @@ public class RePhoto {
 
     @ColumnInfo(name = "phreid",index = true)
     private long phReId;
-
     private String phDescription;
     private String phPath;
-    private int phContentDescription;
+    private long phImgId;
 
     public RePhoto() {}
 
-    public RePhoto(long pPhId, String pPhDescription, String pPhPath,int pPhContentDescription) {
+    public RePhoto(String pPhDescription, String pPhPath, long pPhImgId) {
+        phDescription = pPhDescription;
+        phPath = pPhPath;
+        phImgId = pPhImgId;
+    }
+
+    public RePhoto(long pPhId, String pPhDescription, String pPhPath, long pPhImgId) {
         phId = pPhId;
         phDescription = pPhDescription;
         phPath = pPhPath;
-        phContentDescription = pPhContentDescription;
+        phImgId = pPhImgId;
     }
 
-    public RePhoto(long pPhId, long pPhReId, String pPhDescription, String pPhPath,int pPhContentDescription) {
+    public RePhoto(long pPhId, long pPhReId, String pPhDescription, String pPhPath, long pPhImgId) {
         phId = pPhId;
         phReId = pPhReId;
         phDescription = pPhDescription;
         phPath = pPhPath;
-        phContentDescription = pPhContentDescription;
+        phImgId = pPhImgId;
     }
 
     public long getPhId() { return phId; }
@@ -56,7 +61,7 @@ public class RePhoto {
 
     public void setPhPath(String pPhPath) { phPath = pPhPath; }
 
-    public int getPhContentDescription() { return phContentDescription; }
+    public long getPhImgId() { return phImgId; }
 
-    public void setPhContentDescription(int pPhContentDescription) { phContentDescription = pPhContentDescription; }
+    public void setPhImgId(long pPhImgId) { phImgId = pPhImgId; }
 }

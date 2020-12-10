@@ -14,21 +14,12 @@
         android:theme="@style/ReTheme"
         tools:context=".view.fragments.ReAddEditFragment">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/img_btn_add"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_take_photo_48"/>
-
-
         <androidx.cardview.widget.CardView
             android:id="@+id/frag_re_add_edit_cardv_status"
             style="@style/ReTheme.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/img_btn_add">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

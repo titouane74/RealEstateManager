@@ -8,6 +8,8 @@
         android:id="@+id/frag_re_det_img_photo"
         android:layout_width="@dimen/re_add_edit_photo_size_large"
         android:layout_height="@dimen/re_add_edit_photo_size_large"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:contentDescription="@string/txt_photos"

@@ -6,6 +6,8 @@ import com.openclassrooms.realestatemanager.database.dao.ReDao;
 import com.openclassrooms.realestatemanager.database.dao.ReLocationDao;
 import com.openclassrooms.realestatemanager.database.dao.RePhotoDao;
 import com.openclassrooms.realestatemanager.model.ReLocation;
+import com.openclassrooms.realestatemanager.model.RePhoto;
+import com.openclassrooms.realestatemanager.model.RePoi;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 
@@ -19,6 +21,8 @@ public class RePhotoRepository {
     private RePhotoDao mRePhotoDao;
 
     public RePhotoRepository(RePhotoDao pRePhotoDao) {mRePhotoDao = pRePhotoDao;}
+
+    public void insertRePhoto(RePhoto pRePhoto) { mRePhotoDao.insertRePhoto(pRePhoto);}
 
 
 }
