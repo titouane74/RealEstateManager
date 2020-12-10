@@ -13,6 +13,7 @@ import com.openclassrooms.realestatemanager.repository.RePhotoRepository;
 import com.openclassrooms.realestatemanager.repository.RePoiRepository;
 import com.openclassrooms.realestatemanager.repository.ReRepository;
 
+import java.util.List;
 import java.util.concurrent.Executor;
 
 public class ReAddEditViewModel extends ViewModel {
@@ -59,6 +60,13 @@ public class ReAddEditViewModel extends ViewModel {
 
     public LiveData<RealEstateComplete> selectReComplete(long pReId) { return mReRepo.selectReComplete(pReId); }
 
+    public LiveData<List<RePhoto>> selectRePhoto(long pReId) {return  mRePhRepo.selectRePhoto(pReId); }
+
     public void insertRePhoto(RePhoto pRePhoto) { mExecutor.execute(() -> mRePhRepo.insertRePhoto(pRePhoto)); }
+
+    public void updateRePhoto(RePhoto pRePhoto) { mExecutor.execute(() -> mRePhRepo.updateRePhoto(pRePhoto)); }
+
+    public void deleteRePhoto(RePhoto pRePhoto) { mExecutor.execute(() -> mRePhRepo.deleteRePhoto(pRePhoto)); }
+
 
 }

@@ -22,7 +22,12 @@ public class RePhotoRepository {
 
     public RePhotoRepository(RePhotoDao pRePhotoDao) {mRePhotoDao = pRePhotoDao;}
 
+    public LiveData<List<RePhoto>> selectRePhoto(long pReId) { return mRePhotoDao.selectRePhoto(pReId);}
+
     public void insertRePhoto(RePhoto pRePhoto) { mRePhotoDao.insertRePhoto(pRePhoto);}
 
+    public void updateRePhoto(RePhoto pRePhoto) { mRePhotoDao.updateRePhoto(pRePhoto);}
+
+    public void deleteRePhoto(RePhoto pRePhoto) { mRePhotoDao.deleteRePhoto(pRePhoto);}
 
 }

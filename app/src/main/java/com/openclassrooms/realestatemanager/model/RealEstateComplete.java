@@ -4,6 +4,7 @@ import androidx.room.Embedded;
 import androidx.room.Relation;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Florence LE BOURNOT on 25/11/2020
@@ -15,6 +16,20 @@ public class RealEstateComplete {
     public List<RePoi> mPoiList;
     @Relation(parentColumn = "reId", entityColumn = "locreid")
     public ReLocation mReLocation;
+
+    @Override
+    public boolean equals(Object lpO) {
+        if (this == lpO) return true;
+        if (!(lpO instanceof RealEstateComplete)) return false;
+        RealEstateComplete lthat = (RealEstateComplete) lpO;
+        return getRePhotoList().equals(lthat.getRePhotoList());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRePhotoList());
+    }
+
     @Relation(parentColumn = "reId", entityColumn = "phreid")
     public List<RePhoto> mRePhotoList;
 

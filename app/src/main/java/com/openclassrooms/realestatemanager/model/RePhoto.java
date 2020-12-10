@@ -5,6 +5,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 /**
  * Created by Florence LE BOURNOT on 08/12/2020
  */
@@ -64,4 +66,20 @@ public class RePhoto {
     public long getPhImgId() { return phImgId; }
 
     public void setPhImgId(long pPhImgId) { phImgId = pPhImgId; }
+
+    @Override
+    public boolean equals(Object lpO) {
+        if (this == lpO) return true;
+        if (!(lpO instanceof RePhoto)) return false;
+        RePhoto llRePhoto = (RePhoto) lpO;
+        return getPhReId() == llRePhoto.getPhReId() &&
+                getPhImgId() == llRePhoto.getPhImgId() &&
+                getPhDescription().equals(llRePhoto.getPhDescription()) &&
+                getPhPath().equals(llRePhoto.getPhPath());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPhReId(), getPhDescription(), getPhPath(), getPhImgId());
+    }
 }

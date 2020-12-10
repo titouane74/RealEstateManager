@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.Nullable;
 
 import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.model.RePhoto;
 import com.openclassrooms.realestatemanager.model.RePoi;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
@@ -254,4 +255,55 @@ public class REMHelper {
         }
         return pPoiList;
     }
+
+    public static void setPhotoList(List<RePhoto> pReComp, List<RePhoto> pPhotoList, long pReId,
+                                             boolean pIsEdit,ReAddEditViewModel pViewModel) {
+        RePhoto lReCompPh;
+
+        if (pIsEdit) {   //update
+            //If the photo in database are no longer in the new list => delete
+            for (RePhoto lPhoto : pReComp) {
+                if (!isFindInNewPhotoList(pPhotoList, lPhoto)) {
+                    pViewModel.deleteRePhoto(lPhoto);
+                }
+            }
+        }
+
+        for (RePhoto lPhoto : pPhotoList) {
+            if (pIsEdit) { // update
+                lReCompPh = findInPhotoList(pReComp,lPhoto);
+                if (lReCompPh != null) {   // photo is in the database
+                    if (!lReCompPh.equals(lPhoto)) {   // photos are not equals => update
+                        lPhoto.setPhId(lReCompPh.getPhId());
+                        pViewModel.updateRePhoto(lPhoto);
+                    }
+                } else {  // photo is not in the database => insert
+                    lPhoto.setPhReId(pReId);
+                    pViewModel.insertRePhoto(lPhoto);
+                }
+            } else {  // insert
+                lPhoto.setPhReId(pReId);
+                pViewModel.insertRePhoto(lPhoto);
+            }
+        }
+    }
+
+    public static RePhoto findInPhotoList(List<RePhoto> pReComp,RePhoto pPhoto) {
+        for (RePhoto lPhoto : pReComp) {
+            if (lPhoto.getPhImgId() == pPhoto.getPhImgId()) {
+                return lPhoto;
+            }
+        }
+        return null;
+    }
+
+    public static boolean isFindInNewPhotoList(List<RePhoto> pPhotoList,RePhoto pPhoto) {
+        for (RePhoto lPhoto : pPhotoList) {
+            if (lPhoto.getPhImgId() == pPhoto.getPhImgId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

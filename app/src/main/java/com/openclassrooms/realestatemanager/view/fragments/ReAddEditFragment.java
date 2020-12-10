@@ -43,7 +43,7 @@ import java.util.List;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
 
-public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> implements AddEditPhotoAdapter.OnRecyclerViewListener {
+public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
     private static final String TAG = "TAG_REAddFragment";
 
@@ -67,6 +67,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> im
     private List<RePoi> mPoiList = new ArrayList<>();
     private List<RePhoto> mPhotoList = new ArrayList<>();
     private RealEstateComplete mReComp;
+    private List<RePhoto> mInitialPhotoList = new ArrayList<>();
 
     @Override
     protected int getMenuAttached() {
@@ -98,10 +99,8 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> im
     @Override
     public void onActivityResult(int requestCode, final int resultCode, Intent data) {
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
-            // Get a list of picked images
             List<Image> images = ImagePicker.getImages(data);
             for (Image lImg : images) {
-                Log.d(TAG, "onActivityResult: " + lImg.getName() + " " + lImg.getPath() + " " + lImg.getId() + " " + lImg.describeContents());
                 mPhotoList.add(new RePhoto(lImg.getName(), lImg.getPath(), lImg.getId()));
             }
             mAdapter.setPhotoList(mPhotoList);
@@ -186,21 +185,25 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> im
         manageLocation(pReId);
         managePoi(pReId);
         managePhoto(pReId);
-        if (!mIsTabletLandscape) {
-            mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
+    }
+
+    private void managePhoto(long pReId) {
+        if (mIsEdit) {
+            mViewModel.selectRePhoto(pReId).observe(getViewLifecycleOwner(), pPhotoList -> {
+                mInitialPhotoList = pPhotoList;
+                REMHelper.setPhotoList(mInitialPhotoList, mPhotoList, pReId, mIsEdit, mViewModel);
+                navigateToList();
+            });
+        } else {
+            REMHelper.setPhotoList(mInitialPhotoList, mPhotoList, pReId, mIsEdit, mViewModel);
+            navigateToList();
         }
     }
 
-    private void managePhoto(long pMaxReId) {
-        for (RePhoto lPhoto : mPhotoList) {
-            lPhoto.setPhReId(pMaxReId);
-            if (!mIsEdit) {
-                mViewModel.insertRePhoto(lPhoto);
-            } else {
-                //TODO manage list
-            }
+    private void navigateToList() {
+        if (!mIsTabletLandscape) {
+            mNavController.navigate(R.id.action_reAddFragment_to_reListFragment);
         }
-
     }
 
     private void manageLocation(long pMaxReId) {
@@ -266,6 +269,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> im
     }
 
     private void initRecyclerView() {
+
         mAdapter = new AddEditPhotoAdapter();
         mBinding.fragReAddEditRvPhoto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mBinding.fragReAddEditRvPhoto.setAdapter(mAdapter);
@@ -288,7 +292,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> im
         ReViewModelFactory lFactory = Injection.reViewModelFactory(mContext);
         mViewModel = new ViewModelProvider(this, lFactory).get(ReAddEditViewModel.class);
     }
-
 
     /**
      * Display calendar dialog box
@@ -434,8 +437,4 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> im
         lDatePickerDialog.show();
     }
 
-    @Override
-    public void listToSave(List<RePhoto> pPhotoList) {
-        mPhotoList = pPhotoList;
-    }
 }
