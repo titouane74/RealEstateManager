@@ -37,7 +37,7 @@ public class AddEditPhotoAdapter extends RecyclerView.Adapter<AddEditPhotoAdapte
     @Override
     public void onBindViewHolder(@NonNull AddEditPhotoHolder holder, int position) {
         holder.bindView(mPhotoList.get(position));
-
+        final  RePhoto mPhoto = mPhotoList.get(position);
         mBinding.fragReAddEditEtPhoto.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -46,14 +46,13 @@ public class AddEditPhotoAdapter extends RecyclerView.Adapter<AddEditPhotoAdapte
             }
             @Override
             public void afterTextChanged(Editable s) {
-                mPhotoList.get(position).setPhDescription(s.toString());
+                mPhoto.setPhDescription(s.toString());
             }
         });
         mBinding.fragReAddEditImgDelete.setOnClickListener(v-> {
-            Log.d(TAG, "onBindViewHolder: photo list size avant remove " + mPhotoList.size());
             mPhotoList.remove(position);
-            Log.d(TAG, "onBindViewHolder: photo list size après remove " + mPhotoList.size());
             notifyItemRemoved(position);
+            notifyItemRangeChanged(position,getItemCount());
         } );
     }
 
