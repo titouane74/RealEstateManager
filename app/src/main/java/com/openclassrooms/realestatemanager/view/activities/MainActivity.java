@@ -99,15 +99,12 @@ public class MainActivity extends AppCompatActivity {
         if (REMHelper.isTabletLandscape(mContext,mIsTablet)) {
             switch (pItem.getItemId()) {
                 case R.id.reAddEditFragment:
-//                    Log.d(TAG, "onOptionsItemSelected: main activity detail to add edit : " + pItem.getItemId());
                     mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment);
                     break;
                 case R.id.loanFragment:
-//                    Log.d(TAG, "onOptionsItemSelected:  main activity detail to loan : " + pItem.getItemId());
                     mNavController.navigate(R.id.action_reDetailFragment_to_loanFragment);
                     break;
                 case R.id.reSearchFragment:
-//                    Log.d(TAG, "onOptionsItemSelected:  main activity detail to search : " + pItem.getItemId());
                     mNavController.navigate(R.id.action_reDetailFragment_to_reSearchFragment);
                     break;
                 default:

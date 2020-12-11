@@ -94,13 +94,13 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             lBundle.putLong(RE_ID_KEY, mReId);
             lBundle.putBoolean(IS_EDIT_KEY, true);
             Log.d(TAG, "onOptionsItemSelected: detail envoi reId : " + mReId);
-//            if (mIsTabletLandscape) {
-//                mNavController.navigate(R.id.reAddEditFragment,lBundle);
-//                Log.d(TAG, "onOptionsItemSelected: detail fragment tablet detail to edit");
-//            } else {
-            mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment, lBundle);
-//                Log.d(TAG, "onOptionsItemSelected: detail fragment phone detail to edit");
-//            }
+            if (mIsTabletLandscape) {
+                mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment, lBundle);
+                Log.d(TAG, "onOptionsItemSelected: detail fragment tablet detail to edit");
+            } else {
+                mNavController.navigate(R.id.reAddEditFragment,lBundle);
+                Log.d(TAG, "onOptionsItemSelected: detail fragment phone detail to edit");
+            }
             return true;
         }
         return super.onOptionsItemSelected(pItem);
@@ -216,7 +216,9 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             mBinding.fragReDetTvNbBedrooms.setText(Integer.toString(pRe.getRealEstate().getReNbBedrooms()));
             mBinding.fragReDetTvNbBathrooms.setText(Integer.toString(pRe.getRealEstate().getReNbBathrooms()));
 
-            mBinding.fragReDetTvCompleteAddress.setText(pRe.getReLocation().toString());
+            if(pRe.getReLocation() != null) {
+                mBinding.fragReDetTvCompleteAddress.setText(pRe.getReLocation().toString());
+            }
 
             mBinding.fragReDetTvMarketDate.setText(REMHelper.formatDateToString(pRe.getRealEstate().getReOnMarketDate()));
             mBinding.fragReDetTvSoldDate.setText(REMHelper.formatDateToString(pRe.getRealEstate().getReSaleDate()));

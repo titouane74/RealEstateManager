@@ -133,14 +133,12 @@ public class REMHelper {
 
     /**
      * Return the id of the nav_host_fragment which must be used when it's a tablet in landscape
-     *
      * @param pContext  : context
      * @param pIsTablet : boolean : indicator if the material is a tablet or not
      * @return : return the right nav_host_fragment id
      */
     public static int getNavHostId(Context pContext, boolean pIsTablet) {
         if (isTabletLandscape(pContext, pIsTablet)) {
-            //return R.id.nav_host_fragment;
             return R.id.nav_right_fragment;
         } else {
             return R.id.nav_host_fragment;
