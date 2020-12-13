@@ -94,7 +94,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         }
 
         public void bindView(RealEstateComplete pReComp) {
-            mBindingHolder.itemCity.setText(pReComp.getRealEstate().getReAgentFirstName());
+            mBindingHolder.itemCity.setText(pReComp.getReLocation().getLocCity());
             mBindingHolder.itemPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pReComp.getRealEstate().getRePrice()));
             mBindingHolder.itemType.setText(pReComp.getRealEstate().getReType());
             if(pReComp.getRealEstate().isReIsSold()) {

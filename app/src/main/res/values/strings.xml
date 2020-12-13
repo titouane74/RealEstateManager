@@ -15,9 +15,15 @@
     <string name="default_txt_edit">Edit</string>
     <string name="default_txt_save">Save</string>
     <string name="default_txt_confirm">Confirm</string>
-    <string name="default_txt_err_no_data">No data to save. Please enter information.</string>
+    <string name="default_txt_data_not_saved">Data not saved</string>
+
+    <!-- ERRORS -->
+    <string name="add_edit_txt_err_no_data">No data to save. Please enter information.</string>
+    <string name="add_edit_txt_err_date_sold_before_date_market">The sold date can\'t be before the on market date</string>
+    <string name="add_edit_txt_err_agent_not_valid">Agent information invalid</string>
 
     <!-- REGEX PATTERN -->
+    <string name="regex_agent">([a-zA-Z])*</string>
     <string name="regex_street">((\\d*)?)((\\s?,?\\s?)([a-zA-Z]+))*</string>
     <string name="regex_city">([a-zA-Z]+)((\\s|-?)*[a-zA-Z])*</string>
     <string name="regex_zip_code">[0-9]{5}</string>
