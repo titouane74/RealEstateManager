@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.Nullable;
 
 import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
 import com.openclassrooms.realestatemanager.model.RePhoto;
 import com.openclassrooms.realestatemanager.model.RePoi;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
@@ -70,60 +71,6 @@ public class REMHelper {
     }
 
     /**
-     * Convert a string number with currency
-     *
-     * @param pStringValue : string : string number with currency to convert into an int
-     * @return : string : value without format and currency
-     */
-    /*
-    public static String formatStringNumberWithCommaAndCurrency(String pStringValue) {
-        Log.d(TAG, "formatStringNumberWithCommaAndCurrency: " + pStringValue);
-        if (!pStringValue.contains(Currency.getInstance(Locale.getDefault()).getSymbol())) {
-            int lIntValue = Integer.parseInt(pStringValue);
-            Log.d(TAG, "formatStringNumberWithCommaAndCurrency: intValue" + lIntValue);
-            String pValueFormatted = NumberFormat.getCurrencyInstance(Locale.getDefault()).format(lIntValue);
-            Log.d(TAG, "formatStringNumberWithCommaAndCurrency: pValueFormatted " + pValueFormatted);
-            return pValueFormatted;
-//            return pValueFormatted.substring(0, pValueFormatted.length() - 3);
-        } else {
-            return pStringValue;
-        }
-    }
-
-    public static String removeCurrency(String pStringValue) {
-        String lCurrency = Currency.getInstance(Locale.getDefault()).getSymbol();
-        int lPosCur = pStringValue.indexOf(lCurrency);
-        if (lPosCur <= 1) {
-            return pStringValue.substring(lPosCur, pStringValue.length() -1);
-        } else {
-            return pStringValue.substring(0, pStringValue.length() - 2);
-        }
-
-    }
-
-*/
-    /**
-     * Convert a string number with currency into an int
-     *
-     * @param pValue : string : string number with currency to convert into an int
-     * @return : int : value converted in int
-     */
-    /*
-    public static int formatStringNumberWithCommaAndCurrencyToInt(String pValue) {
-        Log.d(TAG, "formatStringNumberWithCommaAndCurrencyToInt: pvalue " + pValue);
-
-        pValue = removeCurrency(pValue);
-        Log.d(TAG, "formatStringNumberWithCommaAndCurrencyToInt: pvalue " + pValue);
-
-        pValue = pValue.replaceAll(",", "");
-//        pValue = pValue.substring(0, pValue.length() - 3);
-        return Integer.parseInt(pValue);
-//        return Integer.parseInt(newString);
-    }
-
-     */
-
-    /**
      * Get the orientation of the material
      *
      * @param pContext : context
@@ -159,10 +106,22 @@ public class REMHelper {
         return pIsTablet && (getOrientation(pContext) == Configuration.ORIENTATION_LANDSCAPE);
     }
 
+    /**
+     * Get the position of the value in the spinner
+     * @param pContext : context
+     * @param pResource : int : spinner where is the information
+     * @param pValue : string : value to find position
+     * @return : int : return the position of the value
+     */
     public static int getPositionInSpinner(Context pContext, int pResource, String pValue) {
         return configureSpinAdapter(pContext, pResource).getPosition(pValue);
     }
 
+    /**
+     * Convert for the display the room value 5 into a string equals to the spinner "5 +"
+     * @param pValue : int : value to convert into a spinner string with sign
+     * @return : string : return the room with a sign
+     */
     public static String convertSpinRoomToString(int pValue) {
         if (pValue == 5) {
             return "5 +";
@@ -171,10 +130,22 @@ public class REMHelper {
         }
     }
 
+    /**
+     * Get the position of the value in the spinner room
+     * @param pContext : context
+     * @param pResource : int : spinner where is the information
+     * @param pRoom : int : value to find position
+     * @return : int : position of the value in the spinner
+     */
     public static int getPositionInRoomSpinner(Context pContext, int pResource, int pRoom) {
         return configureSpinAdapter(pContext, pResource).getPosition(convertSpinRoomToString(pRoom));
     }
 
+    /**
+     * Convert the string spinner value "5 +" into int
+     * @param pValue : string : value to convert
+     * @return : int : return the value without the sign
+     */
     public static int convertSpinnerValueToInt(String pValue) {
         if (pValue.indexOf("+") > 0) {
             return Integer.parseInt(pValue.substring(0, 1));
@@ -183,7 +154,12 @@ public class REMHelper {
         }
     }
 
-    public static String convertSpinTypeToString(int pValue) {
+    /**
+     * Convert for the search the number of photo value 10 into a string equals to the spinner "10 +"
+     * @param pValue : int : value to convert into a spinner string with sign
+     * @return : string : return the room with a sign
+     */
+    public static String convertSpinPhotoToString(int pValue) {
         if (pValue == 10) {
             return "10 +";
         } else {
@@ -191,30 +167,12 @@ public class REMHelper {
         }
     }
 
-    public static String formatStringToDayMonthYearString(String pDate) {
-        SimpleDateFormat sFrom = new SimpleDateFormat("yyyy-MM-dd");
-        java.text.SimpleDateFormat sTo = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            return sTo.format(sFrom.parse(pDate));
-        } catch (ParseException pE) {
-            pE.printStackTrace();
-        }
-        return "";
-    }
-
-    public static String formatStringToYearMonthDayString(String pDate) {
-        SimpleDateFormat sFrom = new SimpleDateFormat("dd/MM/yyyy");
-        java.text.SimpleDateFormat sTo = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            return sTo.format(sFrom.parse(pDate));
-        } catch (ParseException pE) {
-            pE.printStackTrace();
-        }
-        return "";
-    }
-
-    public static @Nullable
-    Date formatStringToDate(String pDate) {
+    /**
+     * Convert a string into a date
+     * @param pDate : string : date to convert
+     * @return : date : date converted
+     */
+    public static @Nullable Date convertStringToDate(String pDate) {
         SimpleDateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             return lDateFormat.parse(pDate);
@@ -224,8 +182,12 @@ public class REMHelper {
         return null;
     }
 
-    public static @Nullable
-    String formatDateToString(Date pDate) {
+    /**
+     * Convert a date into a string
+     * @param pDate : date : date to convert
+     * @return : string : date converted
+     */
+    public static @Nullable String convertDateToString(Date pDate) {
         SimpleDateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         if (pDate != null) {
             return lDateFormat.format(pDate);
@@ -233,95 +195,5 @@ public class REMHelper {
             return null;
         }
     }
-
-    public static RePoi findInPoiList(List<RePoi> pPoiList, String pPoi) {
-        for (RePoi lPoi : pPoiList) {
-            if (lPoi.getPoiName().equals(pPoi)) {
-                return lPoi;
-            }
-        }
-        return null;
-    }
-
-    public static List<RePoi> setPoiList(RealEstateComplete pReComp, List<RePoi> pPoiList, long pReId,
-                                         boolean pIsEdit, String pPoi, boolean pIsChecked, ReAddEditViewModel pViewModel) {
-        RePoi lPoi;
-
-        if (pIsEdit) { //update
-            lPoi = REMHelper.findInPoiList(pReComp.getPoiList(), pPoi);
-            if ((lPoi != null) && !pIsChecked) {  // in list and  no more selected => delete
-                pViewModel.deleteRePoi(lPoi);
-            } else if ((lPoi == null) && pIsChecked) {  // not in list and selected => insert
-                pPoiList.add(new RePoi(pReId, pPoi));
-            }
-        } else if (pIsChecked) { //insert
-            pPoiList.add(new RePoi(pReId, pPoi));
-        }
-        return pPoiList;
-    }
-
-    public static void setPhotoList(List<RePhoto> pReComp, List<RePhoto> pPhotoList, long pReId,
-                                    boolean pIsEdit, ReAddEditViewModel pViewModel) {
-        RePhoto lReCompPh;
-
-        if (pIsEdit) {   //update
-            //If the photo in database are no longer in the new list => delete
-            for (RePhoto lPhoto : pReComp) {
-                if (!isFindInNewPhotoList(pPhotoList, lPhoto)) {
-                    pViewModel.deleteRePhoto(lPhoto);
-                }
-            }
-        }
-
-        for (RePhoto lPhoto : pPhotoList) {
-            if (pIsEdit) { // update
-                lReCompPh = findInPhotoList(pReComp, lPhoto);
-                if (lReCompPh != null) {   // photo is in the database
-                    if (!lReCompPh.equals(lPhoto)) {   // photos are not equals => update
-                        lPhoto.setPhId(lReCompPh.getPhId());
-                        pViewModel.updateRePhoto(lPhoto);
-                    }
-                } else {  // photo is not in the database => insert
-                    lPhoto.setPhReId(pReId);
-                    pViewModel.insertRePhoto(lPhoto);
-                }
-            } else {  // insert
-                lPhoto.setPhReId(pReId);
-                pViewModel.insertRePhoto(lPhoto);
-            }
-        }
-    }
-
-    public static RePhoto findInPhotoList(List<RePhoto> pReComp, RePhoto pPhoto) {
-        for (RePhoto lPhoto : pReComp) {
-            if (lPhoto.getPhImgId() == pPhoto.getPhImgId()) {
-                return lPhoto;
-            }
-        }
-        return null;
-    }
-
-    public static boolean isFindInNewPhotoList(List<RePhoto> pPhotoList, RePhoto pPhoto) {
-        for (RePhoto lPhoto : pPhotoList) {
-            if (lPhoto.getPhImgId() == pPhoto.getPhImgId()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean controlValidityWithRegex(String pValue, String pRegex) {
-        Matcher lMatcher;
-        Pattern lPattern;
-
-        if (!pValue.equals("")) {
-            lPattern = Pattern.compile(pRegex);
-            lMatcher = lPattern.matcher(pValue);
-            return lMatcher.matches();
-        } else {
-            return true;
-        }
-    }
-
 }
 

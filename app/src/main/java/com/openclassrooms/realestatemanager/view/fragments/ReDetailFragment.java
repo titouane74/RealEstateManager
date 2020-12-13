@@ -220,8 +220,8 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
                 mBinding.fragReDetTvCompleteAddress.setText(pRe.getReLocation().toString());
             }
 
-            mBinding.fragReDetTvMarketDate.setText(REMHelper.formatDateToString(pRe.getRealEstate().getReOnMarketDate()));
-            mBinding.fragReDetTvSoldDate.setText(REMHelper.formatDateToString(pRe.getRealEstate().getReSaleDate()));
+            mBinding.fragReDetTvMarketDate.setText(REMHelper.convertDateToString(pRe.getRealEstate().getReOnMarketDate()));
+            mBinding.fragReDetTvSoldDate.setText(REMHelper.convertDateToString(pRe.getRealEstate().getReSaleDate()));
 
             mPhotoList = pRe.getRePhotoList();
             mAdapter.setPhotoList(mPhotoList);

@@ -31,6 +31,7 @@ import com.openclassrooms.realestatemanager.model.RePoi;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
+import com.openclassrooms.realestatemanager.utils.REMHelperAddEdit;
 import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 
@@ -40,8 +41,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
@@ -63,6 +62,10 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private Calendar mDateCal;
     private boolean mIsTabletLandscape;
     private boolean mIsEdit;
+    private boolean mIsLocationEmpty = true;
+    private boolean mIsReEmpty =true;
+    private boolean mIsPhotoEmpty = true;
+    private boolean mIsPoiEmpty =  true;
 
     private long mReId;
     private RealEstate mRealEstate = new RealEstate();
@@ -153,46 +156,58 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         int lNbBathRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBathrooms.getSelectedItem().toString());
 
         if (mStringDateMarket != null) {
-            lDateMarket = REMHelper.formatStringToDate(mStringDateMarket);
+            lDateMarket = REMHelper.convertStringToDate(mStringDateMarket);
         } else if (mBinding.fragReAddEditEtMarketDate.getText() != null) {
-            lDateMarket = REMHelper.formatStringToDate(mBinding.fragReAddEditEtMarketDate.getText().toString());
+            lDateMarket = REMHelper.convertStringToDate(mBinding.fragReAddEditEtMarketDate.getText().toString());
         }
 
         if (mStringDateSold != null) {
-            lDateSold = REMHelper.formatStringToDate(mStringDateSold);
+            lDateSold = REMHelper.convertStringToDate(mStringDateSold);
         } else if (mBinding.fragReAddEditEtSoldDate.getText() != null) {
-            lDateSold = REMHelper.formatStringToDate(mBinding.fragReAddEditEtSoldDate.getText().toString());
+            lDateSold = REMHelper.convertStringToDate(mBinding.fragReAddEditEtSoldDate.getText().toString());
         }
 
-        mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
-                lAgentFirstName, lAgentLastName, lDateSold, lDateMarket);
+        if(lDateMarket!=null || lDateSold!=null || lIsSold || !lAgentFirstName.equals("") || !lAgentLastName.equals("")
+            || !lDescription.equals("") || !lType.equals("")) {
+            mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
+                    lAgentFirstName, lAgentLastName, lDateSold, lDateMarket);
 
-        if (manageLocation()) {
-            saveRealEstate();
+            mIsReEmpty=false;
+
+            if (manageLocation()) {
+                mIsPhotoEmpty = mInitialPhotoList.size() != 0;
+                mIsPoiEmpty = REMHelperAddEdit.isPoiEmpty(mBinding);
+                saveRealEstate();
+            }
         }
     }
 
     private void saveRealEstate() {
-        if (!mIsEdit) {
-            mViewModel.insertRealEstate(mRealEstate);
-            mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
-                mReId = pMaxReId;
-                mReLocation.setLocReId(pMaxReId);
-                mViewModel.insertReLocation(mReLocation);
-                saveInformations(pMaxReId);
-            });
-        } else {
-            mRealEstate.setReId(mReId);
-            mViewModel.updateRealEstate(mRealEstate);
 
-            mReLocation.setLocId(mReComp.getReLocation().getLocId());
-            mReLocation.setLocReId(mReId);
-            mViewModel.updateReLocation(mReLocation);
-            saveInformations(mReId);
+        if (mIsReEmpty && mIsLocationEmpty && mIsPhotoEmpty && mIsPoiEmpty) {
+            Toast.makeText(mContext, getString(R.string.default_txt_err_no_data), Toast.LENGTH_SHORT).show();
+        } else {
+            if (!mIsEdit) {
+                mViewModel.insertRealEstate(mRealEstate);
+                mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
+                    mReId = pMaxReId;
+                    mReLocation.setLocReId(pMaxReId);
+                    mViewModel.insertReLocation(mReLocation);
+                    savePoiAndPhotoInformations(pMaxReId);
+                });
+            } else {
+                mRealEstate.setReId(mReId);
+                mViewModel.updateRealEstate(mRealEstate);
+
+                mReLocation.setLocId(mReComp.getReLocation().getLocId());
+                mReLocation.setLocReId(mReId);
+                mViewModel.updateReLocation(mReLocation);
+                savePoiAndPhotoInformations(mReId);
+            }
         }
     }
 
-    private void saveInformations(long pReId) {
+    private void savePoiAndPhotoInformations(long pReId) {
         managePoi(pReId);
         managePhoto(pReId);
     }
@@ -201,11 +216,11 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         if (mIsEdit) {
             mViewModel.selectRePhoto(pReId).observe(getViewLifecycleOwner(), pPhotoList -> {
                 mInitialPhotoList = pPhotoList;
-                REMHelper.setPhotoList(mInitialPhotoList, mPhotoList, pReId, mIsEdit, mViewModel);
+                REMHelperAddEdit.setPhotoList(mInitialPhotoList, mPhotoList, pReId, mIsEdit, mViewModel);
                 navigateToList();
             });
         } else {
-            REMHelper.setPhotoList(mInitialPhotoList, mPhotoList, pReId, mIsEdit, mViewModel);
+            REMHelperAddEdit.setPhotoList(mInitialPhotoList, mPhotoList, pReId, mIsEdit, mViewModel);
             navigateToList();
         }
     }
@@ -228,13 +243,13 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
                 ? "" : mBinding.fragReAddEditSpinCountry.getSelectedItem().toString();
 
         String lStreet = mBinding.fragReAddEditEtStreet.getText().toString();
-        lIsValidStreet = REMHelper.controlValidityWithRegex(lStreet,getString(R.string.regex_street));
+        lIsValidStreet = REMHelperAddEdit.controlValidityWithRegex(lStreet,getString(R.string.regex_street));
 
         String lCity = mBinding.fragReAddEditEtCity.getText().toString();
-        lIsValidCity = REMHelper.controlValidityWithRegex(lCity,getString(R.string.regex_city));
+        lIsValidCity = REMHelperAddEdit.controlValidityWithRegex(lCity,getString(R.string.regex_city));
 
         String lZipCode = mBinding.fragReAddEditEtZipCode.getText().toString();
-        lIsValidZipCode = REMHelper.controlValidityWithRegex(lZipCode,getString(R.string.regex_zip_code));
+        lIsValidZipCode = REMHelperAddEdit.controlValidityWithRegex(lZipCode,getString(R.string.regex_zip_code));
 
         lErrorData = !lIsValidStreet ? REMHelper.addValueAndSeparatorToString(lErrorData, ", " , getString(R.string.txt_street)) : lErrorData;
         lErrorData = !lIsValidZipCode ? REMHelper.addValueAndSeparatorToString(lErrorData, ", " , getString(R.string.txt_zip_code)) : lErrorData;
@@ -243,29 +258,33 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         if (lErrorData.length()>0) {
             Toast.makeText(mContext, "Error on data : " + lErrorData, Toast.LENGTH_SHORT).show();
             return false;
-        } else {
-            mReLocation = new ReLocation(lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry);
+        } else  {
+            if (!lStreet.equals("") || !lZipCode.equals("") || !lCity.equals("") || !lDistrict.equals("")
+                    || lCounty.equals("") || !lCountry.equals("")) {
+                mReLocation = new ReLocation(lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry);
+                mIsLocationEmpty=false;
+            }
             return true;
         }
     }
 
     private void managePoi(long pReId) {
 
-        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_restaurant),
+        mPoiList = REMHelperAddEdit.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_restaurant),
                 mBinding.fragReAddEditPoiRestaurant.isChecked(), mViewModel);
-        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_subway),
+        mPoiList = REMHelperAddEdit.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_subway),
                 mBinding.fragReAddEditPoiSubway.isChecked(), mViewModel);
-        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_school),
+        mPoiList = REMHelperAddEdit.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_school),
                 mBinding.fragReAddEditPoiSchool.isChecked(), mViewModel);
-        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_park),
+        mPoiList = REMHelperAddEdit.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_park),
                 mBinding.fragReAddEditPoiPark.isChecked(), mViewModel);
-        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_store),
+        mPoiList = REMHelperAddEdit.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_store),
                 mBinding.fragReAddEditPoiStore.isChecked(), mViewModel);
-        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_bank),
+        mPoiList = REMHelperAddEdit.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_bank),
                 mBinding.fragReAddEditPoiBank.isChecked(), mViewModel);
-        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_food),
+        mPoiList = REMHelperAddEdit.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_food),
                 mBinding.fragReAddEditPoiFood.isChecked(), mViewModel);
-        mPoiList = REMHelper.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_health),
+        mPoiList = REMHelperAddEdit.setPoiList(mReComp, mPoiList, pReId, mIsEdit, getString(R.string.poi_health),
                 mBinding.fragReAddEditPoiHealth.isChecked(), mViewModel);
 
         if (mPoiList.size() > 0) {
@@ -405,8 +424,8 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             mBinding.fragReAddEditEtAgentLastName.setText(pReComp.getRealEstate().getReAgentLastName());
             mBinding.fragReAddEditEtAgentFirstName.setText(pReComp.getRealEstate().getReAgentFirstName());
 
-            mBinding.fragReAddEditEtMarketDate.setText(REMHelper.formatDateToString(pReComp.getRealEstate().getReOnMarketDate()));
-            mBinding.fragReAddEditEtSoldDate.setText(REMHelper.formatDateToString(pReComp.getRealEstate().getReSaleDate()));
+            mBinding.fragReAddEditEtMarketDate.setText(REMHelper.convertDateToString(pReComp.getRealEstate().getReOnMarketDate()));
+            mBinding.fragReAddEditEtSoldDate.setText(REMHelper.convertDateToString(pReComp.getRealEstate().getReSaleDate()));
 
             mPhotoList = pReComp.getRePhotoList();
             mAdapter.setPhotoList(mPhotoList);
