@@ -16,6 +16,11 @@
     <string name="default_txt_save">Save</string>
     <string name="default_txt_confirm">Confirm</string>
 
+    <!-- REGEX PATTERN -->
+    <string name="regex_street">((\\d*)?)((\\s?,?\\s?)([a-zA-Z]+))*</string>
+    <string name="regex_city">([a-zA-Z]+)((\\s|-?)*[a-zA-Z])*</string>
+    <string name="regex_zip_code">[0-9]{5}</string>
+
     <!-- REAL ESTATE VOCABULARY -->
     <string name="txt_location">Location</string>
     <string name="txt_address">Address</string>

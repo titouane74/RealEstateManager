@@ -33,6 +33,15 @@ public class ReLocation {
     public ReLocation() {
     }
 
+    public ReLocation(String pLocStreet, String pLocDistrict, String pLocCity, String pLocCounty, String pLocZipCode, String pLocCountry) {
+        locStreet = pLocStreet;
+        locDistrict = pLocDistrict;
+        locCity = pLocCity;
+        locCounty = pLocCounty;
+        locZipCode = pLocZipCode;
+        locCountry = pLocCountry;
+    }
+
     public ReLocation(long pLocReId, String pLocStreet, String pLocDistrict, String pLocCity, String pLocCounty, String pLocZipCode, String pLocCountry) {
         locReId = pLocReId;
         locStreet = pLocStreet;

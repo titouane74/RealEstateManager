@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
@@ -39,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
@@ -139,12 +142,12 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
         String lDescription = mBinding.fragReAddEditEtDescription.getText().toString();
 
-        String lType = mBinding.fragReAddEditSpinType.getSelectedItem().toString();
-        if (lType == getString(R.string.spinners_select)) {
-            lType = "";
-        }
-        int lArea = Integer.parseInt(mBinding.fragReAddEditEtArea.getText().toString());
-        int lPrice = Integer.parseInt(mBinding.fragReAddEditEtPrice.getText().toString());
+        String lType = mBinding.fragReAddEditSpinType.getSelectedItem().toString().equals(getString(R.string.spinners_select))
+                ? "" : mBinding.fragReAddEditSpinType.getSelectedItem().toString();
+
+        int lArea = (!mBinding.fragReAddEditEtArea.getText().toString().equals("")) ? Integer.parseInt(mBinding.fragReAddEditEtArea.getText().toString()) : 0;
+        int lPrice = (!mBinding.fragReAddEditEtPrice.getText().toString().equals("")) ? Integer.parseInt(mBinding.fragReAddEditEtPrice.getText().toString()) : 0;
+
         int lNbRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinRooms.getSelectedItem().toString());
         int lNbBedRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBedrooms.getSelectedItem().toString());
         int lNbBathRooms = REMHelper.convertSpinnerValueToInt(mBinding.fragReAddEditSpinBathrooms.getSelectedItem().toString());
@@ -154,6 +157,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         } else if (mBinding.fragReAddEditEtMarketDate.getText() != null) {
             lDateMarket = REMHelper.formatStringToDate(mBinding.fragReAddEditEtMarketDate.getText().toString());
         }
+
         if (mStringDateSold != null) {
             lDateSold = REMHelper.formatStringToDate(mStringDateSold);
         } else if (mBinding.fragReAddEditEtSoldDate.getText() != null) {
@@ -163,26 +167,32 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
                 lAgentFirstName, lAgentLastName, lDateSold, lDateMarket);
 
-        saveRealEstate();
+        if (manageLocation()) {
+            saveRealEstate();
+        }
     }
 
     private void saveRealEstate() {
         if (!mIsEdit) {
             mViewModel.insertRealEstate(mRealEstate);
             mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
-                Log.d(TAG, "saveRealEstate: maxreid : " + pMaxReId);
+                mReId = pMaxReId;
+                mReLocation.setLocReId(pMaxReId);
+                mViewModel.insertReLocation(mReLocation);
                 saveInformations(pMaxReId);
             });
         } else {
             mRealEstate.setReId(mReId);
             mViewModel.updateRealEstate(mRealEstate);
-            Log.d(TAG, "saveRealEstate: reid " + mReId);
+
+            mReLocation.setLocId(mReComp.getReLocation().getLocId());
+            mReLocation.setLocReId(mReId);
+            mViewModel.updateReLocation(mReLocation);
             saveInformations(mReId);
         }
     }
 
     private void saveInformations(long pReId) {
-        manageLocation(pReId);
         managePoi(pReId);
         managePhoto(pReId);
     }
@@ -206,31 +216,36 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         }
     }
 
-    private void manageLocation(long pMaxReId) {
-        boolean lIsValid = true;
-        String lStreet = mBinding.fragReAddEditEtStreet.getText().toString();
+    private boolean manageLocation() {
+        String lErrorData = "";
+        boolean lIsValidStreet ;
+        boolean lIsValidCity;
+        boolean lIsValidZipCode ;
+
         String lDistrict = mBinding.fragReAddEditEtDistrict.getText().toString();
-        String lCity = mBinding.fragReAddEditEtCity.getText().toString();
         String lCounty = mBinding.fragReAddEditEtCounty.getText().toString();
-/*        Pattern lPattern = Pattern.compile("#[0-9]#");
-        Matcher lMatcher = lPattern.matcher(lStringZipCode);
-        lIsValid = lMatcher.matches();*/
+        String lCountry = mBinding.fragReAddEditSpinCountry.getSelectedItem().toString().equals(getString(R.string.spinners_select))
+                ? "" : mBinding.fragReAddEditSpinCountry.getSelectedItem().toString();
+
+        String lStreet = mBinding.fragReAddEditEtStreet.getText().toString();
+        lIsValidStreet = REMHelper.controlValidityWithRegex(lStreet,getString(R.string.regex_street));
+
+        String lCity = mBinding.fragReAddEditEtCity.getText().toString();
+        lIsValidCity = REMHelper.controlValidityWithRegex(lCity,getString(R.string.regex_city));
 
         String lZipCode = mBinding.fragReAddEditEtZipCode.getText().toString();
+        lIsValidZipCode = REMHelper.controlValidityWithRegex(lZipCode,getString(R.string.regex_zip_code));
 
-        String lCountry = mBinding.fragReAddEditSpinCountry.getSelectedItem().toString();
-        if (lCountry == getString(R.string.spinners_select)) {
-            lCountry = "";
-        }
+        lErrorData = !lIsValidStreet ? REMHelper.addValueAndSeparatorToString(lErrorData, ", " , getString(R.string.txt_street)) : lErrorData;
+        lErrorData = !lIsValidZipCode ? REMHelper.addValueAndSeparatorToString(lErrorData, ", " , getString(R.string.txt_zip_code)) : lErrorData;
+        lErrorData = !lIsValidCity ? REMHelper.addValueAndSeparatorToString(lErrorData, ", " , getString(R.string.txt_city)) : lErrorData;
 
-        if (lIsValid) {
-            mReLocation = new ReLocation(pMaxReId, lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry);
-            if (!mIsEdit) {
-                mViewModel.insertReLocation(mReLocation);
-            } else {
-                mReLocation.setLocId(mReComp.getReLocation().getLocId());
-                mViewModel.updateReLocation(mReLocation);
-            }
+        if (lErrorData.length()>0) {
+            Toast.makeText(mContext, "Error on data : " + lErrorData, Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            mReLocation = new ReLocation(lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry);
+            return true;
         }
     }
 
@@ -436,5 +451,4 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         );
         lDatePickerDialog.show();
     }
-
 }

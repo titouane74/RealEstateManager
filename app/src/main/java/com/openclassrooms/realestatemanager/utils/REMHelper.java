@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Florence LE BOURNOT on 23/11/2020
@@ -133,6 +135,7 @@ public class REMHelper {
 
     /**
      * Return the id of the nav_host_fragment which must be used when it's a tablet in landscape
+     *
      * @param pContext  : context
      * @param pIsTablet : boolean : indicator if the material is a tablet or not
      * @return : return the right nav_host_fragment id
@@ -209,7 +212,9 @@ public class REMHelper {
         }
         return "";
     }
-    public static @Nullable Date formatStringToDate(String pDate) {
+
+    public static @Nullable
+    Date formatStringToDate(String pDate) {
         SimpleDateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             return lDateFormat.parse(pDate);
@@ -219,7 +224,8 @@ public class REMHelper {
         return null;
     }
 
-    public static @Nullable String formatDateToString(Date pDate) {
+    public static @Nullable
+    String formatDateToString(Date pDate) {
         SimpleDateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         if (pDate != null) {
             return lDateFormat.format(pDate);
@@ -241,21 +247,21 @@ public class REMHelper {
                                          boolean pIsEdit, String pPoi, boolean pIsChecked, ReAddEditViewModel pViewModel) {
         RePoi lPoi;
 
-        if(pIsEdit) { //update
-            lPoi = REMHelper.findInPoiList(pReComp.getPoiList(),pPoi) ;
+        if (pIsEdit) { //update
+            lPoi = REMHelper.findInPoiList(pReComp.getPoiList(), pPoi);
             if ((lPoi != null) && !pIsChecked) {  // in list and  no more selected => delete
                 pViewModel.deleteRePoi(lPoi);
-            } else if ((lPoi == null) && pIsChecked){  // not in list and selected => insert
-                pPoiList.add(new RePoi(pReId,pPoi));
+            } else if ((lPoi == null) && pIsChecked) {  // not in list and selected => insert
+                pPoiList.add(new RePoi(pReId, pPoi));
             }
-        } else { //insert
-            pPoiList.add(new RePoi(pReId,pPoi));
+        } else if (pIsChecked) { //insert
+            pPoiList.add(new RePoi(pReId, pPoi));
         }
         return pPoiList;
     }
 
     public static void setPhotoList(List<RePhoto> pReComp, List<RePhoto> pPhotoList, long pReId,
-                                             boolean pIsEdit,ReAddEditViewModel pViewModel) {
+                                    boolean pIsEdit, ReAddEditViewModel pViewModel) {
         RePhoto lReCompPh;
 
         if (pIsEdit) {   //update
@@ -269,7 +275,7 @@ public class REMHelper {
 
         for (RePhoto lPhoto : pPhotoList) {
             if (pIsEdit) { // update
-                lReCompPh = findInPhotoList(pReComp,lPhoto);
+                lReCompPh = findInPhotoList(pReComp, lPhoto);
                 if (lReCompPh != null) {   // photo is in the database
                     if (!lReCompPh.equals(lPhoto)) {   // photos are not equals => update
                         lPhoto.setPhId(lReCompPh.getPhId());
@@ -286,7 +292,7 @@ public class REMHelper {
         }
     }
 
-    public static RePhoto findInPhotoList(List<RePhoto> pReComp,RePhoto pPhoto) {
+    public static RePhoto findInPhotoList(List<RePhoto> pReComp, RePhoto pPhoto) {
         for (RePhoto lPhoto : pReComp) {
             if (lPhoto.getPhImgId() == pPhoto.getPhImgId()) {
                 return lPhoto;
@@ -295,7 +301,7 @@ public class REMHelper {
         return null;
     }
 
-    public static boolean isFindInNewPhotoList(List<RePhoto> pPhotoList,RePhoto pPhoto) {
+    public static boolean isFindInNewPhotoList(List<RePhoto> pPhotoList, RePhoto pPhoto) {
         for (RePhoto lPhoto : pPhotoList) {
             if (lPhoto.getPhImgId() == pPhoto.getPhImgId()) {
                 return true;
@@ -304,4 +310,18 @@ public class REMHelper {
         return false;
     }
 
+    public static boolean controlValidityWithRegex(String pValue, String pRegex) {
+        Matcher lMatcher;
+        Pattern lPattern;
+
+        if (!pValue.equals("")) {
+            lPattern = Pattern.compile(pRegex);
+            lMatcher = lPattern.matcher(pValue);
+            return lMatcher.matches();
+        } else {
+            return true;
+        }
+    }
+
 }
+
