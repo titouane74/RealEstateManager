@@ -29,20 +29,26 @@ public class ReLocation {
     private String locCounty;
     private String locZipCode;
     private String locCountry;
+    private double locLatitude;
+    private double locLongitude;
 
     public ReLocation() {
     }
 
-    public ReLocation(String pLocStreet, String pLocDistrict, String pLocCity, String pLocCounty, String pLocZipCode, String pLocCountry) {
+    public ReLocation(String pLocStreet, String pLocDistrict, String pLocCity, String pLocCounty,
+                      String pLocZipCode, String pLocCountry, double pLocLatitude, double pLocLongitude) {
         locStreet = pLocStreet;
         locDistrict = pLocDistrict;
         locCity = pLocCity;
         locCounty = pLocCounty;
         locZipCode = pLocZipCode;
         locCountry = pLocCountry;
+        locLatitude = pLocLatitude;
+        locLongitude = pLocLongitude;
     }
 
-    public ReLocation(long pLocReId, String pLocStreet, String pLocDistrict, String pLocCity, String pLocCounty, String pLocZipCode, String pLocCountry) {
+    public ReLocation(long pLocReId, String pLocStreet, String pLocDistrict, String pLocCity,
+                      String pLocCounty, String pLocZipCode, String pLocCountry, double pLocLatitude, double pLocLongitude) {
         locReId = pLocReId;
         locStreet = pLocStreet;
         locDistrict = pLocDistrict;
@@ -50,10 +56,12 @@ public class ReLocation {
         locCounty = pLocCounty;
         locZipCode = pLocZipCode;
         locCountry = pLocCountry;
+        locLatitude = pLocLatitude;
+        locLongitude = pLocLongitude;
     }
 
     public ReLocation(long pLocId, long pLocReId, String pLocStreet, String pLocDistrict, String pLocCity, String pLocCounty,
-                      String pLocZipCode, String pLocCountry) {
+                      String pLocZipCode, String pLocCountry, double pLocLatitude, double pLocLongitude) {
         locId = pLocId;
         locReId = pLocReId;
         locStreet = pLocStreet;
@@ -62,6 +70,8 @@ public class ReLocation {
         locCounty = pLocCounty;
         locZipCode = pLocZipCode;
         locCountry = pLocCountry;
+        locLatitude = pLocLatitude;
+        locLongitude = pLocLongitude;
     }
 
     public long getLocId() {
@@ -127,6 +137,14 @@ public class ReLocation {
     public void setLocCountry(String pLocCountry) {
         locCountry = pLocCountry;
     }
+
+    public double getLocLatitude() { return locLatitude; }
+
+    public void setLocLatitude(double pLocLatitude) { locLatitude = pLocLatitude; }
+
+    public double getLocLongitude() { return locLongitude; }
+
+    public void setLocLongitude(double pLocLongitude) { locLongitude = pLocLongitude; }
 
     @Override
     public String toString() {

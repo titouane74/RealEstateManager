@@ -8,6 +8,8 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
+import com.google.android.gms.maps.model.LatLng;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
@@ -38,6 +41,7 @@ import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 import com.openclassrooms.realestatemanager.workmanager.NotifyWorker;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -249,13 +253,22 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         } else {
             if (!lStreet.equals("") || !lZipCode.equals("") || !lCity.equals("") || !lDistrict.equals("")
                     || lCounty.equals("") || !lCountry.equals("")) {
-                mReLocation = new ReLocation(lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry);
+                mReLocation = new ReLocation(lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry,0,0);
+                manageGeolocalisation();
                 mIsLocationEmpty = false;
             }
             return true;
         }
     }
 
+    private void manageGeolocalisation() {
+        if (!mReLocation.getLocStreet().isEmpty() && !mReLocation.getLocZipCode().isEmpty() && !mReLocation.getLocCity().isEmpty()) {
+            String lAddress = mReLocation.getLocStreet() + " " + mReLocation.getLocZipCode() + " " + mReLocation.getLocCity();
+            LatLng lLatLng = getLocationFromAddress(lAddress);
+            mReLocation.setLocLatitude(lLatLng.latitude);
+            mReLocation.setLocLongitude(lLatLng.longitude);
+        }
+    }
     /**
      * Save the real estate information
      */
@@ -284,22 +297,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             }
         }
     }
-
-
-/*    *//**
-     * Configure the work manager for the notifications
-     *
-     * @param pContext : object : context
-     *//*
-    private void configureWorkerNotification(Context pContext) {
-        NotificationManagerCompat lNotificationManager = NotificationManagerCompat.from(pContext);
-
-        if (lNotificationManager.areNotificationsEnabled()) {
-            WorkerNotificationController.startWorkerController(pContext);
-        } else {
-            WorkerNotificationController.stopWorkerController(pContext);
-        }
-    }*/
     /**
      * Call the management of the poi and photo information
      *
@@ -316,11 +313,12 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
         if (lNotificationManager.areNotificationsEnabled()) {
             NotifyWorker.createNotification(mContext);
-            Log.d(TAG, "sendNotification: create notification" );
+            Log.d(TAG, "sendNotification: create notification");
         } else {
             Log.d(TAG, "sendNotification: dont create notification");
         }
     }
+
     /**
      * Manage the information of the poi
      *
@@ -527,5 +525,25 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
                 lCalendar.get(Calendar.DAY_OF_MONTH)
         );
         lDatePickerDialog.show();
+    }
+
+    public LatLng getLocationFromAddress(String pAddress) {
+        Geocoder lCoder = new Geocoder(mContext);
+        List<Address> lAddressList;
+        LatLng lLatLng = null;
+
+        try {
+            lAddressList = lCoder.getFromLocationName(pAddress, 5);
+            if (lAddressList == null) {
+                return null;
+            }
+
+            Address lLocation = lAddressList.get(0);
+            lLatLng = new LatLng(lLocation.getLatitude(), lLocation.getLongitude());
+
+        } catch (IOException pE) {
+            pE.printStackTrace();
+        }
+        return lLatLng;
     }
 }

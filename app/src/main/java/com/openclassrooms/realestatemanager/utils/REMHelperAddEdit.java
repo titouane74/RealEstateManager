@@ -1,5 +1,8 @@
 package com.openclassrooms.realestatemanager.utils;
 
+import android.location.Geocoder;
+
+import com.google.android.gms.maps.model.LatLng;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
 import com.openclassrooms.realestatemanager.model.ReLocation;
 import com.openclassrooms.realestatemanager.model.RePhoto;
