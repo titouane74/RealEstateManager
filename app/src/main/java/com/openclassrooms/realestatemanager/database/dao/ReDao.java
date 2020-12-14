@@ -1,5 +1,7 @@
 package com.openclassrooms.realestatemanager.database.dao;
 
+import android.database.Cursor;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -19,6 +21,11 @@ import java.util.List;
 @Dao
 public interface ReDao {
 
+    //FOR CONTENT PROVIDER
+    @Query("SELECT * FROM realestate WHERE reid = :pReId")
+    Cursor selectRealEstateCursor(long pReId);
+
+    //FOR ROOM
     @Query("SELECT * FROM realestate")
     LiveData<List<RealEstate>> selectAllRealEstates();
 
@@ -29,7 +36,7 @@ public interface ReDao {
     LiveData<Integer> selectMaxReId();
 
     @Insert
-    void insertRealEstate(RealEstate pRealEstate);
+    long insertRealEstate(RealEstate pRealEstate);
 
     @Update
     void updateRealEstate(RealEstate pRealEstate);

@@ -31,6 +31,7 @@ import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.utils.REMHelperAddEdit;
+import com.openclassrooms.realestatemanager.utils.Utils;
 import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 
@@ -64,6 +65,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private boolean mIsPoiEmpty =  true;
     private Date mDateMarket = null;
     private Date mDateSold = null;
+    private boolean mIsMandatoryDataComplete = false;
 
     private long mReId;
     private RealEstate mRealEstate = new RealEstate();
@@ -144,8 +146,12 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
         if (pItem.getItemId() == R.id.menu_action_save) {
-            manageRealEstate();
-            return true;
+            if (Utils.isInternetAvailable(mContext)) {
+                manageRealEstate();
+                return true;
+            } else {
+                Toast.makeText(mContext, getString(R.string.default_txt_no_internet_no_backup), Toast.LENGTH_SHORT).show();
+            }
         }
         return super.onOptionsItemSelected(pItem);
     }
@@ -192,7 +198,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         } else if(mDateMarket!=null || mDateSold!=null || lIsSold || !lAgentFirstName.equals("") || !lAgentLastName.equals("")
             || !lDescription.equals("") || !lType.equals("")) {
             mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
-                    lAgentFirstName, lAgentLastName, mDateSold, mDateMarket);
+                    lAgentFirstName, lAgentLastName, mDateSold, mDateMarket,mIsMandatoryDataComplete);
 
             mIsReEmpty=false;
 

@@ -16,6 +16,7 @@
     <string name="default_txt_save">Save</string>
     <string name="default_txt_confirm">Confirm</string>
     <string name="default_txt_data_not_saved">Data not saved</string>
+    <string name="default_txt_no_internet_no_backup">No internet connection. Impossible to save data</string>
 
     <!-- ERRORS -->
     <string name="add_edit_txt_err_no_data">No data to save. Please enter information.</string>

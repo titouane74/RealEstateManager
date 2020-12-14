@@ -8,12 +8,15 @@ import androidx.room.Update;
 
 import com.openclassrooms.realestatemanager.model.ReLocation;
 
-
 /**
  * Created by Florence LE BOURNOT on 08/12/2020
  */
 @Dao
 public interface ReLocationDao {
+
+    //FOR ROOM
+    @Query("SELECT * FROM location WHERE locreid = :pLocReId")
+    LiveData<ReLocation> selectReLocation(long pLocReId);
 
     @Insert
     void insertReLocation(ReLocation pReLocation);
@@ -21,7 +24,4 @@ public interface ReLocationDao {
     @Update
     void updateReLocation(ReLocation pReLocation);
 
-
-    @Query("SELECT * FROM location WHERE locreid = :pLocReId")
-    LiveData<ReLocation> selectReLocation(long pLocReId);
 }

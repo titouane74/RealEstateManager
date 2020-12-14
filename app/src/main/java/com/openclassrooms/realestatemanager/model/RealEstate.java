@@ -1,8 +1,12 @@
 package com.openclassrooms.realestatemanager.model;
 
+import android.content.ContentValues;
+
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.openclassrooms.realestatemanager.utils.DateConverter;
 
 import java.util.Date;
 
@@ -11,7 +15,7 @@ import java.util.Date;
  * Created by Florence LE BOURNOT on 25/11/2020
  */
 @Entity(tableName="realestate")
-public class RealEstate  {
+public class RealEstate {
 
     @PrimaryKey(autoGenerate = true)
     private long reId;
@@ -29,13 +33,13 @@ public class RealEstate  {
     private Date reSaleDate;
     @Nullable
     private Date reOnMarketDate;
+    private boolean reIsMandatoryDataComplete;
 
-    public RealEstate() { }
+    public RealEstate() {
+    }
 
     public RealEstate(String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName, String pReAgentLastName,
-                     @Nullable Date pReSaleDate
-            , @Nullable Date pReOnMarketDate
-    ) {
+                      @Nullable Date pReSaleDate, @Nullable Date pReOnMarketDate, boolean pReIsMandatoryDataComplete) {
         reType = pReType;
         rePrice = pRePrice;
         reArea = pReArea;
@@ -48,12 +52,13 @@ public class RealEstate  {
         reAgentLastName = pReAgentLastName;
         reSaleDate = pReSaleDate;
         reOnMarketDate = pReOnMarketDate;
+        reIsMandatoryDataComplete = pReIsMandatoryDataComplete;
     }
 
     public RealEstate(long pReId, String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms,
                       int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName,
-                      String pReAgentLastName, @Nullable Date pReSaleDate, @Nullable Date pReOnMarketDate
-    ) {
+                      String pReAgentLastName, @Nullable Date pReSaleDate, @Nullable Date pReOnMarketDate,
+                      boolean pReIsMandatoryDataComplete) {
         reId = pReId;
         reType = pReType;
         rePrice = pRePrice;
@@ -67,6 +72,7 @@ public class RealEstate  {
         reAgentLastName = pReAgentLastName;
         reSaleDate = pReSaleDate;
         reOnMarketDate = pReOnMarketDate;
+        reIsMandatoryDataComplete = pReIsMandatoryDataComplete;
     }
 
     public long getReId() {
@@ -81,7 +87,9 @@ public class RealEstate  {
         return reType;
     }
 
-    public void setReType(String pReType) { reType = pReType; }
+    public void setReType(String pReType) {
+        reType = pReType;
+    }
 
     public int getRePrice() {
         return rePrice;
@@ -139,21 +147,45 @@ public class RealEstate  {
         reIsSold = pReIsSold;
     }
 
-    public String getReAgentFirstName() { return reAgentFirstName; }
+    public String getReAgentFirstName() {
+        return reAgentFirstName;
+    }
 
-    public void setReAgentFirstName(String pReAgentFirstName) { reAgentFirstName = pReAgentFirstName; }
+    public void setReAgentFirstName(String pReAgentFirstName) {
+        reAgentFirstName = pReAgentFirstName;
+    }
 
-    public String getReAgentLastName() { return reAgentLastName; }
+    public String getReAgentLastName() {
+        return reAgentLastName;
+    }
 
-    public void setReAgentLastName(String pReAgentLastName) { reAgentLastName = pReAgentLastName; }
+    public void setReAgentLastName(String pReAgentLastName) {
+        reAgentLastName = pReAgentLastName;
+    }
 
-    public Date getReSaleDate() { return reSaleDate; }
+    public Date getReSaleDate() {
+        return reSaleDate;
+    }
 
-    public void setReSaleDate(Date pReSaleDate) { reSaleDate = pReSaleDate; }
+    public void setReSaleDate(Date pReSaleDate) {
+        reSaleDate = pReSaleDate;
+    }
 
-    public Date getReOnMarketDate() { return reOnMarketDate; }
+    public Date getReOnMarketDate() {
+        return reOnMarketDate;
+    }
 
-    public void setReOnMarketDate(Date pReOnMarketDate) { reOnMarketDate = pReOnMarketDate; }
+    public void setReOnMarketDate(Date pReOnMarketDate) {
+        reOnMarketDate = pReOnMarketDate;
+    }
+
+    public boolean isReIsMandatoryDataComplete() {
+        return reIsMandatoryDataComplete;
+    }
+
+    public void setReIsMandatoryDataComplete(boolean pReIsMandatoryDataComplete) {
+        reIsMandatoryDataComplete = pReIsMandatoryDataComplete;
+    }
 
     @Override
     public String toString() {
@@ -172,4 +204,23 @@ public class RealEstate  {
                 '}';
     }
 
+    // FOR CONTENT PROVIDER
+    public static RealEstate fromContentValues(ContentValues pValues) {
+        final RealEstate lRe = new RealEstate();
+        if (pValues.containsKey("reId")) lRe.setReId(pValues.getAsLong("reId"));
+        if (pValues.containsKey("reType")) lRe.setReType(pValues.getAsString("reType"));
+        if (pValues.containsKey("rePrice")) lRe.setRePrice(pValues.getAsInteger("rePrice"));
+        if (pValues.containsKey("reArea")) lRe.setReArea(pValues.getAsInteger("reArea"));
+        if (pValues.containsKey("reNbRooms")) lRe.setReNbRooms(pValues.getAsInteger("reNbRooms"));
+        if (pValues.containsKey("reNbBedrooms")) lRe.setReNbBedrooms(pValues.getAsInteger("reNbBedrooms"));
+        if (pValues.containsKey("reNbBathrooms")) lRe.setReNbBathrooms(pValues.getAsInteger("reNbBathrooms"));
+        if (pValues.containsKey("reDescription")) lRe.setReDescription(pValues.getAsString("reDescription"));
+        if (pValues.containsKey("reIsSold")) lRe.setReIsSold(pValues.getAsBoolean("reIsSold"));
+        if (pValues.containsKey("reAgentFirstName")) lRe.setReAgentFirstName(pValues.getAsString("reAgentFirstName"));
+        if (pValues.containsKey("reAgentLastName")) lRe.setReAgentLastName(pValues.getAsString("reAgentLastName"));
+        if (pValues.containsKey("reSaleDate")) lRe.setReSaleDate(DateConverter.toDate(pValues.getAsLong("reSaleDate")));
+        if (pValues.containsKey("reOnMarketDate")) lRe.setReOnMarketDate(DateConverter.toDate(pValues.getAsLong("reOnMarketDate")));
+        if (pValues.containsKey("reIsMandatoryDataComplete")) lRe.setReIsMandatoryDataComplete(pValues.getAsBoolean("reIsMandatoryDataComplete"));
+        return lRe;
+    }
 }

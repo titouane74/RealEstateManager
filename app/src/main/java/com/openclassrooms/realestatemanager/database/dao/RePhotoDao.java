@@ -17,6 +17,7 @@ import java.util.List;
 @Dao
 public interface RePhotoDao {
 
+    //FOR ROOM
     @Query("SELECT * FROM photo WHERE phreid = :pReId")
     LiveData<List<RePhoto>> selectRePhoto(long pReId);
 

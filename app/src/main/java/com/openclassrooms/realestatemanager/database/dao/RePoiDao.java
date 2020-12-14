@@ -12,6 +12,7 @@ import com.openclassrooms.realestatemanager.model.RePoi;
 @Dao
 public interface RePoiDao {
 
+    //FOR ROOM
     @Insert
     void insertRePoi(RePoi pRePoi);
 
