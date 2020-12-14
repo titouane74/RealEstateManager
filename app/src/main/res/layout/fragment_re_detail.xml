@@ -464,17 +464,17 @@
                     style="@style/ReTheme.TxtView"
                     android:layout_width="@dimen/app_zero_dp"
                     android:text="@string/txt_address"
-                    app:layout_constraintEnd_toStartOf="@id/frag_re_det_map_view"
+                    app:layout_constraintEnd_toStartOf="@id/frag_re_det_static_map"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/frag_re_det_tv_location" />
 
-                <com.google.android.gms.maps.MapView
-                    android:id="@+id/frag_re_det_map_view"
+                <ImageView
+                    android:id="@+id/frag_re_det_static_map"
                     android:layout_width="@dimen/re_det_map_size"
                     android:layout_height="@dimen/re_det_map_size"
+                    android:contentDescription="@string/txt_description"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -40,7 +40,8 @@
     <dimen name="re_det_left_gl">0.34</dimen>
     <dimen name="re_det_right_gl">0.64</dimen>
     <dimen name="re_det_padding_bottom">10dp</dimen>
-    <dimen name="re_det_map_size">140dp</dimen>
+    <dimen name="re_det_map_size">200dp</dimen>
+    <dimen name="re_det_map_size_land">300dp</dimen>
     <dimen name="re_det_width_percent_information">0.48</dimen>
     <dimen name="re_det_height_percent_information">0.33</dimen>
     <!-- REAL ESTATE SEARCH -->

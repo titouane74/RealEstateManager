@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,10 +16,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.openclassrooms.realestatemanager.BuildConfig;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReDetailBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
+import com.openclassrooms.realestatemanager.model.ReLocation;
 import com.openclassrooms.realestatemanager.model.RePhoto;
 import com.openclassrooms.realestatemanager.model.RePoi;
 import com.openclassrooms.realestatemanager.model.RealEstate;
@@ -35,6 +40,7 @@ import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.R
 
 public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
 
+    public static final String GOOGLE_STATIC_MAP_URL = "https://maps.googleapis.com/maps/api/staticmap";
     private static final String TAG = "REDetailFragment";
     private FragmentReDetailBinding mBinding;
     private DetailPhotoAdapter mAdapter;
@@ -214,8 +220,33 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             mPhotoList = pRe.getRePhotoList();
             mAdapter.setPhotoList(mPhotoList);
             mAdapter.notifyDataSetChanged();
+
+            //displayStaticMap(pRe.getReLocation());
+
         } else {
             Log.d(TAG, "displayReComplete: pRe is null");
         }
+    }
+
+    private void displayStaticMap(ReLocation pReLoc) {
+        Uri.Builder uriStaticMap
+                = Uri.parse(GOOGLE_STATIC_MAP_URL).buildUpon();
+
+        int lIntSize = (int) (getResources().getDimension(R.dimen.re_det_map_size)/getResources().getDisplayMetrics().density);
+        String lSize = lIntSize + "x" + lIntSize;
+
+        uriStaticMap
+                .appendQueryParameter("size",lSize)
+                .appendQueryParameter("scale",getString(R.string.static_map_scale))
+                .appendQueryParameter("zoom",getString(R.string.static_map_zoom))
+                .appendQueryParameter("key", BuildConfig.MAPS_API_KEY);
+        String markers = getString(R.string.static_map_txt_markers_param)
+                + pReLoc.getLocLatitude() + "," + pReLoc.getLocLongitude();
+        uriStaticMap.appendQueryParameter("markers",markers);
+
+        Glide.with(this)
+                .load(uriStaticMap.build())
+                .apply(RequestOptions.centerCropTransform())
+                .into(mBinding.fragReDetStaticMap);
     }
 }

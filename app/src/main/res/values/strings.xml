@@ -23,11 +23,13 @@
     <string name="add_edit_txt_err_no_data">No data to save. Please enter information.</string>
     <string name="add_edit_txt_err_date_sold_before_date_market">The sold date can\'t be before the on market date</string>
     <string name="add_edit_txt_err_agent_not_valid">Agent information invalid</string>
+    <string name="add_edit_txt_err_date_sold_empty">Sold date can be empty</string>
 
     <!-- REGEX PATTERN -->
-    <string name="regex_agent">([a-zA-Z])*</string>
-    <string name="regex_street">((\\d*)?)((\\s?,?\\s?)([a-zA-Z]+))*</string>
-    <string name="regex_city">([a-zA-Z]+)((\\s|-?)*[a-zA-Z])*</string>
+    <string name="regex_agent">(\\p{L})*((\\s|-|\'?)*\\p{L})*</string>
+<!--    <string name="regex_agent">([a-zA-ZàäâéèêëïîöôùûüÿÂÄÊËÎÏÔÖÛÜ])*((\\s|-|\'?)*[a-zA-ZàäâéèêëïîöôùûüÿÂÄÊËÎÏÔÖÛÜ])*</string> -->
+    <string name="regex_street">((\\d*)?)((\\s|,|-|\'?)*(\\p{L}+))*</string>
+    <string name="regex_city">(\\p{L}+)((\\s|-|\'?)*\\p{L})*</string>
     <string name="regex_zip_code">[0-9]{5}</string>
 
     <!-- REAL ESTATE VOCABULARY -->
@@ -108,4 +110,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- STATIC MAP PARAMETER -->
+    <string name="static_map_size">200x200</string>
+    <string name="static_map_size_land">300x300</string>
+    <string name="static_map_scale">2</string>
+    <string name="static_map_zoom">14</string>
+    <string name="static_map_txt_markers_param">size:mid|color:blue|label:RE|</string>
 </resources>

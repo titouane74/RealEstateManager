@@ -168,8 +168,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
      */
     private void manageRealEstate() {
 
-        boolean lIsSold = mBinding.fragReAddEditCbSold.isChecked();
-
         String lAgentFirstName = mBinding.fragReAddEditEtAgentFirstName.getText().toString();
         boolean lIsValidAgentFirstName = REMHelperAddEdit.controlValidityWithRegex(lAgentFirstName, getString(R.string.regex_agent));
         String lAgentLastName = mBinding.fragReAddEditEtAgentLastName.getText().toString();
@@ -193,14 +191,22 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             mDateMarket = REMHelper.convertStringToDate(mBinding.fragReAddEditEtMarketDate.getText().toString());
         }
 
+        boolean lIsSold = mBinding.fragReAddEditCbSold.isChecked();
         if (mStringDateSold != null) {
             mDateSold = REMHelper.convertStringToDate(mStringDateSold);
         } else if (mBinding.fragReAddEditEtSoldDate.getText() != null) {
             mDateSold = REMHelper.convertStringToDate(mBinding.fragReAddEditEtSoldDate.getText().toString());
         }
+        if (mDateSold != null && !lIsSold) {
+            lIsSold = true;
+            mBinding.fragReAddEditCbSold.setChecked(true);
+        }
 
         if (!lIsValidAgentFirstName || !lIsValidAgentLastName) {
             Toast.makeText(mContext, getString(R.string.add_edit_txt_err_agent_not_valid) + " "
+                    + getString(R.string.default_txt_data_not_saved), Toast.LENGTH_SHORT).show();
+        } else if (lIsSold && mDateSold == null) {
+            Toast.makeText(mContext, getString(R.string.add_edit_txt_err_date_sold_empty) + " "
                     + getString(R.string.default_txt_data_not_saved), Toast.LENGTH_SHORT).show();
         } else if (mDateMarket != null || mDateSold != null || lIsSold || !lAgentFirstName.equals("") || !lAgentLastName.equals("")
                 || !lDescription.equals("") || !lType.equals("")) {
@@ -278,6 +284,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             Toast.makeText(mContext, getString(R.string.add_edit_txt_err_no_data), Toast.LENGTH_SHORT).show();
         } else {
             mRealEstate.setReIsMandatoryDataComplete(REMHelperAddEdit.getIsMandatoryDataComplete(mRealEstate, mReLocation, mIsPhotoEmpty));
+            mIsMandatoryDataComplete = mRealEstate.isReIsMandatoryDataComplete();
             if (!mIsEdit) {
                 mViewModel.insertRealEstate(mRealEstate);
                 mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
@@ -305,7 +312,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private void savePoiAndPhotoInformations(long pReId) {
         managePoi(pReId);
         managePhoto(pReId);
-        sendNotification();
+        if(mIsMandatoryDataComplete) {
+            sendNotification();
+        }
     }
 
     private void sendNotification() {
