@@ -60,9 +60,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private boolean mIsTabletLandscape;
     private boolean mIsEdit;
     private boolean mIsLocationEmpty = true;
-    private boolean mIsReEmpty =true;
+    private boolean mIsReEmpty = true;
     private boolean mIsPhotoEmpty = true;
-    private boolean mIsPoiEmpty =  true;
+    private boolean mIsPoiEmpty = true;
     private Date mDateMarket = null;
     private Date mDateSold = null;
     private boolean mIsMandatoryDataComplete = false;
@@ -92,17 +92,16 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
         mBinding.fragReAddEditEtMarketDate.setOnClickListener(v -> {
             displayCalendarDialog(R.id.frag_re_add_edit_et_market_date);
-            mDateMarket = (mStringDateMarket != null) ? REMHelper.convertStringToDate(mStringDateMarket) : null ;
+            mDateMarket = (mStringDateMarket != null) ? REMHelper.convertStringToDate(mStringDateMarket) : null;
         });
         mBinding.fragReAddEditEtSoldDate.setOnClickListener(v -> {
             displayCalendarDialog(R.id.frag_re_add_edit_et_sold_date);
             mDateSold = (mStringDateSold != null) ? REMHelper.convertStringToDate(mStringDateSold) : null;
-            if ((mDateMarket!= null) && (mDateSold!= null) && (mDateSold.before(mDateMarket))) {
+            if ((mDateMarket != null) && (mDateSold != null) && (mDateSold.before(mDateMarket))) {
                 Toast.makeText(mContext, getString(R.string.add_edit_txt_err_date_sold_before_date_market), Toast.LENGTH_SHORT).show();
             }
         });
         mBinding.fragReAddEditImgSelectPhoto.setOnClickListener(v -> addPhoto());
-
     }
 
     /**
@@ -115,9 +114,10 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
     /**
      * Manage the result of the selection of photos in the the image picker
+     *
      * @param requestCode : int : request code
-     * @param resultCode : int : result code
-     * @param data : Intent : data
+     * @param resultCode  : int : result code
+     * @param data        : Intent : data
      */
     @Override
     public void onActivityResult(int requestCode, final int resultCode, Intent data) {
@@ -164,9 +164,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         boolean lIsSold = mBinding.fragReAddEditCbSold.isChecked();
 
         String lAgentFirstName = mBinding.fragReAddEditEtAgentFirstName.getText().toString();
-        boolean lIsValidAgentFirstName = REMHelperAddEdit.controlValidityWithRegex(lAgentFirstName,getString(R.string.regex_agent));
+        boolean lIsValidAgentFirstName = REMHelperAddEdit.controlValidityWithRegex(lAgentFirstName, getString(R.string.regex_agent));
         String lAgentLastName = mBinding.fragReAddEditEtAgentLastName.getText().toString();
-        boolean lIsValidAgentLastName = REMHelperAddEdit.controlValidityWithRegex(lAgentLastName,getString(R.string.regex_agent));
+        boolean lIsValidAgentLastName = REMHelperAddEdit.controlValidityWithRegex(lAgentLastName, getString(R.string.regex_agent));
 
         String lDescription = mBinding.fragReAddEditEtDescription.getText().toString();
 
@@ -195,12 +195,12 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         if (!lIsValidAgentFirstName || !lIsValidAgentLastName) {
             Toast.makeText(mContext, getString(R.string.add_edit_txt_err_agent_not_valid) + " "
                     + getString(R.string.default_txt_data_not_saved), Toast.LENGTH_SHORT).show();
-        } else if(mDateMarket!=null || mDateSold!=null || lIsSold || !lAgentFirstName.equals("") || !lAgentLastName.equals("")
-            || !lDescription.equals("") || !lType.equals("")) {
+        } else if (mDateMarket != null || mDateSold != null || lIsSold || !lAgentFirstName.equals("") || !lAgentLastName.equals("")
+                || !lDescription.equals("") || !lType.equals("")) {
             mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
-                    lAgentFirstName, lAgentLastName, mDateSold, mDateMarket,mIsMandatoryDataComplete);
+                    lAgentFirstName, lAgentLastName, mDateSold, mDateMarket, mIsMandatoryDataComplete);
 
-            mIsReEmpty=false;
+            mIsReEmpty = false;
 
             if (manageLocation()) {
                 mIsPhotoEmpty = mInitialPhotoList.size() != 0;
@@ -212,13 +212,14 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
     /**
      * Manage the location data
+     *
      * @return : boolean : return true if the information can be saved
      */
     private boolean manageLocation() {
         String lErrorData = "";
-        boolean lIsValidStreet ;
+        boolean lIsValidStreet;
         boolean lIsValidCity;
-        boolean lIsValidZipCode ;
+        boolean lIsValidZipCode;
 
         String lDistrict = mBinding.fragReAddEditEtDistrict.getText().toString();
         String lCounty = mBinding.fragReAddEditEtCounty.getText().toString();
@@ -226,27 +227,27 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
                 ? "" : mBinding.fragReAddEditSpinCountry.getSelectedItem().toString();
 
         String lStreet = mBinding.fragReAddEditEtStreet.getText().toString();
-        lIsValidStreet = REMHelperAddEdit.controlValidityWithRegex(lStreet,getString(R.string.regex_street));
+        lIsValidStreet = REMHelperAddEdit.controlValidityWithRegex(lStreet, getString(R.string.regex_street));
 
         String lCity = mBinding.fragReAddEditEtCity.getText().toString();
-        lIsValidCity = REMHelperAddEdit.controlValidityWithRegex(lCity,getString(R.string.regex_city));
+        lIsValidCity = REMHelperAddEdit.controlValidityWithRegex(lCity, getString(R.string.regex_city));
 
         String lZipCode = mBinding.fragReAddEditEtZipCode.getText().toString();
-        lIsValidZipCode = REMHelperAddEdit.controlValidityWithRegex(lZipCode,getString(R.string.regex_zip_code));
+        lIsValidZipCode = REMHelperAddEdit.controlValidityWithRegex(lZipCode, getString(R.string.regex_zip_code));
 
-        lErrorData = !lIsValidStreet ? REMHelper.addValueAndSeparatorToString(lErrorData, ", " , getString(R.string.txt_street)) : lErrorData;
-        lErrorData = !lIsValidZipCode ? REMHelper.addValueAndSeparatorToString(lErrorData, ", " , getString(R.string.txt_zip_code)) : lErrorData;
-        lErrorData = !lIsValidCity ? REMHelper.addValueAndSeparatorToString(lErrorData, ", " , getString(R.string.txt_city)) : lErrorData;
+        lErrorData = !lIsValidStreet ? REMHelper.addValueAndSeparatorToString(lErrorData, ", ", getString(R.string.txt_street)) : lErrorData;
+        lErrorData = !lIsValidZipCode ? REMHelper.addValueAndSeparatorToString(lErrorData, ", ", getString(R.string.txt_zip_code)) : lErrorData;
+        lErrorData = !lIsValidCity ? REMHelper.addValueAndSeparatorToString(lErrorData, ", ", getString(R.string.txt_city)) : lErrorData;
 
-        if (lErrorData.length()>0) {
-            Toast.makeText(mContext, "Error on data : " + lErrorData  + " "
+        if (lErrorData.length() > 0) {
+            Toast.makeText(mContext, "Error on data : " + lErrorData + " "
                     + getString(R.string.default_txt_data_not_saved), Toast.LENGTH_SHORT).show();
             return false;
-        } else  {
+        } else {
             if (!lStreet.equals("") || !lZipCode.equals("") || !lCity.equals("") || !lDistrict.equals("")
                     || lCounty.equals("") || !lCountry.equals("")) {
                 mReLocation = new ReLocation(lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry);
-                mIsLocationEmpty=false;
+                mIsLocationEmpty = false;
             }
             return true;
         }
@@ -260,6 +261,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         if (mIsReEmpty && mIsLocationEmpty && mIsPhotoEmpty && mIsPoiEmpty) {
             Toast.makeText(mContext, getString(R.string.add_edit_txt_err_no_data), Toast.LENGTH_SHORT).show();
         } else {
+            mRealEstate.setReIsMandatoryDataComplete(REMHelperAddEdit.getIsMandatoryDataComplete(mRealEstate, mReLocation, mIsPhotoEmpty));
             if (!mIsEdit) {
                 mViewModel.insertRealEstate(mRealEstate);
                 mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
@@ -282,6 +284,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
     /**
      * Call the management of the poi and photo information
+     *
      * @param pReId : long : id of the real estate
      */
     private void savePoiAndPhotoInformations(long pReId) {
@@ -291,6 +294,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
     /**
      * Manage the onfiormation of the poi
+     *
      * @param pReId : long : id of the real estate
      */
     private void managePoi(long pReId) {
@@ -321,6 +325,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
     /**
      * Manage the information of the photo
+     *
      * @param pReId : long : id of hte real estate
      */
     private void managePhoto(long pReId) {
@@ -389,6 +394,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
     /**
      * Display the data of the real estate in the edit case
+     *
      * @param pReComp : object : RealEstateComplete : all the information of the real estate
      */
     @SuppressLint("SetTextI18n")
@@ -418,7 +424,8 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
                 }
             }
 
-            mBinding.fragReAddEditEtPrice.setText(Integer.toString(pReComp.getRealEstate().getRePrice()));
+            String lPrice = (pReComp.getRealEstate().getRePrice() == 0) ? null : Integer.toString(pReComp.getRealEstate().getRePrice());
+            mBinding.fragReAddEditEtPrice.setText(lPrice);
             mBinding.fragReAddEditCbSold.setChecked(pReComp.getRealEstate().isReIsSold());
 
             ArrayAdapter<CharSequence> lAdapter = REMHelper.configureSpinAdapter(mContext, R.array.type_spinner);
@@ -436,7 +443,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             mBinding.fragReAddEditSpinBathrooms.setSelection(lPosInAdapter);
 
             mBinding.fragReAddEditEtDescription.setText(pReComp.getRealEstate().getReDescription());
-            mBinding.fragReAddEditEtArea.setText(Integer.toString(pReComp.getRealEstate().getReArea()));
+
+            String lArea = (pReComp.getRealEstate().getReArea() == 0) ? null : Integer.toString(pReComp.getRealEstate().getReArea());
+            mBinding.fragReAddEditEtArea.setText(lArea);
 
             mBinding.fragReAddEditEtAgentLastName.setText(pReComp.getRealEstate().getReAgentLastName());
             mBinding.fragReAddEditEtAgentFirstName.setText(pReComp.getRealEstate().getReAgentFirstName());
@@ -460,6 +469,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
     /**
      * Display a calendar to implement the on market date or the sold date
+     *
      * @param pId : int : id of the field which is concerned by the implementation
      */
     private void displayCalendarDialog(int pId) {

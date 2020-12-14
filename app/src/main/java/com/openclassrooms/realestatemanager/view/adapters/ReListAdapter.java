@@ -94,7 +94,8 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         }
 
         public void bindView(RealEstateComplete pReComp) {
-            mBindingHolder.itemCity.setText(pReComp.getReLocation().getLocCity());
+            String lCity = pReComp.getReLocation().getLocCity() != null ? pReComp.getReLocation().getLocCity() : "";
+            mBindingHolder.itemCity.setText(lCity);
             mBindingHolder.itemPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pReComp.getRealEstate().getRePrice()));
             mBindingHolder.itemType.setText(pReComp.getRealEstate().getReType());
             if(pReComp.getRealEstate().isReIsSold()) {
@@ -102,7 +103,11 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
             } else {
                 mBindingHolder.fragReListItemImgSold.setVisibility(View.INVISIBLE);
             }
-
+            if(!pReComp.getRealEstate().isReIsMandatoryDataComplete()) {
+                mBindingHolder.fragReListItemImgDataMissing.setVisibility(View.VISIBLE);
+            } else {
+                mBindingHolder.fragReListItemImgDataMissing.setVisibility(View.INVISIBLE);
+            }
             if (pReComp.getRePhotoList().size()>0) {
                 if (pReComp.getRePhotoList().get(0).getPhPath() != null) {
                     Glide.with(mBindingHolder.fragReListItemImgPhoto.getContext())

@@ -88,5 +88,13 @@
             android:layout_marginEnd="@dimen/default_margin_end"
             />
 
+        <ImageView
+            android:id="@+id/frag_re_list_item_img_data_missing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/txt_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_data_missing" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

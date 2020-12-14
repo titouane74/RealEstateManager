@@ -28,9 +28,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_search" />
-                            <entry key="sourceFile" value="D:\0Parcours\Parcours\Projet 9\icons\images\sold_red.svg" />
+                            <entry key="outputName" value="ic_data_missing" />
+                            <entry key="sourceFile" value="D:\0Parcours\Parcours\Projet 9\icons\images\data_missing.svg" />
                           </map>
                         </option>
                       </PersistentState>

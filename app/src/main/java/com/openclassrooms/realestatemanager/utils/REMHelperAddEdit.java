@@ -1,8 +1,10 @@
 package com.openclassrooms.realestatemanager.utils;
 
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
+import com.openclassrooms.realestatemanager.model.ReLocation;
 import com.openclassrooms.realestatemanager.model.RePhoto;
 import com.openclassrooms.realestatemanager.model.RePoi;
+import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 
@@ -155,5 +157,27 @@ public class REMHelperAddEdit {
         } else {
             return true;
         }
+    }
+
+    /**
+     * Get the indicator if all the mandatory fields are complete
+     * @return : boolean : return true if all the mandatory data are complete otherwise false.
+     * Return false by default
+     */
+    public static boolean getIsMandatoryDataComplete(RealEstate pRe, ReLocation pReLoc, boolean pIsPhotoEmpty) {
+        if ((!pIsPhotoEmpty)
+                && (pRe.getReOnMarketDate() != null)
+                && (!pRe.getReAgentLastName().equals(""))
+                && (!pReLoc.getLocStreet().equals(""))
+                && (!pReLoc.getLocCity().equals(""))
+                && (!pReLoc.getLocZipCode().equals(""))
+                && (!pRe.getReType().equals(""))
+                && (pRe.getReArea() != 0)
+                && (pRe.getRePrice() != 0)
+                && (!pRe.getReDescription().equals(""))
+        ) {
+            return true;
+        }
+        return false;
     }
 }
