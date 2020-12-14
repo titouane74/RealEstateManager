@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.view.fragments;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -34,6 +36,7 @@ import com.openclassrooms.realestatemanager.utils.REMHelperAddEdit;
 import com.openclassrooms.realestatemanager.utils.Utils;
 import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
+import com.openclassrooms.realestatemanager.workmanager.NotifyWorker;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -282,6 +285,21 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         }
     }
 
+
+/*    *//**
+     * Configure the work manager for the notifications
+     *
+     * @param pContext : object : context
+     *//*
+    private void configureWorkerNotification(Context pContext) {
+        NotificationManagerCompat lNotificationManager = NotificationManagerCompat.from(pContext);
+
+        if (lNotificationManager.areNotificationsEnabled()) {
+            WorkerNotificationController.startWorkerController(pContext);
+        } else {
+            WorkerNotificationController.stopWorkerController(pContext);
+        }
+    }*/
     /**
      * Call the management of the poi and photo information
      *
@@ -290,10 +308,21 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private void savePoiAndPhotoInformations(long pReId) {
         managePoi(pReId);
         managePhoto(pReId);
+        sendNotification();
     }
 
+    private void sendNotification() {
+        NotificationManagerCompat lNotificationManager = NotificationManagerCompat.from(mContext);
+
+        if (lNotificationManager.areNotificationsEnabled()) {
+            NotifyWorker.createNotification(mContext);
+            Log.d(TAG, "sendNotification: create notification" );
+        } else {
+            Log.d(TAG, "sendNotification: dont create notification");
+        }
+    }
     /**
-     * Manage the onfiormation of the poi
+     * Manage the information of the poi
      *
      * @param pReId : long : id of the real estate
      */
