@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements ReSearchFragment.
 
         configureNavController();
         configureToolBar();
+        Log.d(TAG, "onCreate : current frag : " + mNavHostFragment.getChildFragmentManager());
+
     }
 
     @Nullable
@@ -128,9 +132,50 @@ public class MainActivity extends AppCompatActivity implements ReSearchFragment.
 
         //ReListFragment lFrag = (ReListFragment) getSupportFragmentManager().findFragmentById(R.id.frag_re_list_rv);
 //        ReListFragment lFrag = (ReListFragment) mNavHostFragment.getChildFragmentManager().findFragmentById(R.id.frag_re_list_rv);
-        Log.d(TAG, "onSearchResult: current frag : " + mNavHostFragment.getChildFragmentManager().getPrimaryNavigationFragment());
-        Log.d(TAG, "onSearchResult: nav_hos_frag : " + getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment));
-        Log.d(TAG, "onSearchResult: current back stack entry : " + mNavHostFragment.getNavController().getCurrentBackStackEntry());
 //        lFrag.onSearchResult(pReCompList);
+//        Log.d(TAG, "onSearchResult: current frag : " + mNavHostFragment.getChildFragmentManager().getPrimaryNavigationFragment());
+        Log.d(TAG, "onSearchResult: current frag : " + mNavHostFragment.getChildFragmentManager().getFragments().get(0));
+
+        ReListFragment lReListFragment = getReListFragmentActualInstance();
+//        lReListFragment.onSearchResult(pReCompList);
     }
+
+
+
+    /**
+     * Retrieve the actual instance of the ReListFragment
+     *
+     * @return : object : ReListFragment instance
+     */
+    private ReListFragment getReListFragmentActualInstance() {
+        ReListFragment resultFragment = null;
+        Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        if (navHostFragment != null) {
+            List<Fragment> fragmentList = navHostFragment.getChildFragmentManager().getFragments();
+            for (Fragment fragment : fragmentList) {
+                if (fragment instanceof ReListFragment) {
+                    resultFragment = (ReListFragment) fragment;
+                    break;
+                }
+            }
+        }
+        return resultFragment;
+    }
+
+
+/*
+// IN MAIN ACTIVITY MAREU
+
+    private void replaceFragment(final Fragment pFragment) {
+        final FragmentManager lFragmentManager = getSupportFragmentManager();
+        final FragmentTransaction lFragmentTransaction = lFragmentManager.beginTransaction();
+        lFragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
+        if (mMainLayout.getTag() == getString(R.string.tablet)) {
+            lFragmentTransaction.replace(R.id.frame_right, pFragment);
+        } else {
+            lFragmentTransaction.replace(R.id.frame_list, pFragment);
+        }
+        lFragmentTransaction.commit();
+    }*/
+
 }

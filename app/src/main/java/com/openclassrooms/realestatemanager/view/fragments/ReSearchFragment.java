@@ -216,7 +216,9 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
 //            mCallback = (OnSearchResult) mContext;
             mNavController.navigate(R.id.action_reSearchFragment_to_reListFragment);
+
             mCallback.onSearchResult(pReCompList);
+
 
             //            ReListAdapter lAdapter = new ReListAdapter();
 //            lAdapter.setReList(pReCompList);
