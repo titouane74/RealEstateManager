@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.database.dao;
 import android.database.Cursor;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;

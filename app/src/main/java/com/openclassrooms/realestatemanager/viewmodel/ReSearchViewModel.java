@@ -36,6 +36,5 @@ public class ReSearchViewModel extends ViewModel {
     }
 
     public LiveData<List<RealEstateComplete>> selectSearch(SimpleSQLiteQuery pQuery) { return mReRepo.selectSearch(pQuery); }
-//    public LiveData<List<RealEstateComplete>> selectSearch(String pQuery) { return mReRepo.selectSearch(pQuery); }
 
 }

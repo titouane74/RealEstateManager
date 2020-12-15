@@ -134,9 +134,9 @@ public class MainActivity extends AppCompatActivity implements ReSearchFragment.
 //        ReListFragment lFrag = (ReListFragment) mNavHostFragment.getChildFragmentManager().findFragmentById(R.id.frag_re_list_rv);
 //        lFrag.onSearchResult(pReCompList);
 //        Log.d(TAG, "onSearchResult: current frag : " + mNavHostFragment.getChildFragmentManager().getPrimaryNavigationFragment());
-        Log.d(TAG, "onSearchResult: current frag : " + mNavHostFragment.getChildFragmentManager().getFragments().get(0));
-
-        ReListFragment lReListFragment = getReListFragmentActualInstance();
+//        Log.d(TAG, "onSearchResult: current frag : " + mNavHostFragment.getChildFragmentManager().getFragments().get(0));
+//
+//        ReListFragment lReListFragment = getReListFragmentActualInstance();
 //        lReListFragment.onSearchResult(pReCompList);
     }
 

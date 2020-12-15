@@ -197,12 +197,13 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         lStrQuery += " reType = ?";
         lStrQuery += " AND reDescription = ?";
 //        lStrQuery += " reIsMandatoryDataComplete = ?";
-//        lArgs.add("true");
         lContainsCondition=true;
 
         lStrQuery += ";";
 
         String[] args = {"Apartment","apart apart"};
+//        String[] args = {"true"};
+
 //        ReDatabase  db = ReDatabase.getInstance(mContext);
 //        Cursor lCursor = db.query(lStrQuery,args);
 //        Log.d(TAG, "buildQuery: " + lCursor.getCount());
@@ -217,12 +218,7 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 //            mCallback = (OnSearchResult) mContext;
             mNavController.navigate(R.id.action_reSearchFragment_to_reListFragment);
 
-            mCallback.onSearchResult(pReCompList);
-
-
-            //            ReListAdapter lAdapter = new ReListAdapter();
-//            lAdapter.setReList(pReCompList);
-//            lAdapter.notifyDataSetChanged();
+//            mCallback.onSearchResult(pReCompList);
 
         });
     }

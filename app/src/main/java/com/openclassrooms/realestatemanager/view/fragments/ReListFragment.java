@@ -1,5 +1,7 @@
 package com.openclassrooms.realestatemanager.view.fragments;
 
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -14,7 +16,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.gson.Gson;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
@@ -39,6 +40,7 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> implemen
     private Context mContext;
     private boolean mIsTabletLandscape;
     private NavController mNavController;
+    private MutableLiveData<List<RealEstateComplete>> mMLDReCompList;
 
     @Override
     protected int getMenuAttached() {return R.menu.menu_general;}
@@ -61,23 +63,28 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> implemen
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         configureViewModel();
-/*
-        mViewModel.getAllRe().observe(getViewLifecycleOwner(), pAllRe -> {
-            mAdapter.setReList(pAllRe);
-            mAdapter.notifyDataSetChanged();
+
+        mViewModel.selectAllReComplete().observe(getViewLifecycleOwner(), new Observer<List<RealEstateComplete>>() {
+            @Override
+            public void onChanged(List<RealEstateComplete> pAllRe) {
+                Log.d(TAG, "onActivityCreated allReComplete: " + pAllRe.size());
+                mAdapter.setReList(pAllRe);
+                mAdapter.notifyDataSetChanged();
+            }
         });
-*/
-        mViewModel.selectAllReComplete().observe(getViewLifecycleOwner(), pAllRe -> {
-            mAdapter.setReList(pAllRe);
-            mAdapter.notifyDataSetChanged();
+
+        mViewModel.getSearchResult().observe(getViewLifecycleOwner(), new Observer<List<RealEstateComplete>>() {
+            @Override
+            public void onChanged(List<RealEstateComplete> pRealEstateCompletes) {
+                Log.d(TAG, "onChanged searchresult: " + pRealEstateCompletes.size());
+                mAdapter.setReList(pRealEstateCompletes);
+                mAdapter.notifyDataSetChanged();
+            }
         });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
-//        Log.d(TAG, "onOptionsItemSelected: LIst: " + pItem.getItemId());
-//        Log.d(TAG, "onOptionsItemSelected: LIst: R.id.reAddEditFragment :" + R.id.reAddEditFragment);
-//        Log.d(TAG, "onOptionsItemSelected: LIst: R.id.action_reDetailFragment_to_reAddEditFragment : " + R.id.action_reDetailFragment_to_reAddEditFragment);
         if (pItem.getItemId() == R.id.reAddEditFragment) {
             Bundle lBundle = new Bundle();
             lBundle.putInt(RE_ID_KEY,0);
