@@ -261,7 +261,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
                     || lCounty.equals("") || !lCountry.equals("")) {
                 mReLocation = new ReLocation(lStreet, lDistrict, lCity, lCounty, lZipCode, lCountry,0,0);
                 manageGeolocalisation();
-                mIsLocationEmpty = false;
             }
             return true;
         }
@@ -271,8 +270,13 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         if (!mReLocation.getLocStreet().isEmpty() && !mReLocation.getLocZipCode().isEmpty() && !mReLocation.getLocCity().isEmpty()) {
             String lAddress = mReLocation.getLocStreet() + " " + mReLocation.getLocZipCode() + " " + mReLocation.getLocCity();
             LatLng lLatLng = getLocationFromAddress(lAddress);
-            mReLocation.setLocLatitude(lLatLng.latitude);
-            mReLocation.setLocLongitude(lLatLng.longitude);
+            if (lLatLng != null) {
+                mReLocation.setLocLatitude(lLatLng.latitude);
+                mReLocation.setLocLongitude(lLatLng.longitude);
+                mIsLocationEmpty = false;
+            } else {
+                mIsLocationEmpty = true;
+            }
         }
     }
     /**
@@ -546,10 +550,12 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             if (lAddressList == null) {
                 return null;
             }
-
-            Address lLocation = lAddressList.get(0);
-            lLatLng = new LatLng(lLocation.getLatitude(), lLocation.getLongitude());
-
+            if (lAddressList.size() > 0) {
+                Address lLocation = lAddressList.get(0);
+                lLatLng = new LatLng(lLocation.getLatitude(), lLocation.getLongitude());
+            } else {
+                return null;
+            }
         } catch (IOException pE) {
             pE.printStackTrace();
         }

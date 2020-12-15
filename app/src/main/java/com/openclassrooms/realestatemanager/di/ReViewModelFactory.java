@@ -12,6 +12,7 @@ import com.openclassrooms.realestatemanager.repository.ReRepository;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 import com.openclassrooms.realestatemanager.viewmodel.ReDetailViewModel;
 import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
+import com.openclassrooms.realestatemanager.viewmodel.ReSearchViewModel;
 
 import java.util.concurrent.Executor;
 
@@ -48,6 +49,9 @@ public class ReViewModelFactory implements ViewModelProvider.Factory {
         }
         if (modelClass.isAssignableFrom(ReDetailViewModel.class)) {
             return (T) new ReDetailViewModel(mReRepo, mExecutor);
+        }
+        if (modelClass.isAssignableFrom(ReSearchViewModel.class)) {
+            return (T) new ReSearchViewModel(mReRepo, mRePoiRepo, mReLocRepo, mRePhoRepo, mExecutor);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

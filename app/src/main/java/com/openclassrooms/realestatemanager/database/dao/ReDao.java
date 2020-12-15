@@ -6,8 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.RawQuery;
 import androidx.room.Transaction;
 import androidx.room.Update;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
@@ -48,4 +50,8 @@ public interface ReDao {
     @Transaction
     @Query("SELECT * FROM realestate")
     LiveData<List<RealEstateComplete>> selectAllReComplete();
+
+    @RawQuery(observedEntities = RealEstateComplete.class)
+    //LiveData<List<RealEstateComplete>> selectSearch(String pQuery);
+    LiveData<List<RealEstateComplete>> selectSearch(SupportSQLiteQuery pQuery);
 }

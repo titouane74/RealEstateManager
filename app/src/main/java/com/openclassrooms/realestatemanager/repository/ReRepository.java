@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.repository;
 
 import androidx.lifecycle.LiveData;
+import androidx.sqlite.db.SimpleSQLiteQuery;
 
 import com.openclassrooms.realestatemanager.database.dao.ReDao;
 import com.openclassrooms.realestatemanager.database.dao.ReLocationDao;
@@ -39,4 +40,6 @@ public class ReRepository {
 
     public LiveData<List<RealEstateComplete>> selectAllReComplete() { return mReDao.selectAllReComplete();}
 
+    public LiveData<List<RealEstateComplete>> selectSearch(SimpleSQLiteQuery pQuery) { return mReDao.selectSearch(pQuery);}
+//    public LiveData<List<RealEstateComplete>> selectSearch(String pQuery) { return mReDao.selectSearch(pQuery);}
 }
