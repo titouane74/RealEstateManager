@@ -14,17 +14,21 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
+import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.view.adapters.ReListAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
+
+import java.util.List;
 
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
 
-public class ReListFragment extends BaseFragment<FragmentReListBinding> {
+public class ReListFragment extends BaseFragment<FragmentReListBinding> implements ReSearchFragment.OnSearchResult {
 
     private static final String TAG = "TAG_ReListFragment";
     private ReListViewModel mViewModel;
@@ -96,4 +100,14 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
         mBinding.fragReListRv.setAdapter(mAdapter);
     }
 
+    @Override
+    public void onSearchResult(List<RealEstateComplete> pReCompList) {
+        mAdapter.setReList(pReCompList);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void searchResult(List<RealEstateComplete> pReCompList) {
+        mAdapter.setReList(pReCompList);
+        mAdapter.notifyDataSetChanged();
+    }
 }

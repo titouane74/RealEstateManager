@@ -11,15 +11,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding;
+import com.openclassrooms.realestatemanager.databinding.FragmentReListBinding;
+import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
+import com.openclassrooms.realestatemanager.view.fragments.ReListFragment;
+import com.openclassrooms.realestatemanager.view.fragments.ReSearchFragment;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements ReSearchFragment.OnSearchResult {
 
     public static final String TAG = "TAG_MAIN";
 
@@ -114,5 +121,16 @@ public class MainActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(pItem);
         }
         return true;
+    }
+
+    @Override
+    public void onSearchResult(List<RealEstateComplete> pReCompList) {
+
+        //ReListFragment lFrag = (ReListFragment) getSupportFragmentManager().findFragmentById(R.id.frag_re_list_rv);
+//        ReListFragment lFrag = (ReListFragment) mNavHostFragment.getChildFragmentManager().findFragmentById(R.id.frag_re_list_rv);
+        Log.d(TAG, "onSearchResult: current frag : " + mNavHostFragment.getChildFragmentManager().getPrimaryNavigationFragment());
+        Log.d(TAG, "onSearchResult: nav_hos_frag : " + getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment));
+        Log.d(TAG, "onSearchResult: current back stack entry : " + mNavHostFragment.getNavController().getCurrentBackStackEntry());
+//        lFrag.onSearchResult(pReCompList);
     }
 }

@@ -4,15 +4,18 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.sqlite.db.SimpleSQLiteQuery;
 
+import com.google.gson.Gson;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReSearchBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
@@ -21,6 +24,8 @@ import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.viewmodel.ReSearchViewModel;
 
+import org.json.JSONArray;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,9 +33,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
+import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
+
 public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
+    private OnSearchResult mCallback;
 
+    public interface OnSearchResult {
+        void onSearchResult(List<RealEstateComplete> pReCompList);
+    }
 
     private static final String TAG = "TAG_ReSearchFragment";
     private View mFragView;
@@ -56,7 +68,6 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         mIsTabletLandscape = pIsTabletLandscape;
         configureSpinners();
         configureViewModel();
-
         mBinding.fragReSearchEtMarketDate.setOnClickListener(v -> {
             //displayCalendarDialogMarket ()
             displayCalendarDialog(R.id.frag_re_search_et_market_date);
@@ -74,6 +85,7 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
+        Log.d(TAG, "onOptionsItemSelected: ");
         if (pItem.getItemId() == R.id.menu_action_confirm) {
             Toast.makeText(getContext(), getString(R.string.default_txt_confirm), Toast.LENGTH_SHORT).show();
             buildQuery();
@@ -202,11 +214,24 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
                 Log.d(TAG, "buildQuery: " + lReComp.getRealEstate().getReDescription());
             }
 
+//            mCallback = (OnSearchResult) mContext;
+            mNavController.navigate(R.id.action_reSearchFragment_to_reListFragment);
+            mCallback.onSearchResult(pReCompList);
 
             //            ReListAdapter lAdapter = new ReListAdapter();
 //            lAdapter.setReList(pReCompList);
 //            lAdapter.notifyDataSetChanged();
-//            mNavController.navigate(R.id.reListFragment);
+
         });
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            mCallback = (OnSearchResult) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Error in retrieving data. Please try again");
+        }
     }
 }
