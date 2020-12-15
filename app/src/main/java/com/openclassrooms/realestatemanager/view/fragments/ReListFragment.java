@@ -67,7 +67,7 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> implemen
         mViewModel.selectAllReComplete().observe(getViewLifecycleOwner(), new Observer<List<RealEstateComplete>>() {
             @Override
             public void onChanged(List<RealEstateComplete> pAllRe) {
-                Log.d(TAG, "onActivityCreated allReComplete: " + pAllRe.size());
+//                Log.d(TAG, "onActivityCreated allReComplete: " + pAllRe.size());
                 mAdapter.setReList(pAllRe);
                 mAdapter.notifyDataSetChanged();
             }
@@ -76,7 +76,7 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> implemen
         mViewModel.getSearchResult().observe(getViewLifecycleOwner(), new Observer<List<RealEstateComplete>>() {
             @Override
             public void onChanged(List<RealEstateComplete> pRealEstateCompletes) {
-                Log.d(TAG, "onChanged searchresult: " + pRealEstateCompletes.size());
+//                Log.d(TAG, "onChanged searchresult: " + pRealEstateCompletes.size());
                 mAdapter.setReList(pRealEstateCompletes);
                 mAdapter.notifyDataSetChanged();
             }

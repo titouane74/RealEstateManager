@@ -196,28 +196,28 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         lStrQuery += " WHERE";
         lStrQuery += " reType = ?";
         lStrQuery += " AND reDescription = ?";
-//        lStrQuery += " reIsMandatoryDataComplete = ?";
+        lStrQuery += " AND reIsMandatoryDataComplete = ?";
         lContainsCondition=true;
 
         lStrQuery += ";";
 
-        String[] args = {"Apartment","apart apart"};
-//        String[] args = {"true"};
+//        String[] args = {"Apartment","apart apart","1"};
+        String[] args = new String[3];
 
-//        ReDatabase  db = ReDatabase.getInstance(mContext);
-//        Cursor lCursor = db.query(lStrQuery,args);
-//        Log.d(TAG, "buildQuery: " + lCursor.getCount());
+        args[0] = "Apartment";
+        args[1] = "apart apart";
+        args[2] = "1";
 
         SimpleSQLiteQuery lQuery = new SimpleSQLiteQuery(lStrQuery, args);
         mViewModel.selectSearch(lQuery).observe(getViewLifecycleOwner(), pReCompList -> {
             Log.d(TAG, "buildQuery: " + pReCompList.size());
             for(RealEstateComplete lReComp : pReCompList) {
-                Log.d(TAG, "buildQuery: " + lReComp.getRealEstate().getReDescription());
+                Log.d(TAG, "buildQuery: " + lReComp.getRealEstate().getReDescription()
+                + " ; " + lReComp.getRealEstate().getRePrice());
             }
 
 //            mCallback = (OnSearchResult) mContext;
             mNavController.navigate(R.id.action_reSearchFragment_to_reListFragment);
-
 //            mCallback.onSearchResult(pReCompList);
 
         });

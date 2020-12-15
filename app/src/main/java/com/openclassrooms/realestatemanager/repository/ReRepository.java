@@ -44,7 +44,7 @@ public class ReRepository {
     public LiveData<List<RealEstateComplete>> selectAllReComplete() { return mReDao.selectAllReComplete();}
 
     public LiveData<List<RealEstateComplete>> selectSearch(SimpleSQLiteQuery pQuery) {
-        Log.d(TAG, "selectSearch: " + pQuery);
+//        Log.d(TAG, "selectSearch: " + pQuery);
         mLDSearch = mReDao.selectSearch(pQuery);
 /*        List<RealEstateComplete> lReList = mLDSearch.getValue();
         for(RealEstateComplete lReComp : lReList) {
@@ -56,12 +56,12 @@ public class ReRepository {
     }
 
     public MutableLiveData<List<RealEstateComplete>> getSearchResult() {
-        Log.d(TAG, "getSearchResult: ");
+//        Log.d(TAG, "getSearchResult: ");
         if (mLDSearch!= null) {
             Log.d(TAG, "getSearchResult: setvalue not null");
-            mLDSearchResult.setValue(mLDSearch.getValue());
+//            mLDSearchResult.setValue(mLDSearch.getValue());
         } else {
-            Log.d(TAG, "getSearchResult: mLDSearch null");
+//            Log.d(TAG, "getSearchResult: mLDSearch null");
         }
         return mLDSearchResult;
     }
