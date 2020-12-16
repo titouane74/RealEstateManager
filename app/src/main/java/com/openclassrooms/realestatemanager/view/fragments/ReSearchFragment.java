@@ -193,22 +193,48 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
         boolean lContainsCondition = false;
 
-        lStrQuery += "SELECT * FROM realestate";
+        lStrQuery += "SELECT DISTINCT(reId), reType, rePrice, locCity, reIsMandatoryDataComplete, reIsSold FROM realestate";
+        lStrQuery += " INNER JOIN location ON realestate.reId = location.locreid ";
+//        lStrQuery += " INNER JOIN poi ON realestate.reId = poi.poireid ";
 
         lStrQuery += " WHERE";
-        lStrQuery += " reType = ?";
-        lStrQuery += " AND reDescription = ?";
-        lStrQuery += " AND reIsMandatoryDataComplete = ?";
+//        lStrQuery += " reType = ?";
+//        lStrQuery += " AND";
+        lStrQuery += " locCity = ?";
+//        lStrQuery += " AND";
+//        lStrQuery += " reIsMandatoryDataComplete = ?";
+//        lStrQuery += " AND";
+//        lStrQuery += " reArea >= ?";
+//        lStrQuery += " AND";
+//        lStrQuery += " reNbBedrooms = ?";
+        lStrQuery += " AND";
+
+        lStrQuery += " realestate.reId IN (SELECT DISTINCT(poireid) FROM poi  WHERE ";
+        lStrQuery += " poiName IN ( ? , ? ))";
+        //lStrQuery += " poiName IN ( ? )";
+
+        String lMandatory = "1";
+        String lCity = "Charenton-le-Pont";
+        String lType = "Apartment";
+        String lArea = "120";
+        String lBedroom = "2";
+        String lPoi1 = "School";
+        String lPoi2 = "Restaurant";
+
         lContainsCondition=true;
 
         lStrQuery += ";";
 
-//        String[] args = {"Apartment","apart apart","1"};
-        String[] args = new String[3];
+        Log.d(TAG, "buildQuery: " + lStrQuery);
 
-        args[0] = "Apartment";
-        args[1] = "apart apart";
-        args[2] = "1";
+//        String[] args = {"Apartment","apart apart","1"};
+        int lIndexArgs = 3;
+        String[] args = new String[lIndexArgs];
+
+        args[0] = lCity;
+        args[1] = lPoi2;
+        args[2] = lPoi1;
+        //args[3] = lPoi2;
 
         SimpleSQLiteQuery lQuery = new SimpleSQLiteQuery(lStrQuery, args);
         mViewModel.selectSearch(lQuery).observe(getViewLifecycleOwner(), pReCompList -> {
