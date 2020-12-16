@@ -26,6 +26,7 @@ import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
 
 import java.util.List;
 
+import static com.openclassrooms.realestatemanager.view.activities.MainActivity.sApi;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
 
@@ -64,15 +65,20 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> implemen
         super.onActivityCreated(savedInstanceState);
         configureViewModel();
 
-        mViewModel.selectAllReComplete().observe(getViewLifecycleOwner(), new Observer<List<RealEstateComplete>>() {
-            @Override
-            public void onChanged(List<RealEstateComplete> pAllRe) {
-//                Log.d(TAG, "onActivityCreated allReComplete: " + pAllRe.size());
-                mAdapter.setReList(pAllRe);
-                mAdapter.notifyDataSetChanged();
-            }
-        });
-
+        if(sApi.getSearchResult() == null) {
+            mViewModel.selectAllReComplete().observe(getViewLifecycleOwner(), new Observer<List<RealEstateComplete>>() {
+                @Override
+                public void onChanged(List<RealEstateComplete> pAllRe) {
+                    //                Log.d(TAG, "onActivityCreated allReComplete: " + pAllRe.size());
+                    mAdapter.setReList(pAllRe);
+                    mAdapter.notifyDataSetChanged();
+                }
+            });
+        } else {
+            mAdapter.setReList(sApi.getSearchResult());
+            mAdapter.notifyDataSetChanged();
+        }
+/*
         mViewModel.getSearchResult().observe(getViewLifecycleOwner(), new Observer<List<RealEstateComplete>>() {
             @Override
             public void onChanged(List<RealEstateComplete> pRealEstateCompletes) {
@@ -81,6 +87,7 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> implemen
                 mAdapter.notifyDataSetChanged();
             }
         });
+*/
     }
 
     @Override

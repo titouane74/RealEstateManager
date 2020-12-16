@@ -33,6 +33,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.openclassrooms.realestatemanager.view.activities.MainActivity.sApi;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
 
@@ -66,6 +67,7 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         mContext = getContext();
         mNavController = pNavController;
         mIsTabletLandscape = pIsTabletLandscape;
+//        mCallback = (OnSearchResult) mContext;
         configureSpinners();
         configureViewModel();
         mBinding.fragReSearchEtMarketDate.setOnClickListener(v -> {
@@ -215,21 +217,22 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
                 Log.d(TAG, "buildQuery: " + lReComp.getRealEstate().getReDescription()
                 + " ; " + lReComp.getRealEstate().getRePrice());
             }
-
-//            mCallback = (OnSearchResult) mContext;
+            sApi.setSearchResult(pReCompList);
             mNavController.navigate(R.id.action_reSearchFragment_to_reListFragment);
+//            mCallback = (OnSearchResult) mContext;
+// mCallbach sans onAttach => error null object reference
 //            mCallback.onSearchResult(pReCompList);
 
         });
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        try {
-            mCallback = (OnSearchResult) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException("Error in retrieving data. Please try again");
-        }
-    }
+//    @Override
+//    public void onAttach(@NonNull Context context) {
+//        super.onAttach(context);
+//        try {
+//            mCallback = (OnSearchResult) context;
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException("Error in retrieving data. Please try again");
+//        }
+//    }
 }

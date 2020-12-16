@@ -7,6 +7,8 @@ import com.openclassrooms.realestatemanager.repository.ReLocationRepository;
 import com.openclassrooms.realestatemanager.repository.RePhotoRepository;
 import com.openclassrooms.realestatemanager.repository.RePoiRepository;
 import com.openclassrooms.realestatemanager.repository.ReRepository;
+import com.openclassrooms.realestatemanager.service.REMApi;
+import com.openclassrooms.realestatemanager.service.REMApiService;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -44,5 +46,15 @@ public class Injection {
         RePhotoRepository lRePhotoRepo = provideRePhotoRepository(context);
         Executor executor = provideExecutor();
         return new ReViewModelFactory(lReRepo, lRePoiRepo, lReLocationRepo, lRePhotoRepo, executor);
+    }
+
+
+    private static final REMApi mService = new REMApiService();
+
+    public static REMApi getREMApiService(){ return mService; }
+
+    //Will serve for the unit test
+    public static REMApi getNewInstanceApiService() {
+        return new REMApiService();
     }
 }

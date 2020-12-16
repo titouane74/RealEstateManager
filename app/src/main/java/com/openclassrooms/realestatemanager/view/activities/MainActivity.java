@@ -21,16 +21,21 @@ import androidx.navigation.ui.NavigationUI;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListBinding;
+import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
+import com.openclassrooms.realestatemanager.service.REMApi;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.fragments.ReListFragment;
 import com.openclassrooms.realestatemanager.view.fragments.ReSearchFragment;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ReSearchFragment.OnSearchResult {
+//public class MainActivity extends AppCompatActivity implements ReSearchFragment.OnSearchResult {
+    public class MainActivity extends AppCompatActivity  {
 
     public static final String TAG = "TAG_MAIN";
+
+    public static final REMApi sApi = Injection.getREMApiService();
 
     private ActivityMainBinding mBinding;
     private View mActView;
@@ -121,12 +126,16 @@ public class MainActivity extends AppCompatActivity implements ReSearchFragment.
                 default:
                     return super.onOptionsItemSelected(pItem);
             }
+        } else if (pItem.getItemId() == R.id.menu_clear_search) {
+            sApi.setSearchResult(null);
+            mNavController.navigate(R.id.reListFragment);
         } else {
             return super.onOptionsItemSelected(pItem);
         }
         return true;
     }
 
+/*
     @Override
     public void onSearchResult(List<RealEstateComplete> pReCompList) {
 
@@ -140,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements ReSearchFragment.
 //        lReListFragment.onSearchResult(pReCompList);
     }
 
+*/
 
 
     /**
