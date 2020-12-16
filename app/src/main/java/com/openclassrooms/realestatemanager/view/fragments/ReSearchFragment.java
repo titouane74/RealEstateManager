@@ -216,14 +216,12 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
     private void buildQuery() {
 
+/*
         //Get number of arguments
         int lIndArgs = countNumberOfArguments();
         Log.d(TAG, "buildQuery: lIndArgs : " + lIndArgs);
+*/
 
-        int lIndexArgs = 3;
-
-        //Initialize list of arguments
-        String[] lArgsList = new String[lIndexArgs];
         String lArg = "";
 
         //Initialize query string
@@ -248,6 +246,38 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         //Add conditions to clause Where
         lStrClauseWhere += " WHERE";
         mCondition = "";
+
+//        int lIndexArgs = 3;
+        int lIndexArgs = prepareConditions();
+
+        //Initialize list of arguments
+        String[] lArgsList = new String[lIndexArgs];
+
+        //pour chaque DataSearch => ajout condition et argument
+        for (DataSearch lDs : mDsList) {
+            if (mCondition.length()!=0) {
+                mCondition += " AND ";
+            }
+            if (lDs.getDsWhereClause().indexOf("poi")>0) {
+                //TODO manage the poi
+                lStrClauseWhere += " realestate.reId IN (SELECT DISTINCT(poireid) FROM poi  WHERE ";
+                lStrClauseWhere += " poiName IN ( ? , ? ))";
+            } else {
+                mCondition += lDs.getDsWhereClause();
+                lArgsList[lDs.getDsArg1Index()] = lDs.getDsArg1();
+                if (lDs.getDsDsArg2() != null) {
+                    mCondition += lDs.getDsWhereClause();
+                    lArgsList[lDs.getDsArg1Index()] = lDs.getDsArg1();
+                }
+            }
+        }
+
+        lStrQuery += lStrClauseWhere;
+        lStrQuery += ";";
+
+        executeQuery(lStrQuery, lArgsList);
+
+/*
 
 //        lStrClauseWhere += " reType = ?";
 //        lStrClauseWhere += " AND";
@@ -282,11 +312,10 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         lArgsList[1] = lPoi2;
         lArgsList[2] = lPoi1;
         //lArgsList[3] = lPoi2;
-
-        executeQuery(lStrQuery, lArgsList);
+*/
     }
 
-    private void prepareConditions() {
+    private int  prepareConditions() {
         int lIndexArgs = 0;
         String lArg = "";
 
@@ -390,6 +419,7 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
             mDsList.add(new DataSearch(" GROUP BY photo.phreid HAVING COUNT(phreid) > = ? ", lIndexArgs, lArg));
         }
 
+        return lIndexArgs;
     }
     private int manageDates(int pIndexArgs) {
         String lDateFrom = "";
