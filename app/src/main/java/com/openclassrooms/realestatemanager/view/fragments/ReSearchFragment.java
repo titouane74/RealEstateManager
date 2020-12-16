@@ -188,30 +188,47 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
 
     private void buildQuery() {
+
+        //Get number of arguments
+//        int lIndexArgs = countNumberOfArguments();
+        int lIndexArgs = 3;
+
+        //Initialize list of arguments
+        String[] lArgs = new String[lIndexArgs];
+
+        //Initialize query string
         String lStrQuery = "";
-        List<Object> lArgs = new ArrayList<>();
+        String lStrClauseFrom = "";
+        String lStrClauseWhere = "";
 
-        boolean lContainsCondition = false;
+        //Input the basic select with basic clause from
+        lStrQuery += "SELECT DISTINCT(reId), reType, rePrice, locCity, reIsMandatoryDataComplete, reIsSold ";
+        lStrClauseFrom += " FROM realestate INNER JOIN location ON realestate.reId = location.locreid ";
 
-        lStrQuery += "SELECT DISTINCT(reId), reType, rePrice, locCity, reIsMandatoryDataComplete, reIsSold FROM realestate";
-        lStrQuery += " INNER JOIN location ON realestate.reId = location.locreid ";
-//        lStrQuery += " INNER JOIN poi ON realestate.reId = poi.poireid ";
+        //If city or country not empty add table location in ClauseFrom
+//        lStrQuery += " INNER JOIN location ON realestate.reId = location.locreid ";
 
-        lStrQuery += " WHERE";
-//        lStrQuery += " reType = ?";
-//        lStrQuery += " AND";
-        lStrQuery += " locCity = ?";
-//        lStrQuery += " AND";
-//        lStrQuery += " reIsMandatoryDataComplete = ?";
-//        lStrQuery += " AND";
-//        lStrQuery += " reArea >= ?";
-//        lStrQuery += " AND";
-//        lStrQuery += " reNbBedrooms = ?";
-        lStrQuery += " AND";
+        //If number of photo > 0 add table photo in ClauseFrom
+//        lStrClauseFrom += " INNER JOIN photo ON realestate.reId = photo.phreid ";
 
-        lStrQuery += " realestate.reId IN (SELECT DISTINCT(poireid) FROM poi  WHERE ";
-        lStrQuery += " poiName IN ( ? , ? ))";
-        //lStrQuery += " poiName IN ( ? )";
+        lStrQuery += lStrClauseFrom;
+
+        //Add conditions to clause Where
+        lStrClauseWhere += " WHERE";
+//        lStrClauseWhere += " reType = ?";
+//        lStrClauseWhere += " AND";
+        lStrClauseWhere += " locCity = ?";
+//        lStrClauseWhere += " AND";
+//        lStrClauseWhere += " reIsMandatoryDataComplete = ?";
+//        lStrClauseWhere += " AND";
+//        lStrClauseWhere += " reArea >= ?";
+//        lStrClauseWhere += " AND";
+//        lStrClauseWhere += " reNbBedrooms = ?";
+        lStrClauseWhere += " AND";
+
+        lStrClauseWhere += " realestate.reId IN (SELECT DISTINCT(poireid) FROM poi  WHERE ";
+        lStrClauseWhere += " poiName IN ( ? , ? ))";
+        //lStrClauseWhere += " poiName IN ( ? )";
 
         String lMandatory = "1";
         String lCity = "Charenton-le-Pont";
@@ -221,27 +238,27 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         String lPoi1 = "School";
         String lPoi2 = "Restaurant";
 
-        lContainsCondition=true;
-
+        lStrQuery += lStrClauseWhere;
         lStrQuery += ";";
 
         Log.d(TAG, "buildQuery: " + lStrQuery);
 
-//        String[] args = {"Apartment","apart apart","1"};
-        int lIndexArgs = 3;
-        String[] args = new String[lIndexArgs];
 
-        args[0] = lCity;
-        args[1] = lPoi2;
-        args[2] = lPoi1;
-        //args[3] = lPoi2;
+        lArgs[0] = lCity;
+        lArgs[1] = lPoi2;
+        lArgs[2] = lPoi1;
+        //lArgs[3] = lPoi2;
 
-        SimpleSQLiteQuery lQuery = new SimpleSQLiteQuery(lStrQuery, args);
+        executeQuery(lStrQuery, lArgs);
+    }
+
+    private void executeQuery(String pStrQuery, String[] pArgs) {
+        SimpleSQLiteQuery lQuery = new SimpleSQLiteQuery(pStrQuery, pArgs);
         mViewModel.selectSearch(lQuery).observe(getViewLifecycleOwner(), pReCompList -> {
             Log.d(TAG, "buildQuery: " + pReCompList.size());
             for(RealEstateComplete lReComp : pReCompList) {
                 Log.d(TAG, "buildQuery: " + lReComp.getRealEstate().getReDescription()
-                + " ; " + lReComp.getRealEstate().getRePrice());
+                        + " ; " + lReComp.getRealEstate().getRePrice());
             }
             sApi.setSearchResult(pReCompList);
             mNavController.navigate(R.id.action_reSearchFragment_to_reListFragment);
