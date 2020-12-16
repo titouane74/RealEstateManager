@@ -43,6 +43,8 @@
     <string name="txt_country">Country</string>
     <string name="txt_address_hint">(Street, City, ZipCode, Country)</string>
     <string name="txt_on_market_date">On market</string>
+    <string name="txt_on_market_date_from">On market from</string>
+    <string name="txt_on_market_date_to">On market to</string>
     <string name="txt_status">Status</string>
     <string name="txt_type">Type</string>
     <string name="txt_rooms">Rooms</string>
@@ -63,8 +65,11 @@
     <string name="txt_area">Area (in m²)</string>
     <string name="txt_area_min">Area min</string>
     <string name="txt_area_max">Area max</string>
+    <string name="txt_data_incomplete">Data incomplete</string>
     <string name="txt_sold">Sold</string>
     <string name="txt_sold_date">Sold on</string>
+    <string name="txt_sold_date_from">Sold on from</string>
+    <string name="txt_sold_date_to">Sold on to</string>
     <string name="txt_real_estate">Real estate</string>
     <string name="txt_agent">Agent</string>
     <string name="txt_agent_first">Agent first name</string>

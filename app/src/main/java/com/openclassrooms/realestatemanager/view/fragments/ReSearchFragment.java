@@ -58,7 +58,9 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     private ReSearchViewModel mViewModel;
 
     @Override
-    protected int getMenuAttached() { return R.menu.menu_confirm; }
+    protected int getMenuAttached() {
+        return R.menu.menu_confirm;
+    }
 
     @Override
     protected void configureDesign(FragmentReSearchBinding pBinding, NavController pNavController, boolean pIsTablet, boolean pIsTabletLandscape) {
@@ -75,7 +77,7 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
             displayCalendarDialog(R.id.frag_re_search_et_market_date);
             mDateMarket = (mStringDateMarket != null) ? REMHelper.convertStringToDate(mStringDateMarket) : null;
         });
-        mBinding.fragReSearchEtSoldDate.setOnClickListener(v-> {
+        mBinding.fragReSearchEtSoldDate.setOnClickListener(v -> {
             //displayCalendarDialogSold()
             displayCalendarDialog(R.id.frag_re_search_et_sold_date);
             mDateSold = (mStringDateSold != null) ? REMHelper.convertStringToDate(mStringDateSold) : null;
@@ -97,12 +99,12 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     }
 
     private void configureSpinners() {
-        mBinding.fragReSearchSpinType.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.type_spinner));
-        mBinding.fragReSearchSpinRooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReSearchSpinBedrooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReSearchSpinBathrooms.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.rooms_spinner));
-        mBinding.fragReSearchSpinCountry.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.country_spinner));
-        mBinding.fragReSearchSpinNbPhoto.setAdapter(REMHelper.configureSpinAdapter(mContext,R.array.photo_spinner));
+        mBinding.fragReSearchSpinType.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.type_spinner));
+        mBinding.fragReSearchSpinRooms.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.rooms_spinner));
+        mBinding.fragReSearchSpinBedrooms.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.rooms_spinner));
+        mBinding.fragReSearchSpinBathrooms.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.rooms_spinner));
+        mBinding.fragReSearchSpinCountry.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.country_spinner));
+        mBinding.fragReSearchSpinNbPhoto.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.photo_spinner));
     }
 /*    private void displayCalendarDialogMarket() {
         Calendar lCalendar = Calendar.getInstance();
@@ -209,7 +211,9 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 //        lStrQuery += " INNER JOIN location ON realestate.reId = location.locreid ";
 
         //If number of photo > 0 add table photo in ClauseFrom
-//        lStrClauseFrom += " INNER JOIN photo ON realestate.reId = photo.phreid ";
+        if (!mBinding.fragReSearchSpinNbPhoto.getSelectedItem().equals(0)) {
+            lStrClauseFrom += " INNER JOIN photo ON realestate.reId = photo.phreid ";
+        }
 
         lStrQuery += lStrClauseFrom;
 
@@ -256,7 +260,7 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         SimpleSQLiteQuery lQuery = new SimpleSQLiteQuery(pStrQuery, pArgs);
         mViewModel.selectSearch(lQuery).observe(getViewLifecycleOwner(), pReCompList -> {
             Log.d(TAG, "buildQuery: " + pReCompList.size());
-            for(RealEstateComplete lReComp : pReCompList) {
+            for (RealEstateComplete lReComp : pReCompList) {
                 Log.d(TAG, "buildQuery: " + lReComp.getRealEstate().getReDescription()
                         + " ; " + lReComp.getRealEstate().getRePrice());
             }
