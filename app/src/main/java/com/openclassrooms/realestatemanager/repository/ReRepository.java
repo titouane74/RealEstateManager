@@ -24,6 +24,7 @@ public class ReRepository {
     private static final String TAG = "TAG_ReRepository";
     private ReDao mReDao;
     private LiveData<List<RealEstateComplete>> mLDSearch;
+    private long mReIdInserted;
 
     private MutableLiveData<List<RealEstateComplete>> mLDSearchResult = new MutableLiveData<>();
 
@@ -35,9 +36,19 @@ public class ReRepository {
 
     public LiveData<Integer> selectMaxReId() { return mReDao.selectMaxReId();}
 
-    public void insertRealEstate(RealEstate pRealEstate) {mReDao.insertRealEstate(pRealEstate);}
+    public void insertRealEstate(RealEstate pRealEstate) {
+        mReIdInserted = mReDao.insertRealEstate(pRealEstate);
+        Log.d(TAG, "insertRealEstate: " + mReIdInserted);
+    }
 
-    public void updateRealEstate(RealEstate pRealEstate) {mReDao.updateRealEstate(pRealEstate);}
+    public long getReIdInserted() {
+        Log.d(TAG, "getReIdInserted: "+mReIdInserted);
+        return mReIdInserted;}
+
+    public void updateRealEstate(RealEstate pRealEstate) {
+        int lInt = mReDao.updateRealEstate(pRealEstate);
+        Log.d(TAG, "updateRealEstate: long retour update : " + lInt);
+    }
 
     public LiveData<RealEstateComplete> selectReComplete(long pReId) { return mReDao.selectReComplete(pReId);}
 

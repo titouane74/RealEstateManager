@@ -24,6 +24,7 @@ public class ReAddEditViewModel extends ViewModel {
     private RePhotoRepository mRePhRepo;
     private Executor mExecutor;
     private long mReId;
+    private LiveData<Long> mLDReId;
 
     public ReAddEditViewModel(ReRepository pReRepo, RePoiRepository pRePoiRepo,
                               ReLocationRepository pReLocRepo, RePhotoRepository pRePhRepo,Executor pExecutor) {
@@ -37,6 +38,8 @@ public class ReAddEditViewModel extends ViewModel {
     public void insertRealEstate(RealEstate pRealEstate){
         mExecutor.execute(() -> mReRepo.insertRealEstate(pRealEstate));
     }
+
+    public long getReIdInserted() { return mReRepo.getReIdInserted();}
 
     public void updateRealEstate(RealEstate pRealEstate){
         mExecutor.execute(() -> mReRepo.updateRealEstate(pRealEstate));

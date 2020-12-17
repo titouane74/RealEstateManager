@@ -291,6 +291,10 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             mIsMandatoryDataComplete = mRealEstate.isReIsMandatoryDataComplete();
             if (!mIsEdit) {
                 mViewModel.insertRealEstate(mRealEstate);
+/*                mReId = mViewModel.getReIdInserted();
+                mReLocation.setLocReId(mReId);
+                mViewModel.insertReLocation(mReLocation);
+                savePoiAndPhotoInformations(mReId);*/
                 mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
                     mReId = pMaxReId;
                     mReLocation.setLocReId(pMaxReId);
@@ -316,9 +320,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     private void savePoiAndPhotoInformations(long pReId) {
         managePoi(pReId);
         manageAddEditPhoto(pReId);
-        if(mIsMandatoryDataComplete) {
-            sendNotification();
-        }
     }
 
     private void sendNotification() {
@@ -386,6 +387,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         int lNbPhoto = REMHelperAddEdit.setPhotoList(mInitialPhotoList, mPhotoList, pReId, mIsEdit, mViewModel);
         mRealEstate.setReNbPhotos(lNbPhoto);
         mViewModel.updateRealEstate(mRealEstate);
+        if(mIsMandatoryDataComplete) {
+            sendNotification();
+        }
         navigateToList();
     }
     /**

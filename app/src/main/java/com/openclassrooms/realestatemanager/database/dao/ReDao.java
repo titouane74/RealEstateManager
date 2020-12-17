@@ -42,7 +42,7 @@ public interface ReDao {
     long insertRealEstate(RealEstate pRealEstate);
 
     @Update
-    void updateRealEstate(RealEstate pRealEstate);
+    int updateRealEstate(RealEstate pRealEstate);
 
     @Transaction
     @Query("SELECT * FROM realestate WHERE reid=:pReId")
