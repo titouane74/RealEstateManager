@@ -19,6 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
+import com.openclassrooms.realestatemanager.utils.Utils;
 import com.openclassrooms.realestatemanager.view.fragments.ReListFragment;
 
 import java.util.List;
@@ -124,8 +125,12 @@ import static com.openclassrooms.realestatemanager.AppRem.sApi;
         } else if (pItem.getItemId() == R.id.menu_clear_search) {
             sApi.setSearchResult(null);
             mNavController.navigate(R.id.reListFragment);
-        } else if (pItem.getItemId() == R.id.re_map) {
-            mNavController.navigate(R.id.action_reListFragment_to_mapsFragment);
+        } else if (pItem.getItemId() == R.id.reMapsFragment) {
+            if (!Utils.isInternetAvailable(this)) {
+                Toast.makeText(this, getString(R.string.default_txt_no_internet_no_map), Toast.LENGTH_SHORT).show();
+            } else {
+                mNavController.navigate(R.id.action_reListFragment_to_mapsFragment);
+            }
         } else {
             return super.onOptionsItemSelected(pItem);
         }

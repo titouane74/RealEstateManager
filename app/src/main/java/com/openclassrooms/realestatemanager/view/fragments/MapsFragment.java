@@ -60,18 +60,14 @@ public class MapsFragment extends Fragment implements LocationListener {
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
+        @SuppressLint("MissingPermission")
         @Override
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
+
+            if (checkPermissions()) {
+                mMap.setMyLocationEnabled(true);
+            }
 
             mMap.setOnMarkerClickListener(pMarker -> {
                 displayRealEstateDetail(pMarker);
@@ -88,11 +84,7 @@ public class MapsFragment extends Fragment implements LocationListener {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View lView = inflater.inflate(R.layout.fragment_re_maps, container, false);
-
-        if (!Utils.isInternetAvailable(mContext)) {
-            Toast.makeText(mContext, getString(R.string.default_txt_no_internet_no_map), Toast.LENGTH_SHORT).show();
-            
-        }
+        mContext = lView.getContext();
 
         mZoom = Integer.parseInt(getString(R.string.map_zoom));
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());

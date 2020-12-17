@@ -50,10 +50,6 @@
         <action
             android:id="@+id/action_reDetailFragment_to_reAddEditFragment"
             app:destination="@id/reAddEditFragment" />
-<!--        <argument
-            android:name="reid"
-            android:defaultValue="0"
-            app:argType="integer" />-->
     </fragment>
     <fragment
         android:id="@+id/loanFragment"
