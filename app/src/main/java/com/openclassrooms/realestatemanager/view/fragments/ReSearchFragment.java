@@ -239,11 +239,16 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
             lStrQuery += "SELECT DISTINCT(reId), reType, rePrice, locCity, reIsMandatoryDataComplete, reIsSold ";
             lStrClauseFrom += " FROM realestate INNER JOIN location ON realestate.reId = location.locreid ";
 
+            if (isPoiSelected()) {
+                lStrClauseFrom += " LEFT JOIN poi ON realestate.reId = poi.poireid ";
+            }
             //If number of photo > 0 add table photo in ClauseFrom
+/*
             if (!mBinding.fragReSearchSpinNbPhoto.getSelectedItem().equals("0")) {
-                lStrClauseFrom += " INNER JOIN photo ON realestate.reId = photo.phreid ";
+                lStrClauseFrom += " LEFT JOIN photo ON realestate.reId = photo.phreid ";
                 lIsPhoto = true;
             }
+*/
 
             lStrQuery += lStrClauseFrom;
 
@@ -332,6 +337,20 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 */
     }
 
+    private boolean isPoiSelected() {
+        //Poi
+        //Bank Food Health Restaurant School Store Subway Park
+        int lPoiSelected = 0;
+        lPoiSelected += (mBinding.fragReSearchPoiBank.isChecked()) ? 1 : 0;
+        lPoiSelected += (mBinding.fragReSearchPoiFood.isChecked()) ? 1 : 0;
+        lPoiSelected += (mBinding.fragReSearchPoiHealth.isChecked()) ? 1 : 0;
+        lPoiSelected += (mBinding.fragReSearchPoiRestaurant.isChecked()) ? 1 : 0;
+        lPoiSelected += (mBinding.fragReSearchPoiSchool.isChecked()) ? 1 : 0;
+        lPoiSelected += (mBinding.fragReSearchPoiStore.isChecked()) ? 1 : 0;
+        lPoiSelected += (mBinding.fragReSearchPoiSubway.isChecked()) ? 1 : 0;
+        lPoiSelected += (mBinding.fragReSearchPoiPark.isChecked()) ? 1 : 0;
+        return lPoiSelected>0;
+    }
     private int prepareConditions() {
         int lIndexArgs = -1;
         String lArg = "";
@@ -563,54 +582,57 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     }
 
     private int managePoi(int pIndexArgs) {
-        String lPoiCondition = " realestate.reId IN (SELECT DISTINCT(poireid) FROM poi  WHERE poiName IN ( ";
+//        String lPoiCondition = " realestate.reId IN (SELECT DISTINCT(poireid) FROM poi  WHERE poiName IN ( ";
+        String lPoiCondition = " poiName IN ( ";
         List<RePoi> lPoiList = new ArrayList<>();
+        String lCondition="";
 
         if (mBinding.fragReSearchPoiBank.isChecked()) {
             pIndexArgs++;
-            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
+            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_bank)));
         }
         if (mBinding.fragReSearchPoiFood.isChecked()) {
             pIndexArgs++;
-            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
+            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_food)));
         }
         if (mBinding.fragReSearchPoiHealth.isChecked()) {
             pIndexArgs++;
-            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
+            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_health)));
         }
         if (mBinding.fragReSearchPoiRestaurant.isChecked()) {
             pIndexArgs++;
-            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
+            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_restaurant)));
         }
         if (mBinding.fragReSearchPoiSchool.isChecked()) {
             pIndexArgs++;
-            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
+            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_school)));
         }
         if (mBinding.fragReSearchPoiStore.isChecked()) {
             pIndexArgs++;
-            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
+            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_store)));
         }
         if (mBinding.fragReSearchPoiSubway.isChecked()) {
             pIndexArgs++;
-            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
+            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_subway)));
         }
         if (mBinding.fragReSearchPoiPark.isChecked()) {
             pIndexArgs++;
-            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
+            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_park)));
         }
-
+        lPoiCondition += lCondition ;
+//        lPoiCondition += " )) ";
         lPoiCondition += " ) ";
 
         for (RePoi lPoi : lPoiList) {
-            mDsList.add(new DataSearch(lPoiCondition, (int) lPoi.getPoiId(), lPoi.getPoiName()));
+            mDsList.add(new DataSearch(lPoiCondition, (int) lPoi.getPoiReId(), lPoi.getPoiName()));
         }
         return pIndexArgs;
     }

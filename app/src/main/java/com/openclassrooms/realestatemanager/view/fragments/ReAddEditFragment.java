@@ -212,7 +212,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
                 || !lDescription.equals("") || !lType.equals("")) {
             mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
                     lAgentFirstName, lAgentLastName, mDateSold, mDateMarket, mIsMandatoryDataComplete, mInitialPhotoList.size());
-
+            Log.d(TAG, "manageRealEstate: nbphoto : " + mInitialPhotoList.size());
             mIsReEmpty = false;
 
             if (manageLocation()) {
@@ -370,6 +370,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         if (mIsEdit) {
             mViewModel.selectRePhoto(pReId).observe(getViewLifecycleOwner(), pPhotoList -> {
                 mInitialPhotoList = pPhotoList;
+                Log.d(TAG, "manageAddEditPhoto: nbphotos: " + mInitialPhotoList.size());
                 managePhoto(pReId);
             });
         } else {
