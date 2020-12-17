@@ -124,46 +124,6 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         mBinding.fragReSearchSpinCountry.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.country_spinner));
         mBinding.fragReSearchSpinNbPhoto.setAdapter(REMHelper.configureSpinAdapter(mContext, R.array.photo_spinner));
     }
-/*    private void displayCalendarDialogMarket() {
-        Calendar lCalendar = Calendar.getInstance();
-        final String[] mDate = new String[1];
-
-        DatePickerDialog lDatePickerDialog = new DatePickerDialog(
-                mContext,
-                (view, year, month, dayOfMonth) -> {
-                    @SuppressLint("SimpleDateFormat") DateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                    Calendar lDateCal = Calendar.getInstance();
-
-                    lDateCal.set(year,month,dayOfMonth);
-                    String lDate = lDateFormat.format(lDateCal.getTime());
-                    mBinding.fragReSearchEtMarketDate.setText(lDate);
-                },
-                lCalendar.get(Calendar.YEAR),
-                lCalendar.get(Calendar.MONTH),
-                lCalendar.get(Calendar.DAY_OF_MONTH)
-        );
-        lDatePickerDialog.show();
-    }
-    private void displayCalendarDialogSold() {
-        Calendar lCalendar = Calendar.getInstance();
-        final String[] mDate = new String[1];
-
-        DatePickerDialog lDatePickerDialog = new DatePickerDialog(
-                mContext,
-                (view, year, month, dayOfMonth) -> {
-                    @SuppressLint("SimpleDateFormat") DateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                    Calendar lDateCal = Calendar.getInstance();
-
-                    lDateCal.set(year,month,dayOfMonth);
-                    String lDate = lDateFormat.format(lDateCal.getTime());
-                    mBinding.fragReSearchEtSoldDate.setText(lDate);
-                },
-                lCalendar.get(Calendar.YEAR),
-                lCalendar.get(Calendar.MONTH),
-                lCalendar.get(Calendar.DAY_OF_MONTH)
-        );
-        lDatePickerDialog.show();
-    }*/
 
     /**
      * Display a calendar to implement the on market date or the sold date
@@ -220,8 +180,6 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         if (lIndexArgs == 0) {
             Toast.makeText(mContext, getString(R.string.search_txt_err_select_one_criterion), Toast.LENGTH_SHORT).show();
         } else {
-
-            String lArg = "";
             boolean lIsPhoto = false;
 
             //Initialize query string
@@ -351,31 +309,8 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
                     lIndexArgs, mBinding.fragReSearchSpinType.getSelectedItem().toString()));
         }
 
-        String lIntMin = "";
-        String lIntMax = "";
-        //Area
-        if (!mBinding.fragReSearchEtAreaMin.getText().toString().equals("")) {
-            lIntMin = mBinding.fragReSearchEtAreaMin.getText().toString();
-        }
-        if (!mBinding.fragReSearchEtAreaMax.getText().toString().equals("")) {
-            lIntMax = mBinding.fragReSearchEtAreaMax.getText().toString();
-        }
-        if (!lIntMin.equals("") || !lIntMax.equals("")) {
-            lIndexArgs = manageConditionWith2Arguments(lIndexArgs, lIntMin, lIntMax, "reArea");
-            lIntMin = "";
-            lIntMax = "";
-        }
-
-        //Price
-        if (!mBinding.fragReSearchEtPriceMin.getText().toString().equals("")) {
-            lIntMin = mBinding.fragReSearchEtPriceMin.getText().toString();
-        }
-        if (!mBinding.fragReSearchEtPriceMax.getText().toString().equals("")) {
-            lIntMax = mBinding.fragReSearchEtPriceMax.getText().toString();
-        }
-        if (!lIntMin.equals("") || !lIntMax.equals("")) {
-            lIndexArgs = manageConditionWith2Arguments(lIndexArgs, lIntMin, lIntMax, "rePrice");
-        }
+        //Area and Price
+        lIndexArgs = manageAreaPrice(lIndexArgs);
 
         //Rooms
         lIndexArgs = manageRooms(lIndexArgs);
@@ -386,38 +321,6 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         //Poi
         //Bank Food Health Restaurant School Store Subway Park
         lIndexArgs = managePoi(lIndexArgs);
-/*        if (mBinding.fragReSearchPoiBank.isChecked()) {
-            lIndexArgs++;
-            mDsList.add(addPoiArg(" poiName In ( ? ) ", lIndexArgs, getString(R.string.poi_bank)));
-        }
-        if (mBinding.fragReSearchPoiFood.isChecked()) {
-            lIndexArgs++;
-            mDsList.add(addPoiArg(" poiName In ( ? ) ", lIndexArgs, getString(R.string.poi_food)));
-        }
-        if (mBinding.fragReSearchPoiHealth.isChecked()) {
-            lIndexArgs++;
-            mDsList.add(addPoiArg(" poiName In ( ? ) ", lIndexArgs, getString(R.string.poi_health)));
-        }
-        if (mBinding.fragReSearchPoiRestaurant.isChecked()) {
-            lIndexArgs++;
-            mDsList.add(addPoiArg(" poiName In ( ? ) ", lIndexArgs, getString(R.string.poi_restaurant)));
-        }
-        if (mBinding.fragReSearchPoiSchool.isChecked()) {
-            lIndexArgs++;
-            mDsList.add(addPoiArg(" poiName In ( ? ) ", lIndexArgs, getString(R.string.poi_school)));
-        }
-        if (mBinding.fragReSearchPoiStore.isChecked()) {
-            lIndexArgs++;
-            mDsList.add(addPoiArg(" poiName In ( ? ) ", lIndexArgs, getString(R.string.poi_store)));
-        }
-        if (mBinding.fragReSearchPoiSubway.isChecked()) {
-            lIndexArgs++;
-            mDsList.add(addPoiArg(" poiName In ( ? ) ", lIndexArgs, getString(R.string.poi_subway)));
-        }
-        if (mBinding.fragReSearchPoiPark.isChecked()) {
-            lIndexArgs++;
-            mDsList.add(addPoiArg(" poiName In ( ? ) ", lIndexArgs, getString(R.string.poi_park)));
-        }*/
 
         //Photos
         if (!mBinding.fragReSearchSpinNbPhoto.getSelectedItem().equals("0")) {
@@ -471,6 +374,35 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         }
         if (!lDateFrom.equals("") || !lDateTo.equals("")) {
             pIndexArgs = manageConditionWith2Arguments(pIndexArgs, lDateFrom, lDateTo, "reSaleDate");
+        }
+        return pIndexArgs;
+    }
+
+    private int manageAreaPrice(int pIndexArgs) {
+        String lIntMin = "";
+        String lIntMax = "";
+        //Area
+        if (!mBinding.fragReSearchEtAreaMin.getText().toString().equals("")) {
+            lIntMin = mBinding.fragReSearchEtAreaMin.getText().toString();
+        }
+        if (!mBinding.fragReSearchEtAreaMax.getText().toString().equals("")) {
+            lIntMax = mBinding.fragReSearchEtAreaMax.getText().toString();
+        }
+        if (!lIntMin.equals("") || !lIntMax.equals("")) {
+            pIndexArgs = manageConditionWith2Arguments(pIndexArgs, lIntMin, lIntMax, "reArea");
+            lIntMin = "";
+            lIntMax = "";
+        }
+
+        //Price
+        if (!mBinding.fragReSearchEtPriceMin.getText().toString().equals("")) {
+            lIntMin = mBinding.fragReSearchEtPriceMin.getText().toString();
+        }
+        if (!mBinding.fragReSearchEtPriceMax.getText().toString().equals("")) {
+            lIntMax = mBinding.fragReSearchEtPriceMax.getText().toString();
+        }
+        if (!lIntMin.equals("") || !lIntMax.equals("")) {
+            pIndexArgs = manageConditionWith2Arguments(pIndexArgs, lIntMin, lIntMax, "rePrice");
         }
         return pIndexArgs;
     }
