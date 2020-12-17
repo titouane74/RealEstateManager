@@ -3,15 +3,12 @@ package com.openclassrooms.realestatemanager.view.fragments;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -22,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -40,6 +38,7 @@ import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.PermissionUtils;
+import com.openclassrooms.realestatemanager.utils.Utils;
 import com.openclassrooms.realestatemanager.viewmodel.MapViewModel;
 
 import java.util.List;
@@ -80,6 +79,7 @@ public class MapsFragment extends Fragment implements LocationListener {
             });
         }
     };
+
     public MapsFragment() {    }
 
     @Nullable
@@ -88,6 +88,11 @@ public class MapsFragment extends Fragment implements LocationListener {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View lView = inflater.inflate(R.layout.fragment_re_maps, container, false);
+
+        if (!Utils.isInternetAvailable(mContext)) {
+            Toast.makeText(mContext, getString(R.string.default_txt_no_internet_no_map), Toast.LENGTH_SHORT).show();
+            
+        }
 
         mZoom = Integer.parseInt(getString(R.string.map_zoom));
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
@@ -106,14 +111,6 @@ public class MapsFragment extends Fragment implements LocationListener {
             getCurrentLocation();
         }
 
-/*
-        mContext = lView.getContext();
-        configureViewModel();
-        double lLat = Double.parseDouble(getString(R.string.default_latitude_position));
-        double lLng = Double.parseDouble(getString(R.string.default_longitude_position));
-        LatLng lLatLng = new LatLng(lLat,lLng);
-        setCameraOnCurrentLocation(lLatLng, mZoom);
-*/
         return lView;
     }
 

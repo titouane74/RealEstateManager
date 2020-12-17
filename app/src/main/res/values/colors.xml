@@ -18,6 +18,8 @@
     <color name="colorSecondaryAccentOld">#710329</color>
     <color name="colorOnSecondary">#000000</color>
 
+    <color name="ic_launcher_background">#D2CEFF</color>
+
     <color name="colorError">#B00020</color>
     <color name="colorOnError">#FFFFFF</color>
 
