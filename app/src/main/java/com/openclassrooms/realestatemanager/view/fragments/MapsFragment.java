@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -34,6 +35,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
 import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
+import com.openclassrooms.realestatemanager.databinding.FragmentReMapsBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
@@ -46,8 +49,10 @@ import java.util.List;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 import static com.openclassrooms.realestatemanager.AppRem.sApi;
+import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
+import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
 
-public class MapsFragment extends Fragment implements LocationListener {
+public class MapsFragment extends BaseFragment<FragmentReMapsBinding> implements LocationListener {
 
     private static final int PERMISSION_REQUEST_CODE = 1;
 
@@ -57,6 +62,7 @@ public class MapsFragment extends Fragment implements LocationListener {
     private FusedLocationProviderClient mFusedLocationClient;
     private SupportMapFragment mMapFragment;
     private Context mContext;
+    private NavController mNavController;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -78,7 +84,33 @@ public class MapsFragment extends Fragment implements LocationListener {
 
     public MapsFragment() {    }
 
-    @Nullable
+    @Override
+    protected int getMenuAttached() {return 0; }
+
+    @Override
+    protected void configureDesign(FragmentReMapsBinding pBinding, NavController pNavController, boolean pIsTablet, boolean pIsTabletLandscape) {
+        mContext = getContext();
+        mNavController = pNavController;
+
+        mZoom = Integer.parseInt(getString(R.string.map_zoom));
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
+
+        if (!checkPermissions()) {
+            if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
+                // Display a dialog with rationale.
+                PermissionUtils.RationaleDialog.newInstance(PERMISSION_REQUEST_CODE, true)
+                        .show(requireActivity().getSupportFragmentManager(), "dialog");
+            } else {
+                // Location permission has not been granted yet, request it.
+                requestPermissions(new String[]{ACCESS_FINE_LOCATION},
+                        PERMISSION_REQUEST_CODE);
+            }
+        } else {
+            getCurrentLocation();
+        }
+    }
+
+/*    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
@@ -104,7 +136,7 @@ public class MapsFragment extends Fragment implements LocationListener {
         }
 
         return lView;
-    }
+    }*/
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -157,13 +189,12 @@ public class MapsFragment extends Fragment implements LocationListener {
      * @param pMarker : object : marker
      */
     private void displayRealEstateDetail(Marker pMarker) {
-        Context lContext = requireContext();
+
         RealEstateComplete lReComp = (RealEstateComplete) pMarker.getTag();
         if (lReComp != null) {
-            //TODO
-//            Intent lIntentRestoDetail = new Intent(lContext, RestaurantDetailActivity.class);
-//            lIntentRestoDetail.putExtra(RESTO_PLACE_ID, lRestaurant.getRestoPlaceId());
-//            lContext.startActivity(lIntentRestoDetail);
+            Bundle lBundle = new Bundle();
+            lBundle.putLong(RE_ID_KEY, lReComp.getRealEstate().getReId());
+            mNavController.navigate(R.id.action_reMapsFragment_to_reDetailFragment, lBundle);
         }
     }
 

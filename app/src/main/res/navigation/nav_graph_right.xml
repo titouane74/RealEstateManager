@@ -46,6 +46,10 @@
         android:id="@+id/reMapsFragment"
         android:name="com.openclassrooms.realestatemanager.view.fragments.MapsFragment"
         android:label="@string/default_txt_map"
-        tools:layout="@layout/fragment_re_maps" />
+        tools:layout="@layout/fragment_re_maps" >
+        <action
+            android:id="@+id/action_reMapsFragment_to_reDetailFragment"
+            app:destination="@id/reDetailFragment" />
+    </fragment>
 
 </navigation>

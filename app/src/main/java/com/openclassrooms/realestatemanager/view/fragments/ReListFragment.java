@@ -94,7 +94,7 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> implemen
     public boolean onOptionsItemSelected(MenuItem pItem) {
         if (pItem.getItemId() == R.id.reAddEditFragment) {
             Bundle lBundle = new Bundle();
-            lBundle.putInt(RE_ID_KEY,0);
+            lBundle.putLong(RE_ID_KEY,0);
             lBundle.putBoolean(IS_EDIT_KEY,false);
 //            if (mIsTabletLandscape) {
 //                mNavController.navigate(R.id.reAddEditFragment,lBundle);

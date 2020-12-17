@@ -30,7 +30,7 @@ import java.lang.reflect.Type;
 abstract class BaseFragment<T extends ViewBinding> extends Fragment {
 
     protected T mBinding;
-//    private int mIntNavHost;
+    //    private int mIntNavHost;
     private Context mContext;
 
     protected abstract int getMenuAttached();
@@ -61,7 +61,7 @@ abstract class BaseFragment<T extends ViewBinding> extends Fragment {
         mContext = mBinding.getRoot().getContext();
 
         boolean lIsTablet = mContext.getResources().getBoolean(R.bool.isTablet);
-        boolean lIsTabletLandscape = REMHelper.isTabletLandscape(mContext,lIsTablet);
+        boolean lIsTabletLandscape = REMHelper.isTabletLandscape(mContext, lIsTablet);
 
         //TODO deactivate cause not used for the moment
 //        mIntNavHost = REMHelper.getNavHostId(mContext, lIsTablet);
@@ -75,8 +75,10 @@ abstract class BaseFragment<T extends ViewBinding> extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(getMenuAttached(), menu);
-        super.onCreateOptionsMenu(menu, inflater);
+        if (getMenuAttached() != 0) {
+            inflater.inflate(getMenuAttached(), menu);
+            super.onCreateOptionsMenu(menu, inflater);
+        }
     }
 
 }

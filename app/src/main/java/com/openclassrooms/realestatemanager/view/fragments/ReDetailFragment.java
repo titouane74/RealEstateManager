@@ -106,20 +106,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
         super.onViewCreated(view, savedInstanceState);
 
         if (getArguments() != null) {
-//TODO
-// Deactivation of the safe args with the navigation component causing a build warning
-/*
-            if (!mIsTabletLandscape) {
-                ReDetailFragmentArgs lArgs = ReDetailFragmentArgs.fromBundle(getArguments());
-                mReId = lArgs.getReid();
-                Log.i(TAG, "onViewCreated: " + mReId);
-            } else {
-                mReId = getArguments().getInt(RE_ID_KEY);
-                Log.d(TAG, "onViewCreated: detail mReId: " + mReId);
-            }
-*/
             mReId = getArguments().getLong(RE_ID_KEY);
-            Log.d(TAG, "onViewCreated: detail mReId: " + mReId);
         }
     }
     private void configureViewModel() {
@@ -162,6 +149,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
                     mBinding.fragReDetPoiPark.setChecked(true);
                 }
 /*
+
 //TODO case avec getString non reconnu
                 switch (lPoi.getPoiName()) {
                     case getString(R.string.poi_restaurant):
@@ -192,6 +180,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
                         throw new IllegalStateException("Unexpected value: " + lPoi.getPoiName());
                 }
 */
+
             }
 
             if (pRe.getRealEstate().isReIsSold()) {
@@ -203,7 +192,6 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             }
             mBinding.fragReDetTvDescription.setText(pRe.getRealEstate().getReDescription());
             mBinding.fragReDetTvAgent.setText(pRe.getRealEstate().getReAgentFirstName() + " " + pRe.getRealEstate().getReAgentLastName());
-            //TODO
             mBinding.fragReDetTvPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pRe.getRealEstate().getRePrice()));
             mBinding.fragReDetTvType.setText(pRe.getRealEstate().getReType());
             mBinding.fragReDetTvArea.setText(Integer.toString(pRe.getRealEstate().getReArea()));
@@ -222,7 +210,8 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             mAdapter.setPhotoList(mPhotoList);
             mAdapter.notifyDataSetChanged();
 
-            //displayStaticMap(pRe.getReLocation());
+            //TODO TO REACTIVATE
+            displayStaticMap(pRe.getReLocation());
 
         } else {
             Log.d(TAG, "displayReComplete: pRe is null");
