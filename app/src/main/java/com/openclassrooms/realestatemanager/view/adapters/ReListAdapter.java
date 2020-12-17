@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.view.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.openclassrooms.realestatemanager.databinding.FragmentReListItemBindin
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         LayoutInflater lLayoutInflater = LayoutInflater.from(parent.getContext());
         mBinding = FragmentReListItemBinding.inflate(lLayoutInflater, parent, false);
         mContext = mBinding.getRoot().getContext();
-        mIsTablet =  mContext.getResources().getBoolean(R.bool.isTablet);
+        mIsTablet = mContext.getResources().getBoolean(R.bool.isTablet);
         int lIntNavHost = REMHelper.getNavHostId(mContext, mIsTablet);
         mNavController = Navigation.findNavController((Activity) parent.getContext(), lIntNavHost);
         return new ReListAdapter.ReListHolder(mBinding);
@@ -59,17 +61,17 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
 
         pHolder.itemView.setOnClickListener(v -> {
             Bundle lBundle = new Bundle();
-            lBundle.putLong(RE_ID_KEY,mReList.get(position).getRealEstate().getReId());
+            lBundle.putLong(RE_ID_KEY, mReList.get(position).getRealEstate().getReId());
 
-            if (REMHelper.isTabletLandscape(mContext,mIsTablet)) {
-                mNavController.navigate(R.id.reDetailFragment,lBundle);
+            if (REMHelper.isTabletLandscape(mContext, mIsTablet)) {
+                mNavController.navigate(R.id.reDetailFragment, lBundle);
             } else {
 //TODO
 // Deactivation of the safe args with the navigation component causing a build warning
 //                ReListFragmentDirections.ActionReListFragmentToReDetailFragment lAction =ReListFragmentDirections.actionReListFragmentToReDetailFragment();
 //                lAction.setReid(mReList.get(position).getReId());
 //                mNavController.navigate(lAction);
-                mNavController.navigate(R.id.action_reListFragment_to_reDetailFragment,lBundle);
+                mNavController.navigate(R.id.action_reListFragment_to_reDetailFragment, lBundle);
             }
         });
 
@@ -94,28 +96,32 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         }
 
         public void bindView(RealEstateComplete pReComp) {
-            String lCity = pReComp.getReLocation().getLocCity() != null ? pReComp.getReLocation().getLocCity() : "";
-            mBindingHolder.itemCity.setText(lCity);
-            mBindingHolder.itemPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pReComp.getRealEstate().getRePrice()));
-            mBindingHolder.itemType.setText(pReComp.getRealEstate().getReType());
-            if(pReComp.getRealEstate().isReIsSold()) {
-                mBindingHolder.fragReListItemImgSold.setVisibility(View.VISIBLE);
-            } else {
-                mBindingHolder.fragReListItemImgSold.setVisibility(View.INVISIBLE);
-            }
-            if(!pReComp.getRealEstate().isReIsMandatoryDataComplete()) {
-                mBindingHolder.fragReListItemImgDataMissing.setVisibility(View.VISIBLE);
-            } else {
-                mBindingHolder.fragReListItemImgDataMissing.setVisibility(View.INVISIBLE);
-            }
-            if (pReComp.getRePhotoList().size()>0) {
-                if (pReComp.getRePhotoList().get(0).getPhPath() != null) {
-                    Glide.with(mBindingHolder.fragReListItemImgPhoto.getContext())
-                            .load(pReComp.getRePhotoList().get(0).getPhPath())
-                            .into(mBindingHolder.fragReListItemImgPhoto);
-                }
-            }
+            try {
+                String lCity = pReComp.getReLocation().getLocCity() != null ? pReComp.getReLocation().getLocCity() : "";
 
+                mBindingHolder.itemCity.setText(lCity);
+                mBindingHolder.itemPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pReComp.getRealEstate().getRePrice()));
+                mBindingHolder.itemType.setText(pReComp.getRealEstate().getReType());
+                if (pReComp.getRealEstate().isReIsSold()) {
+                    mBindingHolder.fragReListItemImgSold.setVisibility(View.VISIBLE);
+                } else {
+                    mBindingHolder.fragReListItemImgSold.setVisibility(View.INVISIBLE);
+                }
+                if (!pReComp.getRealEstate().isReIsMandatoryDataComplete()) {
+                    mBindingHolder.fragReListItemImgDataMissing.setVisibility(View.VISIBLE);
+                } else {
+                    mBindingHolder.fragReListItemImgDataMissing.setVisibility(View.INVISIBLE);
+                }
+                if (pReComp.getRePhotoList().size() > 0) {
+                    if (pReComp.getRePhotoList().get(0).getPhPath() != null) {
+                        Glide.with(mBindingHolder.fragReListItemImgPhoto.getContext())
+                                .load(pReComp.getRePhotoList().get(0).getPhPath())
+                                .into(mBindingHolder.fragReListItemImgPhoto);
+                    }
+                }
+            } catch (Exception pE) {
+                pE.printStackTrace();
+            }
         }
     }
 }

@@ -36,9 +36,10 @@ public class ReRepository {
 
     public LiveData<Integer> selectMaxReId() { return mReDao.selectMaxReId();}
 
-    public void insertRealEstate(RealEstate pRealEstate) {
+    public long insertRealEstate(RealEstate pRealEstate) {
         mReIdInserted = mReDao.insertRealEstate(pRealEstate);
         Log.d(TAG, "insertRealEstate: " + mReIdInserted);
+        return mReIdInserted;
     }
 
     public long getReIdInserted() {

@@ -133,6 +133,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             for (Image lImg : images) {
                 mPhotoList.add(new RePhoto(lImg.getName(), lImg.getPath(), lImg.getId()));
             }
+            if(!mIsEdit) mInitialPhotoList = mPhotoList;
             mAdapter.setPhotoList(mPhotoList);
             mAdapter.notifyDataSetChanged();
         }
@@ -291,16 +292,13 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             mIsMandatoryDataComplete = mRealEstate.isReIsMandatoryDataComplete();
             if (!mIsEdit) {
                 mViewModel.insertRealEstate(mRealEstate);
-/*                mReId = mViewModel.getReIdInserted();
-                mReLocation.setLocReId(mReId);
-                mViewModel.insertReLocation(mReLocation);
-                savePoiAndPhotoInformations(mReId);*/
                 mViewModel.selectMaxReId().observe(getViewLifecycleOwner(), pMaxReId -> {
                     mReId = pMaxReId;
                     mReLocation.setLocReId(pMaxReId);
                     mViewModel.insertReLocation(mReLocation);
                     savePoiAndPhotoInformations(pMaxReId);
                 });
+
             } else {
                 mRealEstate.setReId(mReId);
                 mViewModel.updateRealEstate(mRealEstate);
@@ -385,8 +383,10 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
      */
     private void managePhoto(long pReId) {
         int lNbPhoto = REMHelperAddEdit.setPhotoList(mInitialPhotoList, mPhotoList, pReId, mIsEdit, mViewModel);
-        mRealEstate.setReNbPhotos(lNbPhoto);
-        mViewModel.updateRealEstate(mRealEstate);
+        if(mIsEdit) {
+            mRealEstate.setReNbPhotos(lNbPhoto);
+            mViewModel.updateRealEstate(mRealEstate);
+        }
         if(mIsMandatoryDataComplete) {
             sendNotification();
         }

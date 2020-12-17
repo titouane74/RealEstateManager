@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.viewmodel;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.openclassrooms.realestatemanager.model.ReLocation;
@@ -24,7 +25,7 @@ public class ReAddEditViewModel extends ViewModel {
     private RePhotoRepository mRePhRepo;
     private Executor mExecutor;
     private long mReId;
-    private LiveData<Long> mLDReId;
+    //private MutableLiveData<Long> mLDReId = new MutableLiveData<>();
 
     public ReAddEditViewModel(ReRepository pReRepo, RePoiRepository pRePoiRepo,
                               ReLocationRepository pReLocRepo, RePhotoRepository pRePhRepo,Executor pExecutor) {
@@ -38,8 +39,20 @@ public class ReAddEditViewModel extends ViewModel {
     public void insertRealEstate(RealEstate pRealEstate){
         mExecutor.execute(() -> mReRepo.insertRealEstate(pRealEstate));
     }
+/*
+    public void insertRealEstate(RealEstate pRealEstate){
+        mExecutor.execute(() -> {
+            mReId = mReRepo.insertRealEstate(pRealEstate);
+            mLDReId.setValue(mReId);
+        });
+    }
+*/
 
-    public long getReIdInserted() { return mReRepo.getReIdInserted();}
+/*
+    public MutableLiveData<Long> getReIdInserted() {
+        return mLDReId;
+    }
+*/
 
     public void updateRealEstate(RealEstate pRealEstate){
         mExecutor.execute(() -> mReRepo.updateRealEstate(pRealEstate));
