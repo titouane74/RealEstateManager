@@ -148,7 +148,7 @@ public class REMHelper {
      */
     public static int convertSpinnerValueToInt(String pValue) {
         if (pValue.indexOf("+") > 0) {
-            return Integer.parseInt(pValue.substring(0, 1));
+            return Integer.parseInt(pValue.substring(0, pValue.length()-2));
         } else {
             return Integer.parseInt(pValue);
         }

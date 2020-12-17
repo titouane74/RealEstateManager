@@ -25,6 +25,7 @@
     <string name="add_edit_txt_err_agent_not_valid">Agent information invalid</string>
     <string name="add_edit_txt_err_date_sold_empty">Sold date can be empty</string>
     <string name="search_txt_err_select_one_criterion">Select at least one criterion</string>
+    <string name="search_txt_err_no_data_found">No real estate found</string>
 
 
     <!-- REGEX PATTERN -->
