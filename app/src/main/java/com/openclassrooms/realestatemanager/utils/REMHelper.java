@@ -2,26 +2,22 @@ package com.openclassrooms.realestatemanager.utils;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.location.Location;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.Nullable;
+import androidx.core.os.ConfigurationCompat;
+import androidx.core.os.LocaleListCompat;
 
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
-import com.openclassrooms.realestatemanager.model.RePhoto;
-import com.openclassrooms.realestatemanager.model.RePoi;
-import com.openclassrooms.realestatemanager.model.RealEstateComplete;
-import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by Florence LE BOURNOT on 23/11/2020
@@ -67,9 +63,44 @@ public class REMHelper {
      * @return : string : value formatted with currency
      */
     public static String formatNumberWithCommaAndCurrency(int pValue) {
-        NumberFormat lNf = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        NumberFormat lNf;
+//        getLocalInfo();
+        Log.d(TAG, "formatNumberWithCommaAndCurrency: avant format : " + pValue);
+
+        if (Locale.getDefault().getLanguage().contains("en")) {
+            lNf = NumberFormat.getCurrencyInstance(Locale.ENGLISH);
+        } else {
+            lNf = NumberFormat.getCurrencyInstance(Locale.FRANCE);
+        }
         lNf.setMaximumFractionDigits(0);
-        return lNf.format(pValue);
+        Log.d(TAG, "formatNumberWithCommaAndCurrency: avec format : " + lNf.format(pValue));
+        String lFormattedValue = lNf.format(pValue);
+
+        String lCur ;
+        if (Locale.getDefault().getLanguage().contains("en")) {
+            lCur = "$";
+        } else {
+            lCur = "€";
+        }
+//        String lCur = Currency.getInstance(Locale.getDefault()).getSymbol();
+        if (lFormattedValue.contains("¤")) {
+            lFormattedValue = lFormattedValue.replace("¤",lCur);
+        }
+
+        return lFormattedValue;
+    }
+
+    public static void getLocalInfo() {
+        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getLanguage());
+        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getISO3Language());
+        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getCountry());
+        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getISO3Country());
+        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getDisplayCountry());
+        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getDisplayName());
+        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().toString());
+        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getDisplayLanguage());
+//API 21 mini
+//        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().toLanguageTag());
     }
 
     /**
@@ -110,9 +141,10 @@ public class REMHelper {
 
     /**
      * Get the position of the value in the spinner
-     * @param pContext : context
+     *
+     * @param pContext  : context
      * @param pResource : int : spinner where is the information
-     * @param pValue : string : value to find position
+     * @param pValue    : string : value to find position
      * @return : int : return the position of the value
      */
     public static int getPositionInSpinner(Context pContext, int pResource, String pValue) {
@@ -121,6 +153,7 @@ public class REMHelper {
 
     /**
      * Convert for the display the room value 5 into a string equals to the spinner "5 +"
+     *
      * @param pValue : int : value to convert into a spinner string with sign
      * @return : string : return the room with a sign
      */
@@ -134,9 +167,10 @@ public class REMHelper {
 
     /**
      * Get the position of the value in the spinner room
-     * @param pContext : context
+     *
+     * @param pContext  : context
      * @param pResource : int : spinner where is the information
-     * @param pRoom : int : value to find position
+     * @param pRoom     : int : value to find position
      * @return : int : position of the value in the spinner
      */
     public static int getPositionInRoomSpinner(Context pContext, int pResource, int pRoom) {
@@ -145,12 +179,13 @@ public class REMHelper {
 
     /**
      * Convert the string spinner value "5 +" into int
+     *
      * @param pValue : string : value to convert
      * @return : int : return the value without the sign
      */
     public static int convertSpinnerValueToInt(String pValue) {
         if (pValue.indexOf("+") > 0) {
-            return Integer.parseInt(pValue.substring(0, pValue.length()-2));
+            return Integer.parseInt(pValue.substring(0, pValue.length() - 2));
         } else {
             return Integer.parseInt(pValue);
         }
@@ -158,6 +193,7 @@ public class REMHelper {
 
     /**
      * Convert for the search the number of photo value 10 into a string equals to the spinner "10 +"
+     *
      * @param pValue : int : value to convert into a spinner string with sign
      * @return : string : return the room with a sign
      */
@@ -171,10 +207,12 @@ public class REMHelper {
 
     /**
      * Convert a string into a date
+     *
      * @param pDate : string : date to convert
      * @return : date : date converted
      */
-    public static @Nullable Date convertStringToDate(String pDate) {
+    public static @Nullable
+    Date convertStringToDate(String pDate) {
         SimpleDateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             return lDateFormat.parse(pDate);
@@ -186,10 +224,12 @@ public class REMHelper {
 
     /**
      * Convert a date into a string
+     *
      * @param pDate : date : date to convert
      * @return : string : date converted
      */
-    public static @Nullable String convertDateToString(Date pDate) {
+    public static @Nullable
+    String convertDateToString(Date pDate) {
         SimpleDateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         if (pDate != null) {
             return lDateFormat.format(pDate);
@@ -201,7 +241,8 @@ public class REMHelper {
 
     /**
      * Convert a latitude and a longitude into a location
-     * @param pLat : double : latitude
+     *
+     * @param pLat  : double : latitude
      * @param pLng: double : longitude
      * @return : object : location
      */

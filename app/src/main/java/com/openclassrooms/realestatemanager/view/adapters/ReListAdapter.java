@@ -100,6 +100,8 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
                 String lCity = pReComp.getReLocation().getLocCity() != null ? pReComp.getReLocation().getLocCity() : "";
 
                 mBindingHolder.itemCity.setText(lCity);
+                //TODO
+                Log.d(TAG, "bindView: adapter list : " + pReComp.getRealEstate().getRePrice());
                 mBindingHolder.itemPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pReComp.getRealEstate().getRePrice()));
                 mBindingHolder.itemType.setText(pReComp.getRealEstate().getReType());
                 if (pReComp.getRealEstate().isReIsSold()) {

@@ -203,6 +203,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             }
             mBinding.fragReDetTvDescription.setText(pRe.getRealEstate().getReDescription());
             mBinding.fragReDetTvAgent.setText(pRe.getRealEstate().getReAgentFirstName() + " " + pRe.getRealEstate().getReAgentLastName());
+            //TODO
             mBinding.fragReDetTvPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pRe.getRealEstate().getRePrice()));
             mBinding.fragReDetTvType.setText(pRe.getRealEstate().getReType());
             mBinding.fragReDetTvArea.setText(Integer.toString(pRe.getRealEstate().getReArea()));

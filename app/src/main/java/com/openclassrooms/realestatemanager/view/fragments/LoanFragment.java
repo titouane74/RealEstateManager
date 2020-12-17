@@ -76,6 +76,7 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
                 lContribution = Integer.parseInt(mContribution);
             }
             lPayment.setMpContribution(lContribution);
+            //TODO
             String lPay = REMHelper.formatNumberWithCommaAndCurrency(lPayment.calculateMonthlyPayment());
 
             mBinding.fragLoanTvMonthlyPaymentResult.setText(lPay);

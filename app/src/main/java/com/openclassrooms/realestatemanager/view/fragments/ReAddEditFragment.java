@@ -188,14 +188,14 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
         if (mStringDateMarket != null) {
             mDateMarket = REMHelper.convertStringToDate(mStringDateMarket);
-        } else if (mBinding.fragReAddEditEtMarketDate.getText() != null) {
+        } else if ((mBinding.fragReAddEditEtMarketDate.getText() != null) && (!mBinding.fragReAddEditEtMarketDate.getText().toString().equals(""))) {
             mDateMarket = REMHelper.convertStringToDate(mBinding.fragReAddEditEtMarketDate.getText().toString());
         }
 
         boolean lIsSold = mBinding.fragReAddEditCbSold.isChecked();
         if (mStringDateSold != null) {
             mDateSold = REMHelper.convertStringToDate(mStringDateSold);
-        } else if (mBinding.fragReAddEditEtSoldDate.getText() != null) {
+        } else if ((mBinding.fragReAddEditEtSoldDate.getText() != null) && (!mBinding.fragReAddEditEtSoldDate.getText().toString().equals(""))) {
             mDateSold = REMHelper.convertStringToDate(mBinding.fragReAddEditEtSoldDate.getText().toString());
         }
         if (mDateSold != null && !lIsSold) {
@@ -213,7 +213,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
                 || !lDescription.equals("") || !lType.equals("")) {
             mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
                     lAgentFirstName, lAgentLastName, mDateSold, mDateMarket, mIsMandatoryDataComplete, mInitialPhotoList.size());
-            Log.d(TAG, "manageRealEstate: nbphoto : " + mInitialPhotoList.size());
             mIsReEmpty = false;
 
             if (manageLocation()) {
