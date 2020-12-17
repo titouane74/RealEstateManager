@@ -66,11 +66,6 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
             if (REMHelper.isTabletLandscape(mContext, mIsTablet)) {
                 mNavController.navigate(R.id.reDetailFragment, lBundle);
             } else {
-//TODO
-// Deactivation of the safe args with the navigation component causing a build warning
-//                ReListFragmentDirections.ActionReListFragmentToReDetailFragment lAction =ReListFragmentDirections.actionReListFragmentToReDetailFragment();
-//                lAction.setReid(mReList.get(position).getReId());
-//                mNavController.navigate(lAction);
                 mNavController.navigate(R.id.action_reListFragment_to_reDetailFragment, lBundle);
             }
         });
@@ -100,8 +95,6 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
                 String lCity = pReComp.getReLocation().getLocCity() != null ? pReComp.getReLocation().getLocCity() : "";
 
                 mBindingHolder.itemCity.setText(lCity);
-                //TODO
-                Log.d(TAG, "bindView: adapter list : " + pReComp.getRealEstate().getRePrice());
                 mBindingHolder.itemPrice.setText(REMHelper.formatNumberWithCommaAndCurrency(pReComp.getRealEstate().getRePrice()));
                 mBindingHolder.itemType.setText(pReComp.getRealEstate().getReType());
                 if (pReComp.getRealEstate().isReIsSold()) {
