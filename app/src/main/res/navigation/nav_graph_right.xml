@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_reDetailFragment_to_reSearchFragment"
             app:destination="@id/reSearchFragment" />
+        <action
+            android:id="@+id/action_reDetailFragment_to_reMapsFragment"
+            app:destination="@id/reMapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loanFragment"
@@ -39,5 +42,10 @@
         android:name="com.openclassrooms.realestatemanager.view.fragments.ReSearchFragment"
         android:label="@string/default_txt_search"
         tools:layout="@layout/fragment_re_search" />
+    <fragment
+        android:id="@+id/reMapsFragment"
+        android:name="com.openclassrooms.realestatemanager.view.fragments.MapsFragment"
+        android:label="@string/default_txt_map"
+        tools:layout="@layout/fragment_re_maps" />
 
 </navigation>

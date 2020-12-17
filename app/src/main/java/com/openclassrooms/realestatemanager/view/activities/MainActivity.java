@@ -12,21 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding;
-import com.openclassrooms.realestatemanager.databinding.FragmentReListBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
-import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.service.REMApi;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.fragments.ReListFragment;
-import com.openclassrooms.realestatemanager.view.fragments.ReSearchFragment;
 
 import java.util.List;
 
@@ -129,6 +124,8 @@ import java.util.List;
         } else if (pItem.getItemId() == R.id.menu_clear_search) {
             sApi.setSearchResult(null);
             mNavController.navigate(R.id.reListFragment);
+        } else if (pItem.getItemId() == R.id.re_map) {
+            mNavController.navigate(R.id.action_reListFragment_to_mapsFragment);
         } else {
             return super.onOptionsItemSelected(pItem);
         }

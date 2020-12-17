@@ -20,6 +20,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="mapsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-1053" />
+                            <option name="y" value="-801" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="reAddEditFragment">
                     <value>
                       <LayoutPositions>
@@ -67,13 +79,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1034" />
-                            <option name="y" value="-188" />
+                            <option name="x" value="-1257" />
+                            <option name="y" value="-109" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_reListFragment_to_loanFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_reListFragment_to_mapsFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -134,8 +151,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="12" />
+                            <option name="x" value="507" />
+                            <option name="y" value="37" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -164,12 +181,39 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_reDetailFragment_to_loanFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_reDetailFragment_to_mapsFragment2">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_reDetailFragment_to_reAddEditFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_reDetailFragment_to_reSearchFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="reMapsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="110" />
+                            <option name="y" value="-49" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

@@ -348,7 +348,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/D:/ProgramFiles/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/clear/baseline_clear_24.xml" />
+                                      <entry key="url" value="jar:file:/D:/ProgramFiles/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/map/baseline_map_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -359,7 +359,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_clear_search" />
+                            <entry key="outputName" value="ic_map" />
                             <entry key="sourceFile" value="D:\0Parcours\Parcours\Projet 9\icons\images\ic_real_estate.svg" />
                           </map>
                         </option>

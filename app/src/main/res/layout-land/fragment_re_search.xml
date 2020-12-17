@@ -18,6 +18,25 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="@dimen/re_search_center_gl" />
+        <ImageView
+            android:id="@+id/frag_re_search_img_agent"
+            style="@style/ReTheme.ImgView"
+            android:contentDescription="@string/default_img_description"
+            app:layout_constraintBottom_toBottomOf="@id/frag_re_search_et_agent_last_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/frag_re_search_et_agent_last_name"
+            app:srcCompat="@drawable/ic_agent" />
+
+        <EditText
+            android:id="@+id/frag_re_search_et_agent_last_name"
+            style="@style/ReTheme.EditTxt"
+            android:hint="@string/txt_agent_last_name"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/frag_re_search_img_agent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <!-- STATUS -->
         <ImageView
             android:id="@+id/frag_re_search_img_status"
@@ -33,7 +52,17 @@
             style="@style/ReTheme.TxtView"
             android:text="@string/txt_status"
             app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_status"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/frag_re_search_et_agent_last_name" />
+
+        <CheckBox
+            android:id="@+id/frag_re_search_cb_incomplete"
+            style="@style/ReTheme.CheckBox.Sold"
+            android:layout_width="@dimen/app_zero_dp"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_data_incomplete"
+            app:layout_constraintBottom_toBottomOf="@id/frag_re_search_tv_txt_status"
+            app:layout_constraintStart_toEndOf="@id/frag_re_search_tv_txt_status"
+            app:layout_constraintTop_toTopOf="@id/frag_re_search_tv_txt_status" />
 
         <CheckBox
             android:id="@+id/frag_re_search_cb_sold"
@@ -50,13 +79,13 @@
             android:id="@+id/frag_re_search_img_market_date"
             style="@style/ReTheme.ImgView"
             android:contentDescription="@string/default_img_description"
-            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_et_market_date"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_et_market_date_from"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/frag_re_search_et_market_date"
+            app:layout_constraintTop_toTopOf="@+id/frag_re_search_et_market_date_from"
             app:srcCompat="@drawable/ic_calendar" />
 
         <EditText
-            android:id="@+id/frag_re_search_et_market_date"
+            android:id="@+id/frag_re_search_et_market_date_from"
             style="@style/ReTheme.EditTxt.Search"
             android:focusable="false"
             android:hint="@string/txt_on_market_date"
@@ -65,18 +94,28 @@
             app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_market_date"
             app:layout_constraintTop_toBottomOf="@+id/frag_re_search_tv_txt_status" />
 
+        <EditText
+            android:id="@+id/frag_re_search_et_market_date_to"
+            style="@style/ReTheme.EditTxt.Search"
+            android:focusable="false"
+            android:hint="@string/txt_on_market_date_to"
+            android:importantForAutofill="no"
+            android:inputType="date"
+            app:layout_constraintStart_toEndOf="@id/frag_re_search_img_market_date"
+            app:layout_constraintTop_toBottomOf="@id/frag_re_search_et_market_date_from" />
+
         <!-- SOLD ON DATE >= -->
         <ImageView
             android:id="@+id/frag_re_search_img_sold_date"
             style="@style/ReTheme.ImgView"
             android:contentDescription="@string/default_img_description"
-            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_et_sold_date"
+            app:layout_constraintBottom_toBottomOf="@+id/frag_re_search_et_sold_date_from"
             app:layout_constraintStart_toStartOf="@id/center_guideline"
-            app:layout_constraintTop_toTopOf="@+id/frag_re_search_et_sold_date"
+            app:layout_constraintTop_toTopOf="@+id/frag_re_search_et_sold_date_from"
             app:srcCompat="@drawable/ic_calendar" />
 
         <EditText
-            android:id="@+id/frag_re_search_et_sold_date"
+            android:id="@+id/frag_re_search_et_sold_date_from"
             style="@style/ReTheme.EditTxt.Search"
             android:focusable="false"
             android:hint="@string/txt_sold_date"
@@ -84,6 +123,17 @@
             android:inputType="date"
             app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_sold_date"
             app:layout_constraintTop_toBottomOf="@id/frag_re_search_tv_txt_status" />
+
+        <EditText
+            android:id="@+id/frag_re_search_et_sold_date_to"
+            style="@style/ReTheme.EditTxt.Search"
+            android:focusable="false"
+            android:hint="@string/txt_sold_date_to"
+            android:importantForAutofill="no"
+            android:inputType="date"
+            app:layout_constraintStart_toEndOf="@id/frag_re_search_img_sold_date"
+            app:layout_constraintTop_toBottomOf="@id/frag_re_search_et_sold_date_from" />
+
         <!-- TYPE : SPINNER -->
         <ImageView
             android:id="@+id/frag_re_search_img_type"
@@ -102,7 +152,7 @@
             android:prompt="@string/txt_type"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/frag_re_search_img_type"
-            app:layout_constraintTop_toBottomOf="@id/frag_re_search_et_sold_date" />
+            app:layout_constraintTop_toBottomOf="@id/frag_re_search_et_sold_date_to" />
 
         <!-- AREA : MIN - MAX-->
         <ImageView

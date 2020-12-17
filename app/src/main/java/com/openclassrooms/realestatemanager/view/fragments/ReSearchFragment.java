@@ -556,7 +556,9 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
                 Toast.makeText(mContext, getString(R.string.search_txt_err_no_data_found), Toast.LENGTH_SHORT).show();
             } else {
                 sApi.setSearchResult(pReCompList);
-                mNavController.navigate(R.id.action_reSearchFragment_to_reListFragment);
+                if(!mIsTabletLandscape) {
+                    mNavController.navigate(R.id.action_reSearchFragment_to_reListFragment);
+                }
             }
 //            mCallback = (OnSearchResult) mContext;
 // mCallbach sans onAttach => error null object reference

@@ -52,7 +52,11 @@ public interface ReDao {
     @Query("SELECT * FROM realestate")
     LiveData<List<RealEstateComplete>> selectAllReComplete();
 
+    @Transaction
+    @Query("SELECT * FROM realestate WHERE reIsMandatoryDataComplete = 1")
+    LiveData<List<RealEstateComplete>> selectAllReCompleteMap();
+
+
     @RawQuery(observedEntities = RealEstateComplete.class)
-    //LiveData<List<RealEstateComplete>> selectSearch(String pQuery);
     LiveData<List<RealEstateComplete>> selectSearch(SupportSQLiteQuery pQuery);
 }

@@ -9,6 +9,7 @@ import com.openclassrooms.realestatemanager.repository.ReLocationRepository;
 import com.openclassrooms.realestatemanager.repository.RePhotoRepository;
 import com.openclassrooms.realestatemanager.repository.RePoiRepository;
 import com.openclassrooms.realestatemanager.repository.ReRepository;
+import com.openclassrooms.realestatemanager.viewmodel.MapViewModel;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
 import com.openclassrooms.realestatemanager.viewmodel.ReDetailViewModel;
 import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
@@ -52,6 +53,9 @@ public class ReViewModelFactory implements ViewModelProvider.Factory {
         }
         if (modelClass.isAssignableFrom(ReSearchViewModel.class)) {
             return (T) new ReSearchViewModel(mReRepo, mRePoiRepo, mReLocRepo, mRePhoRepo, mExecutor);
+        }
+        if (modelClass.isAssignableFrom(MapViewModel.class)) {
+            return (T) new MapViewModel(mReRepo, mExecutor);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

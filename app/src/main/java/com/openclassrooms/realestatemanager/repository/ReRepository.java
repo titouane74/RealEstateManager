@@ -55,6 +55,8 @@ public class ReRepository {
 
     public LiveData<List<RealEstateComplete>> selectAllReComplete() { return mReDao.selectAllReComplete();}
 
+    public LiveData<List<RealEstateComplete>> selectAllReCompleteMap() { return mReDao.selectAllReCompleteMap();}
+
     public LiveData<List<RealEstateComplete>> selectSearch(SimpleSQLiteQuery pQuery) {
 //        Log.d(TAG, "selectSearch: " + pQuery);
         mLDSearch = mReDao.selectSearch(pQuery);

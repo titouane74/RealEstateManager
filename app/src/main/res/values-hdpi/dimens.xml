@@ -57,7 +57,7 @@
     <dimen name="re_add_edit_photo_margin_end">24dp</dimen>
     <dimen name="re_add_edit_icon_size">24dp</dimen>
     <dimen name="re_add_edit_photo_icon_size">32dp</dimen>
-    <dimen name="re_add_edit_height_percent">0.43</dimen>
+    <dimen name="re_add_edit_height_percent">0.52</dimen>
     <dimen name="re_add_edit_width_percent_poi">0.28</dimen>
     <dimen name="re_add_edit_width_percent_information">0.37</dimen>
     <dimen name="re_add_edit_width_percent_location">0.30</dimen>

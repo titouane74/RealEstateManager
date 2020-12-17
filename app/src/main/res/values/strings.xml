@@ -12,6 +12,8 @@
     <string name="default_btn_ok">OK</string>
     <string name="default_txt_search">Search</string>
     <string name="default_txt_add">Add</string>
+    <string name="default_txt_clear">Clear search</string>
+    <string name="default_txt_map">Map</string>
     <string name="default_txt_edit">Edit</string>
     <string name="default_txt_save">Save</string>
     <string name="default_txt_confirm">Confirm</string>
@@ -123,4 +125,9 @@
     <string name="static_map_scale">2</string>
     <string name="static_map_zoom">14</string>
     <string name="static_map_txt_markers_param">size:mid|color:blue|label:RE|</string>
+
+    <!-- MAPS -->
+    <string name="map_zoom">16</string>
+    <string name="default_latitude_position">48.8534</string>
+    <string name="default_longitude_position">2.3488</string>
 </resources>
