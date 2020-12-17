@@ -58,18 +58,7 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-/*            LatLng sydney = new LatLng(-34, 151);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
-            LatLng paris = new LatLng(-34, 151);
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(paris));
             mMap = googleMap;
-
-/*            if (checkPermissions()) {
-                mMap.setMyLocationEnabled(true);
-            }*/
-
-//            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.style_json));
 
             mMap.setOnMarkerClickListener(pMarker -> {
                 displayRealEstateDetail(pMarker);
@@ -87,7 +76,6 @@ public class MapsFragment extends Fragment {
         View lView = inflater.inflate(R.layout.fragment_re_maps, container, false);
 
         mZoom = Integer.parseInt(getString(R.string.map_zoom));
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
         mContext = lView.getContext();
         configureViewModel();
         double lLat = Double.parseDouble(getString(R.string.default_latitude_position));
@@ -112,12 +100,7 @@ public class MapsFragment extends Fragment {
         MapViewModel lMapViewModel = new ViewModelProvider(requireActivity(),lFactory).get(MapViewModel.class);
 
         lMapViewModel.selectAllReCompleteMap().observe(getViewLifecycleOwner(),
-                new Observer<List<RealEstateComplete>>() {
-                    @Override
-                    public void onChanged(List<RealEstateComplete> pReCompList) {
-                        MapsFragment.this.setMapMarkers(pReCompList);
-                    }
-                });
+                pReCompList -> MapsFragment.this.setMapMarkers(pReCompList));
     }
 
     /**
@@ -171,7 +154,7 @@ public class MapsFragment extends Fragment {
         try {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
         } catch (Exception pE) {
-            Log.e(TAG, "setCameraOnCurrentLocation: ");
+            Log.e(TAG, "setCameraOnCurrentLocation: " + pE.getMessage());
         }
     }
 }
