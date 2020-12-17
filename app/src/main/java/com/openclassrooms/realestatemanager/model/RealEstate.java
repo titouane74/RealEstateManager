@@ -34,12 +34,13 @@ public class RealEstate {
     @Nullable
     private Date reOnMarketDate;
     private boolean reIsMandatoryDataComplete;
+    private int reNbPhotos;
 
     public RealEstate() {
     }
 
     public RealEstate(String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms, int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName, String pReAgentLastName,
-                      @Nullable Date pReSaleDate, @Nullable Date pReOnMarketDate, boolean pReIsMandatoryDataComplete) {
+                      @Nullable Date pReSaleDate, @Nullable Date pReOnMarketDate, boolean pReIsMandatoryDataComplete, int pReNbPhotos) {
         reType = pReType;
         rePrice = pRePrice;
         reArea = pReArea;
@@ -53,12 +54,13 @@ public class RealEstate {
         reSaleDate = pReSaleDate;
         reOnMarketDate = pReOnMarketDate;
         reIsMandatoryDataComplete = pReIsMandatoryDataComplete;
+        reNbPhotos = pReNbPhotos;
     }
 
     public RealEstate(long pReId, String pReType, int pRePrice, int pReArea, int pReNbRooms, int pReNbBedrooms,
                       int pReNbBathrooms, String pReDescription, boolean pReIsSold, String pReAgentFirstName,
                       String pReAgentLastName, @Nullable Date pReSaleDate, @Nullable Date pReOnMarketDate,
-                      boolean pReIsMandatoryDataComplete) {
+                      boolean pReIsMandatoryDataComplete, int pReNbPhotos) {
         reId = pReId;
         reType = pReType;
         rePrice = pRePrice;
@@ -73,6 +75,7 @@ public class RealEstate {
         reSaleDate = pReSaleDate;
         reOnMarketDate = pReOnMarketDate;
         reIsMandatoryDataComplete = pReIsMandatoryDataComplete;
+        reNbPhotos = pReNbPhotos;
     }
 
     public long getReId() {
@@ -187,6 +190,14 @@ public class RealEstate {
         reIsMandatoryDataComplete = pReIsMandatoryDataComplete;
     }
 
+    public int getReNbPhotos() {
+        return reNbPhotos;
+    }
+
+    public void setReNbPhotos(int pReNbPhotos) {
+        reNbPhotos = pReNbPhotos;
+    }
+
     @Override
     public String toString() {
         return "RealEstate{" +
@@ -221,6 +232,7 @@ public class RealEstate {
         if (pValues.containsKey("reSaleDate")) lRe.setReSaleDate(DateConverter.toDate(pValues.getAsLong("reSaleDate")));
         if (pValues.containsKey("reOnMarketDate")) lRe.setReOnMarketDate(DateConverter.toDate(pValues.getAsLong("reOnMarketDate")));
         if (pValues.containsKey("reIsMandatoryDataComplete")) lRe.setReIsMandatoryDataComplete(pValues.getAsBoolean("reIsMandatoryDataComplete"));
+        if (pValues.containsKey("reNbPhotos")) lRe.setReNbPhotos(pValues.getAsInteger("reNbPhotos"));
         return lRe;
     }
 }

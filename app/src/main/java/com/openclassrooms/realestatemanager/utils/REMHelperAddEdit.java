@@ -81,15 +81,17 @@ public class REMHelperAddEdit {
     }
 
 
-    public static void setPhotoList(List<RePhoto> pReComp, List<RePhoto> pPhotoList, long pReId,
+    public static int setPhotoList(List<RePhoto> pReComp, List<RePhoto> pPhotoList, long pReId,
                                     boolean pIsEdit, ReAddEditViewModel pViewModel) {
         RePhoto lReCompPh;
 
+        int lNbPhoto = pReComp.size();
         if (pIsEdit) {   //update
             //If the photo in database are no longer in the new list => delete
             for (RePhoto lPhoto : pReComp) {
                 if (!isFindInNewPhotoList(pPhotoList, lPhoto)) {
                     pViewModel.deleteRePhoto(lPhoto);
+                    lNbPhoto--;
                 }
             }
         }
@@ -105,12 +107,15 @@ public class REMHelperAddEdit {
                 } else {  // photo is not in the database => insert
                     lPhoto.setPhReId(pReId);
                     pViewModel.insertRePhoto(lPhoto);
+                    lNbPhoto++;
                 }
             } else {  // insert
                 lPhoto.setPhReId(pReId);
                 pViewModel.insertRePhoto(lPhoto);
+                lNbPhoto++;
             }
         }
+        return lNbPhoto;
     }
 
     /**

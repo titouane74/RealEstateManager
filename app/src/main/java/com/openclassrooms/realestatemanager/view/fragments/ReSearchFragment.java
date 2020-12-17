@@ -61,7 +61,6 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     private Date mDateSoldFrom = null;
     private Date mDateMarketTo = null;
     private Date mDateSoldTo = null;
-    private String mCondition;
     private DataSearch mDataSearch = new DataSearch();
     private List<DataSearch> mDsList = new ArrayList<>();
 
@@ -215,68 +214,86 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
 
     private void buildQuery() {
-
 /*
         //Get number of arguments
         int lIndArgs = countNumberOfArguments();
         Log.d(TAG, "buildQuery: lIndArgs : " + lIndArgs);
 */
 
-        String lArg = "";
+        int lIndexArgs = prepareConditions() + 1;
 
-        //Initialize query string
-        String lStrQuery = "";
-        String lStrClauseFrom = "";
-        String lStrClauseWhere = "";
+        if (lIndexArgs == 0) {
+            Toast.makeText(mContext, getString(R.string.search_txt_err_select_one_criterion), Toast.LENGTH_SHORT).show();
+        } else {
 
-        //Input the basic select with basic clause from
-        lStrQuery += "SELECT DISTINCT(reId), reType, rePrice, locCity, reIsMandatoryDataComplete, reIsSold ";
-        lStrClauseFrom += " FROM realestate INNER JOIN location ON realestate.reId = location.locreid ";
+            String lArg = "";
+            boolean lIsPhoto = false;
 
-        //If city or country not empty add table location in ClauseFrom
-//        lStrQuery += " INNER JOIN location ON realestate.reId = location.locreid ";
+            //Initialize query string
+            String lStrQuery = "";
+            String lStrClauseFrom = "";
+            String lStrClauseWhere = "";
+            String lStrCondition = "";
 
-        //If number of photo > 0 add table photo in ClauseFrom
-        if (!mBinding.fragReSearchSpinNbPhoto.getSelectedItem().equals(0)) {
-            lStrClauseFrom += " INNER JOIN photo ON realestate.reId = photo.phreid ";
-        }
+            //Input the basic select with basic clause from
+            lStrQuery += "SELECT DISTINCT(reId), reType, rePrice, locCity, reIsMandatoryDataComplete, reIsSold ";
+            lStrClauseFrom += " FROM realestate INNER JOIN location ON realestate.reId = location.locreid ";
 
-        lStrQuery += lStrClauseFrom;
-
-        //Add conditions to clause Where
-        lStrClauseWhere += " WHERE";
-        mCondition = "";
-
-//        int lIndexArgs = 3;
-        int lIndexArgs = prepareConditions();
-
-        //Initialize list of arguments
-        String[] lArgsList = new String[lIndexArgs];
-
-        //pour chaque DataSearch => ajout condition et argument
-        for (DataSearch lDs : mDsList) {
-            if (mCondition.length()!=0) {
-                mCondition += " AND ";
+            //If number of photo > 0 add table photo in ClauseFrom
+            if (!mBinding.fragReSearchSpinNbPhoto.getSelectedItem().equals("0")) {
+                lStrClauseFrom += " INNER JOIN photo ON realestate.reId = photo.phreid ";
+                lIsPhoto = true;
             }
-            if (lDs.getDsWhereClause().indexOf("poi")>0) {
-                //TODO manage the poi
-                lStrClauseWhere += " realestate.reId IN (SELECT DISTINCT(poireid) FROM poi  WHERE ";
-                lStrClauseWhere += " poiName IN ( ? , ? ))";
-            } else {
-                mCondition += lDs.getDsWhereClause();
-                lArgsList[lDs.getDsArg1Index()] = lDs.getDsArg1();
-                if (lDs.getDsDsArg2() != null) {
-                    mCondition += lDs.getDsWhereClause();
+
+            lStrQuery += lStrClauseFrom;
+
+            //Add conditions to clause Where
+            lStrClauseWhere += " WHERE";
+
+            //Initialize list of arguments
+            String[] lArgsList = new String[lIndexArgs];
+            boolean lIsPoiConditionAdded = false;
+            //pour chaque DataSearch => ajout condition et argument
+            for (DataSearch lDs : mDsList) {
+                if ((lStrCondition.length() != 0) && (lDs.getDsWhereClause().indexOf("AND") == 0)) {
+                    lStrCondition += " AND ";
+                }
+                if (lDs.getDsWhereClause().indexOf("poi") > 0) {
+                    if (!lIsPoiConditionAdded) {
+                        lStrCondition += lDs.getDsWhereClause();
+                        lIsPoiConditionAdded = true;
+                    }
                     lArgsList[lDs.getDsArg1Index()] = lDs.getDsArg1();
+                } else {
+                    lStrCondition += lDs.getDsWhereClause();
+                    lArgsList[lDs.getDsArg1Index()] = lDs.getDsArg1();
+                    if (lDs.getDsArg2() != null) {
+                        lStrCondition += lDs.getDsWhereClause();
+                        lArgsList[lDs.getDsArg2Index()] = lDs.getDsArg2();
+                    }
                 }
             }
+
+//            if (lIsPhoto) {
+//                if (lIndexArgs != 1) {
+                    lStrQuery += lStrClauseWhere;
+//                }
+//            } else {
+//                lStrQuery += lStrClauseWhere;
+//            }
+
+            lStrQuery += lStrCondition;
+            lStrQuery += ";";
+
+/*
+            lStrQuery = "SELECT DISTINCT(reId), reType, rePrice, locCity, reIsMandatoryDataComplete, reIsSold" +
+            " FROM realestate INNER JOIN location ON realestate.reId = location.locreid" +
+                    " INNER JOIN photo ON realestate.reId = photo.phreid" +
+                    " GROUP BY photo.phreid HAVING COUNT(phreid) >= ? ;";
+            lArgsList[0] = "0";
+*/
+            executeQuery(lStrQuery, lArgsList);
         }
-
-        lStrQuery += lStrClauseWhere;
-        lStrQuery += ";";
-
-        executeQuery(lStrQuery, lArgsList);
-
 /*
 
 //        lStrClauseWhere += " reType = ?";
@@ -315,8 +332,8 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 */
     }
 
-    private int  prepareConditions() {
-        int lIndexArgs = 0;
+    private int prepareConditions() {
+        int lIndexArgs = -1;
         String lArg = "";
 
         //Agent last name
@@ -331,7 +348,7 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         if ((mBinding.fragReSearchCbIncomplete != null) &&
                 (mBinding.fragReSearchCbIncomplete.isChecked())) {
             lIndexArgs++;
-            mDsList.add(addBooleanArg(" reIsMandatoryDataComplete = ? ", lIndexArgs));
+            mDsList.add(new DataSearch(" reIsMandatoryDataComplete = ? ", lIndexArgs, "0"));
         }
 
         //DATES
@@ -340,7 +357,7 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         //Type
         if (mBinding.fragReSearchSpinType.getSelectedItem().toString() != getString(R.string.spinners_select)) {
             lIndexArgs++;
-            mDsList.add(new DataSearch(" reType > = ? ",
+            mDsList.add(new DataSearch(" reType LIKE ? ",
                     lIndexArgs, mBinding.fragReSearchSpinType.getSelectedItem().toString()));
         }
 
@@ -413,14 +430,16 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         }*/
 
         //Photos
-        if (mBinding.fragReSearchSpinNbPhoto.getSelectedItem().equals(0)) {
+        if (!mBinding.fragReSearchSpinNbPhoto.getSelectedItem().equals("0")) {
             lIndexArgs++;
             lArg = String.valueOf(REMHelper.convertSpinnerValueToInt(mBinding.fragReSearchSpinNbPhoto.getSelectedItem().toString()));
-            mDsList.add(new DataSearch(" GROUP BY photo.phreid HAVING COUNT(phreid) > = ? ", lIndexArgs, lArg));
+//            mDsList.add(new DataSearch(" GROUP BY photo.phreid HAVING COUNT(phreid) >= ? ", lIndexArgs, lArg));
+            mDsList.add(new DataSearch(" reNbPhotos >= ? ", lIndexArgs, lArg));
         }
 
         return lIndexArgs;
     }
+
     private int manageDates(int pIndexArgs) {
         String lDateFrom = "";
         String lDateTo = "";
@@ -465,26 +484,28 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         }
         return pIndexArgs;
     }
-    private int manageRooms(int pIndexArgs) {
-        String lArg="";
 
-        if (!mBinding.fragReSearchSpinRooms.getSelectedItem().equals(0)) {
+    private int manageRooms(int pIndexArgs) {
+        String lArg = "";
+
+        if (!mBinding.fragReSearchSpinRooms.getSelectedItem().equals("0")) {
             pIndexArgs++;
             lArg = String.valueOf(REMHelper.convertSpinnerValueToInt(mBinding.fragReSearchSpinRooms.getSelectedItem().toString()));
-            mDsList.add(new DataSearch(" reNbRooms > = ? ", pIndexArgs, lArg));
+            mDsList.add(new DataSearch(" reNbRooms >= ? ", pIndexArgs, lArg));
         }
-        if (!mBinding.fragReSearchSpinBedrooms.getSelectedItem().equals(0)) {
+        if (!mBinding.fragReSearchSpinBedrooms.getSelectedItem().equals("0")) {
             pIndexArgs++;
             lArg = String.valueOf(REMHelper.convertSpinnerValueToInt(mBinding.fragReSearchSpinBedrooms.getSelectedItem().toString()));
-            mDsList.add(new DataSearch(" reNbBedRooms > = ? ", pIndexArgs, lArg));
+            mDsList.add(new DataSearch(" reNbBedRooms >= ? ", pIndexArgs, lArg));
         }
-        if (!mBinding.fragReSearchSpinBathrooms.getSelectedItem().equals(0)) {
+        if (!mBinding.fragReSearchSpinBathrooms.getSelectedItem().equals("0")) {
             pIndexArgs++;
             lArg = String.valueOf(REMHelper.convertSpinnerValueToInt(mBinding.fragReSearchSpinBathrooms.getSelectedItem().toString()));
-            mDsList.add(new DataSearch(" reNbBathRooms > = ? ", pIndexArgs, lArg));
+            mDsList.add(new DataSearch(" reNbBathRooms >= ? ", pIndexArgs, lArg));
         }
         return pIndexArgs;
     }
+
     private int manageLocation(int pIndexArgs) {
         if (!mBinding.fragReSearchEtCity.getText().toString().equals("")) {
             pIndexArgs++;
@@ -496,22 +517,20 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         }
         return pIndexArgs;
     }
+
     private int manageConditionWith2Arguments(int pIndexArgs, String pArgMin, String pArgMax, String pField) {
 
         if ((!pArgMin.equals("")) && (pArgMax.equals(""))) {
             pIndexArgs++;
-            mDsList.add(new DataSearch(" " + pField + " >= ? ", pIndexArgs,
-                    String.valueOf(DateConverter.fromDate(REMHelper.convertStringToDate(pArgMin)))));
+            mDsList.add(new DataSearch(" " + pField + " >= ? ", pIndexArgs, pArgMin));
         } else if ((pArgMin.equals("")) && (!pArgMax.equals(""))) {
             pIndexArgs++;
             mDsList.add(new DataSearch(" " + pField + " <= ? ", pIndexArgs, pArgMax));
-        } else if ((pArgMin.equals("")) && (pArgMax.equals(""))) {
+        } else if (!(pArgMin.equals("")) && (!pArgMax.equals(""))) {
             pIndexArgs++;
-            mDsList.add(new DataSearch(" " + pField + " BETWEEN ? ", pIndexArgs,
-                    String.valueOf(DateConverter.fromDate(REMHelper.convertStringToDate(pArgMin)))));
+            mDsList.add(new DataSearch(" " + pField + " BETWEEN ? ", pIndexArgs, pArgMin));
             pIndexArgs++;
-            mDsList.add(new DataSearch(" AND ? ", pIndexArgs,
-                    String.valueOf(DateConverter.fromDate(REMHelper.convertStringToDate(pArgMax)))));
+            mDsList.add(new DataSearch(" AND ? ", pIndexArgs, pArgMax));
         }
 
         return pIndexArgs;
@@ -544,54 +563,54 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     }
 
     private int managePoi(int pIndexArgs) {
-        String lCondition = " poiName IN ( ";
+        String lPoiCondition = " realestate.reId IN (SELECT DISTINCT(poireid) FROM poi  WHERE poiName IN ( ";
         List<RePoi> lPoiList = new ArrayList<>();
 
         if (mBinding.fragReSearchPoiBank.isChecked()) {
             pIndexArgs++;
-            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ","," ? ");
+            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_bank)));
         }
         if (mBinding.fragReSearchPoiFood.isChecked()) {
             pIndexArgs++;
-            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ","," ? ");
+            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_food)));
         }
         if (mBinding.fragReSearchPoiHealth.isChecked()) {
             pIndexArgs++;
-            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ","," ? ");
+            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_health)));
         }
         if (mBinding.fragReSearchPoiRestaurant.isChecked()) {
             pIndexArgs++;
-            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ","," ? ");
+            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_restaurant)));
         }
         if (mBinding.fragReSearchPoiSchool.isChecked()) {
             pIndexArgs++;
-            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ","," ? ");
+            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_school)));
         }
         if (mBinding.fragReSearchPoiStore.isChecked()) {
             pIndexArgs++;
-            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ","," ? ");
+            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_store)));
         }
         if (mBinding.fragReSearchPoiSubway.isChecked()) {
             pIndexArgs++;
-            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ","," ? ");
+            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_subway)));
         }
         if (mBinding.fragReSearchPoiPark.isChecked()) {
             pIndexArgs++;
-            lCondition = REMHelper.addValueAndSeparatorToString(lCondition, ","," ? ");
+            lPoiCondition = REMHelper.addValueAndSeparatorToString(lPoiCondition, ",", " ? ");
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_park)));
         }
 
-        lCondition += " ) ";
+        lPoiCondition += " ) ";
 
         for (RePoi lPoi : lPoiList) {
-            mDsList.add(new DataSearch(lCondition, (int) lPoi.getPoiId(), lPoi.getPoiName()));
+            mDsList.add(new DataSearch(lPoiCondition, (int) lPoi.getPoiId(), lPoi.getPoiName()));
         }
         return pIndexArgs;
     }

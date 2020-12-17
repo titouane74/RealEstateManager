@@ -9,7 +9,7 @@ public class DataSearch {
     private int dsArg1Index;
     private String dsArg1;
     private int dsArg2Index;
-    private String dsDsArg2;
+    private String dsArg2;
 
     public DataSearch() { }
 
@@ -19,12 +19,12 @@ public class DataSearch {
         dsArg1 = pDsArg1;
     }
 
-    public DataSearch(String pDsWhereClause, int pDsArg1Index, String pDsArg1, int pDsArg2Index, String pDsDsArg2) {
+    public DataSearch(String pDsWhereClause, int pDsArg1Index, String pDsArg1, int pDsArg2Index, String pDsArg2) {
         dsWhereClause = pDsWhereClause;
         dsArg1Index = pDsArg1Index;
         dsArg1 = pDsArg1;
         dsArg2Index = pDsArg2Index;
-        dsDsArg2 = pDsDsArg2;
+        dsArg2 = pDsArg2;
     }
 
     public String getDsWhereClause() {
@@ -59,11 +59,11 @@ public class DataSearch {
         dsArg2Index = pDsArg2Index;
     }
 
-    public String getDsDsArg2() {
-        return dsDsArg2;
+    public String getDsArg2() {
+        return dsArg2;
     }
 
-    public void setDsDsArg2(String pDsDsArg2) {
-        dsDsArg2 = pDsDsArg2;
+    public void setDsArg2(String pDsArg2) {
+        dsArg2 = pDsArg2;
     }
 }

@@ -211,7 +211,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         } else if (mDateMarket != null || mDateSold != null || lIsSold || !lAgentFirstName.equals("") || !lAgentLastName.equals("")
                 || !lDescription.equals("") || !lType.equals("")) {
             mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
-                    lAgentFirstName, lAgentLastName, mDateSold, mDateMarket, mIsMandatoryDataComplete);
+                    lAgentFirstName, lAgentLastName, mDateSold, mDateMarket, mIsMandatoryDataComplete, mInitialPhotoList.size());
 
             mIsReEmpty = false;
 
@@ -315,7 +315,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
      */
     private void savePoiAndPhotoInformations(long pReId) {
         managePoi(pReId);
-        managePhoto(pReId);
+        manageAddEditPhoto(pReId);
         if(mIsMandatoryDataComplete) {
             sendNotification();
         }
@@ -334,7 +334,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
 
     /**
      * Manage the information of the poi
-     *
      * @param pReId : long : id of the real estate
      */
     private void managePoi(long pReId) {
@@ -364,23 +363,30 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
     }
 
     /**
-     * Manage the information of the photo
-     *
+     * Manage the add / edit information of the photos
      * @param pReId : long : id of hte real estate
      */
-    private void managePhoto(long pReId) {
+    private void manageAddEditPhoto(long pReId) {
         if (mIsEdit) {
             mViewModel.selectRePhoto(pReId).observe(getViewLifecycleOwner(), pPhotoList -> {
                 mInitialPhotoList = pPhotoList;
-                REMHelperAddEdit.setPhotoList(mInitialPhotoList, mPhotoList, pReId, mIsEdit, mViewModel);
-                navigateToList();
+                managePhoto(pReId);
             });
         } else {
-            REMHelperAddEdit.setPhotoList(mInitialPhotoList, mPhotoList, pReId, mIsEdit, mViewModel);
-            navigateToList();
+            managePhoto(pReId);
         }
     }
 
+    /**
+     * Add, update or delete photo. Update the number of photo in the real estate. return to the list
+     * @param pReId : long : id of the real estate
+     */
+    private void managePhoto(long pReId) {
+        int lNbPhoto = REMHelperAddEdit.setPhotoList(mInitialPhotoList, mPhotoList, pReId, mIsEdit, mViewModel);
+        mRealEstate.setReNbPhotos(lNbPhoto);
+        mViewModel.updateRealEstate(mRealEstate);
+        navigateToList();
+    }
     /**
      * Return to the fragment list when not in tablet landscape mode
      */
