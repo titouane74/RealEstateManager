@@ -1,5 +1,7 @@
 package com.openclassrooms.realestatemanager.service;
 
+import android.location.Location;
+
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 
 import java.util.List;
@@ -13,4 +15,11 @@ public interface REMApi {
 
     List<RealEstateComplete> getSearchResult();
 
+    void saveLocationInSharedPreferences(Location pLocation);
+
+    double getLocationFromSharedPreferences(String pTypeLocation);
+
+    void setLocation(Location pLocation);
+
+    Location getLocation();
 }

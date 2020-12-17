@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.utils;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.location.Location;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ import java.util.regex.Pattern;
 public class REMHelper {
 
     private static final String TAG = "TAG_REMHelper";
+    public static final String TXT_PROVIDER = "fusedLocationProvider";
 
     /**
      * Configure the spinner adapter
@@ -194,6 +196,20 @@ public class REMHelper {
         } else {
             return null;
         }
+    }
+
+
+    /**
+     * Convert a latitude and a longitude into a location
+     * @param pLat : double : latitude
+     * @param pLng: double : longitude
+     * @return : object : location
+     */
+    public static Location setCurrentLocation(Double pLat, Double pLng) {
+        Location lFusedLocationProvider = new Location(TXT_PROVIDER);
+        lFusedLocationProvider.setLatitude(pLat);
+        lFusedLocationProvider.setLongitude(pLng);
+        return lFusedLocationProvider;
     }
 }
 

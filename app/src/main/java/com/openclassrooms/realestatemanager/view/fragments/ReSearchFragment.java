@@ -36,9 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.openclassrooms.realestatemanager.view.activities.MainActivity.sApi;
-import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
-import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
+import static com.openclassrooms.realestatemanager.AppRem.sApi;
 
 public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 

@@ -18,19 +18,19 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding;
-import com.openclassrooms.realestatemanager.di.Injection;
-import com.openclassrooms.realestatemanager.service.REMApi;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.fragments.ReListFragment;
 
 import java.util.List;
+
+import static com.openclassrooms.realestatemanager.AppRem.sApi;
 
 //public class MainActivity extends AppCompatActivity implements ReSearchFragment.OnSearchResult {
     public class MainActivity extends AppCompatActivity  {
 
     public static final String TAG = "TAG_MAIN";
 
-    public static final REMApi sApi = Injection.getREMApiService();
+//    public static final REMApi sApi = Injection.getREMApiService();
 
     private ActivityMainBinding mBinding;
     private View mActView;
