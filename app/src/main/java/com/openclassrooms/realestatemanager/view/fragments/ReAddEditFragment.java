@@ -203,6 +203,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             mBinding.fragReAddEditCbSold.setChecked(true);
         }
 
+        mIsPhotoEmpty = mInitialPhotoList.size() == 0;
+        mIsPoiEmpty = REMHelperAddEdit.isPoiEmpty(mBinding);
+
         if (!lIsValidAgentFirstName || !lIsValidAgentLastName) {
             Toast.makeText(mContext, getString(R.string.add_edit_txt_err_agent_not_valid) + " "
                     + getString(R.string.default_txt_data_not_saved), Toast.LENGTH_SHORT).show();
@@ -210,16 +213,16 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             Toast.makeText(mContext, getString(R.string.add_edit_txt_err_date_sold_empty) + " "
                     + getString(R.string.default_txt_data_not_saved), Toast.LENGTH_SHORT).show();
         } else if (mDateMarket != null || mDateSold != null || lIsSold || !lAgentFirstName.equals("") || !lAgentLastName.equals("")
-                || !lDescription.equals("") || !lType.equals("")) {
+                || !lDescription.equals("") || !lType.equals("") || !mIsPhotoEmpty || !mIsPoiEmpty) {
             mRealEstate = new RealEstate(lType, lPrice, lArea, lNbRooms, lNbBedRooms, lNbBathRooms, lDescription, lIsSold,
                     lAgentFirstName, lAgentLastName, mDateSold, mDateMarket, mIsMandatoryDataComplete, mInitialPhotoList.size());
             mIsReEmpty = false;
 
             if (manageLocation()) {
-                mIsPhotoEmpty = mInitialPhotoList.size() != 0;
-                mIsPoiEmpty = REMHelperAddEdit.isPoiEmpty(mBinding);
                 saveRealEstate();
             }
+        } else {
+            Toast.makeText(mContext, getString(R.string.add_edit_txt_err_no_data), Toast.LENGTH_SHORT).show();
         }
     }
 
