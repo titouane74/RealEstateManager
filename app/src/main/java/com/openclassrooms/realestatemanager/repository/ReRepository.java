@@ -42,13 +42,14 @@ public class ReRepository {
         return mReIdInserted;
     }
 
-    public long getReIdInserted() {
-        Log.d(TAG, "getReIdInserted: "+mReIdInserted);
-        return mReIdInserted;}
-
     public void updateRealEstate(RealEstate pRealEstate) {
         int lInt = mReDao.updateRealEstate(pRealEstate);
-        Log.d(TAG, "updateRealEstate: long retour update : " + lInt);
+        Log.d(TAG, "updateRealEstate: int retour update : " + lInt);
+    }
+
+    public void deleteRealEstate(RealEstate pRealEstate) {
+        int lInt = mReDao.deleteRealEstate(pRealEstate.getReId());
+        Log.d(TAG, "deleteRealEstate: int retour delete : " + lInt);
     }
 
     public LiveData<RealEstateComplete> selectReComplete(long pReId) { return mReDao.selectReComplete(pReId);}

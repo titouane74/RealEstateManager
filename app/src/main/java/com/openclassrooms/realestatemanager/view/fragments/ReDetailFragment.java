@@ -52,6 +52,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     private RealEstate mRE;
     private long mReId;
     private List<RePhoto> mPhotoList;
+    private RealEstateComplete mReComp;
 
     @Override
     protected int getMenuAttached() {
@@ -120,6 +121,7 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
         configureViewModel();
         mViewModel.selectReComplete(mReId).observe(getViewLifecycleOwner(), pRealEstateComplete -> {
             try {
+                mReComp = pRealEstateComplete;
                 displayReComplete(pRealEstateComplete);
             } catch (ParseException pE) {
                 pE.printStackTrace();
@@ -148,38 +150,6 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
                 } else if (lPoi.getPoiName().equals(getString(R.string.poi_park))) {
                     mBinding.fragReDetPoiPark.setChecked(true);
                 }
-/*
-
-//TODO case avec getString non reconnu
-                switch (lPoi.getPoiName()) {
-                    case getString(R.string.poi_restaurant):
-                        mBinding.fragReDetPoiRestaurant.setChecked(true);
-                        break;
-                    case getString(R.string.poi_subway):
-                        mBinding.fragReDetPoiSubway.setChecked(true);
-                        break;
-                    case getString(R.string.poi_school):
-                        mBinding.fragReDetPoiSchool.setChecked(true);
-                        break;
-                    case getString(R.string.poi_health):
-                        mBinding.fragReDetPoiHealth.setChecked(true);
-                        break;
-                    case getString(R.string.poi_food):
-                        mBinding.fragReDetPoiFood.setChecked(true);
-                        break;
-                    case getString(R.string.poi_bank):
-                        mBinding.fragReDetPoiBank.setChecked(true);
-                        break;
-                    case getString(R.string.poi_store):
-                        mBinding.fragReDetPoiStore.setChecked(true);
-                        break;
-                    case getString(R.string.poi_park):
-                        mBinding.fragReDetPoiPark.setChecked(true);
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + lPoi.getPoiName());
-                }
-*/
 
             }
 
@@ -219,24 +189,28 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
     }
 
     private void displayStaticMap(ReLocation pReLoc) {
-        Uri.Builder uriStaticMap
-                = Uri.parse(GOOGLE_STATIC_MAP_URL).buildUpon();
+        try {
+            Uri.Builder uriStaticMap
+                    = Uri.parse(GOOGLE_STATIC_MAP_URL).buildUpon();
 
-        int lIntSize = (int) (getResources().getDimension(R.dimen.re_det_map_size)/getResources().getDisplayMetrics().density);
-        String lSize = lIntSize + "x" + lIntSize;
+            int lIntSize = (int) (getResources().getDimension(R.dimen.re_det_map_size) / getResources().getDisplayMetrics().density);
+            String lSize = lIntSize + "x" + lIntSize;
 
-        uriStaticMap
-                .appendQueryParameter("size",lSize)
-                .appendQueryParameter("scale",getString(R.string.static_map_scale))
-                .appendQueryParameter("zoom",getString(R.string.static_map_zoom))
-                .appendQueryParameter("key", BuildConfig.MAPS_API_KEY);
-        String markers = getString(R.string.static_map_txt_markers_param)
-                + pReLoc.getLocLatitude() + "," + pReLoc.getLocLongitude();
-        uriStaticMap.appendQueryParameter("markers",markers);
+            uriStaticMap
+                    .appendQueryParameter("size", lSize)
+                    .appendQueryParameter("scale", getString(R.string.static_map_scale))
+                    .appendQueryParameter("zoom", getString(R.string.static_map_zoom))
+                    .appendQueryParameter("key", BuildConfig.MAPS_API_KEY);
+            String markers = getString(R.string.static_map_txt_markers_param)
+                    + pReLoc.getLocLatitude() + "," + pReLoc.getLocLongitude();
+            uriStaticMap.appendQueryParameter("markers", markers);
 
-        Glide.with(this)
-                .load(uriStaticMap.build())
-                .apply(RequestOptions.centerCropTransform())
-                .into(mBinding.fragReDetStaticMap);
+            Glide.with(this)
+                    .load(uriStaticMap.build())
+                    .apply(RequestOptions.centerCropTransform())
+                    .into(mBinding.fragReDetStaticMap);
+        } catch (Exception pE) {
+            pE.printStackTrace();
+        }
     }
 }

@@ -7,11 +7,13 @@ import androidx.room.PrimaryKey;
 
 import java.util.Objects;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 /**
  * Created by Florence LE BOURNOT on 08/12/2020
  */
 @Entity(tableName = "photo",
-        foreignKeys = @ForeignKey(entity = RealEstate.class,
+        foreignKeys = @ForeignKey(onDelete = CASCADE, entity = RealEstate.class,
                 parentColumns = "reId",
                 childColumns = "phreid"))
 public class RePhoto {

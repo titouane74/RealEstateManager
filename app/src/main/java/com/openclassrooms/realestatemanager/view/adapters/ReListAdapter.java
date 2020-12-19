@@ -56,7 +56,6 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
     @Override
     public void onBindViewHolder(@NonNull ReListHolder pHolder, int position) {
         pHolder.bindView(mReList.get(position));
-
         pHolder.itemView.setOnClickListener(v -> {
             Bundle lBundle = new Bundle();
             lBundle.putLong(RE_ID_KEY, mReList.get(position).getRealEstate().getReId());

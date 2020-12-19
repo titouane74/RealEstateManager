@@ -5,11 +5,13 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 /**
  * Created by Florence LE BOURNOT on 08/12/2020
  */
 @Entity(tableName = "poi",
-        foreignKeys = @ForeignKey(entity = RealEstate.class,
+        foreignKeys = @ForeignKey(onDelete = CASCADE, entity = RealEstate.class,
                 parentColumns = "reId",
                 childColumns = "poireid"))
 

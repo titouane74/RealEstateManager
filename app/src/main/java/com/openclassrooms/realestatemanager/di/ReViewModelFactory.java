@@ -3,8 +3,6 @@ package com.openclassrooms.realestatemanager.di;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.openclassrooms.realestatemanager.database.dao.RePhotoDao;
 import com.openclassrooms.realestatemanager.repository.ReLocationRepository;
 import com.openclassrooms.realestatemanager.repository.RePhotoRepository;
 import com.openclassrooms.realestatemanager.repository.RePoiRepository;

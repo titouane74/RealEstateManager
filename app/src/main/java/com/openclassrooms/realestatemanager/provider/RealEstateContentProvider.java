@@ -29,8 +29,8 @@ public class RealEstateContentProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         if (getContext() != null) {
-            long lUserId = ContentUris.parseId(uri);
-            final Cursor cursor = ReDatabase.getInstance(getContext()).ReDao().selectRealEstateCursor(lUserId);
+            long lReId = ContentUris.parseId(uri);
+            final Cursor cursor = ReDatabase.getInstance(getContext()).ReDao().selectRealEstateCursor(lReId);
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
             return cursor;
         }
@@ -59,7 +59,12 @@ public class RealEstateContentProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        if (getContext() != null){
+            final int count = ReDatabase.getInstance(getContext()).ReDao().deleteRealEstate(ContentUris.parseId(uri));
+            getContext().getContentResolver().notifyChange(uri, null);
+            return count;
+        }
+        throw new IllegalArgumentException("Failed to delete row into " + uri);
     }
 
     @Override

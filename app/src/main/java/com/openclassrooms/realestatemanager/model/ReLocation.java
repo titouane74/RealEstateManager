@@ -7,11 +7,13 @@ import androidx.room.PrimaryKey;
 
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 /**
  * Created by Florence LE BOURNOT on 08/12/2020
  */
 @Entity(tableName = "location",
-        foreignKeys = @ForeignKey(entity = RealEstate.class,
+        foreignKeys = @ForeignKey(onDelete = CASCADE, entity = RealEstate.class,
                 parentColumns = "reId",
                 childColumns = "locreid"))
 

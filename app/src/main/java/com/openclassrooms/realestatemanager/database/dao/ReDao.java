@@ -29,6 +29,9 @@ public interface ReDao {
     @Query("SELECT * FROM realestate WHERE reid = :pReId")
     Cursor selectRealEstateCursor(long pReId);
 
+    @Query("DELETE FROM realestate WHERE reid = :pReId")
+    int deleteRealEstate(long pReId);
+
     //FOR ROOM
     @Query("SELECT * FROM realestate")
     LiveData<List<RealEstate>> selectAllRealEstates();
@@ -45,8 +48,8 @@ public interface ReDao {
     @Update
     int updateRealEstate(RealEstate pRealEstate);
 
-    @Delete
-    int deleteRealEstate(RealEstate pRealEstate);
+/*    @Delete
+    int deleteRealEstate(RealEstate pRealEstate);*/
 
     @Transaction
     @Query("SELECT * FROM realestate WHERE reid=:pReId")

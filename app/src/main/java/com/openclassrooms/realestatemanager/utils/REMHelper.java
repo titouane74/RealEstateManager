@@ -64,8 +64,6 @@ public class REMHelper {
      */
     public static String formatNumberWithCommaAndCurrency(int pValue) {
         NumberFormat lNf;
-//        getLocalInfo();
-        Log.d(TAG, "formatNumberWithCommaAndCurrency: avant format : " + pValue);
 
         if (Locale.getDefault().getLanguage().contains("en")) {
             lNf = NumberFormat.getCurrencyInstance(Locale.ENGLISH);
@@ -73,7 +71,7 @@ public class REMHelper {
             lNf = NumberFormat.getCurrencyInstance(Locale.FRANCE);
         }
         lNf.setMaximumFractionDigits(0);
-        Log.d(TAG, "formatNumberWithCommaAndCurrency: avec format : " + lNf.format(pValue));
+
         String lFormattedValue = lNf.format(pValue);
 
         String lCur ;
@@ -82,25 +80,11 @@ public class REMHelper {
         } else {
             lCur = "€";
         }
-//        String lCur = Currency.getInstance(Locale.getDefault()).getSymbol();
         if (lFormattedValue.contains("¤")) {
             lFormattedValue = lFormattedValue.replace("¤",lCur);
         }
 
         return lFormattedValue;
-    }
-
-    public static void getLocalInfo() {
-        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getLanguage());
-        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getISO3Language());
-        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getCountry());
-        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getISO3Country());
-        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getDisplayCountry());
-        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getDisplayName());
-        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().toString());
-        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().getDisplayLanguage());
-//API 21 mini
-//        Log.d(TAG, "getLocalInfo: " + Locale.getDefault().toLanguageTag());
     }
 
     /**

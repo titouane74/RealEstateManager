@@ -12,17 +12,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.openclassrooms.realestatemanager.database.LiveDataTestUtil;
 import com.openclassrooms.realestatemanager.database.ReDatabase;
 
-import com.openclassrooms.realestatemanager.model.RealEstateComplete;
-import com.openclassrooms.realestatemanager.repository.ReLocationRepository;
-import com.openclassrooms.realestatemanager.repository.RePhotoRepository;
-import com.openclassrooms.realestatemanager.repository.RePoiRepository;
-import com.openclassrooms.realestatemanager.repository.ReRepository;
 import com.openclassrooms.realestatemanager.utils.DateConverter;
-import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
-
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,14 +23,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Date;
-import java.util.concurrent.Executor;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+
 
 /**
  * Created by Florence LE BOURNOT on 14/12/2020
@@ -51,24 +41,17 @@ public class RealEstateContentProviderTest {
     private ReDatabase mReDatabase;
 
     private ContentResolver mContentResolver;
-    private ReAddEditViewModel mReAddEditViewModel;
-    private ReRepository mReRepo;
-    private RePoiRepository mRePoiRepo;
-    private ReLocationRepository mReLocRepo;
-    private RePhotoRepository mRePhRepo;
-    private Executor mExecutor;
 
     private Context mContext;
 
     // DATA SET FOR TEST
-    private long mReId = 1;
-    private RealEstateComplete mReComp;
+    private long mReId = 100;
 
     @Rule
     public InstantTaskExecutorRule mInstantTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Before
-    public void setUp() throws InterruptedException {
+    public void setUp() {
         mContext = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         mContentResolver =  androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext().getContentResolver();
@@ -78,8 +61,6 @@ public class RealEstateContentProviderTest {
                 .allowMainThreadQueries()
                 .build();
 
-//        mReComp = LiveDataTestUtil.getValue(mReDatabase.ReDao().selectReComplete(1));
-//        mReId = mReComp.getRealEstate().getReId();
     }
     @After
     public void closeDb() {
@@ -115,14 +96,17 @@ public class RealEstateContentProviderTest {
 
     @Test
     public void insertAndGetRealEstate() {
+        // AFTER : Delete the demo real estate to avoid the insert unique constraint error
+        final int reUriDel = mContentResolver.delete(ContentUris.withAppendedId(RealEstateContentProvider.URI_RE, mReId),null,null);
         // BEFORE : Adding demo real estate
-        final Uri userUri = mContentResolver.insert(RealEstateContentProvider.URI_RE, generateRealEstate());
+        final Uri reUri = mContentResolver.insert(RealEstateContentProvider.URI_RE, generateRealEstate());
         // TEST
         final Cursor cursor = mContentResolver.query(ContentUris.withAppendedId(RealEstateContentProvider.URI_RE, mReId), null, null, null, null);
         assertThat(cursor, notNullValue());
         assertThat(cursor.getCount(), is(1));
         assertThat(cursor.moveToFirst(), is(true));
         assertThat(cursor.getString(cursor.getColumnIndexOrThrow("reType")), is("House"));
+
     }
 
 
