@@ -3,7 +3,6 @@ package com.openclassrooms.realestatemanager.view.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.openclassrooms.realestatemanager.databinding.FragmentReListItemBindin
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,11 +110,21 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
                         Glide.with(mBindingHolder.fragReListItemImgPhoto.getContext())
                                 .load(pReComp.getRePhotoList().get(0).getPhPath())
                                 .into(mBindingHolder.fragReListItemImgPhoto);
+                    } else {
+                        displayNoPhoto();
                     }
+                } else {
+                    displayNoPhoto();
                 }
             } catch (Exception pE) {
                 pE.printStackTrace();
             }
+        }
+
+        private void displayNoPhoto() {
+            Glide.with(mBindingHolder.fragReListItemImgPhoto.getContext())
+                    .load(R.drawable.ic_no_photo)
+                    .into(mBindingHolder.fragReListItemImgPhoto);
         }
     }
 }
