@@ -62,7 +62,7 @@ public class ReAddEditViewModel extends ViewModel {
         return mReRepo.selectRealEstate(pReId);
     }
 
-    public LiveData<Integer> selectMaxReId() { return mReRepo.selectMaxReId();}
+    public LiveData<Long> selectMaxReId() { return mReRepo.selectMaxReId();}
 
     public void insertReLocation(ReLocation pReLocation) { mExecutor.execute(() -> mReLocRepo.insertReLocation(pReLocation)); }
 
