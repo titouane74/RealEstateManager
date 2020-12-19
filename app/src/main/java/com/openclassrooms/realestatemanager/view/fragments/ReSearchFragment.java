@@ -4,30 +4,24 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.sqlite.db.SimpleSQLiteQuery;
 
-import com.google.gson.Gson;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReSearchBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.model.DataSearch;
 import com.openclassrooms.realestatemanager.model.RePoi;
-import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.DateConverter;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.viewmodel.ReSearchViewModel;
-
-import org.json.JSONArray;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -39,12 +33,6 @@ import java.util.List;
 import static com.openclassrooms.realestatemanager.AppRem.sApi;
 
 public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
-
-    private OnSearchResult mCallback;
-
-    public interface OnSearchResult {
-        void onSearchResult(List<RealEstateComplete> pReCompList);
-    }
 
     private static final String TAG = "TAG_ReSearchFragment";
     private View mFragView;
@@ -59,7 +47,6 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     private Date mDateSoldFrom = null;
     private Date mDateMarketTo = null;
     private Date mDateSoldTo = null;
-    private DataSearch mDataSearch = new DataSearch();
     private List<DataSearch> mDsList = new ArrayList<>();
 
     private ReSearchViewModel mViewModel;
@@ -76,7 +63,7 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         mContext = getContext();
         mNavController = pNavController;
         mIsTabletLandscape = pIsTabletLandscape;
-//        mCallback = (OnSearchResult) mContext;
+
         configureSpinners();
         configureViewModel();
         mBinding.fragReSearchEtMarketDateFrom.setOnClickListener(v -> {
@@ -105,9 +92,7 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
-        Log.d(TAG, "onOptionsItemSelected: ");
         if (pItem.getItemId() == R.id.menu_action_confirm) {
-            Toast.makeText(getContext(), getString(R.string.default_txt_confirm), Toast.LENGTH_SHORT).show();
             buildQuery();
             return true;
         }
@@ -170,7 +155,6 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         mViewModel = new ViewModelProvider(this, lFactory).get(ReSearchViewModel.class);
     }
 
-
     private void buildQuery() {
 
         int lIndexArgs = prepareConditions() + 1;
@@ -178,8 +162,6 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         if (lIndexArgs == 0) {
             Toast.makeText(mContext, getString(R.string.search_txt_err_select_one_criterion), Toast.LENGTH_SHORT).show();
         } else {
-            boolean lIsPhoto = false;
-
             //Initialize query string
             String lStrQuery = "";
             String lStrFromClause = "";
@@ -193,13 +175,6 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
             if (isPoiSelected()) {
                 lStrFromClause += " LEFT JOIN poi ON realestate.reId = poi.poireid ";
             }
-            //If number of photo > 0 add table photo in ClauseFrom
-/*
-            if (!mBinding.fragReSearchSpinNbPhoto.getSelectedItem().equals("0")) {
-                lStrFromClause += " LEFT JOIN photo ON realestate.reId = photo.phreid ";
-                lIsPhoto = true;
-            }
-*/
 
             lStrQuery += lStrFromClause;
 
@@ -209,9 +184,7 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
             //Initialize list of arguments
             String[] lArgsList = new String[lIndexArgs];
             boolean lIsPoiConditionAdded = false;
-            //pour chaque DataSearch => ajout condition et argument
             for (DataSearch lDs : mDsList) {
-//                if ((lStrCondition.length() != 0) && (!lDs.getDsWhereClause().contains("AND"))) {
                 if (lStrCondition.length() != 0) {     //a condition has been added
                     if (!lDs.getDsWhereClause().contains("AND")) {   //the whereclause don't contains AND
                         if (!lDs.getDsWhereClause().contains("poi")) {    // the whereclause don't contains poi
@@ -240,24 +213,9 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
             }
 
-//            if (lIsPhoto) {
-//                if (lIndexArgs != 1) {
             lStrQuery += lStrWhereClause;
-//                }
-//            } else {
-//                lStrQuery += lStrWhereClause;
-//            }
-
             lStrQuery += lStrCondition;
             lStrQuery += ";";
-
-/*
-            lStrQuery = "SELECT DISTINCT(reId), reType, rePrice, locCity, reIsMandatoryDataComplete, reIsSold" +
-            " FROM realestate INNER JOIN location ON realestate.reId = location.locreid" +
-                    " INNER JOIN photo ON realestate.reId = photo.phreid" +
-                    " GROUP BY photo.phreid HAVING COUNT(phreid) >= ? ;";
-            lArgsList[0] = "0";
-*/
             executeQuery(lStrQuery, lArgsList);
         }
 
@@ -280,21 +238,16 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
     private int prepareConditions() {
         int lIndexArgs = -1;
-        String lArg = "";
 
         //Agent last name
-        if ((mBinding.fragReSearchEtAgentLastName != null) &&
-                (!mBinding.fragReSearchEtAgentLastName.getText().toString().equals(""))) {
-            lIndexArgs++;
-            mDsList.add(new DataSearch(" reAgentLastName LIKE ? ",
-                    lIndexArgs, mBinding.fragReSearchEtAgentLastName.getText().toString()));
+        if (!mBinding.fragReSearchEtAgentLastName.getText().toString().equals("")) {
+            lIndexArgs = addCondition(" reAgentLastName LIKE ? ",
+                    lIndexArgs, mBinding.fragReSearchEtAgentLastName.getText().toString());
         }
 
         //Data incomplete
-        if ((mBinding.fragReSearchCbIncomplete != null) &&
-                (mBinding.fragReSearchCbIncomplete.isChecked())) {
-            lIndexArgs++;
-            mDsList.add(new DataSearch(" reIsMandatoryDataComplete = ? ", lIndexArgs, "0"));
+        if (mBinding.fragReSearchCbIncomplete.isChecked()) {
+            lIndexArgs = addCondition(" reIsMandatoryDataComplete = ? ", lIndexArgs, "0");
         }
 
         //DATES
@@ -302,9 +255,8 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
         //Type
         if (mBinding.fragReSearchSpinType.getSelectedItem().toString() != getString(R.string.spinners_select)) {
-            lIndexArgs++;
-            mDsList.add(new DataSearch(" reType LIKE ? ",
-                    lIndexArgs, mBinding.fragReSearchSpinType.getSelectedItem().toString()));
+            lIndexArgs = addCondition(" reType LIKE ? ",
+                    lIndexArgs, mBinding.fragReSearchSpinType.getSelectedItem().toString());
         }
 
         //Area and Price
@@ -322,13 +274,17 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
         //Photos
         if (!mBinding.fragReSearchSpinNbPhoto.getSelectedItem().equals("0")) {
-            lIndexArgs++;
-            lArg = String.valueOf(REMHelper.convertSpinnerValueToInt(mBinding.fragReSearchSpinNbPhoto.getSelectedItem().toString()));
-//            mDsList.add(new DataSearch(" GROUP BY photo.phreid HAVING COUNT(phreid) >= ? ", lIndexArgs, lArg));
-            mDsList.add(new DataSearch(" reNbPhotos >= ? ", lIndexArgs, lArg));
+            lIndexArgs = addCondition(" reNbPhotos >= ? ", lIndexArgs,
+                    String.valueOf(REMHelper.convertSpinnerValueToInt(mBinding.fragReSearchSpinNbPhoto.getSelectedItem().toString())));
         }
 
         return lIndexArgs;
+    }
+
+    private int addCondition(String pWhereClause, int pIndexArgs, String pArg) {
+        pIndexArgs++;
+        mDsList.add(new DataSearch(pWhereClause, pIndexArgs, pArg));
+        return pIndexArgs;
     }
 
     private int manageDates(int pIndexArgs) {
@@ -336,14 +292,12 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         String lDateTo = "";
 
         //On market date
-        if ((mBinding.fragReSearchEtMarketDateFrom != null) &&
-                (!mBinding.fragReSearchEtMarketDateFrom.getText().toString().equals(""))) {
+        if (!mBinding.fragReSearchEtMarketDateFrom.getText().toString().equals("")) {
             lDateFrom = mBinding.fragReSearchEtMarketDateFrom.getText().toString();
             lDateFrom = String.valueOf(DateConverter.fromDate(REMHelper.convertStringToDate(lDateFrom)));
         }
 
-        if ((mBinding.fragReSearchEtMarketDateTo != null) &&
-                (!mBinding.fragReSearchEtMarketDateTo.getText().toString().equals(""))) {
+        if (!mBinding.fragReSearchEtMarketDateTo.getText().toString().equals("")) {
             lDateTo = mBinding.fragReSearchEtMarketDateTo.getText().toString();
             lDateTo = String.valueOf(DateConverter.fromDate(REMHelper.convertStringToDate(lDateTo)));
         }
@@ -355,18 +309,15 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
         //Sold on date
         if (mBinding.fragReSearchCbSold.isChecked()) {
-            pIndexArgs++;
-            mDsList.add(addBooleanArg(" reIsSold = ? ", pIndexArgs));
+            pIndexArgs = addCondition(" reIsSold = ? ", pIndexArgs, "1");
         }
 
-        if ((mBinding.fragReSearchEtSoldDateFrom != null) &&
-                (!mBinding.fragReSearchEtSoldDateFrom.getText().toString().equals(""))) {
+        if (!mBinding.fragReSearchEtSoldDateFrom.getText().toString().equals("")) {
             lDateFrom = mBinding.fragReSearchEtSoldDateFrom.getText().toString();
             lDateFrom = String.valueOf(DateConverter.fromDate(REMHelper.convertStringToDate(lDateFrom)));
         }
 
-        if ((mBinding.fragReSearchEtSoldDateTo != null) &&
-                (!mBinding.fragReSearchEtSoldDateTo.getText().toString().equals(""))) {
+        if (!mBinding.fragReSearchEtSoldDateTo.getText().toString().equals("")) {
             lDateTo = mBinding.fragReSearchEtSoldDateTo.getText().toString();
             lDateTo = String.valueOf(DateConverter.fromDate(REMHelper.convertStringToDate(lDateTo)));
         }
@@ -406,34 +357,32 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     }
 
     private int manageRooms(int pIndexArgs) {
-        String lArg = "";
 
         if (!mBinding.fragReSearchSpinRooms.getSelectedItem().equals("0")) {
-            pIndexArgs++;
-            lArg = String.valueOf(REMHelper.convertSpinnerValueToInt(mBinding.fragReSearchSpinRooms.getSelectedItem().toString()));
-            mDsList.add(new DataSearch(" reNbRooms >= ? ", pIndexArgs, lArg));
+            pIndexArgs = addCondition(" reNbRooms >= ? ", pIndexArgs,
+                    String.valueOf(REMHelper.convertSpinnerValueToInt(mBinding.fragReSearchSpinRooms.getSelectedItem().toString())));
         }
         if (!mBinding.fragReSearchSpinBedrooms.getSelectedItem().equals("0")) {
-            pIndexArgs++;
-            lArg = String.valueOf(REMHelper.convertSpinnerValueToInt(mBinding.fragReSearchSpinBedrooms.getSelectedItem().toString()));
-            mDsList.add(new DataSearch(" reNbBedRooms >= ? ", pIndexArgs, lArg));
+            pIndexArgs = addCondition(" reNbBedRooms >= ? ", pIndexArgs,
+                    String.valueOf(REMHelper.convertSpinnerValueToInt(mBinding.fragReSearchSpinBedrooms.getSelectedItem().toString())));
         }
         if (!mBinding.fragReSearchSpinBathrooms.getSelectedItem().equals("0")) {
-            pIndexArgs++;
-            lArg = String.valueOf(REMHelper.convertSpinnerValueToInt(mBinding.fragReSearchSpinBathrooms.getSelectedItem().toString()));
-            mDsList.add(new DataSearch(" reNbBathRooms >= ? ", pIndexArgs, lArg));
+            pIndexArgs = addCondition(" reNbBathRooms >= ? ", pIndexArgs,
+                    String.valueOf(REMHelper.convertSpinnerValueToInt(mBinding.fragReSearchSpinBathrooms.getSelectedItem().toString())));
         }
         return pIndexArgs;
     }
 
     private int manageLocation(int pIndexArgs) {
-        if (!mBinding.fragReSearchEtCity.getText().toString().equals("")) {
-            pIndexArgs++;
-            mDsList.add(new DataSearch(" locCity LIKE ? ", pIndexArgs, mBinding.fragReSearchEtCity.getText().toString()));
-        }
-        if (mBinding.fragReSearchSpinCountry.getSelectedItem().toString() != getString(R.string.spinners_select)) {
-            pIndexArgs++;
-            mDsList.add(new DataSearch(" locCountry LIKE ? ", pIndexArgs, mBinding.fragReSearchSpinCountry.getSelectedItem().toString()));
+        try {
+            if (!mBinding.fragReSearchEtCity.getText().toString().equals("")) {
+                pIndexArgs = addCondition(" locCity LIKE ? ", pIndexArgs,mBinding.fragReSearchEtCity.getText().toString());
+            }
+            if (mBinding.fragReSearchSpinCountry.getSelectedItem().toString() != getString(R.string.spinners_select)) {
+                pIndexArgs = addCondition(" locCountry LIKE ? ", pIndexArgs,mBinding.fragReSearchSpinCountry.getSelectedItem().toString());
+            }
+        } catch (Exception pE) {
+            pE.printStackTrace();
         }
         return pIndexArgs;
     }
@@ -441,49 +390,18 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     private int manageConditionWith2Arguments(int pIndexArgs, String pArgMin, String pArgMax, String pField) {
 
         if ((!pArgMin.equals("")) && (pArgMax.equals(""))) {
-            pIndexArgs++;
-            mDsList.add(new DataSearch(" " + pField + " >= ? ", pIndexArgs, pArgMin));
+            pIndexArgs = addCondition(" " + pField + " >= ? ", pIndexArgs,pArgMin);
         } else if ((pArgMin.equals("")) && (!pArgMax.equals(""))) {
-            pIndexArgs++;
-            mDsList.add(new DataSearch(" " + pField + " <= ? ", pIndexArgs, pArgMax));
+            pIndexArgs = addCondition(" " + pField + " <= ? ", pIndexArgs,pArgMax);
         } else if (!(pArgMin.equals("")) && (!pArgMax.equals(""))) {
-            pIndexArgs++;
-            mDsList.add(new DataSearch(" " + pField + " BETWEEN ? ", pIndexArgs, pArgMin));
-            pIndexArgs++;
-            mDsList.add(new DataSearch(" AND ? ", pIndexArgs, pArgMax));
+            pIndexArgs = addCondition(" " + pField + " BETWEEN ? ", pIndexArgs,pArgMin);
+            pIndexArgs = addCondition(" AND ? ", pIndexArgs,pArgMax);
         }
 
         return pIndexArgs;
-    }
-
-    private int manageDateCondition(int pIndexArgs, String pDateFrom, String pDateTo, String pField) {
-
-        if ((!pDateFrom.equals("")) && (pDateTo.equals(""))) {
-            pIndexArgs++;
-            mDsList.add(new DataSearch(" " + pField + " >= ? ", pIndexArgs,
-                    String.valueOf(DateConverter.fromDate(REMHelper.convertStringToDate(pDateFrom)))));
-        } else if ((pDateFrom.equals("")) && (!pDateTo.equals(""))) {
-            pIndexArgs++;
-            mDsList.add(new DataSearch(" " + pField + " <= ? ", pIndexArgs,
-                    String.valueOf(DateConverter.fromDate(REMHelper.convertStringToDate(pDateTo)))));
-        } else if ((pDateFrom.equals("")) && (pDateTo.equals(""))) {
-            pIndexArgs++;
-            mDsList.add(new DataSearch(" " + pField + " BETWEEN ? ", pIndexArgs,
-                    String.valueOf(DateConverter.fromDate(REMHelper.convertStringToDate(pDateFrom)))));
-            pIndexArgs++;
-            mDsList.add(new DataSearch(" AND ? ", pIndexArgs,
-                    String.valueOf(DateConverter.fromDate(REMHelper.convertStringToDate(pDateTo)))));
-        }
-
-        return pIndexArgs;
-    }
-
-    private DataSearch addPoiArg(String pCondition, int pIndexArg, String pArg) {
-        return new DataSearch(pCondition, pIndexArg, pArg);
     }
 
     private int managePoi(int pIndexArgs) {
-//        String lPoiCondition = " realestate.reId IN (SELECT DISTINCT(poireid) FROM poi  WHERE poiName IN ( ";
         String lPoiCondition = " poiName IN ( ";
         List<RePoi> lPoiList = new ArrayList<>();
         String lCondition = "";
@@ -529,7 +447,6 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
             lPoiList.add(new RePoi(pIndexArgs, getString(R.string.poi_park)));
         }
         lPoiCondition += lCondition;
-//        lPoiCondition += " )) ";
         lPoiCondition += " ) ";
 
         for (RePoi lPoi : lPoiList) {
@@ -538,40 +455,17 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         return pIndexArgs;
     }
 
-    private DataSearch addBooleanArg(String pCondition, int pIndexArg) {
-        return new DataSearch(pCondition, pIndexArg, "1");
-    }
-
     private void executeQuery(String pStrQuery, String[] pArgs) {
         SimpleSQLiteQuery lQuery = new SimpleSQLiteQuery(pStrQuery, pArgs);
         mViewModel.selectSearch(lQuery).observe(getViewLifecycleOwner(), pReCompList -> {
-            Log.d(TAG, "buildQuery: " + pReCompList.size());
-            for (RealEstateComplete lReComp : pReCompList) {
-                Log.d(TAG, "buildQuery: " + lReComp.getRealEstate().getReDescription()
-                        + " ; " + lReComp.getRealEstate().getRePrice());
-            }
             if (pReCompList.size() == 0) {
                 Toast.makeText(mContext, getString(R.string.search_txt_err_no_data_found), Toast.LENGTH_SHORT).show();
             } else {
                 sApi.setSearchResult(pReCompList);
-                if(!mIsTabletLandscape) {
+                if (!mIsTabletLandscape) {
                     mNavController.navigate(R.id.action_reSearchFragment_to_reListFragment);
                 }
             }
-//            mCallback = (OnSearchResult) mContext;
-// mCallbach sans onAttach => error null object reference
-//            mCallback.onSearchResult(pReCompList);
-
         });
     }
-
-//    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//        try {
-//            mCallback = (OnSearchResult) context;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException("Error in retrieving data. Please try again");
-//        }
-//    }
 }

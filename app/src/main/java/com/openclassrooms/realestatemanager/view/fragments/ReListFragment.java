@@ -30,7 +30,7 @@ import static com.openclassrooms.realestatemanager.AppRem.sApi;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
 
-public class ReListFragment extends BaseFragment<FragmentReListBinding> implements ReSearchFragment.OnSearchResult {
+public class ReListFragment extends BaseFragment<FragmentReListBinding> {
 
     private static final String TAG = "TAG_ReListFragment";
     private ReListViewModel mViewModel;
@@ -112,16 +112,5 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> implemen
         mAdapter = new ReListAdapter();
         mBinding.fragReListRv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         mBinding.fragReListRv.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onSearchResult(List<RealEstateComplete> pReCompList) {
-        mAdapter.setReList(pReCompList);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    public void searchResult(List<RealEstateComplete> pReCompList) {
-        mAdapter.setReList(pReCompList);
-        mAdapter.notifyDataSetChanged();
     }
 }
