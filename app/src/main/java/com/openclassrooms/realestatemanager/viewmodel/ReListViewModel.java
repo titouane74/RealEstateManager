@@ -24,6 +24,8 @@ public class ReListViewModel extends ViewModel {
 
     public LiveData<List<RealEstateComplete>> selectAllReComplete() { return mReRepo.selectAllReComplete(); }
 
+    public LiveData<List<RealEstateComplete>> selectAllReCompleteMandatoryDataComplete() { return mReRepo.selectAllReCompleteMandatoryDataComplete(); }
+
     public LiveData<List<RealEstateComplete>> getSearchResult() { return mReRepo.getSearchResult(); }
 
 }

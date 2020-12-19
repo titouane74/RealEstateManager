@@ -1,7 +1,5 @@
 package com.openclassrooms.realestatemanager.view.fragments;
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -12,7 +10,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -20,11 +17,8 @@ import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
-import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.view.adapters.ReListAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
-
-import java.util.List;
 
 import static com.openclassrooms.realestatemanager.AppRem.sApi;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
@@ -41,7 +35,6 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
     private Context mContext;
     private boolean mIsTabletLandscape;
     private NavController mNavController;
-    private MutableLiveData<List<RealEstateComplete>> mMLDReCompList;
 
     @Override
     protected int getMenuAttached() {return R.menu.menu_general;}
@@ -66,28 +59,14 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> {
         configureViewModel();
 
         if(sApi.getSearchResult() == null) {
-            mViewModel.selectAllReComplete().observe(getViewLifecycleOwner(), new Observer<List<RealEstateComplete>>() {
-                @Override
-                public void onChanged(List<RealEstateComplete> pAllRe) {
-                    //                Log.d(TAG, "onActivityCreated allReComplete: " + pAllRe.size());
-                    mAdapter.setReList(pAllRe);
-                    mAdapter.notifyDataSetChanged();
-                }
+            mViewModel.selectAllReCompleteMandatoryDataComplete().observe(getViewLifecycleOwner(), pAllRe -> {
+                mAdapter.setReList(pAllRe);
+                mAdapter.notifyDataSetChanged();
             });
         } else {
             mAdapter.setReList(sApi.getSearchResult());
             mAdapter.notifyDataSetChanged();
         }
-/*
-        mViewModel.getSearchResult().observe(getViewLifecycleOwner(), new Observer<List<RealEstateComplete>>() {
-            @Override
-            public void onChanged(List<RealEstateComplete> pRealEstateCompletes) {
-//                Log.d(TAG, "onChanged searchresult: " + pRealEstateCompletes.size());
-                mAdapter.setReList(pRealEstateCompletes);
-                mAdapter.notifyDataSetChanged();
-            }
-        });
-*/
     }
 
     @Override

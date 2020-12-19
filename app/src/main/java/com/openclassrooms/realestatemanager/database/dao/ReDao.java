@@ -54,7 +54,7 @@ public interface ReDao {
 
     @Transaction
     @Query("SELECT * FROM realestate WHERE reIsMandatoryDataComplete = 1")
-    LiveData<List<RealEstateComplete>> selectAllReCompleteMap();
+    LiveData<List<RealEstateComplete>> selectAllReCompleteMandatoryDataComplete();
 
 
     @RawQuery(observedEntities = RealEstateComplete.class)

@@ -34,7 +34,7 @@ public class RealEstateContentProviderTest {
     private ContentResolver mContentResolver;
 
     // DATA SET FOR TEST
-    private static long USER_ID = 1;
+    private static long USER_ID = 50;
 
     @Before
     public void setUp() {
@@ -88,7 +88,7 @@ public class RealEstateContentProviderTest {
         Date lDate = new Date();
 
         final ContentValues lValues = new ContentValues();
-        lValues.put("reId","100");
+        lValues.put("reId","102");
         lValues.put("reType","House");
         lValues.put("rePrice","650000");
         lValues.put("reArea","150");

@@ -12,13 +12,11 @@ import java.util.concurrent.Executor;
 public class MapViewModel extends ViewModel {
 
     private ReRepository mReRepo;
-    private Executor mExecutor;
 
     public MapViewModel(ReRepository pReRepo, Executor pExecutor) {
         mReRepo = pReRepo;
-        mExecutor = pExecutor;
     }
 
-    public LiveData<List<RealEstateComplete>> selectAllReCompleteMap() { return mReRepo.selectAllReCompleteMap(); }
+    public LiveData<List<RealEstateComplete>> selectAllReCompleteMandatoryDataComplete() { return mReRepo.selectAllReCompleteMandatoryDataComplete(); }
 
 }

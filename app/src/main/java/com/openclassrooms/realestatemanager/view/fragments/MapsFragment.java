@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.view.fragments;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 
@@ -17,10 +16,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -35,13 +31,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
 import com.openclassrooms.realestatemanager.databinding.FragmentReMapsBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.PermissionUtils;
-import com.openclassrooms.realestatemanager.utils.Utils;
 import com.openclassrooms.realestatemanager.viewmodel.MapViewModel;
 
 import java.util.List;
@@ -49,7 +43,6 @@ import java.util.List;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 import static com.openclassrooms.realestatemanager.AppRem.sApi;
-import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
 import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
 
 public class MapsFragment extends BaseFragment<FragmentReMapsBinding> implements LocationListener {
@@ -152,8 +145,8 @@ public class MapsFragment extends BaseFragment<FragmentReMapsBinding> implements
         ReViewModelFactory lFactory = Injection.reViewModelFactory(mContext);
         MapViewModel lMapViewModel = new ViewModelProvider(requireActivity(),lFactory).get(MapViewModel.class);
 
-        lMapViewModel.selectAllReCompleteMap().observe(getViewLifecycleOwner(),
-                pReCompList -> MapsFragment.this.setMapMarkers(pReCompList));
+        lMapViewModel.selectAllReCompleteMandatoryDataComplete().observe(getViewLifecycleOwner(),
+                MapsFragment.this::setMapMarkers);
     }
 
     /**
