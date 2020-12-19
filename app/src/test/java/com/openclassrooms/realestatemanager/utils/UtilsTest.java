@@ -20,6 +20,12 @@ public class UtilsTest {
     }
 
     @Test
+    public void convertDollarToEuroWithSuccess() {
+        int lNewPrice = Utils.convertDollarToEuro(200);
+        assertEquals(162,lNewPrice);
+    }
+
+    @Test
     public void getTodayDate() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String lNewDateFormatted = Utils.getTodayDate();
