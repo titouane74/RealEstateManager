@@ -34,12 +34,13 @@ import com.openclassrooms.realestatemanager.model.RePhoto;
 import com.openclassrooms.realestatemanager.model.RePoi;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
+import com.openclassrooms.realestatemanager.notification.NotifyWorker;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.utils.REMHelperAddEdit;
 import com.openclassrooms.realestatemanager.utils.Utils;
 import com.openclassrooms.realestatemanager.view.adapters.AddEditPhotoAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReAddEditViewModel;
-import com.openclassrooms.realestatemanager.workmanager.NotifyWorker;
+
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -326,7 +327,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         NotificationManagerCompat lNotificationManager = NotificationManagerCompat.from(mContext);
 
         if (lNotificationManager.areNotificationsEnabled()) {
-            NotifyWorker.createNotification(mContext);
+            NotifyWorker.createNotification(mContext, mIsMandatoryDataComplete);
             Log.d(TAG, "sendNotification: create notification");
         } else {
             Log.d(TAG, "sendNotification: dont create notification");
@@ -389,9 +390,7 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             mRealEstate.setReNbPhotos(lNbPhoto);
             mViewModel.updateRealEstate(mRealEstate);
         }
-        if(mIsMandatoryDataComplete) {
-            sendNotification();
-        }
+        sendNotification();
         navigateToList();
     }
     /**

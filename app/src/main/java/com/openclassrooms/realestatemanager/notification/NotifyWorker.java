@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.workmanager;
+package com.openclassrooms.realestatemanager.notification;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -30,7 +30,7 @@ import com.openclassrooms.realestatemanager.R;
 //        mContext = context;
 //    }
 
-    public static void createNotification(Context pContext) {
+    public static void createNotification(Context pContext, boolean pIsMandatoryDataComplete) {
 
         NotificationCompat.Builder lBuilder;
 
@@ -48,22 +48,31 @@ import com.openclassrooms.realestatemanager.R;
         }
 
         String lTitle = pContext.getString(R.string.app_name);
-        String lMessage = pContext.getString(R.string.default_txt_notification_message);
+        String lMessage ;
+        if (pIsMandatoryDataComplete) {
+            lMessage = pContext.getString(R.string.default_txt_notification_message_successful);
+        } else {
+            lMessage = pContext.getString(R.string.default_txt_notification_message_incomplete);
+        }
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             lBuilder = new NotificationCompat.Builder(pContext, NOTIF_CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setSmallIcon(R.drawable.ic_notification)
                     .setColor(ContextCompat.getColor(pContext, R.color.colorPrimary))
                     .setContentTitle(lTitle)
                     .setContentText(lMessage)
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText(lMessage + " " + pContext.getString(R.string.default_txt_notification_message_to_complete)))
                     .setAutoCancel(true)
                     .setCategory(NotificationCompat.CATEGORY_MESSAGE);
         } else {
             lBuilder = new NotificationCompat.Builder(pContext, NOTIF_CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setSmallIcon(R.drawable.ic_notification)
                     .setColor(ContextCompat.getColor(pContext, R.color.colorPrimary))
                     .setContentTitle(lTitle)
                     .setContentText(lMessage)
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText(lMessage + " " + pContext.getString(R.string.default_txt_notification_message_to_complete)))
                     .setAutoCancel(true)
                     .setCategory(NotificationCompat.CATEGORY_MESSAGE);
         }
