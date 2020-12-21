@@ -119,6 +119,13 @@ import static com.openclassrooms.realestatemanager.AppRem.sApi;
                 case R.id.reSearchFragment:
                     mNavController.navigate(R.id.action_reDetailFragment_to_reSearchFragment);
                     break;
+                case R.id.reMapsFragment :
+                    if (!Utils.isInternetAvailable(this)) {
+                        Toast.makeText(this, getString(R.string.default_txt_no_internet_no_map), Toast.LENGTH_SHORT).show();
+                    } else {
+                        mNavController.navigate(R.id.action_reDetailFragment_to_reMapsFragment);
+                    }
+                    break;
                 default:
                     return super.onOptionsItemSelected(pItem);
             }
