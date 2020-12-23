@@ -3,9 +3,7 @@ package com.openclassrooms.realestatemanager.database.dao;
 import android.database.Cursor;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.RawQuery;
@@ -48,8 +46,6 @@ public interface ReDao {
     @Update
     int updateRealEstate(RealEstate pRealEstate);
 
-/*    @Delete
-    int deleteRealEstate(RealEstate pRealEstate);*/
 
     @Transaction
     @Query("SELECT * FROM realestate WHERE reid=:pReId")
@@ -60,7 +56,7 @@ public interface ReDao {
     LiveData<List<RealEstateComplete>> selectAllReComplete();
 
     @Transaction
-    @Query("SELECT * FROM realestate WHERE reIsMandatoryDataComplete = 1")
+    @Query("SELECT * FROM realestate WHERE reIsMandatoryDataComplete=1")
     LiveData<List<RealEstateComplete>> selectAllReCompleteMandatoryDataComplete();
 
 
