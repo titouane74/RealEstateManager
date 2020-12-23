@@ -33,7 +33,7 @@
     <string name="add_edit_txt_err_date_sold_before_date_market">The sold date can\'t be before the on market date</string>
     <string name="add_edit_txt_err_agent_not_valid">Agent information invalid</string>
     <string name="add_edit_txt_err_date_sold_empty">Sold date can\'t be empty</string>
-    <string name="add_edit_txt_err_check_sold_not_confirm">Check the box "Sold" to confirm the sale</string>
+    <string name="add_edit_txt_err_check_sold_not_confirm">Check the box \"Sold\" to confirm the sale</string>
     <string name="search_txt_err_select_one_criterion">Select at least one criterion</string>
     <string name="search_txt_err_no_data_found">No real estate found</string>
 
