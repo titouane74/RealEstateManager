@@ -30,7 +30,6 @@ public class Utils {
 
     /**
      * Converting the price of a property (Euros to Dollars)
-     *
      * @param pEuros : int : price in euros
      * @return : int : price convert in dollars
      */
@@ -44,10 +43,11 @@ public class Utils {
      *
      * @return : string : day formatted
      */
+    @SuppressLint("SimpleDateFormat")
     public static String getTodayDate() {
         //Change format display
         //DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(new Date());
     }
 
@@ -62,28 +62,25 @@ public class Utils {
         boolean lIsWifi = false;
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            ConnectivityManager lConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager lConnectivityManager =
+                    (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
             if (lConnectivityManager == null) return false;
-
             Network lNetwork = lConnectivityManager.getActiveNetwork();
-
             if (lNetwork == null) return false;
 
             NetworkCapabilities lCapabilities = lConnectivityManager.getNetworkCapabilities(lNetwork);
             if (lCapabilities != null)
                 lIsWifi = lCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
                         || lCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET);
-
         } else {
-            WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-            if (wifi != null) {
-                lIsWifi = wifi.isWifiEnabled();
-            }
+            WifiManager wifi = (WifiManager) context.getApplicationContext()
+                    .getSystemService(Context.WIFI_SERVICE);
+            if (wifi != null) lIsWifi = wifi.isWifiEnabled();
         }
         return lIsWifi;
-//        WifiManager wifi = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
-//        return wifi.isWifiEnabled();
+        //WifiManager wifi = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+        //return wifi.isWifiEnabled();
     }
 
 }

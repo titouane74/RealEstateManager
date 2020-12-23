@@ -36,6 +36,11 @@ public class UtilsTest {
         assertEquals(true, Utils.isInternetAvailable(InstrumentationRegistry.getInstrumentation().getTargetContext()));
     }
 
+    /**
+     * Forced to disabled the wifi to test if internet is available
+     * Only for API under 28
+     * @throws InterruptedException
+     */
     @Test
     public void isWifiDisabled() throws InterruptedException {
         if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
