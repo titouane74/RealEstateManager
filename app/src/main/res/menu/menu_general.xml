@@ -3,28 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_clear_search"
-        android:icon="@drawable/ic_clear_search"
-        android:title="@string/default_txt_clear"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/reMapsFragment"
-        android:icon="@drawable/ic_map"
-        android:title="@string/default_txt_map"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/reAddEditFragment"
-        android:icon="@drawable/ic_add"
-        android:title="@string/default_txt_add"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/reSearchFragment"
-        android:icon="@drawable/ic_search"
-        android:title="@string/default_txt_search"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/loanFragment"
-        android:icon="@drawable/ic_calculate"
-        android:title="@string/loan_txt_calculate"
-        app:showAsAction="always" />
+        android:id="@+id/action_general"
+        android:title="@string/default_txt_confirm"
+        android:icon="@android:drawable/ic_menu_more"
+        app:showAsAction="always" >
+
+        <menu>
+            <item
+                android:id="@+id/action_map"
+                android:icon="@drawable/ic_map"
+                android:title="@string/default_txt_map" />
+            <item
+                android:id="@+id/action_add"
+                android:icon="@drawable/ic_add"
+                android:title="@string/default_txt_add" />
+            <item
+                android:id="@+id/action_search"
+                android:icon="@drawable/ic_search"
+                android:title="@string/default_txt_search" />
+            <item
+                android:id="@+id/action_clear_search"
+                android:icon="@drawable/ic_clear_search"
+                android:title="@string/default_txt_clear" />
+            <item
+                android:id="@+id/action_loan"
+                android:icon="@drawable/ic_calculate"
+                android:title="@string/loan_txt_calculate" />
+
+        </menu>
+
+    </item>
+
+
 </menu>
