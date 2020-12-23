@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.location.Location;
 import android.widget.ArrayAdapter;
 
@@ -84,32 +83,6 @@ public class REMHelper {
     }
 
     /**
-     * Return the id of the nav_host_fragment which must be used when it's a tablet in landscape
-     *
-     * @param pContext  : context
-     * @param pIsTablet : boolean : indicator if the material is a tablet or not
-     * @return : return the right nav_host_fragment id
-     */
-    public static int getNavHostId(Context pContext, boolean pIsTablet) {
-        if (isTabletLandscape(pContext, pIsTablet)) {
-            return R.id.nav_right_fragment;
-        } else {
-            return R.id.nav_host_fragment;
-        }
-    }
-
-    /**
-     * Indicator of the support is a tablet in landscape mode
-     *
-     * @param pContext  : context
-     * @param pIsTablet : boolean : is a tablet or not
-     * @return : boolean : true if it's a tablet in landscape otherwise false
-     */
-    public static boolean isTabletLandscape(Context pContext, boolean pIsTablet) {
-        return pIsTablet && (getOrientation(pContext) == Configuration.ORIENTATION_LANDSCAPE);
-    }
-
-    /**
      * Get the position of the value in the spinner
      *
      * @param pContext  : context
@@ -158,20 +131,6 @@ public class REMHelper {
             return Integer.parseInt(pValue.substring(0, pValue.length() - 2));
         } else {
             return Integer.parseInt(pValue);
-        }
-    }
-
-    /**
-     * Convert for the search the number of photo value 10 into a string equals to the spinner "10 +"
-     *
-     * @param pValue : int : value to convert into a spinner string with sign
-     * @return : string : return the room with a sign
-     */
-    public static String convertSpinPhotoToString(int pValue) {
-        if (pValue == 10) {
-            return "10 +";
-        } else {
-            return String.valueOf(pValue);
         }
     }
 
