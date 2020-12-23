@@ -1,12 +1,12 @@
 package com.openclassrooms.realestatemanager.view.fragments;
 
 import android.content.Context;
-
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import androidx.navigation.NavController;
+import androidx.annotation.NonNull;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentLoanBinding;
@@ -20,25 +20,17 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
     private Context mContext;
     private String mPrice;
     private String mContribution;
-    private NavController mNavController;
 
     @Override
-    protected int getMenuAttached() {
-        return R.menu.menu_confirm;
-    }
-
-    @Override
-    protected void configureDesign(FragmentLoanBinding pBinding, NavController pNavController, boolean pIsTablet, boolean pIsTabletLandscape) {
+    protected void configureDesign(FragmentLoanBinding pBinding, boolean pIsTablet) {
+        setHasOptionsMenu(true);
         mBinding = pBinding;
-        View lFragView = mBinding.getRoot();
-        mContext = lFragView.getContext();
-        mNavController = pNavController;
+        mContext = mBinding.getRoot().getContext();
 
         mBinding.fragLoanEtPrice.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 if (!mBinding.fragLoanEtPrice.getText().toString().equals("")) {
                     mPrice = mBinding.fragLoanEtPrice.getText().toString();
-                    //mBinding.fragLoanEtPrice.setText(REMHelper.formatStringNumberWithCommaAndCurrency(mPrice));
                 }
             }
         });
@@ -46,10 +38,16 @@ public class LoanFragment extends BaseFragment<FragmentLoanBinding> {
             if (!hasFocus) {
                 if (!mBinding.fragLoanEtContribution.getText().toString().equals("")) {
                     mContribution = mBinding.fragLoanEtContribution.getText().toString();
-                    //mBinding.fragLoanEtContribution.setText(REMHelper.formatStringNumberWithCommaAndCurrency(mContribution));
                 }
             }
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_confirm, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override

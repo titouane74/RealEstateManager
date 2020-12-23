@@ -1,10 +1,5 @@
 package com.openclassrooms.realestatemanager.view.fragments;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,6 +13,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,7 +24,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -47,6 +45,12 @@ import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.R
 
 public class MapsFragment extends BaseFragment<FragmentReMapsBinding> implements LocationListener {
 
+    private OnMarkerClick mCallback;
+
+    public interface OnMarkerClick {
+        void navigateDetail(Bundle pBundle);
+    }
+
     private static final int PERMISSION_REQUEST_CODE = 1;
 
     public static final String  TAG = "TAG_MAP";
@@ -55,7 +59,6 @@ public class MapsFragment extends BaseFragment<FragmentReMapsBinding> implements
     private FusedLocationProviderClient mFusedLocationClient;
     private SupportMapFragment mMapFragment;
     private Context mContext;
-    private NavController mNavController;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -78,12 +81,8 @@ public class MapsFragment extends BaseFragment<FragmentReMapsBinding> implements
     public MapsFragment() {    }
 
     @Override
-    protected int getMenuAttached() {return 0; }
-
-    @Override
-    protected void configureDesign(FragmentReMapsBinding pBinding, NavController pNavController, boolean pIsTablet, boolean pIsTabletLandscape) {
+    protected void configureDesign(FragmentReMapsBinding pBinding, boolean pIsTablet) {
         mContext = getContext();
-        mNavController = pNavController;
 
         mZoom = Integer.parseInt(getString(R.string.map_zoom));
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
@@ -102,34 +101,6 @@ public class MapsFragment extends BaseFragment<FragmentReMapsBinding> implements
             getCurrentLocation();
         }
     }
-
-/*    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        View lView = inflater.inflate(R.layout.fragment_re_maps, container, false);
-        mContext = lView.getContext();
-
-        mZoom = Integer.parseInt(getString(R.string.map_zoom));
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
-
-        if (!checkPermissions()) {
-            if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
-                // Display a dialog with rationale.
-                PermissionUtils.RationaleDialog.newInstance(PERMISSION_REQUEST_CODE, true)
-                        .show(requireActivity().getSupportFragmentManager(), "dialog");
-            } else {
-                // Location permission has not been granted yet, request it.
-                requestPermissions(new String[]{ACCESS_FINE_LOCATION},
-                        PERMISSION_REQUEST_CODE);
-            }
-        } else {
-            getCurrentLocation();
-        }
-
-        return lView;
-    }*/
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -162,7 +133,7 @@ public class MapsFragment extends BaseFragment<FragmentReMapsBinding> implements
                 lName += "\n " + lReComp.getRealEstate().getReArea();
                 lName += "\n " + lReComp.getRealEstate().getRePrice();
 
-                lIcon = BitmapDescriptorFactory.fromResource(R.drawable.ic_location);
+//                lIcon = BitmapDescriptorFactory.fromResource(R.drawable.ic_location);
 
                 if (lReComp.getReLocation()!= null) {
                     LatLng latLng = new LatLng(lReComp.getReLocation().getLocLatitude(),
@@ -170,7 +141,6 @@ public class MapsFragment extends BaseFragment<FragmentReMapsBinding> implements
                     Marker lMarker = mMap.addMarker(new MarkerOptions()
                             .position(latLng)
                             .title(lName));
-//                            .icon(R.drawable.ic_location));
                     lMarker.setTag(lReComp);
                 }
             }
@@ -187,7 +157,8 @@ public class MapsFragment extends BaseFragment<FragmentReMapsBinding> implements
         if (lReComp != null) {
             Bundle lBundle = new Bundle();
             lBundle.putLong(RE_ID_KEY, lReComp.getRealEstate().getReId());
-            mNavController.navigate(R.id.action_reMapsFragment_to_reDetailFragment, lBundle);
+            mCallback = (OnMarkerClick) mContext;
+            mCallback.navigateDetail(lBundle);
         }
     }
 

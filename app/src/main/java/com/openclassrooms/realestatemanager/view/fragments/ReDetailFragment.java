@@ -1,20 +1,19 @@
 package com.openclassrooms.realestatemanager.view.fragments;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.navigation.NavController;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -26,7 +25,6 @@ import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.model.ReLocation;
 import com.openclassrooms.realestatemanager.model.RePhoto;
 import com.openclassrooms.realestatemanager.model.RePoi;
-import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.view.adapters.DetailPhotoAdapter;
@@ -40,37 +38,37 @@ import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.R
 
 public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
 
+    private OnClickListener mCallback;
+
+    /**
+     * Interface permettant de gérer les callbacks vers la MainActivity
+     */
+    public interface OnClickListener {
+        void navigateAddEdit(Bundle pBundle);
+    }
+
     public static final String GOOGLE_STATIC_MAP_URL = "https://maps.googleapis.com/maps/api/staticmap";
     private static final String TAG = "REDetailFragment";
     private FragmentReDetailBinding mBinding;
     private DetailPhotoAdapter mAdapter;
-    private View mFragView;
     private ReDetailViewModel mViewModel;
     private Context mContext;
-    private NavController mNavController;
-    private boolean mIsTabletLandscape;
-    private RealEstate mRE;
     private long mReId;
     private List<RePhoto> mPhotoList;
-    private RealEstateComplete mReComp;
 
     @Override
-    protected int getMenuAttached() {
-//        if (mIsTabletLandscape) {
-//            return R.menu.menu_general_tablet;
-//        } else {
-        return R.menu.menu_edit;
-//        }
+    protected void configureDesign(FragmentReDetailBinding pBinding, boolean pIsTablet) {
+        setHasOptionsMenu(true);
+        mBinding = pBinding;
+        mContext = mBinding.getRoot().getContext();
+        initRecyclerView();
     }
 
     @Override
-    protected void configureDesign(FragmentReDetailBinding pBinding, NavController pNavController, boolean pIsTablet, boolean pIsTabletLandscape) {
-        mBinding = pBinding;
-        mFragView = mBinding.getRoot();
-        mContext = getContext();
-        mNavController = pNavController;
-        mIsTabletLandscape = pIsTabletLandscape;
-        initRecyclerView();
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_edit, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void initRecyclerView() {
@@ -81,26 +79,20 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
-//        if (pItem.getItemId() == R.id.menu_action_edit) {
-        Log.d(TAG, "onOptionsItemSelected: detail :  " + pItem.getItemId());
-        Log.d(TAG, "onOptionsItemSelected: detail : R.id.reAddEditFragment : " + R.id.reAddEditFragment);
-        if (pItem.getItemId() == R.id.reAddEditFragment) {
+        if (pItem.getItemId() == R.id.action_menu_edit) {
             Bundle lBundle = new Bundle();
             lBundle.putLong(RE_ID_KEY, mReId);
             lBundle.putBoolean(IS_EDIT_KEY, true);
-            Log.d(TAG, "onOptionsItemSelected: detail envoi reId : " + mReId);
-            if (mIsTabletLandscape) {
-                mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment, lBundle);
-                Log.d(TAG, "onOptionsItemSelected: detail fragment tablet detail to edit");
-            } else {
-                mNavController.navigate(R.id.reAddEditFragment,lBundle);
-                Log.d(TAG, "onOptionsItemSelected: detail fragment phone detail to edit");
-            }
+            navigateTo(lBundle);
             return true;
         }
         return super.onOptionsItemSelected(pItem);
     }
 
+    private void navigateTo(Bundle pBundle) {
+        mCallback = (OnClickListener) mContext;
+        mCallback.navigateAddEdit(pBundle);
+    }
     @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -121,7 +113,6 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
         configureViewModel();
         mViewModel.selectReComplete(mReId).observe(getViewLifecycleOwner(), pRealEstateComplete -> {
             try {
-                mReComp = pRealEstateComplete;
                 displayReComplete(pRealEstateComplete);
             } catch (ParseException pE) {
                 pE.printStackTrace();

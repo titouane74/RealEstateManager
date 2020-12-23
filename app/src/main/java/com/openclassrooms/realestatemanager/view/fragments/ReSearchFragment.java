@@ -3,14 +3,14 @@ package com.openclassrooms.realestatemanager.view.fragments;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
-
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.sqlite.db.SimpleSQLiteQuery;
 
 import com.openclassrooms.realestatemanager.R;
@@ -19,6 +19,7 @@ import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
 import com.openclassrooms.realestatemanager.model.DataSearch;
 import com.openclassrooms.realestatemanager.model.RePoi;
+import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.utils.DateConverter;
 import com.openclassrooms.realestatemanager.utils.REMHelper;
 import com.openclassrooms.realestatemanager.viewmodel.ReSearchViewModel;
@@ -34,11 +35,17 @@ import static com.openclassrooms.realestatemanager.AppRem.sApi;
 
 public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
 
+    private OnSearchListener mCallback;
+
+    /**
+     * Interface permettant de gérer les callbacks vers la MainActivity
+     */
+    public interface OnSearchListener {
+        void updateList(List<RealEstateComplete> pReCompList);
+    }
+
     private static final String TAG = "TAG_ReSearchFragment";
-    private View mFragView;
     private Context mContext;
-    private NavController mNavController;
-    private boolean mIsTabletLandscape;
     private String mStringDateMarketFrom;
     private String mStringDateMarketTo;
     private String mStringDateSoldFrom;
@@ -52,17 +59,11 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     private ReSearchViewModel mViewModel;
 
     @Override
-    protected int getMenuAttached() {
-        return R.menu.menu_confirm;
-    }
+    protected void configureDesign(FragmentReSearchBinding pBinding, boolean pIsTablet) {
+        setHasOptionsMenu(true);
 
-    @Override
-    protected void configureDesign(FragmentReSearchBinding pBinding, NavController pNavController, boolean pIsTablet, boolean pIsTabletLandscape) {
         mBinding = pBinding;
-        mFragView = mBinding.getRoot();
-        mContext = getContext();
-        mNavController = pNavController;
-        mIsTabletLandscape = pIsTabletLandscape;
+        mContext = mBinding.getRoot().getContext();
 
         configureSpinners();
         configureViewModel();
@@ -91,8 +92,16 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     }
 
     @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_confirm, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem pItem) {
         if (pItem.getItemId() == R.id.menu_action_confirm) {
+            mDsList = new ArrayList<>();
             buildQuery();
             return true;
         }
@@ -376,10 +385,10 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     private int manageLocation(int pIndexArgs) {
         try {
             if (!mBinding.fragReSearchEtCity.getText().toString().equals("")) {
-                pIndexArgs = addCondition(" locCity LIKE ? ", pIndexArgs,mBinding.fragReSearchEtCity.getText().toString());
+                pIndexArgs = addCondition(" locCity LIKE ? ", pIndexArgs, mBinding.fragReSearchEtCity.getText().toString());
             }
             if (mBinding.fragReSearchSpinCountry.getSelectedItem().toString() != getString(R.string.spinners_select)) {
-                pIndexArgs = addCondition(" locCountry LIKE ? ", pIndexArgs,mBinding.fragReSearchSpinCountry.getSelectedItem().toString());
+                pIndexArgs = addCondition(" locCountry LIKE ? ", pIndexArgs, mBinding.fragReSearchSpinCountry.getSelectedItem().toString());
             }
         } catch (Exception pE) {
             pE.printStackTrace();
@@ -390,12 +399,12 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     private int manageConditionWith2Arguments(int pIndexArgs, String pArgMin, String pArgMax, String pField) {
 
         if ((!pArgMin.equals("")) && (pArgMax.equals(""))) {
-            pIndexArgs = addCondition(" " + pField + " >= ? ", pIndexArgs,pArgMin);
+            pIndexArgs = addCondition(" " + pField + " >= ? ", pIndexArgs, pArgMin);
         } else if ((pArgMin.equals("")) && (!pArgMax.equals(""))) {
-            pIndexArgs = addCondition(" " + pField + " <= ? ", pIndexArgs,pArgMax);
+            pIndexArgs = addCondition(" " + pField + " <= ? ", pIndexArgs, pArgMax);
         } else if (!(pArgMin.equals("")) && (!pArgMax.equals(""))) {
-            pIndexArgs = addCondition(" " + pField + " BETWEEN ? ", pIndexArgs,pArgMin);
-            pIndexArgs = addCondition(" AND ? ", pIndexArgs,pArgMax);
+            pIndexArgs = addCondition(" " + pField + " BETWEEN ? ", pIndexArgs, pArgMin);
+            pIndexArgs = addCondition(" AND ? ", pIndexArgs, pArgMax);
         }
 
         return pIndexArgs;
@@ -461,10 +470,10 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
             if (pReCompList.size() == 0) {
                 Toast.makeText(mContext, getString(R.string.search_txt_err_no_data_found), Toast.LENGTH_SHORT).show();
             } else {
+                Log.d(TAG, "executeQuery: " + pReCompList.size());
                 sApi.setSearchResult(pReCompList);
-                if (!mIsTabletLandscape) {
-                    mNavController.navigate(R.id.action_reSearchFragment_to_reListFragment);
-                }
+                mCallback = (OnSearchListener) mContext;
+                mCallback.updateList(pReCompList);
             }
         });
     }

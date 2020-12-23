@@ -1,95 +1,88 @@
 package com.openclassrooms.realestatemanager.view.fragments;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.navigation.NavController;
-import androidx.navigation.ui.NavigationUI;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.MenuItem;
-import android.view.View;
-
-import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReListBinding;
 import com.openclassrooms.realestatemanager.di.Injection;
 import com.openclassrooms.realestatemanager.di.ReViewModelFactory;
+import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.view.adapters.ReListAdapter;
 import com.openclassrooms.realestatemanager.viewmodel.ReListViewModel;
 
-import static com.openclassrooms.realestatemanager.AppRem.sApi;
-import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.IS_EDIT_KEY;
-import static com.openclassrooms.realestatemanager.view.adapters.ReListAdapter.RE_ID_KEY;
+import java.util.List;
 
-public class ReListFragment extends BaseFragment<FragmentReListBinding> {
+import static com.openclassrooms.realestatemanager.AppRem.sApi;
+
+public class ReListFragment extends BaseFragment<FragmentReListBinding> implements ReSearchFragment.OnSearchListener  {
 
     private static final String TAG = "TAG_ReListFragment";
-    private ReListViewModel mViewModel;
-    private View mFragView;
     private FragmentReListBinding mBinding;
-
+    private ReListViewModel mViewModel;
     private ReListAdapter mAdapter;
     private Context mContext;
-    private boolean mIsTabletLandscape;
-    private NavController mNavController;
+
+    public ReListFragment() {}
 
     @Override
-    protected int getMenuAttached() {return R.menu.menu_general;}
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
-    protected void configureDesign(FragmentReListBinding pBinding, NavController pNavController, boolean pIsTablet, boolean pIsTabletLandscape) {
+    protected void configureDesign(FragmentReListBinding pBinding, boolean pIsTablet) {
         mBinding = pBinding;
-        mFragView = mBinding.getRoot();
-        mContext = mFragView.getContext();
-        mIsTabletLandscape = pIsTabletLandscape;
-        mNavController = pNavController;
+        mContext = mBinding.getRoot().getContext();
+        Log.d(TAG, "configureDesign: init RV");
         initRecyclerView();
+        Log.d(TAG, "configureDesign: conf VM");
+        configureViewModel();
+
+        if(sApi.getSearchResult() == null) {
+            Log.d(TAG, "configureDesign: search null");
+            getListDataFromDatabase();
+        } else {
+            Log.d(TAG, "configureDesign: search not null");
+            updateRecyclerView(sApi.getSearchResult());
+        }
+
     }
 
     private void configureViewModel() {
         ReViewModelFactory lFactory = Injection.reViewModelFactory(mContext);
         mViewModel = new ViewModelProvider(this,lFactory).get(ReListViewModel.class);
     }
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        configureViewModel();
 
-        if(sApi.getSearchResult() == null) {
-            mViewModel.selectAllReCompleteMandatoryDataComplete().observe(getViewLifecycleOwner(), pAllRe -> {
-                mAdapter.setReList(pAllRe);
-                mAdapter.notifyDataSetChanged();
-            });
-        } else {
-            mAdapter.setReList(sApi.getSearchResult());
-            mAdapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem pItem) {
-        if (pItem.getItemId() == R.id.reAddEditFragment) {
-            Bundle lBundle = new Bundle();
-            lBundle.putLong(RE_ID_KEY,0);
-            lBundle.putBoolean(IS_EDIT_KEY,false);
-//            if (mIsTabletLandscape) {
-//                mNavController.navigate(R.id.reAddEditFragment,lBundle);
-//                Log.d(TAG, "onOptionsItemSelected: detail fragment tablet detail to edit");
-//            } else {
-                mNavController.navigate(R.id.action_reListFragment_to_reAddFragment,lBundle);
-//            }
-            return super.onOptionsItemSelected(pItem);
-        } else {
-            return NavigationUI.onNavDestinationSelected(pItem, mNavController) || super.onOptionsItemSelected(pItem);
-        }
+    private void getListDataFromDatabase() {
+//        mViewModel.selectAllReCompleteMandatoryDataComplete().observe(getViewLifecycleOwner(), this::updateRecyclerView);
+        mViewModel.selectAllReComplete().observe(getViewLifecycleOwner(), this::updateRecyclerView);
     }
 
     private void initRecyclerView() {
         mAdapter = new ReListAdapter();
         mBinding.fragReListRv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         mBinding.fragReListRv.setAdapter(mAdapter);
+    }
+
+    private void updateRecyclerView(List<RealEstateComplete> pReCompList) {
+        Log.d(TAG, "updateRecyclerView: " + pReCompList.size());
+        mAdapter.setReList(pReCompList);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void updateList(List<RealEstateComplete> pReCompList) {
+        if (pReCompList.size() == 0) {
+            Log.d(TAG, "updateList: liste vide  : ");
+            getListDataFromDatabase();
+        } else {
+            Log.d(TAG, "updateList: " + pReCompList.size());
+            updateRecyclerView(pReCompList);
+        }
     }
 }
