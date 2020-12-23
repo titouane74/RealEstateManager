@@ -1,15 +1,15 @@
 package com.openclassrooms.realestatemanager.view.adapters;
 
-import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,47 +24,58 @@ import java.util.List;
 /**
  * Created by Florence LE BOURNOT on 30/11/2020
  */
-public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHolder> {
+public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHolder> implements View.OnClickListener {
+
+    private OnRecyclerViewListener mCallback;
+
+    /**
+     * Interface permettant de gérer les callbacks vers la MainActivity
+     */
+    public interface OnRecyclerViewListener {
+        void onListAdapterItemClicked(Bundle pBundle);
+    }
 
     public static final String RE_ID_KEY = "RE_ID";
     public static final String IS_EDIT_KEY = "IS_EDIT";
 
     private static final String TAG = "TAG_ReListAdapter";
     private List<RealEstateComplete> mReList = new ArrayList<>();
-    private com.openclassrooms.realestatemanager.databinding.FragmentReListItemBinding mBinding;
-    private NavController mNavController;
+    private FragmentReListItemBinding mBinding;
     private Context mContext;
     private boolean mIsTablet;
 
 
     public void setReList(List<RealEstateComplete> pReList) {
+        Log.d(TAG, "setReList: update list: " + pReList.size());
         mReList = pReList;
+    }
+
+    public ReListAdapter() {
+        mCallback = (OnRecyclerViewListener) mContext;
     }
 
     @NonNull
     @Override
-    public ReListAdapter.ReListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ReListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater lLayoutInflater = LayoutInflater.from(parent.getContext());
         mBinding = FragmentReListItemBinding.inflate(lLayoutInflater, parent, false);
         mContext = mBinding.getRoot().getContext();
         mIsTablet = mContext.getResources().getBoolean(R.bool.isTablet);
-        int lIntNavHost = REMHelper.getNavHostId(mContext, mIsTablet);
-        mNavController = Navigation.findNavController((Activity) parent.getContext(), lIntNavHost);
-        return new ReListAdapter.ReListHolder(mBinding);
+        return new ReListHolder(mBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ReListHolder pHolder, int position) {
         pHolder.bindView(mReList.get(position));
+
+        mCallback = (OnRecyclerViewListener) mContext;
+
         pHolder.itemView.setOnClickListener(v -> {
             Bundle lBundle = new Bundle();
             lBundle.putLong(RE_ID_KEY, mReList.get(position).getRealEstate().getReId());
+            Log.d(TAG, "onBindViewHolder: callback item clicked");
+            mCallback.onListAdapterItemClicked(lBundle);
 
-            if (REMHelper.isTabletLandscape(mContext, mIsTablet)) {
-                mNavController.navigate(R.id.reDetailFragment, lBundle);
-            } else {
-                mNavController.navigate(R.id.action_reListFragment_to_reDetailFragment, lBundle);
-            }
         });
 
     }
@@ -78,9 +89,14 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         }
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
 
     static class ReListHolder extends RecyclerView.ViewHolder {
-        com.openclassrooms.realestatemanager.databinding.FragmentReListItemBinding mBindingHolder;
+        FragmentReListItemBinding mBindingHolder;
 
         public ReListHolder(@NonNull FragmentReListItemBinding pBindingHolder) {
             super(pBindingHolder.getRoot());
@@ -106,9 +122,21 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
                 }
                 if (pReComp.getRePhotoList().size() > 0) {
                     if (pReComp.getRePhotoList().get(0).getPhPath() != null) {
+/*
+                        RequestOptions requestOptions = new RequestOptions();
+                        requestOptions=requestOptions.placeholder(R.drawable.ic_no_photo);
+
+
                         Glide.with(mBindingHolder.fragReListItemImgPhoto.getContext())
                                 .load(pReComp.getRePhotoList().get(0).getPhPath())
+                                .apply(requestOptions)
                                 .into(mBindingHolder.fragReListItemImgPhoto);
+*/
+
+                        String lPath = pReComp.getRePhotoList().get(0).getPhPath();
+                        Log.d(TAG, "bindView: " + lPath);
+                        Bitmap lBitmap = BitmapFactory.decodeFile(lPath);
+                        mBindingHolder.fragReListItemImgPhoto.setImageBitmap(lBitmap);
                     } else {
                         displayNoPhoto();
                     }
@@ -117,6 +145,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
                 }
             } catch (Exception pE) {
                 pE.printStackTrace();
+                Log.d(TAG, "bindView: stacktrace : " + pE.getMessage());
             }
         }
 

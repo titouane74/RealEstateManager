@@ -1,96 +1,255 @@
 package com.openclassrooms.realestatemanager.view.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding;
-import com.openclassrooms.realestatemanager.utils.REMHelper;
-import com.openclassrooms.realestatemanager.utils.Utils;
+import com.openclassrooms.realestatemanager.model.RealEstateComplete;
+import com.openclassrooms.realestatemanager.view.adapters.ReListAdapter;
+import com.openclassrooms.realestatemanager.view.fragments.LoanFragment;
+import com.openclassrooms.realestatemanager.view.fragments.MapsFragment;
+import com.openclassrooms.realestatemanager.view.fragments.ReAddEditFragment;
+import com.openclassrooms.realestatemanager.view.fragments.ReDetailFragment;
 import com.openclassrooms.realestatemanager.view.fragments.ReListFragment;
+import com.openclassrooms.realestatemanager.view.fragments.ReSearchFragment;
+import com.openclassrooms.realestatemanager.view.fragments.RightFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.openclassrooms.realestatemanager.AppRem.sApi;
 
-//public class MainActivity extends AppCompatActivity implements ReSearchFragment.OnSearchResult {
-    public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements ReAddEditFragment.OnSaveListener,
+        ReSearchFragment.OnSearchListener, ReListAdapter.OnRecyclerViewListener,
+        ReDetailFragment.OnClickListener, MapsFragment.OnMarkerClick {
 
-    public static final String TAG = "TAG_MAIN";
+    public static final String TAG="TAG_";
 
-//    public static final REMApi sApi = Injection.getREMApiService();
-
-    private ActivityMainBinding mBinding;
-    private View mActView;
-
-    private NavController mNavController;
-    private NavHostFragment mNavHostFragment;
-    private long mBackPressedTime;
-    private Toast mBackToast;
+    public static final String TAG_FRAG_LIST = "TAG_FRAG_LIST";
+    public static final String TAG_FRAG_DETAIL = "TAG_FRAG_DETAIL";
+    public static final String TAG_FRAG_ADDEDIT = "TAG_FRAG_ADDEDIT";
+    public static final String TAG_FRAG_SEARCH = "TAG_FRAG_SEARCH";
+    public static final String TAG_FRAG_LOAN = "TAG_FRAG_LOAN";
+    public static final String TAG_FRAG_MAP = "TAG_FRAG_MAP";
 
     private Context mContext;
-    private int mIntNavHost = 0;
+    private ActivityMainBinding mBinding;
+    private ReListFragment mListFragment;
+    private RightFragment mRightFragment;
+    private ReAddEditFragment mReAddEditFragment;
+    private ReDetailFragment mReDetailFragment;
+    private LoanFragment mLoanFragment;
+    private ReSearchFragment mReSearchFragment;
+    private MapsFragment mMapsFragment;
+
     private boolean mIsTablet;
+    private long mBackPressedTime;
+    private Toast mBackToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
+        mContext = this;
 
         mIsTablet = getApplicationContext().getResources().getBoolean(R.bool.isTablet);
+        setSupportActionBar(mBinding.actMainToolbar);
 
-        mBinding = ActivityMainBinding.inflate(getLayoutInflater());
-        mActView = mBinding.getRoot();
-        mContext = getApplicationContext();
-        setContentView(mActView);
+        if (savedInstanceState != null) {
+            mReDetailFragment = (ReDetailFragment) getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_DETAIL);
+            mListFragment = (ReListFragment) getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_LIST);
+            mReSearchFragment = (ReSearchFragment) getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_SEARCH);
+            mLoanFragment = (LoanFragment) getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_LOAN);
+            mReAddEditFragment = (ReAddEditFragment) getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_ADDEDIT);
+            mMapsFragment = (MapsFragment) getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_MAP);
 
-        configureNavController();
-        configureToolBar();
-        Log.d(TAG, "onCreate : current frag : " + mNavHostFragment.getChildFragmentManager());
-
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
-        return super.onCreateView(name, context, attrs);
-    }
-
-    private void configureNavController() {
-
-        mIntNavHost = REMHelper.getNavHostId(mContext,mIsTablet);
-        mNavHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(mIntNavHost);
-        if (mNavHostFragment != null) {
-            mNavController = mNavHostFragment.getNavController();
+            if (mListFragment != null) {
+                configureAndShowListFragment();
+                if (mReDetailFragment != null) {
+                    replaceFragment(mReDetailFragment);
+                } else if (mReAddEditFragment != null) {
+                    replaceFragment(mReAddEditFragment);
+                } else if (mReSearchFragment != null) {
+                    replaceFragment(mReSearchFragment);
+                } else if (mLoanFragment != null) {
+                    replaceFragment(mLoanFragment);
+                } else if (mMapsFragment != null) {
+                    replaceFragment(mMapsFragment);
+                } else {
+                    mReAddEditFragment = new ReAddEditFragment();
+                    mReDetailFragment = new ReDetailFragment();
+                    mLoanFragment = new LoanFragment();
+                    mReSearchFragment = new ReSearchFragment();
+                    mMapsFragment = new MapsFragment();
+                }
+            }
         } else {
-            Toast.makeText(mContext, "NavHost null", Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "configureNavController: navHost null");
+            configureAndShowListFragment();
+
+            mReAddEditFragment = new ReAddEditFragment();
+            mReDetailFragment = new ReDetailFragment();
+            mLoanFragment = new LoanFragment();
+            mReSearchFragment = new ReSearchFragment();
+            mMapsFragment = new MapsFragment();
+        }
+
+        if (mIsTablet) {
+            configureAndShowRightFragment();
         }
     }
 
-    /**
-     * Configure the toolbar
-     */
-    private void configureToolBar() {
-        setSupportActionBar(mBinding.actMainToolbar);
-        NavigationUI.setupActionBarWithNavController(this, mNavController);
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //Save the fragment's instance
+        Fragment lFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAG_LIST);
+        if (lFragment != null) {
+            getSupportFragmentManager().putFragment(outState, TAG_FRAG_LIST, lFragment);
+        }
+        lFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAG_DETAIL);
+        if (lFragment != null) {
+            getSupportFragmentManager().putFragment(outState, TAG_FRAG_DETAIL, lFragment);
+        }
+        lFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAG_ADDEDIT);
+        if (lFragment != null) {
+            getSupportFragmentManager().putFragment(outState, TAG_FRAG_ADDEDIT, lFragment);
+        }
+        lFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAG_SEARCH);
+        if (lFragment != null) {
+            getSupportFragmentManager().putFragment(outState, TAG_FRAG_SEARCH, lFragment);
+        }
+        lFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAG_LOAN);
+        if (lFragment != null) {
+            getSupportFragmentManager().putFragment(outState, TAG_FRAG_LOAN, lFragment);
+        }
+        lFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAG_MAP);
+        if (lFragment != null) {
+            getSupportFragmentManager().putFragment(outState, TAG_FRAG_MAP, lFragment);
+        }
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        return mNavController.navigateUp() || super.onSupportNavigateUp();
+    public boolean onCreateOptionsMenu(Menu pMenu) {
+        getMenuInflater().inflate(R.menu.menu_general, pMenu);
+        return true;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem pItem) {
+        switch (pItem.getItemId()) {
+            case android.R.id.home:
+                if ((mReAddEditFragment != null && mReAddEditFragment.isVisible())
+                        || (mReDetailFragment != null && mReDetailFragment.isVisible())
+                        || (mLoanFragment != null && mLoanFragment.isVisible())
+                        || (mReSearchFragment != null && mReSearchFragment.isVisible())
+                        || (mMapsFragment != null && mMapsFragment.isVisible())
+                ) {
+                    if (mIsTablet) {
+                        replaceFragment(mRightFragment);
+                    } else {
+                        replaceFragment(mListFragment);
+                    }
+                }
+                manageActionBar(false);
+                return true;
+            case R.id.action_add:
+                manageActionBar(true);
+                if ((mListFragment != null && mListFragment.isVisible())) {
+                    mReAddEditFragment = new ReAddEditFragment();
+                    replaceFragment(mReAddEditFragment);
+                    invalidateOptionsMenu();
+                }
+                return true;
+            case R.id.action_loan:
+                manageActionBar(true);
+                if ((mListFragment != null && mListFragment.isVisible())) {
+                    mLoanFragment = new LoanFragment();
+                    replaceFragment(mLoanFragment);
+                    invalidateOptionsMenu();
+                }
+                return true;
+            case R.id.action_search:
+                manageActionBar(true);
+                if ((mListFragment != null && mListFragment.isVisible())) {
+                    mReSearchFragment = new ReSearchFragment();
+                    replaceFragment(mReSearchFragment);
+                    invalidateOptionsMenu();
+                }
+                return true;
+            case R.id.action_clear_search:
+                sApi.setSearchResult(null);
+                List<RealEstateComplete> lReComp = new ArrayList<>();
+                mListFragment.updateList(lReComp);
+                return true;
+            case R.id.action_map:
+                manageActionBar(true);
+                if ((mListFragment != null && mListFragment.isVisible())) {
+                    replaceFragment(mMapsFragment);
+                    invalidateOptionsMenu();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(pItem);
+        }
+    }
+
+    private void configureAndShowListFragment() {
+        mListFragment = (ReListFragment) getSupportFragmentManager().findFragmentById(R.id.frame_list);
+        if (mListFragment == null) {
+            mListFragment = new ReListFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.frame_list, mListFragment)
+                    .commit();
+        }
+    }
+
+    private void configureAndShowRightFragment() {
+        mRightFragment = (RightFragment) getSupportFragmentManager().findFragmentById(R.id.frame_right);
+        if (mRightFragment == null && findViewById(R.id.frame_right) != null) {
+            mRightFragment = new RightFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.frame_right, mRightFragment)
+                    .commit();
+        }
+    }
+
+    private void replaceFragment(final Fragment pFragment) {
+        final FragmentManager lFragmentManager = getSupportFragmentManager();
+        final FragmentTransaction lFragmentTransaction = lFragmentManager.beginTransaction();
+        lFragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
+        if (mIsTablet) {
+            lFragmentTransaction.replace(R.id.frame_right, pFragment);
+        } else {
+            lFragmentTransaction.replace(R.id.frame_list, pFragment);
+        }
+        lFragmentTransaction.commit();
+    }
+
+    private void manageActionBar(boolean isEnabled) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(isEnabled);
+            getSupportActionBar().setDisplayShowHomeEnabled(isEnabled);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        invalidateOptionsMenu();
     }
 
     @Override
@@ -107,94 +266,50 @@ import static com.openclassrooms.realestatemanager.AppRem.sApi;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem pItem) {
-        if (REMHelper.isTabletLandscape(mContext,mIsTablet)) {
-            switch (pItem.getItemId()) {
-                case R.id.reAddEditFragment:
-                    mNavController.navigate(R.id.action_reDetailFragment_to_reAddEditFragment);
-                    break;
-                case R.id.loanFragment:
-                    mNavController.navigate(R.id.action_reDetailFragment_to_loanFragment);
-                    break;
-                case R.id.reSearchFragment:
-                    mNavController.navigate(R.id.action_reDetailFragment_to_reSearchFragment);
-                    break;
-                case R.id.reMapsFragment :
-                    if (!Utils.isInternetAvailable(this)) {
-                        Toast.makeText(this, getString(R.string.default_txt_no_internet_no_map), Toast.LENGTH_SHORT).show();
-                    } else {
-                        mNavController.navigate(R.id.action_reDetailFragment_to_reMapsFragment);
-                    }
-                    break;
-                default:
-                    return super.onOptionsItemSelected(pItem);
-            }
-        } else if (pItem.getItemId() == R.id.menu_clear_search) {
-            sApi.setSearchResult(null);
-            mNavController.navigate(R.id.reListFragment);
-        } else if (pItem.getItemId() == R.id.reMapsFragment) {
-            if (!Utils.isInternetAvailable(this)) {
-                Toast.makeText(this, getString(R.string.default_txt_no_internet_no_map), Toast.LENGTH_SHORT).show();
+    public void navigateToList() {
+        if (mReAddEditFragment != null && mReAddEditFragment.isVisible()) {
+            if (mIsTablet) {
+                replaceFragment(mRightFragment);
             } else {
-                mNavController.navigate(R.id.action_reListFragment_to_mapsFragment);
+                replaceFragment(mListFragment);
             }
-        } else {
-            return super.onOptionsItemSelected(pItem);
         }
-        return true;
+        manageActionBar(false);
+        invalidateOptionsMenu();
     }
 
-/*
     @Override
-    public void onSearchResult(List<RealEstateComplete> pReCompList) {
-
-        //ReListFragment lFrag = (ReListFragment) getSupportFragmentManager().findFragmentById(R.id.frag_re_list_rv);
-//        ReListFragment lFrag = (ReListFragment) mNavHostFragment.getChildFragmentManager().findFragmentById(R.id.frag_re_list_rv);
-//        lFrag.onSearchResult(pReCompList);
-//        Log.d(TAG, "onSearchResult: current frag : " + mNavHostFragment.getChildFragmentManager().getPrimaryNavigationFragment());
-//        Log.d(TAG, "onSearchResult: current frag : " + mNavHostFragment.getChildFragmentManager().getFragments().get(0));
-//
-//        ReListFragment lReListFragment = getReListFragmentActualInstance();
-//        lReListFragment.onSearchResult(pReCompList);
-    }
-
-*/
-
-
-    /**
-     * Retrieve the actual instance of the ReListFragment
-     *
-     * @return : object : ReListFragment instance
-     */
-    private ReListFragment getReListFragmentActualInstance() {
-        ReListFragment resultFragment = null;
-        Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        if (navHostFragment != null) {
-            List<Fragment> fragmentList = navHostFragment.getChildFragmentManager().getFragments();
-            for (Fragment fragment : fragmentList) {
-                if (fragment instanceof ReListFragment) {
-                    resultFragment = (ReListFragment) fragment;
-                    break;
-                }
+    public void updateList(List<RealEstateComplete> pReCompList) {
+        if (mReSearchFragment != null && mReSearchFragment.isVisible()) {
+            if (mIsTablet) {
+                replaceFragment(mRightFragment);
+            } else {
+                replaceFragment(mListFragment);
             }
         }
-        return resultFragment;
+        manageActionBar(false);
+        mListFragment.updateList(pReCompList);
+        invalidateOptionsMenu();
     }
 
+    @Override
+    public void onListAdapterItemClicked(Bundle pBundle) {
+        manageActionBar(true);
+        mReDetailFragment.setArguments(pBundle);
+        replaceFragment(mReDetailFragment);
+    }
 
-/*
-// IN MAIN ACTIVITY MAREU
+    @Override
+    public void navigateAddEdit(Bundle pBundle) {
+        manageActionBar(true);
+        mReAddEditFragment.setArguments(pBundle);
+        replaceFragment(mReAddEditFragment);
+    }
 
-    private void replaceFragment(final Fragment pFragment) {
-        final FragmentManager lFragmentManager = getSupportFragmentManager();
-        final FragmentTransaction lFragmentTransaction = lFragmentManager.beginTransaction();
-        lFragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
-        if (mMainLayout.getTag() == getString(R.string.tablet)) {
-            lFragmentTransaction.replace(R.id.frame_right, pFragment);
-        } else {
-            lFragmentTransaction.replace(R.id.frame_list, pFragment);
-        }
-        lFragmentTransaction.commit();
-    }*/
-
+    @Override
+    public void navigateDetail(Bundle pBundle) {
+        manageActionBar(true);
+        mReDetailFragment.setArguments(pBundle);
+        replaceFragment(mReDetailFragment);
+    }
 }
