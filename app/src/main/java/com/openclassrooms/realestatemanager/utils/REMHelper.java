@@ -1,15 +1,12 @@
 package com.openclassrooms.realestatemanager.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.location.Location;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.Nullable;
-import androidx.core.os.ConfigurationCompat;
-import androidx.core.os.LocaleListCompat;
 
 import com.openclassrooms.realestatemanager.R;
 
@@ -63,23 +60,12 @@ public class REMHelper {
      * @return : string : value formatted with currency
      */
     public static String formatNumberWithCommaAndCurrency(int pValue) {
-        NumberFormat lNf;
-
-        if (Locale.getDefault().getLanguage().contains("en")) {
-            lNf = NumberFormat.getCurrencyInstance(Locale.ENGLISH);
-        } else {
-            lNf = NumberFormat.getCurrencyInstance(Locale.FRANCE);
-        }
+        NumberFormat lNf = NumberFormat.getCurrencyInstance(Locale.ENGLISH);
         lNf.setMaximumFractionDigits(0);
 
         String lFormattedValue = lNf.format(pValue);
 
-        String lCur ;
-        if (Locale.getDefault().getLanguage().contains("en")) {
-            lCur = "$";
-        } else {
-            lCur = "€";
-        }
+        String lCur = "$";
         if (lFormattedValue.contains("¤")) {
             lFormattedValue = lFormattedValue.replace("¤",lCur);
         }
@@ -195,9 +181,10 @@ public class REMHelper {
      * @param pDate : string : date to convert
      * @return : date : date converted
      */
+    @SuppressLint("SimpleDateFormat")
     public static @Nullable
     Date convertStringToDate(String pDate) {
-        SimpleDateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             return lDateFormat.parse(pDate);
         } catch (ParseException pE) {
@@ -212,6 +199,7 @@ public class REMHelper {
      * @param pDate : date : date to convert
      * @return : string : date converted
      */
+    @SuppressLint("SimpleDateFormat")
     public static @Nullable
     String convertDateToString(Date pDate) {
         SimpleDateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy");

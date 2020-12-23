@@ -1,8 +1,5 @@
 package com.openclassrooms.realestatemanager.utils;
 
-import android.location.Geocoder;
-
-import com.google.android.gms.maps.model.LatLng;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditBinding;
 import com.openclassrooms.realestatemanager.model.ReLocation;
 import com.openclassrooms.realestatemanager.model.RePhoto;
@@ -82,7 +79,7 @@ public class REMHelperAddEdit {
 
 
     public static int setPhotoList(List<RePhoto> pReComp, List<RePhoto> pPhotoList, long pReId,
-                                    boolean pIsEdit, ReAddEditViewModel pViewModel) {
+                                   boolean pIsEdit, ReAddEditViewModel pViewModel) {
         RePhoto lReCompPh;
 
         int lNbPhoto = pReComp.size();
@@ -173,7 +170,7 @@ public class REMHelperAddEdit {
      * Return false by default
      */
     public static boolean getIsMandatoryDataComplete(RealEstate pRe, ReLocation pReLoc, boolean pIsPhotoEmpty) {
-        if ((!pIsPhotoEmpty)
+        return (!pIsPhotoEmpty)
                 && (pRe.getReOnMarketDate() != null)
                 && (!pRe.getReAgentLastName().equals(""))
                 && (!pReLoc.getLocStreet().equals(""))
@@ -182,10 +179,6 @@ public class REMHelperAddEdit {
                 && (!pRe.getReType().equals(""))
                 && (pRe.getReArea() != 0)
                 && (pRe.getRePrice() != 0)
-                && (!pRe.getReDescription().equals(""))
-        ) {
-            return true;
-        }
-        return false;
+                && (!pRe.getReDescription().equals(""));
     }
 }
