@@ -8,4 +8,7 @@
     <dimen name="re_add_edit_width_percent_information">0.38</dimen>
     <dimen name="re_add_edit_width_percent_location">0.3</dimen>
 
+    <!-- REAL ESTATE DETAIL -->
+    <dimen name="re_det_map_size">200dp</dimen>
+    <dimen name="re_det_map_size_land">300dp</dimen>
 </resources>
