@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.view.adapters;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -10,8 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReAddEditRvPhotoItemBinding;
 import com.openclassrooms.realestatemanager.model.RePhoto;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,7 @@ public class AddEditPhotoAdapter extends RecyclerView.Adapter<AddEditPhotoAdapte
     @Override
     public void onBindViewHolder(@NonNull AddEditPhotoHolder holder, int position) {
         holder.bindView(mPhotoList.get(position));
-        final  RePhoto mPhoto = mPhotoList.get(position);
+        final RePhoto mPhoto = mPhotoList.get(position);
         mBinding.fragReAddEditEtPhoto.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -76,8 +78,11 @@ public class AddEditPhotoAdapter extends RecyclerView.Adapter<AddEditPhotoAdapte
 
         public void bindView(RePhoto pPhoto) {
             mBindingHolder.fragReAddEditEtPhoto.setText(pPhoto.getPhDescription());
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions=requestOptions.placeholder(R.drawable.ic_no_photo);
             Glide.with(mBindingHolder.fragReAddEditImgPhoto.getContext())
                     .load(pPhoto.getPhPath())
+                    .apply(requestOptions)
                     .into(mBindingHolder.fragReAddEditImgPhoto);
 
         }
