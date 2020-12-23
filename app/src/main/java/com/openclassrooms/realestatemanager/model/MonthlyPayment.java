@@ -1,7 +1,5 @@
 package com.openclassrooms.realestatemanager.model;
 
-import android.util.Log;
-
 /**
  * Created by Florence LE BOURNOT on 02/12/2020
  */

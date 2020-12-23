@@ -11,7 +11,8 @@ import java.util.Objects;
  */
 public class RealEstateComplete {
 
-    @Embedded RealEstate mRealEstate;
+    @Embedded
+    RealEstate mRealEstate;
     @Relation(parentColumn = "reId",entityColumn = "poireid")
     public List<RePoi> mPoiList;
     @Relation(parentColumn = "reId", entityColumn = "locreid")
