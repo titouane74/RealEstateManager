@@ -73,7 +73,6 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
         pHolder.itemView.setOnClickListener(v -> {
             Bundle lBundle = new Bundle();
             lBundle.putLong(RE_ID_KEY, mReList.get(position).getRealEstate().getReId());
-            Log.d(TAG, "onBindViewHolder: callback item clicked");
             mCallback.onListAdapterItemClicked(lBundle);
 
         });
@@ -122,19 +121,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
                 }
                 if (pReComp.getRePhotoList().size() > 0) {
                     if (pReComp.getRePhotoList().get(0).getPhPath() != null) {
-/*
-                        RequestOptions requestOptions = new RequestOptions();
-                        requestOptions=requestOptions.placeholder(R.drawable.ic_no_photo);
-
-
-                        Glide.with(mBindingHolder.fragReListItemImgPhoto.getContext())
-                                .load(pReComp.getRePhotoList().get(0).getPhPath())
-                                .apply(requestOptions)
-                                .into(mBindingHolder.fragReListItemImgPhoto);
-*/
-
                         String lPath = pReComp.getRePhotoList().get(0).getPhPath();
-                        Log.d(TAG, "bindView: " + lPath);
                         Bitmap lBitmap = BitmapFactory.decodeFile(lPath);
                         mBindingHolder.fragReListItemImgPhoto.setImageBitmap(lBitmap);
                     } else {

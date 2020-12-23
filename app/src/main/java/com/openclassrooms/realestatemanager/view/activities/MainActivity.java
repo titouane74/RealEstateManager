@@ -33,14 +33,9 @@ public class MainActivity extends AppCompatActivity implements ReAddEditFragment
         ReSearchFragment.OnSearchListener, ReListAdapter.OnRecyclerViewListener,
         ReDetailFragment.OnClickListener, MapsFragment.OnMarkerClick {
 
-    public static final String TAG="TAG_";
+    public static final String TAG = "TAG_";
 
     public static final String TAG_FRAG_LIST = "TAG_FRAG_LIST";
-    public static final String TAG_FRAG_DETAIL = "TAG_FRAG_DETAIL";
-    public static final String TAG_FRAG_ADDEDIT = "TAG_FRAG_ADDEDIT";
-    public static final String TAG_FRAG_SEARCH = "TAG_FRAG_SEARCH";
-    public static final String TAG_FRAG_LOAN = "TAG_FRAG_LOAN";
-    public static final String TAG_FRAG_MAP = "TAG_FRAG_MAP";
 
     private Context mContext;
     private ActivityMainBinding mBinding;
@@ -67,78 +62,60 @@ public class MainActivity extends AppCompatActivity implements ReAddEditFragment
         setSupportActionBar(mBinding.actMainToolbar);
 
         if (savedInstanceState != null) {
-            mReDetailFragment = (ReDetailFragment) getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_DETAIL);
-            mListFragment = (ReListFragment) getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_LIST);
-            mReSearchFragment = (ReSearchFragment) getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_SEARCH);
-            mLoanFragment = (LoanFragment) getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_LOAN);
-            mReAddEditFragment = (ReAddEditFragment) getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_ADDEDIT);
-            mMapsFragment = (MapsFragment) getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_MAP);
+            Fragment lListFragment = getSupportFragmentManager().getFragment(savedInstanceState, TAG_FRAG_LIST);
 
-            if (mListFragment != null) {
-                configureAndShowListFragment();
-                if (mReDetailFragment != null) {
-                    replaceFragment(mReDetailFragment);
-                } else if (mReAddEditFragment != null) {
-                    replaceFragment(mReAddEditFragment);
-                } else if (mReSearchFragment != null) {
-                    replaceFragment(mReSearchFragment);
-                } else if (mLoanFragment != null) {
-                    replaceFragment(mLoanFragment);
-                } else if (mMapsFragment != null) {
-                    replaceFragment(mMapsFragment);
-                } else {
-                    mReAddEditFragment = new ReAddEditFragment();
-                    mReDetailFragment = new ReDetailFragment();
-                    mLoanFragment = new LoanFragment();
-                    mReSearchFragment = new ReSearchFragment();
-                    mMapsFragment = new MapsFragment();
-                }
+            if (lListFragment != null) {
+                manageRestoreActiveFragment(lListFragment);
             }
         } else {
-            configureAndShowListFragment();
-
-            mReAddEditFragment = new ReAddEditFragment();
-            mReDetailFragment = new ReDetailFragment();
-            mLoanFragment = new LoanFragment();
-            mReSearchFragment = new ReSearchFragment();
-            mMapsFragment = new MapsFragment();
+            if (mListFragment == null) configureAndShowListFragment();
         }
+        initializeFragment();
 
         if (mIsTablet) {
-            configureAndShowRightFragment();
+            if (mRightFragment == null) configureAndShowRightFragment();
         }
     }
 
+    private void initializeFragment() {
+        if (mReAddEditFragment == null) mReAddEditFragment = new ReAddEditFragment();
+        if (mReDetailFragment == null) mReDetailFragment = new ReDetailFragment();
+        if (mLoanFragment == null) mLoanFragment = new LoanFragment();
+        if (mReSearchFragment == null) mReSearchFragment = new ReSearchFragment();
+        if (mMapsFragment == null) mMapsFragment = new MapsFragment();
+    }
+
+    private void manageRestoreActiveFragment(Fragment pFragment) {
+        if (pFragment instanceof ReDetailFragment) {
+            mReDetailFragment = (ReDetailFragment) pFragment;
+            manageActionBar(true);
+        } else if (pFragment instanceof ReAddEditFragment) {
+            mReAddEditFragment = (ReAddEditFragment) pFragment;
+            manageActionBar(true);
+        } else if (pFragment instanceof ReSearchFragment) {
+            mReSearchFragment = (ReSearchFragment) pFragment;
+            manageActionBar(true);
+        } else if (pFragment instanceof LoanFragment) {
+            mLoanFragment = (LoanFragment) pFragment;
+            manageActionBar(true);
+        } else if (pFragment instanceof MapsFragment) {
+            mMapsFragment = (MapsFragment) pFragment;
+            manageActionBar(true);
+        } else if (pFragment instanceof ReListFragment) {
+            configureAndShowListFragment();
+        }
+        if (mListFragment == null) mListFragment = new ReListFragment();
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        //Save the fragment's instance
-        Fragment lFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAG_LIST);
+        Fragment lFragment = getSupportFragmentManager().findFragmentById(R.id.frame_list);
         if (lFragment != null) {
             getSupportFragmentManager().putFragment(outState, TAG_FRAG_LIST, lFragment);
         }
-        lFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAG_DETAIL);
-        if (lFragment != null) {
-            getSupportFragmentManager().putFragment(outState, TAG_FRAG_DETAIL, lFragment);
-        }
-        lFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAG_ADDEDIT);
-        if (lFragment != null) {
-            getSupportFragmentManager().putFragment(outState, TAG_FRAG_ADDEDIT, lFragment);
-        }
-        lFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAG_SEARCH);
-        if (lFragment != null) {
-            getSupportFragmentManager().putFragment(outState, TAG_FRAG_SEARCH, lFragment);
-        }
-        lFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAG_LOAN);
-        if (lFragment != null) {
-            getSupportFragmentManager().putFragment(outState, TAG_FRAG_LOAN, lFragment);
-        }
-        lFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAG_MAP);
-        if (lFragment != null) {
-            getSupportFragmentManager().putFragment(outState, TAG_FRAG_MAP, lFragment);
-        }
+
     }
 
     @Override
@@ -207,13 +184,17 @@ public class MainActivity extends AppCompatActivity implements ReAddEditFragment
         }
     }
 
+    private void configureAndShowFrameFragment(int pIdFrame, Fragment pFragment) {
+        getSupportFragmentManager().beginTransaction()
+                .add(pIdFrame, pFragment)
+                .commit();
+    }
+
     private void configureAndShowListFragment() {
         mListFragment = (ReListFragment) getSupportFragmentManager().findFragmentById(R.id.frame_list);
         if (mListFragment == null) {
             mListFragment = new ReListFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.frame_list, mListFragment)
-                    .commit();
+            configureAndShowFrameFragment(R.id.frame_list, mListFragment);
         }
     }
 
@@ -221,9 +202,7 @@ public class MainActivity extends AppCompatActivity implements ReAddEditFragment
         mRightFragment = (RightFragment) getSupportFragmentManager().findFragmentById(R.id.frame_right);
         if (mRightFragment == null && findViewById(R.id.frame_right) != null) {
             mRightFragment = new RightFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.frame_right, mRightFragment)
-                    .commit();
+            configureAndShowFrameFragment(R.id.frame_right, mRightFragment);
         }
     }
 
@@ -244,12 +223,6 @@ public class MainActivity extends AppCompatActivity implements ReAddEditFragment
             getSupportActionBar().setDisplayHomeAsUpEnabled(isEnabled);
             getSupportActionBar().setDisplayShowHomeEnabled(isEnabled);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        invalidateOptionsMenu();
     }
 
     @Override
@@ -295,6 +268,7 @@ public class MainActivity extends AppCompatActivity implements ReAddEditFragment
     @Override
     public void onListAdapterItemClicked(Bundle pBundle) {
         manageActionBar(true);
+        if (mReDetailFragment == null) mReDetailFragment = new ReDetailFragment();
         mReDetailFragment.setArguments(pBundle);
         replaceFragment(mReDetailFragment);
     }
@@ -302,6 +276,7 @@ public class MainActivity extends AppCompatActivity implements ReAddEditFragment
     @Override
     public void navigateAddEdit(Bundle pBundle) {
         manageActionBar(true);
+        if (mReAddEditFragment == null) mReAddEditFragment = new ReAddEditFragment();
         mReAddEditFragment.setArguments(pBundle);
         replaceFragment(mReAddEditFragment);
     }
@@ -309,6 +284,7 @@ public class MainActivity extends AppCompatActivity implements ReAddEditFragment
     @Override
     public void navigateDetail(Bundle pBundle) {
         manageActionBar(true);
+        if (mReDetailFragment == null) mReDetailFragment = new ReDetailFragment();
         mReDetailFragment.setArguments(pBundle);
         replaceFragment(mReDetailFragment);
     }
