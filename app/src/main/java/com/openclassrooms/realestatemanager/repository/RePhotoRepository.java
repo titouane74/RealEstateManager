@@ -2,14 +2,8 @@ package com.openclassrooms.realestatemanager.repository;
 
 import androidx.lifecycle.LiveData;
 
-import com.openclassrooms.realestatemanager.database.dao.ReDao;
-import com.openclassrooms.realestatemanager.database.dao.ReLocationDao;
 import com.openclassrooms.realestatemanager.database.dao.RePhotoDao;
-import com.openclassrooms.realestatemanager.model.ReLocation;
 import com.openclassrooms.realestatemanager.model.RePhoto;
-import com.openclassrooms.realestatemanager.model.RePoi;
-import com.openclassrooms.realestatemanager.model.RealEstate;
-import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 
 import java.util.List;
 

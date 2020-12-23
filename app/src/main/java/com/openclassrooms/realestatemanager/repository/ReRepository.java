@@ -2,15 +2,11 @@ package com.openclassrooms.realestatemanager.repository;
 
 import android.util.Log;
 
-import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.sqlite.db.SimpleSQLiteQuery;
 
 import com.openclassrooms.realestatemanager.database.dao.ReDao;
-import com.openclassrooms.realestatemanager.database.dao.ReLocationDao;
-import com.openclassrooms.realestatemanager.database.dao.RePoiDao;
-import com.openclassrooms.realestatemanager.model.ReLocation;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 
