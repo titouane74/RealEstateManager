@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentReDetailPhotoItemBinding;
 import com.openclassrooms.realestatemanager.model.RePhoto;
 
@@ -57,8 +59,11 @@ public class DetailPhotoAdapter extends RecyclerView.Adapter<DetailPhotoAdapter.
 
         public void bindView(RePhoto pPhoto) {
             mBindingHolder.fragReDetTvPhoto.setText(pPhoto.getPhDescription());
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions=requestOptions.placeholder(R.drawable.ic_no_photo);
             Glide.with(mBindingHolder.fragReDetImgPhoto.getContext())
                     .load(pPhoto.getPhPath())
+                    .apply(requestOptions)
                     .into(mBindingHolder.fragReDetImgPhoto);
         }
     }
