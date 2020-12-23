@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/act_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:tag="@string/app_support_tablet"
+    tools:context="com.openclassrooms.realestatemanager.view.activities.MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/act_main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ReToolBarTheme"
+        app:popupTheme="@style/ReToolBarPopupTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/colorOnPrimary"
+        app:titleTextAppearance="@style/ReToolBarTheme"/>
+
+    <FrameLayout
+        android:id="@+id/frame_list"
+        android:layout_width="@dimen/app_zero_dp"
+        android:layout_height="@dimen/app_zero_dp"
+        app:layout_constraintWidth_percent="@dimen/tablet_divider_width_percent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/act_main_toolbar"
+        />
+    <View
+        android:id="@+id/divider"
+        android:layout_width="@dimen/tablet_divider_width"
+        android:layout_height="@dimen/app_zero_dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintStart_toEndOf="@id/frame_list"
+        app:layout_constraintTop_toBottomOf="@id/act_main_toolbar"
+        app:layout_constraintEnd_toStartOf="@id/frame_right"/>
+    <FrameLayout
+        android:id="@+id/frame_right"
+        android:layout_width="@dimen/app_zero_dp"
+        android:layout_height="@dimen/app_zero_dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/divider"
+        app:layout_constraintTop_toBottomOf="@+id/act_main_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
