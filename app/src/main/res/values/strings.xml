@@ -24,12 +24,15 @@
     <string name="default_txt_notification_message_to_complete">Complete it to visualize it in the list.</string>
     <string name="default_txt_no_internet_no_map">No internet connection. Impossible to open the map</string>
 
+    <!-- TABLET -->
+    <string name="fragment_list">LIST</string>
+    <string name="fragment_right">RIGHT</string>
 
     <!-- ERRORS -->
     <string name="add_edit_txt_err_no_data">No data to save. Please enter information.</string>
     <string name="add_edit_txt_err_date_sold_before_date_market">The sold date can\'t be before the on market date</string>
     <string name="add_edit_txt_err_agent_not_valid">Agent information invalid</string>
-    <string name="add_edit_txt_err_date_sold_empty">Sold date can be empty</string>
+    <string name="add_edit_txt_err_date_sold_empty">Sold date can\'t be empty</string>
     <string name="search_txt_err_select_one_criterion">Select at least one criterion</string>
     <string name="search_txt_err_no_data_found">No real estate found</string>
 
@@ -99,7 +102,7 @@
     <string name="loan_txt_rate">Rate (in %)</string>
     <string name="loan_txt_duration">Duration (in Years)</string>
     <string name="loan_txt_monthly_payment">Monthly payment</string>
-    <string name="loan_txt_calculate">Calculate</string>
+    <string name="loan_txt_calculate">Calculate loan</string>
     <string name="loan_txt_err_valid_input">The fields are mandatory : </string>
     <string name="loan_txt_err_field_rate">Rate</string>
     <string name="loan_txt_err_field_duration">Duration</string>

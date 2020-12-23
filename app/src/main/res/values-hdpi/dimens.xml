@@ -3,7 +3,7 @@
     <dimen name="app_zero_dp">0dp</dimen>
     <dimen name="app_divider_height">1dp</dimen>
     <!-- DEFAULT TEXT -->
-<dimen name="default_txt_size">12sp</dimen>
+    <dimen name="default_txt_size">12sp</dimen>
     <dimen name="default_txt_size_large">14sp</dimen>
     <dimen name="default_txt_size_extra_large">20sp</dimen>
     <!-- DEFAULT MARGIN -->

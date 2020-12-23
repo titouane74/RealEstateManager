@@ -61,7 +61,7 @@
     <dimen name="re_add_edit_height_percent">0.52</dimen>
     <dimen name="re_add_edit_width_percent_poi">0.27</dimen>
     <dimen name="re_add_edit_width_percent_information">0.30</dimen>
-    <dimen name="re_add_edit_width_percent_location">0.4</dimen>
+    <dimen name="re_add_edit_width_percent_location">0.3</dimen>
     <dimen name="re_add_edit_width_percent_agent">0.22</dimen>
     <dimen name="re_add_edit_width_percent_date">0.15</dimen>
     <dimen name="re_add_edit_width_percent_et">0.42</dimen>
