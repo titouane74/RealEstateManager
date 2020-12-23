@@ -522,14 +522,12 @@
                     app:layout_constraintTop_toTopOf="@+id/frag_re_add_edit_et_photo"
                     app:srcCompat="@drawable/ic_photo" />
 
-                <EditText
+                <TextView
                     android:id="@+id/frag_re_add_edit_et_photo"
                     style="@style/ReTheme.EditTxt"
                     android:hint="@string/txt_photo_description"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/frag_re_add_edit_img_photo"
+                    app:layout_constraintStart_toEndOf="@id/frag_re_add_edit_img_photo"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
@@ -542,33 +540,6 @@
                     app:layout_constraintStart_toStartOf="@id/frag_re_add_edit_et_photo"
                     app:srcCompat="@drawable/ic_take_photo_48"
                     android:contentDescription="@string/txt_photo_description" />
-
-<!--                <ImageView
-                    android:id="@+id/frag_re_add_edit_img_take_photo"
-                    style="@style/ReTheme.ImgView"
-                    android:layout_width="@dimen/re_add_edit_photo_icon_size"
-                    android:layout_height="@dimen/re_add_edit_photo_icon_size"
-                    android:layout_marginStart="40dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="@string/txt_take_photo"
-                    app:layout_constraintEnd_toStartOf="@id/frag_re_add_edit_img_add_photo"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_et_photo"
-                    app:srcCompat="@drawable/ic_take_photo_48" />
-
-                <ImageView
-                    android:id="@+id/frag_re_add_edit_img_add_photo"
-                    style="@style/ReTheme.ImgView"
-                    android:layout_width="@dimen/re_add_edit_photo_icon_size"
-                    android:layout_height="@dimen/re_add_edit_photo_icon_size"
-                    android:layout_marginStart="40dp"
-
-                    android:contentDescription="@string/txt_add_photo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/frag_re_add_edit_img_take_photo"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_re_add_edit_et_photo"
-                    app:srcCompat="@drawable/ic_add_photo_48" />-->
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/frag_re_add_edit_rv_photo"
