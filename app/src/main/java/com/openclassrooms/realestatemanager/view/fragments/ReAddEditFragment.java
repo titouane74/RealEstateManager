@@ -217,10 +217,6 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
         } else if ((mBinding.fragReAddEditEtSoldDate.getText() != null) && (!mBinding.fragReAddEditEtSoldDate.getText().toString().equals(""))) {
             mDateSold = REMHelper.convertStringToDate(mBinding.fragReAddEditEtSoldDate.getText().toString());
         }
-        if (mDateSold != null && !lIsSold) {
-            lIsSold = true;
-            mBinding.fragReAddEditCbSold.setChecked(true);
-        }
 
         mIsPhotoEmpty = mInitialPhotoList.size() == 0;
         mIsPoiEmpty = REMHelperAddEdit.isPoiEmpty(mBinding);
@@ -230,6 +226,9 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
                     + getString(R.string.default_txt_data_not_saved), Toast.LENGTH_SHORT).show();
         } else if (lIsSold && mDateSold == null) {
             Toast.makeText(mContext, getString(R.string.add_edit_txt_err_date_sold_empty) + " "
+                    + getString(R.string.default_txt_data_not_saved), Toast.LENGTH_SHORT).show();
+        } else if (mDateSold != null && !lIsSold) {
+            Toast.makeText(mContext, getString(R.string.add_edit_txt_err_check_sold_not_confirm) + " "
                     + getString(R.string.default_txt_data_not_saved), Toast.LENGTH_SHORT).show();
         } else if (mDateMarket != null || mDateSold != null || lIsSold || !lAgentFirstName.equals("") || !lAgentLastName.equals("")
                 || !lDescription.equals("") || !lType.equals("") || !mIsPhotoEmpty || !mIsPoiEmpty) {
