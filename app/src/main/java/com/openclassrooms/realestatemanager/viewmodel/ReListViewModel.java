@@ -20,8 +20,6 @@ public class ReListViewModel extends ViewModel {
         mExecutor = pExecutor;
     }
 
-    public LiveData<List<RealEstate>> getAllRe() { return mReRepo.selectAllRealEstates(); }
-
     public LiveData<List<RealEstateComplete>> selectAllReComplete() { return mReRepo.selectAllReComplete(); }
 
     public LiveData<List<RealEstateComplete>> selectAllReCompleteMandatoryDataComplete() { return mReRepo.selectAllReCompleteMandatoryDataComplete(); }

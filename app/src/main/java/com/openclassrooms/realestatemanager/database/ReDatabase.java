@@ -20,12 +20,11 @@ import com.openclassrooms.realestatemanager.utils.DateConverter;
 /**
  * Created by Florence LE BOURNOT on 04/12/2020
  */
-@Database(entities = {RealEstate.class, RePoi.class, ReLocation.class, RePhoto.class}, version = 2 , exportSchema = false)
+@Database(entities = {RealEstate.class, RePoi.class, ReLocation.class, RePhoto.class},
+        version = 2 , exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class ReDatabase extends RoomDatabase {
-
     private static ReDatabase INSTANCE;
-
     public abstract ReDao ReDao();
     public abstract RePoiDao RePoiDao();
     public abstract ReLocationDao ReLocationDao();

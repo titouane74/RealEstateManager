@@ -41,17 +41,11 @@ public class ReAddEditViewModel extends ViewModel {
         mExecutor.execute(() -> mReRepo.updateRealEstate(pRealEstate));
     }
 
-    public LiveData<RealEstate> getRealEstate(long pReId) {
-        return mReRepo.selectRealEstate(pReId);
-    }
-
     public LiveData<Long> selectMaxReId() { return mReRepo.selectMaxReId();}
 
     public void insertReLocation(ReLocation pReLocation) { mExecutor.execute(() -> mReLocRepo.insertReLocation(pReLocation)); }
 
     public void updateReLocation(ReLocation pReLocation) { mExecutor.execute(() -> mReLocRepo.updateReLocation(pReLocation)); }
-
-    public LiveData<ReLocation> selectReLocation(long pLocReId) { return mReLocRepo.selectReLocation(pLocReId); }
 
     public void insertRePoi(RePoi pRePoi) { mExecutor.execute(() -> mRePoiRepo.insertRePoi(pRePoi)); }
 
