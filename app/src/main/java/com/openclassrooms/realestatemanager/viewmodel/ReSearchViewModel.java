@@ -4,10 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.sqlite.db.SimpleSQLiteQuery;
 
-import com.openclassrooms.realestatemanager.model.ReLocation;
-import com.openclassrooms.realestatemanager.model.RePhoto;
-import com.openclassrooms.realestatemanager.model.RePoi;
-import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstateComplete;
 import com.openclassrooms.realestatemanager.repository.ReLocationRepository;
 import com.openclassrooms.realestatemanager.repository.RePhotoRepository;
@@ -24,7 +20,6 @@ public class ReSearchViewModel extends ViewModel {
     private ReLocationRepository mReLocRepo;
     private RePhotoRepository mRePhRepo;
     private Executor mExecutor;
-    private long mReId;
 
     public ReSearchViewModel(ReRepository pReRepo, RePoiRepository pRePoiRepo,
                              ReLocationRepository pReLocRepo, RePhotoRepository pRePhRepo, Executor pExecutor) {

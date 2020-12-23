@@ -23,11 +23,9 @@ public class ReAddEditViewModel extends ViewModel {
     private ReLocationRepository mReLocRepo;
     private RePhotoRepository mRePhRepo;
     private Executor mExecutor;
-    private long mReId;
-    //private MutableLiveData<Long> mLDReId = new MutableLiveData<>();
 
     public ReAddEditViewModel(ReRepository pReRepo, RePoiRepository pRePoiRepo,
-                              ReLocationRepository pReLocRepo, RePhotoRepository pRePhRepo,Executor pExecutor) {
+                              ReLocationRepository pReLocRepo, RePhotoRepository pRePhRepo, Executor pExecutor) {
         mReRepo = pReRepo;
         mRePoiRepo = pRePoiRepo;
         mReLocRepo = pReLocRepo;
