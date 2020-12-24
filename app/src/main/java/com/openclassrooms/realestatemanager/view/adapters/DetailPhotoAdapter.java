@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class DetailPhotoAdapter extends RecyclerView.Adapter<DetailPhotoAdapter.DetailPhotoHolder> {
 
-    private static final String TAG = "TAG_DetailPhotoAdapter";
     private List<RePhoto> mPhotoList = new ArrayList<>();
     private FragmentReDetailPhotoItemBinding mBinding;
 

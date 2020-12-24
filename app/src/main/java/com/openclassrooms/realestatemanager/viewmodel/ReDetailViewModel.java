@@ -18,9 +18,5 @@ public class ReDetailViewModel extends ViewModel {
         mExecutor = pExecutor;
     }
 
-    public LiveData<RealEstate> selectRealEstate(long pReId) {
-        return mReRepo.selectRealEstate(pReId);
-    }
-
     public LiveData<RealEstateComplete> selectReComplete(long pReId) { return mReRepo.selectReComplete(pReId); }
 }

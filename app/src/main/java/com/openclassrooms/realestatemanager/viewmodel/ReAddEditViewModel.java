@@ -33,33 +33,53 @@ public class ReAddEditViewModel extends ViewModel {
         mExecutor = pExecutor;
     }
 
-    public void insertRealEstate(RealEstate pRealEstate){
+    public void insertRealEstate(RealEstate pRealEstate) {
         mExecutor.execute(() -> mReRepo.insertRealEstate(pRealEstate));
     }
 
-    public void updateRealEstate(RealEstate pRealEstate){
-        mExecutor.execute(() -> mReRepo.updateRealEstate(pRealEstate));
+    public void updateRealEstate(RealEstate pRealEstate) {
+        mExecutor.execute(() ->  mReRepo.updateRealEstate(pRealEstate));
     }
 
-    public LiveData<Long> selectMaxReId() { return mReRepo.selectMaxReId();}
+    public LiveData<Long> selectMaxReId() {
+        return mReRepo.selectMaxReId();
+    }
 
-    public void insertReLocation(ReLocation pReLocation) { mExecutor.execute(() -> mReLocRepo.insertReLocation(pReLocation)); }
+    public void insertReLocation(ReLocation pReLocation) {
+        mExecutor.execute(() -> mReLocRepo.insertReLocation(pReLocation));
+    }
 
-    public void updateReLocation(ReLocation pReLocation) { mExecutor.execute(() -> mReLocRepo.updateReLocation(pReLocation)); }
+    public void updateReLocation(ReLocation pReLocation) {
+        mExecutor.execute(() -> mReLocRepo.updateReLocation(pReLocation));
+    }
 
-    public void insertRePoi(RePoi pRePoi) { mExecutor.execute(() -> mRePoiRepo.insertRePoi(pRePoi)); }
+    public void insertRePoi(RePoi pRePoi) {
+        mExecutor.execute(() -> mRePoiRepo.insertRePoi(pRePoi));
+    }
 
-    public void deleteRePoi(RePoi pRePoi) { mExecutor.execute(() -> mRePoiRepo.deleteRePoi(pRePoi)); }
+    public void deleteRePoi(RePoi pRePoi) {
+        mExecutor.execute(() -> mRePoiRepo.deleteRePoi(pRePoi));
+    }
 
-    public LiveData<RealEstateComplete> selectReComplete(long pReId) { return mReRepo.selectReComplete(pReId); }
+    public LiveData<RealEstateComplete> selectReComplete(long pReId) {
+        return mReRepo.selectReComplete(pReId);
+    }
 
-    public LiveData<List<RePhoto>> selectRePhoto(long pReId) {return  mRePhRepo.selectRePhoto(pReId); }
+    public LiveData<List<RePhoto>> selectRePhoto(long pReId) {
+        return mRePhRepo.selectRePhoto(pReId);
+    }
 
-    public void insertRePhoto(RePhoto pRePhoto) { mExecutor.execute(() -> mRePhRepo.insertRePhoto(pRePhoto)); }
+    public void insertRePhoto(RePhoto pRePhoto) {
+        mExecutor.execute(() -> mRePhRepo.insertRePhoto(pRePhoto));
+    }
 
-    public void updateRePhoto(RePhoto pRePhoto) { mExecutor.execute(() -> mRePhRepo.updateRePhoto(pRePhoto)); }
+    public void updateRePhoto(RePhoto pRePhoto) {
+        mExecutor.execute(() -> mRePhRepo.updateRePhoto(pRePhoto));
+    }
 
-    public void deleteRePhoto(RePhoto pRePhoto) { mExecutor.execute(() -> mRePhRepo.deleteRePhoto(pRePhoto)); }
+    public void deleteRePhoto(RePhoto pRePhoto) {
+        mExecutor.execute(() -> mRePhRepo.deleteRePhoto(pRePhoto));
+    }
 
 
 }

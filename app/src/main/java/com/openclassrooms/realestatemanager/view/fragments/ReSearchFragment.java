@@ -3,7 +3,6 @@ package com.openclassrooms.realestatemanager.view.fragments;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,7 +43,6 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         void updateList(List<RealEstateComplete> pReCompList);
     }
 
-    private static final String TAG = "TAG_ReSearchFragment";
     private Context mContext;
     private String mStringDateMarketFrom;
     private String mStringDateMarketTo;
@@ -470,7 +468,6 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
             if (pReCompList.size() == 0) {
                 Toast.makeText(mContext, getString(R.string.search_txt_err_no_data_found), Toast.LENGTH_SHORT).show();
             } else {
-                Log.d(TAG, "executeQuery: " + pReCompList.size());
                 sApi.setSearchResult(pReCompList);
                 mCallback = (OnSearchListener) mContext;
                 mCallback.updateList(pReCompList);

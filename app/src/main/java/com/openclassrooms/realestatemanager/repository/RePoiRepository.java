@@ -8,7 +8,7 @@ import com.openclassrooms.realestatemanager.model.RePoi;
  */
 public class RePoiRepository {
 
-    private RePoiDao mRePoiDao;
+    private final RePoiDao mRePoiDao;
 
     public RePoiRepository(RePoiDao pRePoiDao) {mRePoiDao = pRePoiDao;}
 

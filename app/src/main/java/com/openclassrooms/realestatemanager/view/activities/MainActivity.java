@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements ReAddEditFragment
         ReSearchFragment.OnSearchListener, ReListAdapter.OnRecyclerViewListener,
         ReDetailFragment.OnClickListener, MapsFragment.OnMarkerClick {
 
-    public static final String TAG = "TAG_";
-
     public static final String TAG_FRAG_LIST = "TAG_FRAG_LIST";
 
     private Context mContext;

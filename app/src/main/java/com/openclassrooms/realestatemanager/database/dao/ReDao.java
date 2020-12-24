@@ -31,9 +31,6 @@ public interface ReDao {
     int deleteRealEstate(long pReId);
 
     //FOR ROOM
-    @Query("SELECT * FROM realestate")
-    LiveData<List<RealEstate>> selectAllRealEstates();
-
     @Query("SELECT * FROM realestate WHERE reid = :pReId")
     LiveData<RealEstate> selectRealEstate(long pReId);
 

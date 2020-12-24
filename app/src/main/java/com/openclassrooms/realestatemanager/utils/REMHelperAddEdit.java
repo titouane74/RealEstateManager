@@ -43,7 +43,7 @@ public class REMHelperAddEdit {
      * @param pPoi : string : the label of the poi which is controlled
      * @param pIsChecked : boolean : indicator if the poi is check or not
      * @param pViewModel : view model : ReAddEditViewModel
-     * @return : list og object : list of the poi which are selected
+     * @return : list of object : list of the poi which are selected
      */
     public static List<RePoi> setPoiList(RealEstateComplete pReComp, List<RePoi> pPoiList, long pReId,
                                          boolean pIsEdit, String pPoi, boolean pIsChecked, ReAddEditViewModel pViewModel) {
@@ -78,6 +78,16 @@ public class REMHelperAddEdit {
     }
 
 
+    /**
+     * Manage the photo to add , update and delete in the database
+     * @param pReComp : object : list of the photo of the real estate from the database
+     * to be compared with the new list of photo
+     * @param pPhotoList : list of object : list of the photo which are added
+     * @param pReId : long : id of the real estate
+     * @param pIsEdit : boolean : indicator if it's an add or edit
+     * @param pViewModel : view model : ReAddEditViewModel
+     * @return : int : return the new number of photo in the real estate
+     */
     public static int setPhotoList(List<RePhoto> pReComp, List<RePhoto> pPhotoList, long pReId,
                                    boolean pIsEdit, ReAddEditViewModel pViewModel) {
         RePhoto lReCompPh;

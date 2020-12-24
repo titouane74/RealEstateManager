@@ -52,8 +52,6 @@ import com.openclassrooms.realestatemanager.R;
                     .setColor(ContextCompat.getColor(pContext, R.color.colorPrimary))
                     .setContentTitle(lTitle)
                     .setContentText(lMessage)
-//                    .setStyle(new NotificationCompat.BigTextStyle()
-//                            .bigText(lMessage + " " + pContext.getString(R.string.default_txt_notification_message_to_complete)))
                     .setAutoCancel(true)
                     .setCategory(NotificationCompat.CATEGORY_MESSAGE);
         } else {
@@ -62,8 +60,6 @@ import com.openclassrooms.realestatemanager.R;
                     .setColor(ContextCompat.getColor(pContext, R.color.colorPrimary))
                     .setContentTitle(lTitle)
                     .setContentText(lMessage)
-//                    .setStyle(new NotificationCompat.BigTextStyle()
-//                            .bigText(lMessage + " " + pContext.getString(R.string.default_txt_notification_message_to_complete)))
                     .setAutoCancel(true)
                     .setCategory(NotificationCompat.CATEGORY_MESSAGE);
         }

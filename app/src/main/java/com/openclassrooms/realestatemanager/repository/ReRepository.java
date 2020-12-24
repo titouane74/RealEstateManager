@@ -1,9 +1,6 @@
 package com.openclassrooms.realestatemanager.repository;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.sqlite.db.SimpleSQLiteQuery;
 
 import com.openclassrooms.realestatemanager.database.dao.ReDao;
@@ -17,36 +14,17 @@ import java.util.List;
  */
 public class ReRepository {
 
-    private static final String TAG = "TAG_ReRepository";
-    private ReDao mReDao;
-    private LiveData<List<RealEstateComplete>> mLDSearch;
-    private long mReIdInserted;
-
-    private MutableLiveData<List<RealEstateComplete>> mLDSearchResult = new MutableLiveData<>();
+    private final ReDao mReDao;
 
     public ReRepository(ReDao pReDao) {mReDao = pReDao;}
 
-    public LiveData<List<RealEstate>> selectAllRealEstates() { return mReDao.selectAllRealEstates(); }
-
-    public LiveData<RealEstate> selectRealEstate(long pReId) { return mReDao.selectRealEstate(pReId); }
-
     public LiveData<Long> selectMaxReId() { return mReDao.selectMaxReId();}
 
-    public long insertRealEstate(RealEstate pRealEstate) {
-        mReIdInserted = mReDao.insertRealEstate(pRealEstate);
-        Log.d(TAG, "insertRealEstate: " + mReIdInserted);
-        return mReIdInserted;
-    }
+    public long insertRealEstate(RealEstate pRealEstate) { return mReDao.insertRealEstate(pRealEstate); }
 
-    public void updateRealEstate(RealEstate pRealEstate) {
-        int lInt = mReDao.updateRealEstate(pRealEstate);
-        Log.d(TAG, "updateRealEstate: int retour update : " + lInt);
-    }
+    public int updateRealEstate(RealEstate pRealEstate) { return mReDao.updateRealEstate(pRealEstate);}
 
-    public void deleteRealEstate(RealEstate pRealEstate) {
-        int lInt = mReDao.deleteRealEstate(pRealEstate.getReId());
-        Log.d(TAG, "deleteRealEstate: int retour delete : " + lInt);
-    }
+    public void deleteRealEstate(RealEstate pRealEstate) { mReDao.deleteRealEstate(pRealEstate.getReId());}
 
     public LiveData<RealEstateComplete> selectReComplete(long pReId) { return mReDao.selectReComplete(pReId);}
 
@@ -54,15 +32,7 @@ public class ReRepository {
 
     public LiveData<List<RealEstateComplete>> selectAllReCompleteMandatoryDataComplete() { return mReDao.selectAllReCompleteMandatoryDataComplete();}
 
-    public LiveData<List<RealEstateComplete>> selectSearch(SimpleSQLiteQuery pQuery) {
-        mLDSearch = mReDao.selectSearch(pQuery);
-        return mLDSearch;
+    public LiveData<List<RealEstateComplete>> selectSearch(SimpleSQLiteQuery pQuery) { return mReDao.selectSearch(pQuery);
     }
 
-    public MutableLiveData<List<RealEstateComplete>> getSearchResult() {
-        if (mLDSearch!= null) {
-            Log.d(TAG, "getSearchResult: setvalue not null");
-        }
-        return mLDSearchResult;
-    }
 }

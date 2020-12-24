@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,6 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
     public static final String RE_ID_KEY = "RE_ID";
     public static final String IS_EDIT_KEY = "IS_EDIT";
 
-    private static final String TAG = "TAG_ReListAdapter";
     private List<RealEstateComplete> mReList = new ArrayList<>();
     private FragmentReListItemBinding mBinding;
     private Context mContext;
@@ -73,9 +71,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
             Bundle lBundle = new Bundle();
             lBundle.putLong(RE_ID_KEY, mReList.get(position).getRealEstate().getReId());
             mCallback.onListAdapterItemClicked(lBundle);
-
         });
-
     }
 
     @Override
@@ -88,10 +84,7 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
-
+    public void onClick(View v) {    }
 
     static class ReListHolder extends RecyclerView.ViewHolder {
         FragmentReListItemBinding mBindingHolder;
@@ -131,7 +124,6 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
                 }
             } catch (Exception pE) {
                 pE.printStackTrace();
-                Log.d(TAG, "bindView: stacktrace : " + pE.getMessage());
             }
         }
 

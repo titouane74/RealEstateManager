@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class RePhotoRepository {
 
-    private RePhotoDao mRePhotoDao;
+    private final RePhotoDao mRePhotoDao;
 
     public RePhotoRepository(RePhotoDao pRePhotoDao) {mRePhotoDao = pRePhotoDao;}
 

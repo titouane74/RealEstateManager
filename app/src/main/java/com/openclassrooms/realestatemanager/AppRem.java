@@ -31,8 +31,6 @@ public class AppRem extends Application {
     private void initializeSharedPreferences() {
 
         PreferencesHelper.loadPreferences(this);
-        String lValueString;
-        int lValueInt;
 
         if (mPreferences == null) {
 

@@ -6,7 +6,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
@@ -37,15 +36,13 @@ import static org.junit.Assert.assertThat;
 public class RealEstateContentProviderTest {
     private static final String TAG = "TAG_RealEstateContentProvid";
 
-    // FOR DATA
     private ReDatabase mReDatabase;
 
     private ContentResolver mContentResolver;
 
     private Context mContext;
 
-    // DATA SET FOR TEST
-    private long mReId = 100;
+    private long mReId = 99999999;
 
     @Rule
     public InstantTaskExecutorRule mInstantTaskExecutorRule = new InstantTaskExecutorRule();
@@ -60,47 +57,18 @@ public class RealEstateContentProviderTest {
                 ReDatabase.class)
                 .allowMainThreadQueries()
                 .build();
+        // : Adding demo real estate
+        final Uri reUri = mContentResolver.insert(RealEstateContentProvider.URI_RE, generateRealEstate());
 
     }
     @After
     public void closeDb() {
+        //Delete the demo real estate to avoid the insert unique constraint error
+        final int reUriDel = mContentResolver.delete(ContentUris.withAppendedId(RealEstateContentProvider.URI_RE, mReId),null,null);
         mReDatabase.close();
     }
-
     @Test
     public void getRealEstate() {
-        final Cursor cursor = mContentResolver.query(ContentUris.withAppendedId(RealEstateContentProvider.URI_RE, mReId), null, null, null, null);
-        assertThat(cursor, notNullValue());
-        Log.d(TAG, "getRealEstate: " + cursor.getCount());
-        for (int i=0; i < cursor.getCount();i++){
-            cursor.moveToPosition(i);
-            Log.d(TAG, "getReWhenNoReInserted: =======================================");
-            Log.d(TAG, "getReWhenNoReInserted: reId ="+cursor.getLong(cursor.getColumnIndexOrThrow("reId")));
-            Log.d(TAG, "getReWhenNoReInserted: reType ="+cursor.getString(cursor.getColumnIndexOrThrow("reType")));
-            Log.d(TAG, "getReWhenNoReInserted: rePrice ="+cursor.getInt(cursor.getColumnIndexOrThrow("rePrice")));
-            Log.d(TAG, "getReWhenNoReInserted: reArea ="+cursor.getInt(cursor.getColumnIndexOrThrow("reArea")));
-            Log.d(TAG, "getReWhenNoReInserted: reNbRooms ="+cursor.getInt(cursor.getColumnIndexOrThrow("reNbRooms")));
-            Log.d(TAG, "getReWhenNoReInserted: reNbBedrooms ="+cursor.getInt(cursor.getColumnIndexOrThrow("reNbBedrooms")));
-            Log.d(TAG, "getReWhenNoReInserted: reNbBathrooms ="+cursor.getInt(cursor.getColumnIndexOrThrow("reNbBathrooms")));
-            Log.d(TAG, "getReWhenNoReInserted: reDescription ="+cursor.getString(cursor.getColumnIndexOrThrow("reDescription")));
-            Log.d(TAG, "getReWhenNoReInserted: reIsSold ="+cursor.getString(cursor.getColumnIndexOrThrow("reIsSold")));
-            Log.d(TAG, "getReWhenNoReInserted: reAgentFirstName ="+cursor.getString(cursor.getColumnIndexOrThrow("reAgentFirstName")));
-            Log.d(TAG, "getReWhenNoReInserted: reAgentLastName ="+cursor.getLong(cursor.getColumnIndexOrThrow("reAgentLastName")));
-            Log.d(TAG, "getReWhenNoReInserted: reSaleDate ="+cursor.getLong(cursor.getColumnIndexOrThrow("reSaleDate")));
-            Log.d(TAG, "getReWhenNoReInserted: reOnMarketDate ="+cursor.getString(cursor.getColumnIndexOrThrow("reOnMarketDate")));
-            Log.d(TAG, "getReWhenNoReInserted: reIsMandatoryDataComplete ="+cursor.getString(cursor.getColumnIndexOrThrow("reIsMandatoryDataComplete")));
-        }
-        assertThat(cursor.moveToFirst(), is(true));
-        cursor.close();
-    }
-
-    @Test
-    public void insertAndGetRealEstate() {
-        // AFTER : Delete the demo real estate to avoid the insert unique constraint error
-        final int reUriDel = mContentResolver.delete(ContentUris.withAppendedId(RealEstateContentProvider.URI_RE, mReId),null,null);
-        // BEFORE : Adding demo real estate
-        final Uri reUri = mContentResolver.insert(RealEstateContentProvider.URI_RE, generateRealEstate());
-        // TEST
         final Cursor cursor = mContentResolver.query(ContentUris.withAppendedId(RealEstateContentProvider.URI_RE, mReId), null, null, null, null);
         assertThat(cursor, notNullValue());
         assertThat(cursor.getCount(), is(1));
@@ -108,7 +76,6 @@ public class RealEstateContentProviderTest {
         assertThat(cursor.getString(cursor.getColumnIndexOrThrow("reType")), is("House"));
 
     }
-
 
     private ContentValues generateRealEstate(){
         Date lDate = new Date();

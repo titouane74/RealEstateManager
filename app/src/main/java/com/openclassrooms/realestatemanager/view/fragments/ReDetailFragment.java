@@ -171,7 +171,6 @@ public class ReDetailFragment extends BaseFragment<FragmentReDetailBinding> {
             mAdapter.setPhotoList(mPhotoList);
             mAdapter.notifyDataSetChanged();
 
-            //TODO TO REACTIVATE
             displayStaticMap(pRe.getReLocation());
 
         } else {

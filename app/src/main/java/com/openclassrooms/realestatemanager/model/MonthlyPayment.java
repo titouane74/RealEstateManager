@@ -4,7 +4,7 @@ package com.openclassrooms.realestatemanager.model;
  * Created by Florence LE BOURNOT on 02/12/2020
  */
 public class MonthlyPayment {
-    private static final String TAG = "TAG_MonthlyPayment";
+
     private int mpAmountBorrowed;
     private int mpContribution;
     private double mpRate;

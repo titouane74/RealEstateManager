@@ -1,7 +1,5 @@
 package com.openclassrooms.realestatemanager.repository;
 
-import androidx.lifecycle.LiveData;
-
 import com.openclassrooms.realestatemanager.database.dao.ReLocationDao;
 import com.openclassrooms.realestatemanager.model.ReLocation;
 
@@ -10,14 +8,12 @@ import com.openclassrooms.realestatemanager.model.ReLocation;
  */
 public class ReLocationRepository {
 
-    private ReLocationDao mReLocationDao;
+    private final ReLocationDao mReLocationDao;
 
     public ReLocationRepository(ReLocationDao pReLocationDao) {mReLocationDao = pReLocationDao;}
 
     public void insertReLocation(ReLocation pReLocation) {mReLocationDao.insertReLocation(pReLocation);}
 
     public void updateReLocation(ReLocation pReLocation) {mReLocationDao.updateReLocation(pReLocation);}
-
-    public LiveData<ReLocation> selectReLocation(long pLocReId) {return mReLocationDao.selectReLocation(pLocReId); }
 
 }

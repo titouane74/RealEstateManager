@@ -21,7 +21,6 @@ import java.util.Locale;
 
 public class REMHelper {
 
-    private static final String TAG = "TAG_REMHelper";
     public static final String TXT_PROVIDER = "fusedLocationProvider";
 
     /**
@@ -121,7 +120,7 @@ public class REMHelper {
     }
 
     /**
-     * Convert the string spinner value "5 +" into int
+     * Convert the string spinner value "5 +"  or "10 +" into int
      *
      * @param pValue : string : value to convert
      * @return : int : return the value without the sign

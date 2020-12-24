@@ -10,7 +10,6 @@ import com.openclassrooms.realestatemanager.utils.DateConverter;
 
 import java.util.Date;
 
-
 /**
  * Created by Florence LE BOURNOT on 25/11/2020
  */

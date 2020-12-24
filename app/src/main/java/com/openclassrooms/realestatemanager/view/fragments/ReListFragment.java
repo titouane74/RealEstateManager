@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.view.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,7 +20,6 @@ import static com.openclassrooms.realestatemanager.AppRem.sApi;
 
 public class ReListFragment extends BaseFragment<FragmentReListBinding> implements ReSearchFragment.OnSearchListener  {
 
-    private static final String TAG = "TAG_ReListFragment";
     private FragmentReListBinding mBinding;
     private ReListViewModel mViewModel;
     private ReListAdapter mAdapter;
@@ -55,7 +53,6 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> implemen
     }
 
     private void getListDataFromDatabase() {
-//        mViewModel.selectAllReCompleteMandatoryDataComplete().observe(getViewLifecycleOwner(), this::updateRecyclerView);
         mViewModel.selectAllReComplete().observe(getViewLifecycleOwner(), this::updateRecyclerView);
     }
 

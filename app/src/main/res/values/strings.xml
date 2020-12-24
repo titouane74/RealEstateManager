@@ -29,6 +29,7 @@
     <string name="fragment_right">RIGHT</string>
 
     <!-- ERRORS -->
+    <string name="add_edit_txt_err_data_incorrect">Error on data</string>
     <string name="add_edit_txt_err_no_data">No data to save. Please enter information.</string>
     <string name="add_edit_txt_err_date_sold_before_date_market">The sold date can\'t be before the on market date</string>
     <string name="add_edit_txt_err_agent_not_valid">Agent information invalid</string>
@@ -42,7 +43,7 @@
     <string name="regex_agent">(\\p{L})*((\\s|-|\'?)*\\p{L}\\s?)*</string>
     <string name="regex_street">((\\d*)?)((\\s|,|-|\'?)*(\\p{L}+)\\s?)*</string>
     <string name="regex_city">(\\p{L}+)((\\s|-|\'?)*\\p{L}\\s?)*</string>
-    <string name="regex_zip_code">[0–9]{5}</string>
+    <string name="regex_zip_code">[0-9]{5}</string>
 
     <!-- REAL ESTATE VOCABULARY -->
     <string name="txt_location">Location</string>
@@ -124,8 +125,6 @@
     <string name="poi_subway">Subway</string>
     <string name="poi_park">Park</string>
     <string name="poi_title_list">POI List</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- STATIC MAP PARAMETER -->
     <string name="static_map_size">200x200</string>

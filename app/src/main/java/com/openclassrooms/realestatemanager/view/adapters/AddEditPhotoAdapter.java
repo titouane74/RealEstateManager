@@ -22,7 +22,6 @@ import java.util.List;
  */
 public class AddEditPhotoAdapter extends RecyclerView.Adapter<AddEditPhotoAdapter.AddEditPhotoHolder> {
 
-    private static final String TAG = "TAG_AddEditPhotoAdapter";
     private List<RePhoto> mPhotoList = new ArrayList<>();
     private FragmentReAddEditRvPhotoItemBinding mBinding;
 
