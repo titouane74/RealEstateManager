@@ -42,7 +42,7 @@
     <string name="regex_agent">(\\p{L})*((\\s|-|\'?)*\\p{L}\\s?)*</string>
     <string name="regex_street">((\\d*)?)((\\s|,|-|\'?)*(\\p{L}+)\\s?)*</string>
     <string name="regex_city">(\\p{L}+)((\\s|-|\'?)*\\p{L}\\s?)*</string>
-    <string name="regex_zip_code">[0-9]{5}</string>
+    <string name="regex_zip_code">[0–9]{5}</string>
 
     <!-- REAL ESTATE VOCABULARY -->
     <string name="txt_location">Location</string>

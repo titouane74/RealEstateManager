@@ -413,10 +413,10 @@ public class ReAddEditFragment extends BaseFragment<FragmentReAddEditBinding> {
             } else {
                 mIsPhotoEmpty = false;
             }
-            mRealEstate.setReIsMandatoryDataComplete(REMHelperAddEdit.getIsMandatoryDataComplete(mRealEstate, mReLocation, mIsPhotoEmpty));
-            mIsMandatoryDataComplete = mRealEstate.isReIsMandatoryDataComplete();
-            mViewModel.updateRealEstate(mRealEstate);
         }
+        mRealEstate.setReIsMandatoryDataComplete(REMHelperAddEdit.getIsMandatoryDataComplete(mRealEstate, mReLocation, mIsPhotoEmpty));
+        mIsMandatoryDataComplete = mRealEstate.isReIsMandatoryDataComplete();
+        mViewModel.updateRealEstate(mRealEstate);
         sendNotification();
         navigateTo();
     }

@@ -46,7 +46,6 @@ public class ReListAdapter extends RecyclerView.Adapter<ReListAdapter.ReListHold
 
 
     public void setReList(List<RealEstateComplete> pReList) {
-        Log.d(TAG, "setReList: update list: " + pReList.size());
         mReList = pReList;
     }
 

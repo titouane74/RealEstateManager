@@ -38,16 +38,12 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> implemen
     protected void configureDesign(FragmentReListBinding pBinding, boolean pIsTablet) {
         mBinding = pBinding;
         mContext = mBinding.getRoot().getContext();
-        Log.d(TAG, "configureDesign: init RV");
         initRecyclerView();
-        Log.d(TAG, "configureDesign: conf VM");
         configureViewModel();
 
         if(sApi.getSearchResult() == null) {
-            Log.d(TAG, "configureDesign: search null");
             getListDataFromDatabase();
         } else {
-            Log.d(TAG, "configureDesign: search not null");
             updateRecyclerView(sApi.getSearchResult());
         }
 
@@ -70,7 +66,6 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> implemen
     }
 
     private void updateRecyclerView(List<RealEstateComplete> pReCompList) {
-        Log.d(TAG, "updateRecyclerView: " + pReCompList.size());
         mAdapter.setReList(pReCompList);
         mAdapter.notifyDataSetChanged();
     }
@@ -78,10 +73,8 @@ public class ReListFragment extends BaseFragment<FragmentReListBinding> implemen
     @Override
     public void updateList(List<RealEstateComplete> pReCompList) {
         if (pReCompList.size() == 0) {
-            Log.d(TAG, "updateList: liste vide  : ");
             getListDataFromDatabase();
         } else {
-            Log.d(TAG, "updateList: " + pReCompList.size());
             updateRecyclerView(pReCompList);
         }
     }
