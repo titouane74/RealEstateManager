@@ -125,15 +125,12 @@ public class MapsFragment extends BaseFragment<FragmentReMapsBinding> implements
      * @param pReCompList : list object : real estate list
      */
     public void setMapMarkers(List<RealEstateComplete> pReCompList) {
-        BitmapDescriptor lIcon;
         if (mMap != null) {
             mMap.clear();
             for (RealEstateComplete lReComp : pReCompList) {
                 String lName = lReComp.getRealEstate().getReType();
                 lName += "\n " + lReComp.getRealEstate().getReArea();
                 lName += "\n " + lReComp.getRealEstate().getRePrice();
-
-//                lIcon = BitmapDescriptorFactory.fromResource(R.drawable.ic_location);
 
                 if (lReComp.getReLocation()!= null) {
                     LatLng latLng = new LatLng(lReComp.getReLocation().getLocLatitude(),
