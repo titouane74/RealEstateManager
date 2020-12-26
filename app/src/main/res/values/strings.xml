@@ -37,6 +37,8 @@
     <string name="add_edit_txt_err_check_sold_not_confirm">Check the box \"Sold\" to confirm the sale</string>
     <string name="search_txt_err_select_one_criterion">Select at least one criterion</string>
     <string name="search_txt_err_no_data_found">No real estate found</string>
+    <string name="search_txt_err_date_max_before_min">Max date can\'t be before min date</string>
+    <string name="search_txt_err_int_max_inferior_min">Max cant\' be inferior to min</string>
 
 
     <!-- REGEX PATTERN -->

@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.view.fragments;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -100,10 +101,63 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
     public boolean onOptionsItemSelected(MenuItem pItem) {
         if (pItem.getItemId() == R.id.menu_action_confirm) {
             mDsList = new ArrayList<>();
-            buildQuery();
+            boolean lIsBuildQuery = validMinMaxData();
+            if (lIsBuildQuery) {
+                buildQuery();
+            }
             return true;
         }
         return super.onOptionsItemSelected(pItem);
+    }
+
+    private boolean validMinMaxData() {
+        boolean lIsBuild = true;
+
+        //Dates
+
+        if ((!mBinding.fragReSearchEtMarketDateFrom.getText().toString().equals(""))
+                && (!mBinding.fragReSearchEtMarketDateTo.getText().toString().equals(""))) {
+            lIsBuild = compareDate(REMHelper.convertStringToDate(mBinding.fragReSearchEtMarketDateFrom.getText().toString()),
+                    REMHelper.convertStringToDate(mBinding.fragReSearchEtMarketDateTo.getText().toString()),
+                    getString(R.string.txt_on_market_date));
+        }
+        if ((!mBinding.fragReSearchEtSoldDateFrom.getText().toString().equals(""))
+                && (!mBinding.fragReSearchEtSoldDateTo.getText().toString().equals(""))) {
+            lIsBuild = compareDate(REMHelper.convertStringToDate(mBinding.fragReSearchEtSoldDateFrom.getText().toString()),
+                    REMHelper.convertStringToDate(mBinding.fragReSearchEtSoldDateTo.getText().toString()),
+                    getString(R.string.txt_sold_date));
+        }
+
+        //Area
+        if ((!mBinding.fragReSearchEtAreaMin.getText().toString().equals(""))
+                && !(mBinding.fragReSearchEtAreaMax.getText().toString().equals(""))) {
+            lIsBuild = compareInt(Integer.parseInt(mBinding.fragReSearchEtAreaMin.getText().toString()),
+                    Integer.parseInt(mBinding.fragReSearchEtAreaMax.getText().toString()), getString(R.string.txt_area));
+        }
+
+        //Price
+        if ((!mBinding.fragReSearchEtPriceMin.getText().toString().equals(""))
+                && (!mBinding.fragReSearchEtPriceMax.getText().toString().equals(""))) {
+            lIsBuild = compareInt(Integer.parseInt(mBinding.fragReSearchEtPriceMin.getText().toString()),
+                    Integer.parseInt(mBinding.fragReSearchEtPriceMax.getText().toString()), getString(R.string.txt_price));
+        }
+        return lIsBuild;
+    }
+
+    private boolean compareInt(int pMin, int pMax, String pField) {
+        if (pMax < pMin) {
+            Toast.makeText(mContext, pField + " : " + getString(R.string.search_txt_err_int_max_inferior_min), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean compareDate(Date pMin, Date pMax, String pField) {
+        if (pMax.before(pMin)) {
+            Toast.makeText(mContext, pField + " : " + getString(R.string.search_txt_err_date_max_before_min), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     private void configureSpinners() {
@@ -401,8 +455,8 @@ public class ReSearchFragment extends BaseFragment<FragmentReSearchBinding> {
         } else if ((pArgMin.equals("")) && (!pArgMax.equals(""))) {
             pIndexArgs = addCondition(" " + pField + " <= ? ", pIndexArgs, pArgMax);
         } else if (!(pArgMin.equals("")) && (!pArgMax.equals(""))) {
-            pIndexArgs = addCondition(" " + pField + " BETWEEN ? ", pIndexArgs, pArgMin);
-            pIndexArgs = addCondition(" AND ? ", pIndexArgs, pArgMax);
+                pIndexArgs = addCondition(" " + pField + " BETWEEN ? ", pIndexArgs, pArgMin);
+                pIndexArgs = addCondition(" AND ? ", pIndexArgs, pArgMax);
         }
 
         return pIndexArgs;
